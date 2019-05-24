@@ -1,0 +1,159 @@
+<html>
+  <head>	  
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+      
+    <script type="text/javascript" src="paper.js"></script> 
+    <!--this is the newest update-->
+    <script type="text/paperscript" src="calculations.js" canvas="c"></script>
+     <style>
+p.solid {border-style: solid;}
+
+
+.container {
+  position: relative; 
+  width: 98%; /* Maximum width */
+ /* margin: 0 auto; /* Center it */
+}
+.buttons{
+  text-align: center;
+}
+.canvas-container{margin: 0 auto;}
+canvas[resize] {
+	border-style: solid;
+  width: 750px;
+  height: 750px;
+}
+    </style>
+
+  </head>
+
+  <body>
+   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">SU</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="stage1.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+      </div>
+    </nav>-->
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+        <span class="sr-only">40% Complete</span>
+      </div>
+    </div>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm">
+
+          <h1><p text-center>Style your Identities</p>   </h1>
+<div class="text text-right">
+  <a class="btn btn-danger" href="finished.html">Abort</a>
+</div>
+          <div id="StartMapping" class="tabcontent">
+            This section is where you add some detail to your map. In this section you may add either a red color for a negative impact on your life. Or you may add the color blue to your circle meaning that this identity makes you content.<br>
+            <div id="detail" class="tabcontent">
+              <br>To add color to your circle, use the slider below the form where entering the circles identity. This slider starts at white then goes from red to purple to blue. To the right of the color slider are two radio buttons where you can select the outline of the circle to be either solid or a dotted outline to represent a "conflicted" relationship. After you input your five identities, you can choose the color of the intersecting cirles on the map using the "Intersection Slider". <br>
+            </div>
+
+          </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">
+                <br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" name="circleText" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="1"><!-- holds the SUid corresponding to this circle -->
+                  <input type="submit" style="width: 30%;" value="Add circle">
+                </form>
+<br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" name="circleText" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="2"><!-- holds the SUid corresponding to this circle-->
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+<br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="3"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+<br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="4"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+                <br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="5"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+           <br>
+                <br>
+                <h5>Active Item Color:<br></h5><input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
+		<h5>Circle Outline:</h5>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">Solid&emsp;&emsp;</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect12" value="option2">
+                  <label class="form-check-label" for="inlineRadio2">Dotted</label>
+                </div>
+
+
+
+
+
+
+
+              </div>
+<script>
+  
+    var text1 = localStorage["1"];
+    var text2 = localStorage["2"];
+    var text3 = localStorage["3"];
+    var text4 = localStorage["4"];
+    var text5 = localStorage["5"];
+  console.log(text1);
+  function doFunction(){
+    locked = true;
+    console.log(locked);
+  }
+</script>
+              <div class="col-sm-8">
+                <canvas id="c" resize></canvas>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div>
+          </div>
+          </p>
+        </div>
+      <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-6">
+           <h4> <a href="initialMapping.html">&larr;Previous</a>
+&ensp;         <a href="survey.html">Next&rarr;</a>&emsp;&emsp;</h4>
+
+        </div>
+     
+      </div>
+</div>
+  </body>
+</html>

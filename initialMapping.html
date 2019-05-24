@@ -1,0 +1,171 @@
+<html>
+  <head>	  
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="paper.js"></script> 
+
+   
+    <!--this is the newest update-->
+    <script type="text/paperscript" src="calculations.js" canvas="c"></script>
+     <style>
+p.solid {border-style: solid;}
+
+.container{
+  width: 100%;
+}
+.container {
+  position: relative; 
+  width: 98%; /* Maximum width */
+ /* margin: 0 auto; /* Center it */
+}
+.buttons{
+  text-align: center;
+}
+.canvas-container{margin: 0 auto;}
+canvas[resize] {
+	border-style: solid;
+  width: 750px;
+  height: 750px;
+}
+p.ex1 {display: none;}
+.container{
+  width: 100%;
+}
+    </style>
+
+  </head>
+
+  <body>
+   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">SU</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="welcome.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+      </div>
+    </nav>-->
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+        <span class="sr-only">40% Complete</span>
+      </div>
+    </div>
+    <div class="container">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+
+          <h1><p text-center>Map your Identities</p>   </h1>
+<div class="text text-right">
+  <a class="btn btn-danger" href="finished.html">Abort</a>
+</div>
+          <div id="StartMapping" class="tabcontent">
+This is the section where you choose the five social identities that are closest to you and map them onto the canvas where you see fit.
+To add social identities, simply type each one into the corresponding text box then click add circle. Once a circle has been added you can move them on the screen
+to be placed where you think they fit best.
+  
+
+          </div>
+          <div class="container">
+            <br>
+            <div class="row">
+              <div class="col-sm-4">
+                <br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" name="circleText" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="1"><!-- holds the SUid corresponding to this circle -->
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+<br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" name="circleText" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="2"><!-- holds the SUid corresponding to this circle-->
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+<br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="3"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+<br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="4"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+                <br><br>
+                <form action="#" onsubmit="doSubmit(event);">
+                  <input type="text" id="textInput" style="width: 60%;">
+                  <input type="hidden" name="formId" value="5"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="submit" value="Add circle" style="width: 30%;">
+                </form>
+          
+                <br>
+                <br>
+  
+
+
+                <p class="ex1">
+                <input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect1" value="option1">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect12" value="option2">
+                  </p>
+      
+
+
+
+
+
+
+              </div>
+<script>
+  function doFunction(){
+    locked = true;
+    console.log(locked);
+  }
+</script>
+              <div class="col-sm-8">
+                <canvas id="c" resize></canvas>
+                <div class="text text-right">
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div>
+          </div>
+          </p>
+        </div></div>
+    </div>
+    </div>
+    <div class="container">
+<div class="row">
+  <div class="col-sm-4">
+
+  </div>
+  <div class="col-sm-4">
+ <h4> <a href="welcome.html">&larr;&nbsp;Previous</a> &ensp;&ensp; <a href="extendedMapping.html">Next&nbsp;&rarr;</a></h4>
+
+
+  </div>
+
+</div>
+</div>
+<br><br>
+
+
+
+
+    <!-- <script type="text/javascript" src="fabric.js"></script>   -->
+</div>
+  </body>
+</html>
