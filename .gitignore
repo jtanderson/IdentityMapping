@@ -1,0 +1,4 @@
+# Ignore temp files created by VIM
+
+*.swp
+*.swo
