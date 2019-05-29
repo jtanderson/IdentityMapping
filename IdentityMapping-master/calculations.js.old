@@ -1,0 +1,529 @@
+//   <script type="text/paperscript" canvas="c">
+/*
+ * CURRENT TODO. MUST BE DONE BEFORE FIRST DEPLOY:
+ * - Clean up the code (a lot)
+ *   - move things into functions
+ *   - combine the "doSubmitX" functions into one
+ *   - combine sliders and border change events into one
+ * - implement "lock" mode where user cannot drag or resize circles
+ * - Put a hard cap on circle radius. Something like at least 5 px and at most 1/4 the width of canvas
+ * - Don't add groups to the canvas until button is clicked. {insert: false} option can probably help
+ * - when changing the visibility, need to make sure that nothing gets covered by another object,
+ *   use more testing
+ * - Revisit the "activeItem" logic in onMouseDown and make it saner. Some bugs still with this
+ * - [partially complete 12/6] Only calculate intersections with visible circles (see onMouseUp comments)
+ *   - Problem: omits calculation too aggressively, doesn't work with group 1 and group 3 only visible
+ * - Prevent resizing of intersections
+ * - Fix specific TODO's within the code
+ *
+ * TODO AFTER DEPLOY:
+ * - Populate circles from databse
+ * - Save events to dastabase
+ * - Integrate results into survey
+ */
+var text1 = new PointText(new Point(100,100));
+text1.fillColor = 'black';
+text1.content = 'Circle 1';
+
+var c1 = new Path.Circle({
+  center: [300,200],
+  radius: 100,
+  fillColor: 'white',
+  strokeColor: 'black'
+});
+text1.position = c1.position;
+
+var group1 = new Group([c1, text1]);
+group1.data.id = 1;
+group1.visible = false;
+var text2 = new PointText(new Point(100,100));
+text2.fillColor = 'black';
+text2.content = 'Circle 2';
+
+var c2 = new Path.Circle({
+  center: [150,525],
+  radius: 125,
+  fillColor: 'white',
+  strokeColor: 'black'
+});
+text2.position = c2.position;
+
+var group2 = new Group([c2, text2]);
+group2.data.id = 2;
+group2.visible = false;
+text3= new PointText(new Point(100, 100));
+text3.fillColor = 'black';
+text3.content= 'Circle 3';
+
+c3 = new Path.Circle({
+  center: [567,300],
+  radius: 125,
+  parent: originals,
+  fillColor: 'white',
+  strokeColor: 'black'
+});
+text3.position = c3.position;
+group3 = new Group([c3, text3]);
+
+group3.data.id=3;
+
+group3.visible = false;
+
+var text4= new PointText(new Point(100, 100));
+text4.fillColor = 'black';
+text4.content= 'Circle 4';
+
+var c4 = new Path.Circle({
+  center: [100,300],
+  radius: 88,
+  fillColor: 'white',
+  strokeColor: 'black'
+});
+
+text4.position = c4.position;
+var group4 = new Group([c4, text4]);
+group4.data.id = 4;
+group4.visible = false;
+var text5= new PointText(new Point(100, 100));
+text5.fillColor = 'black';
+text5.content= 'Circle 5';
+
+var c5 = new Path.Circle({
+  center: [445,505],
+  radius: 110,
+  fillColor: 'white',
+  strokeColor: 'black'
+});
+c5.data.id=5;
+text5.position = c5.position;
+var group5 = new Group([c5, text5]);
+group5.data.id=5;
+group5.visible = false;
+
+
+var originals = new Group({
+  children: [group1, group2, group3, group4, group5],
+  insert: true
+});
+
+var groupArray = [undefined, group1, group2, group3, group4, group5];
+var intersections = {};
+
+for(var i=1;i<6;i++){
+  for(var j=i+1;j<6;j++){
+    intersections[""+i+j] = groupArray[i].children[0].intersect(groupArray[j].children[0]);
+    for(var k=j+1;k<6;k++){
+      intersections[""+i+j+k] = intersections[""+i+j].intersect(groupArray[k].children[0]);
+      for(var l = k+1;l<6; l++){
+        intersections[""+i+j+k+l] = intersections[""+i+j+k].intersect(groupArray[l].children[0]);
+      }
+    }
+  }
+}
+
+intersections["12345"] = c5.intersect(intersections["1234"]);
+
+for (var i in intersections){
+  intersections[i].moveAbove(c1);
+  intersections[i].moveAbove(c2);
+  intersections[i].moveAbove(c3);
+  intersections[i].moveAbove(c4);
+  intersections[i].moveAbove(c5);
+  intersections[i].moveBelow(text1);
+  intersections[i].moveBelow(text2);
+  intersections[i].moveBelow(text3);
+  intersections[i].moveBelow(text4);
+  intersections[i].moveBelow(text5);
+
+}
+
+// intersection between cicles c_i_1, ..., c_i_k is at intersections[i_1 i_2 ... i_k]
+// region145 is at intersections["145"]
+// to parse, split the string index to get the numbers of the regions
+
+console.log(intersections);
+
+var activeItem; 
+
+var handle;
+
+var dragged = false; 
+
+function onMouseDown(event) {
+  dragged = false;
+  handle = null;
+  if (activeItem) {
+    // TODO: what was the purpose of this? why here and not later?
+    // removing this will help with dealing with the activeItem logic later
+    handle = activeItem.hitTest(event.point) 
+      {
+        segments: true,
+        stroke: true,
+        fill: true,
+        tolerance: 5
+      }
+    );
+  }
+  var hitResult = originals.hitTest(event.point);
+  //TODO: a lot of undefined/null checking
+  if(activeItem){
+    console.log("active item: " + activeItem);
+    console.log(activeItem.children);
+    if(activeItem.isIntersection == undefined){
+      for(var c in activeItem.children){
+        activeItem.children[c].selected = false;
+      }
+    } else {
+      activeItem.selected = false;
+    }
+  }
+  activeItem = hitResult && hitResult.item;
+  console.log(activeItem);
+  if(activeItem){
+    activeItem.selected = true;
+    if(activeItem.isIntersection == undefined){
+      activeItem = activeItem.parent;
+    }
+  } else {
+    console.log('nothing hit');
+    return;
+  }
+
+  for (var _int in intersections){
+    if(!intersections[_int].selected){
+      intersections[_int].remove();
+	    console.log(intersections[_int]);
+    }
+  }
+
+} 
+
+var segment;
+
+function onMouseDrag(event) {
+  dragged = true;
+  if ( activeItem){
+    if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
+      var p = event.point; // old
+      var p2 = p + event.delta; // new
+      var c = activeItem.position;
+
+      if ((c - p).length > (c - p2).length){
+        activeItem.scaling -= 0.005*event.delta.length;
+      } else {
+        activeItem.scaling += 0.005*event.delta.length;
+      }
+    }
+    else {
+      activeItem.translate(event.point - activeItem.position);
+	    console.log(activeItem.position);
+    }
+
+  } // end if(activeitem)
+} // end onMouseDrag
+console.log("mouse drag stopped");
+
+function onMouseUp(event){
+  // move this to only be computed after drag stops
+  // but, remove intersections when the drag starts
+
+  if (dragged) { 
+    for (var _int in intersections){
+      // do fun stuff
+      // array of circle numbers is i.split("")
+      intersections[_int].remove();
+    }
+
+    for(var i=1;i<6;i++){
+      if (groupArray[i].visible) {
+        for(var j=i+1;j<6;j++){
+          if (groupArray[j].visible) {
+            intersections[""+i+j] = groupArray[i].children[0].intersect(groupArray[j].children[0]);
+		  console.log(intersections[""+i+j]);
+            for(var k=j+1;k<6;k++){
+              if (groupArray[k].visible) {
+                intersections[""+i+j+k] = intersections[""+i+j].intersect(groupArray[k].children[0]);
+		  console.log(intersections[""+i+j+k]);
+		      
+                for(var l =k+1; l < 6; l++){
+                  intersections[""+i+j+k +l] = intersections[""+i+j + k].intersect(groupArray[l].children[0]);
+		  console.log(intersections[""+i+j+k+l]);
+			
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    for (var _int in intersections){
+      // this isn't correct
+      // TODO: needs a lot more checking of various objects
+      intersections[_int].moveAbove(c1);
+      intersections[_int].moveAbove(c2);
+      intersections[_int].moveAbove(c3);
+      intersections[_int].moveAbove(c4);
+      intersections[_int].moveAbove(c5);
+      intersections[_int].moveBelow(text1);
+      intersections[_int].moveBelow(text2);
+      intersections[_int].moveBelow(text3);
+      intersections[_int].moveBelow(text4);
+      intersections[_int].moveBelow(text5);
+      intersections[_int].isIntersection = "true";
+    }
+  }
+}
+
+var scope = this;
+doSubmitOne = function(e){
+  scope.activate();
+  e.preventDefault();
+  group1.visible = true;
+
+  console.log(e);
+  return false;
+
+  var targetName = document.getElementsByName("formOne")[0].value.toLowerCase();
+	console.log(targetName);
+  var text = e.target.getElementsByTagName("input")[0].value;
+  console.log(text);
+  console.log(text.value);
+  var obj;
+
+  for( i = 0; i < originals.children.length; i++){
+    if (originals.children[i].data.id == targetName){
+      obj = originals.children[i];
+    }
+  }
+  var t = obj.getItem({
+    _class: "PointText"
+  });
+  t.content = text;
+  return false;
+}
+window.doSubmitOne = doSubmitOne;
+
+
+doSubmitTwo = function(e){
+  scope.activate();
+  e.preventDefault();
+  group2.visible = true;
+  var targetName = document.getElementsByName("formTwo")[0].value.toLowerCase();
+
+  var text = e.target.getElementsByTagName("input")[0].value;
+	  console.log(text);
+  console.log(text.value);
+
+  var obj;
+  var arr = [group1, group2, group3, group4, group5];
+  for( i = 0; i < arr.length; i++){
+    if (arr[i].data.id == targetName){
+      obj = arr[i];
+    }
+  }
+  var t = obj.getItem({
+    _class: "PointText"
+  });
+  t.content = text;
+  return false;
+}
+window.doSubmitTwo = doSubmitTwo;
+
+doSubmitThree = function(e){
+  scope.activate();
+  e.preventDefault();
+  group3.visible = "true";
+  var targetName = document.getElementsByName("formThree")[0].value.toLowerCase();
+  var text = e.target.getElementsByTagName("input")[0].value;
+	  console.log(text);
+  console.log(text.value);
+
+  var obj;
+  var arr = [group1, group2, group3, group4, group5];
+  for( i = 0; i < arr.length; i++){
+    if (arr[i].data.id == targetName){
+      obj = arr[i];
+    }
+  }
+  var t = obj.getItem({
+    _class: "PointText"
+  });
+  t.content = text;
+  return false;
+}
+window.doSubmitThree = doSubmitThree;
+doSubmitFour = function(e){
+  scope.activate();
+  e.preventDefault();
+  group4.visible = true;
+  console.log(e.target);
+  var targetName = document.getElementsByName("formFour")[0].value.toLowerCase();
+  var text = e.target.getElementsByTagName("input")[0].value;
+	  console.log(text);
+  console.log(text.value);
+
+  var obj;
+  var arr = [group1, group2, group3, group4, group5];
+  for( i = 0; i < arr.length; i++){
+    if (arr[i].data.id == targetName){
+      obj = arr[i];
+    }
+  }
+  var t = obj.getItem({
+    _class: "PointText"
+  });
+  t.content = text;
+  return false;
+}
+window.doSubmitFour = doSubmitFour;
+doSubmitFive = function(e){
+  scope.activate();
+  e.preventDefault();
+  group5.visible = true;
+  var targetName = document.getElementsByName("formFive")[0].value.toLowerCase();
+  var text = e.target.getElementsByTagName("input")[0].value;
+	  console.log(text);
+  console.log(text.value);
+
+  var obj;
+  var arr = [group1, group2, group3, group4, group5];
+  for( i = 0; i < arr.length; i++){
+    if (arr[i].data.id == targetName){
+      obj = arr[i];
+    }
+  }
+  var t = obj.getItem({
+    _class: "PointText"
+  });
+  t.content = text;
+  return false;
+}
+window.doSubmitFive = doSubmitFive;
+var slider2=document.getElementById("range2");
+slider2.addEventListener("change",function(){
+  var r,b;
+  r=Math.round(255*(100-slider2.value)/100);
+  b=Math.round(255*slider2.value/100);
+  c2.fillColor = "rgb("+r+",0,"+b+")";
+  if(slider2.value == 0){
+    c2.fillColor = "white";
+  }
+
+},false);
+
+var slider1=document.getElementById("range1");
+slider1.addEventListener("change",function(){
+  var r,b;
+  r=Math.round(255*(100-slider1.value)/100);
+  b=Math.round(255*slider1.value/100);
+  c1.fillColor = "rgb("+r+",0,"+b+")";
+  if(slider1.value == 0){
+    c1.fillColor = "white";
+  }
+
+},false);
+
+var slider3=document.getElementById("range3");
+slider3.addEventListener("change",function(){
+  var r,b;
+  r=Math.round(255*(100-slider3.value)/100);
+  b=Math.round(255*slider3.value/100);
+  c3.fillColor = "rgb("+r+",0,"+b+")";
+  if(slider3.value == 0){
+    c3.fillColor = "white";
+  }
+
+},false);
+var slider4=document.getElementById("range4");
+slider4.addEventListener("change",function(){
+  var r,b;
+  r=Math.round(255*(100-slider4.value)/100);
+  b=Math.round(255*slider4.value/100);
+  c4.fillColor = "rgb("+r+",0,"+b+")";
+  if(slider4.value == 0){
+    c4.fillColor = "white";
+  }
+
+},false);
+var slider5=document.getElementById("range5");
+slider5.addEventListener("change",function(){
+  var r,b;
+  r=Math.round(255*(100-slider5.value)/100);
+  b=Math.round(255*slider5.value/100);
+  c5.fillColor = "rgb("+r+",0,"+b+")";
+  if(slider5.value == 0){
+    c5.fillColor = "white";
+  }
+  if(group1.visible == false){
+    c1.fillColor = "white";
+  }
+},false);
+var form1 = document.getElementById("inlineRadio1");
+form1.addEventListener("change",function(){
+  c1.dashArray = false;
+
+},false);
+var form12 = document.getElementById("inlineRadio12");
+form12.addEventListener("change",function(){
+  c1.dashArray = [10,4];
+},false);
+var form2 = document.getElementById("inlineRadio2");
+form2.addEventListener("change",function(){
+  c2.dashArray = false;
+
+},false);
+var form21 = document.getElementById("inlineRadio21");
+form21.addEventListener("change",function(){
+  c2.dashArray = [10,4];
+},false);
+var form3 = document.getElementById("inlineRadio3");
+form3.addEventListener("change",function(){
+  c3.dashArray = false;
+
+},false);
+var form31 = document.getElementById("inlineRadio31");
+form31.addEventListener("change",function(){
+  c3.dashArray = [10,4];
+},false);
+var form4 = document.getElementById("inlineRadio4");
+form4.addEventListener("change",function(){
+  c4.dashArray = false;
+
+},false);
+var form41 = document.getElementById("inlineRadio41");
+form41.addEventListener("change",function(){
+  c4.dashArray = [10,4];
+},false);
+var form5 = document.getElementById("inlineRadio5");
+form5.addEventListener("change",function(){
+  c5.dashArray = false;
+
+},false);
+var form51 = document.getElementById("inlineRadio51");
+form51.addEventListener("change",function(){
+  c5.dashArray = [10,4];
+},false);
+
+var sliderIntersect=document.getElementById("rangeIntersect");
+
+sliderIntersect.addEventListener("change",function(){
+  var r,b;
+  r=Math.round(255*(100-sliderIntersect.value)/100);
+  b=Math.round(255*sliderIntersect.value/100);
+  activeItem.fillColor = "rgb("+r+",0,"+b+")";
+  if(activeItem.value == 0){
+    activeItem.fillColor = "white";
+  }
+
+},false);
+var formIntersect1 = document.getElementById("inlineRadioIntersect1");
+formIntersect1.addEventListener("change",function(){
+  activeItem.dashArray = false;
+
+},false);
+var formIntersect12 = document.getElementById("inlineRadioIntersect12");
+formIntersect12.addEventListener("change",function(){
+  activeItem.dashArray = [10,4];
+},false);
+

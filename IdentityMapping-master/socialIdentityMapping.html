@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <!-- <link rel="stylesheet" href="myCSS.css"> -->
+  </head>
+  <body>
+    <h2 title="Social Identity Mapping">Social Identity Mapping</h2>
+
+
+
+
+    
+
+   
+
+
+
+  <div id="StartMapping" class="tabcontent">
+	<h3>Begin</h3>
+	Start by entering up to five of the most important identities that relate to you. The more identities you can list the more accurate the results will be<br>
+
+	    <form >
+     1: <input type="text" name="circleText" id="textInput">
+    </form>
+		     <form >
+      2:<input type="text" name="circleText" id="textInput">
+    </form>
+   <form >
+      3:<input type="text" name="circleText" id="textInput">
+    </form>
+   <form >
+     4: <input type="text" name="circleText" id="textInput">
+    </form>
+   <form >
+     5: <input type="text" name="circleText" id="textInput">
+    </form>
+	   <!-- <button> Continue To Map</button>-->
+	     <input id="btnStart" type="button" value="Start Mapping"
+        onclick="printDuration();" />
+	     <p id="para">0</p>
+
+
+
+
+
+
+      <p title="I'm a tooltip">
+    Use the mouse to size and resize the circles on the canvas. Move the circles somewhere on the grid 
+    that describes you the most.<br>Once completed, click the save results button at the bottom right of the canvas to submit your work. <br>    </p>
+
+    
+
+    <div style="border: 2px solid black; margin-bottom: 20px;">
+      <canvas id="c" style=""></canvas>
+    </div>
+    <p align="right"> <button onclick="stop();">Save Results</button>
+   
+
+    <form action="#" onsubmit="doSubmit(event);">
+      <input type="text" name="circleText" id="textInput">
+      <input type="hidden" name="circleId" value="1"><!-- holds the SUid corresponding to this circle -->
+      <input type="submit" value="Change Circle 1">
+    </form>
+
+   <form action="#" onsubmit="doSubmit(event);">
+      <input type="text" name="circleText" id="textInput">
+      <input type="hidden" name="circleId" value="2"><!-- holds the SUid corresponding to this circle-->
+      <input type="submit" value="Change Circle 2">
+    </form>
+
+
+     <form action="#" onsubmit="doSubmit(event);">
+      <input type="text" id="textInput">
+      <input type="hidden" name="circleId" value="3"><!-- holds the SUid corresponding to this circle-->      
+      <input type="submit" value="Change Circle 3">
+    </form>
+
+
+     <form action="#" onsubmit="doSubmit(event);">
+      <input type="text" id="textInput">
+      <input type="hidden" name="circleId" value="4"><!-- holds the SUid corresponding to this circle-->      
+      <input type="submit" value="Change Circle 4">
+    </form>
+
+
+     <form action="#" onsubmit="doSubmit(event);">
+      <input type="text" id="textInput">
+      <input type="hidden" name="circleId" value="5"><!-- holds the SUid corresponding to this circle-->      
+      <input type="submit" value="Change Circle 5">
+    </form>
+    <br>
+    <p title="Go Gulls">Salisbury University<br> </p>
+    <p id="demo"></p>
+</div>
+
+
+
+
+
+
+  </body>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js"></script>
+  <script src = "fabric.js"></script>
+
+</html>
