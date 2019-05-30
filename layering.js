@@ -1,4 +1,6 @@
-
+/*
+ *  Set up the circle objects
+ */
 var c1 = new Path.Circle({
   center: [150,250],
   radius: 100,
