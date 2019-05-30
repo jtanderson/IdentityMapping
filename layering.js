@@ -258,9 +258,25 @@ var activeItem;
 var handle;
 var dragged = false; 
 //end layering manipulation, starts functions and such
+
+//started working on 5/29
 function onMouseDown(event) {
   handle = null;
+  //shouldnt need groups on mouse down only cirles
+    //maybe make a circles group
+    var c1 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
+    var c2 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
+    var c3 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
+    var c4 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});
+    var c5 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
+    var groups = new Group({
+      children: [c1, c2, c3, c4, c5],
+      insert: true
+    });
+    console.log(groups);
+
   var hitResult = groups.hitTest(event.point);
+  //activeItem should be null here...how to define an active item??
   if(activeItem){
     //this is how we define the handles to resize the circle
     handle = activeItem.hitTest(event.point, 
@@ -271,6 +287,23 @@ function onMouseDown(event) {
         tolerance: 5
       }
     );
+    //defining the intersections here for this function
+    for(var i=1;i<6;i++){
+      var c_i = project
+          .getItem({data: {layerName: "circles"}})
+          .getItem({data: {circleId: i}});
+      for(var j=i+1;j<6;j++){
+        console.log("checking " + i + " and " + j);
+        var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+    
+        var int_ij = c_i.intersect(c_j, {insert: false});
+        int_ij.data.id = ""+i+j;
+        //delete int_ij.data.circleId;
+        intersectionLayer.addChild(int_ij);
+    
+     
+      }
+    }
     //logging the active items on click
       console.log("Active item has children:");
       console.log(activeItem.children);
