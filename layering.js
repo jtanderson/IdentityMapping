@@ -264,20 +264,12 @@ var dragged = false;
 //started working on 5/29
 function onMouseDown(event) {
   handle = null;
-  //shouldnt need groups on mouse down only cirles
-    //maybe make a circles group
-    var c1 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
-    var c2 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
-    var c3 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
-    var c4 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});
-    var c5 = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
-    var groups = new Group({
-      children: [c1, c2, c3, c4, c5],
-      insert: true
-    });
-    console.log(groups);
 
-  var hitResult = groups.hitTest(event.point);
+  // Just to avoid some potential closure pain
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+
+  var hitResult = cLayer.hitTest(event.point);
+  
   //activeItem should be null here...how to define an active item??
   if(activeItem){
     //this is how we define the handles to resize the circle
@@ -318,8 +310,10 @@ function onMouseDown(event) {
         activeItem.selected = false;
       }
   }
+
   //sets active item to whatever is clicked
   activeItem = hitResult && hitResult.item;
+  
   //this activeItem keeps cirle with the text but when combined doesnt work??
   if(activeItem){
     activeItem.selected = true;
@@ -331,15 +325,16 @@ function onMouseDown(event) {
     console.log('nothing hit');
     return;
   }
-  //removes intersections on click
+  //remove intersections on click
   // move to drag?
+  /*
   for (var _int in intersections){
     if(!intersections[_int].selected){
       intersections[_int].remove();
     }
   }
-} 
-//end onmousedown function
+  */
+} //end onmousedown function
 
 var segment;
 
@@ -366,6 +361,8 @@ function onMouseDrag(event) {
     else {
       //activeItem.translate(event.point - activeItem.position);
       // todo: only do this if movement isn't locked
+      console.log(activeItem);
+      console.log("==========");
       activeItem.translate(event.delta);// + activeItem.position);
     }
 
