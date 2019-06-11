@@ -42,10 +42,6 @@ project.addLayer(circleLayer);
 var intersectionLayer = new Layer();
 intersectionLayer.data.layerName = "intersections";
 
-//changed the data ID's to ints rather than strings so we can access the intersections easier
-
-//paper.project.getItem({data:{layerName: "intersections"}}).activate();
-// TODO: finish for all k-wise intersections
 for(var i=1;i<6;i++){
   var c_i = project
       .getItem({data: {layerName: "circles"}})
@@ -129,27 +125,22 @@ var dragged = false;
 //end layering manipulation, starts functions and such
 
 /*
- * Gets a coordinate of a user click
- * 1. tests to see if they hit an intersection
- *  a. if yes, set that to active and stop
- * 2. If not clicking an intersection, test circles
- *  a. if yes, set the handle stuff in case they mean to resize
- *  b. also if yes, rendering gets weird, so adjust layers on top of each other
+ * 1. Need to hit test on items within the layer not the entire layer
+ * 2. Active item setting is probably wrong since setting entire layer and not one item 
  */
-function onMouseDown(event) {
+function onMouseDown(event){
   handle = null;
-
-  // Just to avoid some potential closure pain
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-  // logic here
-
-  var hitResult = cLayer.hitTest(event.point);
-  
-  //activeItem should be null here...how to define an active item??
-  if(activeItem){
-    //this is how we define the handles to resize the circle
+  if(hitResult == iLayer.hitTest(event.point)){//if the intersection layer is hit
+    activeItem = iLayer;//needs to be a certain int not entire layer but not sure how to test which int
+    console.log("Active item has children:");
+    console.log(activeItem.children);
+  }
+  else if(hitResult == cLayer.hitTest(event.point)){//if the circle layer is hit
+    activeItem = cLayer;//same as above need to set one item to active not entire layer
+    //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
         segments: true,
@@ -158,59 +149,21 @@ function onMouseDown(event) {
         tolerance: 5
       }
     );
+    console.log("Active item has children:");
+    console.log(activeItem.children);
+  }
+  else{
+    console.log("Nothing hit");
+    for(var i in iLayer){
+      i.selected = false;//??
+    }
+    for(var c in cLayer){
+      c.selected = false;//??
+    }
+  }
+  fixLayers();
+}
 
-    //defining the intersections here for this function
-    for(var i=1;i<6;i++){
-      var c_i = project
-          .getItem({data: {layerName: "circles"}})
-          .getItem({data: {circleId: i}});
-      for(var j=i+1;j<6;j++){
-        console.log("checking " + i + " and " + j);
-        var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-    
-        var int_ij = c_i.intersect(c_j, {insert: false});
-        int_ij.data.id = ""+i+j;
-        //delete int_ij.data.circleId;
-        intersectionLayer.addChild(int_ij);
-      }
-    }
-    //logging the active items on click
-      console.log("Active item has children:");
-      console.log(activeItem.children);
-      //de selecting everything when nothing clicked
-      if(activeItem.isIntersection == undefined){
-        for(var c in activeItem.children){
-          activeItem.children[c].selected = false;
-        }
-      } else {
-        activeItem.selected = false;
-      }
-  }
-
-  //sets active item to whatever is clicked
-  activeItem = hitResult && hitResult.item;
-  
-  //this activeItem keeps cirle with the text but when combined doesnt work??
-  if(activeItem){
-    activeItem.selected = true;
-    if(activeItem.isIntersection == undefined){
-      activeItem = activeItem.parent;
-    }
-  } 
-  else {
-    console.log('nothing hit');
-    return;
-  }
-  //remove intersections on click
-  // move to drag?
-  /*
-  for (var _int in intersections){
-    if(!intersections[_int].selected){
-      intersections[_int].remove();
-    }
-  }
-  */
-} //end onmousedown function
 
 var segment;
 
