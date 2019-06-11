@@ -8,12 +8,17 @@
  */
 
 
-var min = 75;
-var max = 125;
+
+
+
+// has all the circles
+var circleLayer = new Layer();
+var min = 55;
+var max = 135;
 var minR = 125;
 var maxR = 650;
 for(var i=1; i<=5; i++){
-
+//PROBLEM: when using random get crazy amount of intersections
 var circle = new Path.Circle({
   center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
   radius: Math.floor(Math.random() * (+max - +min)) + +min,
@@ -25,22 +30,11 @@ var circle = new Path.Circle({
     circleId: i
   }
 });
-  circleLayer.addChild(circle);
+  circleLayer.addChild(circle); 
 }
-
-
-// has all the circles
-var circleLayer = new Layer();
-
 circleLayer.data.layerName = "circles";
 project.addLayer(circleLayer);
-/*
-circleLayer.addChild(c1);
-circleLayer.addChild(c2);
-circleLayer.addChild(c3);
-circleLayer.addChild(c4);
-circleLayer.addChild(c5);
-*/
+
 
 // In console, can use the "getItem" and leverage the data field
 // e.g., paper.project.getItem({data:{layerName: "circles"}}).getItem({data:{circleId: "1"}})
