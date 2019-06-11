@@ -39,17 +39,8 @@ project.addLayer(circleLayer);
 // In console, can use the "getItem" and leverage the data field
 // e.g., paper.project.getItem({data:{layerName: "circles"}}).getItem({data:{circleId: "1"}})
 
-
-
-
-//everything above should be for circles only
-//layer for adding intersections
-// var secondLayer = new secondLayer();
-
 var intersectionLayer = new Layer();
-// project.addLayer(intersectionLayer);
 intersectionLayer.data.layerName = "intersections";
-//intersectionLayer.activate(); // not needed now, but later
 
 //changed the data ID's to ints rather than strings so we can access the intersections easier
 
@@ -65,19 +56,30 @@ for(var i=1;i<6;i++){
 
     var int_ij = c_i.intersect(c_j, {insert: false});
     int_ij.data.id = ""+i+j;
-    //delete int_ij.data.circleId;
     intersectionLayer.addChild(int_ij);
-
     console.log(int_ij);
-    /*
-    for(var k=j+1;k<6;k++){
-      intersections[""+i+j+k] = intersections["" + i + j].intersect(paper.project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}}));
-      for(var l = k+1;l<6; l++){
-        intersections[""+i+j+k+l] = intersections[""+i+j+k].intersect(paper.project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}}));
-      }
-    }
-    */
+   
   }
+  //TODO: think my loops are off but not sure here
+  for(var k = 1; k < 3; k++){
+    var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+    var int_ijk = int_ij.intersect(c_k, {insert: false});
+    int_ijk.data.id = ""+i+j+k;
+    intersectionLayer.addChild(int_ijk);
+    console.log(int_ijk);
+  }
+  for(var l = 1; k < 2; k++){
+    var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
+    var int_ijkl = int_ijk.intersect(c_l, {insert: false});
+    int_ijkl.data.id = ""+i+j+k+l;
+    intersectionLayer.addChild(int_ijkl);
+    console.log(int_ijkl);
+  }
+  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: m}});
+  var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
+  int_ijklm.data.id = ""+i+j+k+l+m;
+  intersectionLayer.addChild(int_ijklm);
+  console.log(int_ijklm);
 }
 
 
