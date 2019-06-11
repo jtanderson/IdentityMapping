@@ -7,75 +7,26 @@
  * see text section for example
  */
 
-/*
-var c1 = new Path.Circle({
-  center: [150,250],
-  radius: 100,
-  fillColor: 'white',
-  strokeColor: 'black',
-  id: 1,
-  insert: false,
-  data: {
-    circleId: 1
-  }
-});
-circleLayer.addChild(c1);
-*/
 
-var c1 = new Path.Circle({
-  center: [150,250],
-  radius: 100,
-  fillColor: 'white',
-  strokeColor: 'black',
-  id: 1,
-  insert: false,
-  data: {
-    circleId: 1
-  }
-});
-var c2 = new Path.Circle({
-  center: [150,525],
-  radius: 125,
-  fillColor: 'white',
-  strokeColor: 'black',
-  insert: false,
-  data: {
-    circleId: 2
-  }
-});
-var c3 = new Path.Circle({
-  center: [567,300],
-  radius: 65,
-  // parent: groups,
-  fillColor: 'white',
-  strokeColor: 'black',
-  insert: false,
-  data: {
-    circleId: 3
-  }
-});
-var c4 = new Path.Circle({
-  center: [100,300],
-  radius: 88,
-  fillColor: 'white',
-  strokeColor: 'black',
-  insert: false,
-  data: {
-    circleId: 4
-  }
-});
-var c5 = new Path.Circle({
-  center: [445,505],
-  radius: 110,
-  fillColor: 'white',
-  strokeColor: 'black',
-  insert: false,
-  data: {
-    circleId: 5
-  }
-});
+var min = 75;
+var max = 125;
+var minR = 125;
+var maxR = 650;
+for(var i=1; i<=5; i++){
 
-c5.data.circleId = 5;
+var circle = new Path.Circle({
+  center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
+  radius: Math.floor(Math.random() * (+max - +min)) + +min,
+  fillColor: 'white',
+  strokeColor: 'black',
+  id: i,
+  insert: false,
+  data: {
+    circleId: i
+  }
+});
+  circleLayer.addChild(circle);
+}
 
 
 // has all the circles
@@ -83,13 +34,13 @@ var circleLayer = new Layer();
 
 circleLayer.data.layerName = "circles";
 project.addLayer(circleLayer);
-
+/*
 circleLayer.addChild(c1);
 circleLayer.addChild(c2);
 circleLayer.addChild(c3);
 circleLayer.addChild(c4);
 circleLayer.addChild(c5);
-
+*/
 
 // In console, can use the "getItem" and leverage the data field
 // e.g., paper.project.getItem({data:{layerName: "circles"}}).getItem({data:{circleId: "1"}})
