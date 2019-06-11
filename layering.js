@@ -18,18 +18,19 @@ var max = 135;
 var minR = 125;
 var maxR = 650;
 for(var i=1; i<=5; i++){
-//PROBLEM: when using random get crazy amount of intersections
-var circle = new Path.Circle({
-  center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
-  radius: Math.floor(Math.random() * (+max - +min)) + +min,
-  fillColor: 'white',
-  strokeColor: 'black',
-  id: i,
-  insert: false,
-  data: {
-    circleId: i
-  }
-});
+  //PROBLEM: when using random get crazy amount of intersections
+  // jta: this is okay for now, the won't all be displayed initially anyway
+  var circle = new Path.Circle({
+    center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
+    radius: Math.floor(Math.random() * (+max - +min)) + +min,
+    fillColor: 'white',
+    strokeColor: 'black',
+    id: i,
+    insert: false,
+    data: {
+      circleId: i
+    }
+  });
   circleLayer.addChild(circle); 
 }
 circleLayer.data.layerName = "circles";
@@ -48,8 +49,8 @@ intersectionLayer.data.layerName = "intersections";
 // TODO: finish for all k-wise intersections
 for(var i=1;i<6;i++){
   var c_i = project
-      .getItem({data: {layerName: "circles"}})
-      .getItem({data: {circleId: i}});
+    .getItem({data: {layerName: "circles"}})
+    .getItem({data: {circleId: i}});
   for(var j=i+1;j<6;j++){
     console.log("checking " + i + " and " + j);
     var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
@@ -58,7 +59,7 @@ for(var i=1;i<6;i++){
     int_ij.data.id = ""+i+j;
     intersectionLayer.addChild(int_ij);
     console.log(int_ij);
-   
+
   }
   //TODO: think my loops are off but not sure here
   for(var k = 1; k < 3; k++){
@@ -112,7 +113,7 @@ for(var i=1; i<=5; i++){
 
 var fixLayers = function(){
   // because of binding, may need to use project.layers...
-  
+
   textLayer.sendToBack();
   intersectionLayer.sendToBack();
   circleLayer.sendToBack();
@@ -146,7 +147,7 @@ function onMouseDown(event) {
   // logic here
 
   var hitResult = cLayer.hitTest(event.point);
-  
+
   //activeItem should be null here...how to define an active item??
   if(activeItem){
     //this is how we define the handles to resize the circle
@@ -162,12 +163,12 @@ function onMouseDown(event) {
     //defining the intersections here for this function
     for(var i=1;i<6;i++){
       var c_i = project
-          .getItem({data: {layerName: "circles"}})
-          .getItem({data: {circleId: i}});
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
       for(var j=i+1;j<6;j++){
         console.log("checking " + i + " and " + j);
         var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-    
+
         var int_ij = c_i.intersect(c_j, {insert: false});
         int_ij.data.id = ""+i+j;
         //delete int_ij.data.circleId;
@@ -175,21 +176,21 @@ function onMouseDown(event) {
       }
     }
     //logging the active items on click
-      console.log("Active item has children:");
-      console.log(activeItem.children);
-      //de selecting everything when nothing clicked
-      if(activeItem.isIntersection == undefined){
-        for(var c in activeItem.children){
-          activeItem.children[c].selected = false;
-        }
-      } else {
-        activeItem.selected = false;
+    console.log("Active item has children:");
+    console.log(activeItem.children);
+    //de selecting everything when nothing clicked
+    if(activeItem.isIntersection == undefined){
+      for(var c in activeItem.children){
+        activeItem.children[c].selected = false;
       }
+    } else {
+      activeItem.selected = false;
+    }
   }
 
   //sets active item to whatever is clicked
   activeItem = hitResult && hitResult.item;
-  
+
   //this activeItem keeps cirle with the text but when combined doesnt work??
   if(activeItem){
     activeItem.selected = true;
@@ -298,11 +299,11 @@ doSubmit = function(e){
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
- 
+
   console.log("Looking for circle " + targetName);
-  
+
   var obj = project
-    //.getItem({data: {layerName: "circles"}})
+  //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
 
   console.log(obj);
@@ -315,9 +316,9 @@ doSubmit = function(e){
   // TODO: instead of changing visibility, call "insert" if not already there
   obj.visible = true;
   return false;
-}
+} //end doSubmit function
+
 window.doSubmit= doSubmit;
-//end doSubmit function
 
 var sliderIntersect=document.getElementById("rangeIntersect");
 
@@ -338,11 +339,12 @@ sliderIntersect.addEventListener("change",function(){
   }
 
 },false);
+
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 formIntersect1.addEventListener("change",function(){
   activeItem.dashArray = false;
-
 },false);
+
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
 formIntersect12.addEventListener("change",function(){
   activeItem.dashArray = [10,4];
