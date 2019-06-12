@@ -51,7 +51,7 @@ for(var i=1;i<6;i++){
 
  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
   var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
-  int_ijklm.data.id = ""+i+j+k+l+m;
+  int_ijklm.data.id = ""+i+j+k+l+5;
   intersectionLayer.addChild(int_ijklm);
 
 var textLayer = new Layer();//creates the text layer which will be the top layer
@@ -125,24 +125,12 @@ function onMouseDown(event){
 var segment;
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
-  //test if circle is clicked using items layerName
-    //if it is a handle then resize the circle
-    //else move the circle
-  //otherwise do nothing (don't want to move the intersection, text, etc..)
-
-}//end mouse dragging function
-function onMouseDrag(event) {
-  dragged = true;
-  
-  // @Grace, as soon as a drag starts, destroy all existing intersections
-  // they will be re-created on the mouseUp event
-
-  if ( activeItem){
-    // terrible and dirty.
-    if( activeItem.isIntersection == "true" ){
-      return false;
-    }
-    //if we hit a handle, resize the circle
+  dragged = true;//not sure if we still need this yet
+  //need to destroy old intersections here before we test and make any changes
+  console.log(activeItem);
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+  var iLayer = project.getItem({data: {layerName: "intersections"}});
+  if(hitResult = cLayer.hitTest(event.point)){//if it is a circle being hit
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
       var p2 = p + event.delta; // new
@@ -157,9 +145,15 @@ function onMouseDrag(event) {
     else {
       activeItem.translate(event.delta);// + activeItem.position);
     }
+  } else{
+    return false;
+  }
+  //test if circle is clicked using items layerName
+    //if it is a handle then resize the circle
+    //else move the circle
+  //otherwise do nothing (don't want to move the intersection, text, etc..)
 
-  } // end if(activeitem)
-} // end onMouseDrag
+}//end mouse dragging function
 
 function onMouseUp(event){
 
