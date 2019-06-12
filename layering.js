@@ -123,7 +123,14 @@ function onMouseDown(event){
 
 
 var segment;
+//when user clicks and drags
+function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
+  //test if circle is clicked using items layerName
+    //if it is a handle then resize the circle
+    //else move the circle
+  //otherwise do nothing (don't want to move the intersection, text, etc..)
 
+}//end mouse dragging function
 function onMouseDrag(event) {
   dragged = true;
   
