@@ -94,7 +94,7 @@ var tester = false;
 //function when user makes a click
 function onMouseDown(event){
   if(activeItem){
-    activeItem.selected = false;
+   // activeItem.selected = false;
   }
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
@@ -169,6 +169,17 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 //on mouse up function
 function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+  var visibility = true;
+  for(var j in cLayer.children){
+    if(cLayer.children[j].visible == false){
+      visibility = false;
+    }
+  }  
+  if(visibility == true){
+      intersections();
+
+  }
 
   //need to de select active item
   //TODO: recalculate all intersections
@@ -178,7 +189,6 @@ function onMouseUp(event){
       iLayer.children[i].remove(); 
     }
     //create new intersections here
-    intersections();
     //calculate new intersections by calling graces function
   }
   dragged = false;
