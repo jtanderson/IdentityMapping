@@ -1,25 +1,9 @@
-/*
- *  Set up the circle objects
- *  TODO: make starting centers random
- */
-
-/* TODO: loop this block instead of copy-paste
- * see text section for example
- */
-
-
-
-
-
-// has all the circles
-var circleLayer = new Layer();
+var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
 var minR = 125;
 var maxR = 650;
-for(var i=1; i<=5; i++){
-  //PROBLEM: when using random get crazy amount of intersections
-  // jta: this is okay for now, the won't all be displayed initially anyway
+for(var i=1; i<=5; i++){//loop for circle creation (random)
   var circle = new Path.Circle({
     center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
     radius: Math.floor(Math.random() * (+max - +min)) + +min,
@@ -31,80 +15,53 @@ for(var i=1; i<=5; i++){
       circleId: i
     }
   });
-  circleLayer.addChild(circle); 
+  circleLayer.addChild(circle); //add each circle to the layer
 }
 circleLayer.data.layerName = "circles";
-project.addLayer(circleLayer);
+project.addLayer(circleLayer);//adds the layer
 
-
-// In console, can use the "getItem" and leverage the data field
-// e.g., paper.project.getItem({data:{layerName: "circles"}}).getItem({data:{circleId: "1"}})
-
-var intersectionLayer = new Layer();
+var intersectionLayer = new Layer();//starts the intersection layer
 intersectionLayer.data.layerName = "intersections";
-
+//loop for creating all the intersection objects
 for(var i=1;i<6;i++){
   var c_i = project
     .getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: i}});
   for(var j=i+1;j<6;j++){
-    //console.log("checking " + i + " and " + j);
     var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
 
     var int_ij = c_i.intersect(c_j, {insert: false});
     int_ij.data.id = ""+i+j;
     intersectionLayer.addChild(int_ij);
-    //console.log(int_ij);
-    //console.log("Checking intersection of " + i + " " + j);
     for(var k = j+1; k<6; ++k){
-      // TODO: actual intersection stuff
-      //console.log("Checking intersection of " + i + " " + j + " " + k);
+         var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+         var int_ijk = int_ij.intersect(c_k, {insert: false});
+        int_ijk.data.id = ""+i+j+k;
+        intersectionLayer.addChild(int_ijk); 
       for(var l=k+1; l<6; l++){
-        //console.log("Checking intersection of " + i + " " + j + " " + k + " " + l);
-      }
-    }
-  }
-  //TODO: think my loops are off but not sure here
-  /*
-  for(var k = 1; k < 3; k++){
-    var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-    var int_ijk = int_ij.intersect(c_k, {insert: false});
-    int_ijk.data.id = ""+i+j+k;
-    intersectionLayer.addChild(int_ijk);
-    console.log(int_ijk);
-  }
-  for(var l = 1; k < 2; k++){
-    var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
+        var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
     var int_ijkl = int_ijk.intersect(c_l, {insert: false});
     int_ijkl.data.id = ""+i+j+k+l;
     intersectionLayer.addChild(int_ijkl);
-    console.log(int_ijkl);
+      }
+    }
   }
-  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: m}});
+}//end intersections loop
+
+
+ var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
   var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
   int_ijklm.data.id = ""+i+j+k+l+m;
   intersectionLayer.addChild(int_ijklm);
-  console.log(int_ijklm);
-  */
-}
 
-//TODO: do intersection of all five
-
-//layer for adding text and manipulating text, will be the top layer, grouping should be here as it ties everything together
-
-
-var textLayer = new Layer();
+var textLayer = new Layer();//creates the text layer which will be the top layer
 textLayer.data.layerName = "text";
-//console.log("**************************");
-//console.log(project.layers);
-//project.layers[2].data.layerName = "textLayer";
 
 
-for(var i=1; i<=5; i++){
+
+for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
   var c = project.getItem({data: {circleId: i}});
-
   var text = new PointText({
-    //point: [100,100],
     fillColor:  'black',
     content:  "Circle " + i,
     position: c.position,
@@ -114,31 +71,21 @@ for(var i=1; i<=5; i++){
     }
   });
 
-  textLayer.addChild(text);
+  textLayer.addChild(text);//adds text to the text layer
 }
-
+//function for fixing the layers
 var fixLayers = function(){
-  // because of binding, may need to use project.layers...
-
   textLayer.sendToBack();
   intersectionLayer.sendToBack();
   circleLayer.sendToBack();
-
   console.log('Fixed layers...');
-  //console.log(textLayer);
-  //console.log(intersectionLayer);
-  //console.log(circleLayer);
 }
 
 var activeItem; 
 var handle;
 var dragged = false; 
-//end layering manipulation, starts functions and such
 
-/*
- * 1. Need to hit test on items within the layer not the entire layer
- * 2. Active item setting is probably wrong since setting entire layer and not one item 
- */
+//function when user makes a click
 function onMouseDown(event){
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
@@ -172,7 +119,7 @@ function onMouseDown(event){
     }
   }
   fixLayers();
-}
+}//end of the mouse down function
 
 
 var segment;
@@ -201,10 +148,6 @@ function onMouseDrag(event) {
     }
     //else move the circle
     else {
-      //activeItem.translate(event.point - activeItem.position);
-      // todo: only do this if movement isn't locked
-      //console.log(activeItem);
-      //console.log("==========");
       activeItem.translate(event.delta);// + activeItem.position);
     }
 
@@ -261,7 +204,6 @@ doSubmit = function(e){
   scope.activate();
   e.preventDefault();
 
-  console.log(e);
 
   // the id of the circle we're changing
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
