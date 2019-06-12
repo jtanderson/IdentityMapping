@@ -131,6 +131,9 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   if(tester){//if it is a circle being hit
+    for(var i in iLayer.children){
+      iLayer.children[i].selected = false; 
+    }
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
       var p2 = p + event.delta; // new
@@ -160,13 +163,16 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 
 //on mouse up function
 function onMouseUp(event){
+  var iLayer = project.getItem({data: {layerName: "intersections"}});
+
   //need to de select active item
-  //activeItem.selected = false;//why?
   //TODO: recalculate all intersections
   if(dragged){//if the user dragged the circle
     //remove all old intersections
+    for(var i in iLayer.children){
+      iLayer.children[i].selected = false; 
+    }
     //calculate new intersections by calling graces function
-
   }
   dragged = false;
   fixLayers();
@@ -206,35 +212,27 @@ doSubmit = function(e){
 } //end doSubmit function
 
 window.doSubmit= doSubmit;
-
+//handles all color sliders as well as outlines
 var sliderIntersect=document.getElementById("rangeIntersect");
-
 sliderIntersect.addEventListener("change",function(){
   var r,b;
   r=Math.round(255*(100-sliderIntersect.value)/100);
   b=Math.round(255*sliderIntersect.value/100);
-
-  // doesn't work for intersections because then activeItem doesn't have children
-  if( !activeItem.isIntersection ){
-    activeItem.children[0].fillColor = "rgb("+r+",0,"+b+")";
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+  if(hitResult = cLayer.hitTest(event.point)){
+    activeItem = hitResult.item; // will be a circle
+        activeItem.children[0].fillColor = "rgb("+r+",0,"+b+")";
     if(activeItem.value == 0){ // TODO: you mean slider value here?
       activeItem.children[0].fillColor = "white";
     }
-  } else {
-    // activeItem is an intersection (i.e. some Path object)
-    activeItem.fillColor = "rgb("+r+",0,"+b+")";
   }
-
+    activeItem.fillColor = "rgb("+r+",0,"+b+")";
 },false);
-
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 formIntersect1.addEventListener("change",function(){
   activeItem.dashArray = false;
 },false);
-
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
 formIntersect12.addEventListener("change",function(){
   activeItem.dashArray = [10,4];
 },false);
-
-
