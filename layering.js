@@ -93,6 +93,9 @@ var dragged = false;
 var tester = false;
 //function when user makes a click
 function onMouseDown(event){
+  if(activeItem){
+    activeItem.selected = false;
+  }
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
