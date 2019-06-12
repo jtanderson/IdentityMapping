@@ -127,7 +127,7 @@ var segment;
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
   dragged = true;//not sure if we still need this yet
-  //need to destroy old intersections here before we test and make any changes
+  //TODO: need to destroy old intersections here before we test and make any changes
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   if(tester){//if it is a circle being hit
@@ -158,46 +158,19 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 
 }//end mouse dragging function
 
+//on mouse up function
 function onMouseUp(event){
+  //need to de select active item
+  //activeItem.selected = false;//why?
+  //TODO: recalculate all intersections
+  if(dragged){//if the user dragged the circle
+    //remove all old intersections
+    //calculate new intersections by calling graces function
 
-  console.log(activeItem);
-  /*
-   * activeItem is about to get removed!
-   * need to remember which intersection it is, if any, and re-select it later
-   * add an attribute, or use "isSelected" ?
-   */
-
-  //dragged = true;
-  if (dragged) { 
-    console.log("Calculating intersections...");
-    for (var _int in intersections){
-      // TODO: maybe remove if destruction happens in onMouseDrag
-      intersections[_int].remove();
-    }
-    // @Grace, compare w/ code above, put into own function
-    // iterate every 2, 3, 4-tuple and calculate intersection of all
-    // need to add the 5-tuple after
-    for(var i=1;i<6;i++){
-      for(var j=i+1;j<6;j++){
-        if( groupArray[j].visible ){ // TODO: bring back visibility testing
-          intersections[""+i+j] = groupArray[i].children[0].intersect(groupArray[j].children[0]);
-          // TODO: more of this
-          intersections[""+i+j].data["intersectionId"] = "blah";
-          for(var k=j+1;k<6;k++){
-            intersections[""+i+j+k] = intersections[""+i+j].intersect(groupArray[k].children[0]);
-            for(var l =k+1; l < 6; l++){
-              intersections[""+i+j+k +l] = intersections[""+i+j + k].intersect(groupArray[l].children[0]);
-            }
-          }
-        }
-      }
-    }
   }
-
-  dragged = false; // reset
-  console.log("Calling fixLayers...");
+  dragged = false;
   fixLayers();
-}
+}//end mouse up function
 
 var scope = this;
 
