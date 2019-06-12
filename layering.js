@@ -95,6 +95,7 @@ var tester = false;
 function onMouseDown(event){
   if(activeItem){
    // activeItem.selected = false;
+   //need something else here maybe
   }
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
