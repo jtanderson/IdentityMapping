@@ -78,13 +78,6 @@ function intersections(){
     int_ijklm.data.id = ""+i+j+k+l+5;
     intersectionLayer.addChild(int_ijklm);
 }//end intersections function
-  
-  
-   var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
-    var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
-    int_ijklm.data.id = ""+i+j+k+l+5;
-    intersectionLayer.addChild(int_ijklm);
-}//end intersections function
 
 //function for fixing the layers
 var fixLayers = function(){
