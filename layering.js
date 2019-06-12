@@ -84,7 +84,7 @@ var fixLayers = function(){
 var activeItem; 
 var handle;
 var dragged = false; 
-
+var tester = false;
 //function when user makes a click
 function onMouseDown(event){
   handle = null;
@@ -98,6 +98,7 @@ function onMouseDown(event){
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
     //activeItem = cLayer;//same as above need to set one item to active not entire layer
     activeItem = hitResult.item; // will be a circle
+    tester = true;
     activeItem.selected = true;
  
     //creates circles handle
@@ -127,10 +128,9 @@ var segment;
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
   dragged = true;//not sure if we still need this yet
   //need to destroy old intersections here before we test and make any changes
-  console.log(activeItem);
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  if(hitResult = cLayer.hitTest(event.point)){//if it is a circle being hit
+  if(tester){//if it is a circle being hit
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
       var p2 = p + event.delta; // new
@@ -143,7 +143,10 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
     }
     //else move the circle
     else {
-      activeItem.translate(event.delta);// + activeItem.position);
+      var data = activeItem.data.circleId;
+      activeItem.translate(event.delta);
+      project.getItem({data: {textId: data}}).translate(event.delta);
+      // + activeItem.position);
     }
   } else{
     return false;
