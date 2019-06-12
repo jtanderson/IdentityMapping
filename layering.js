@@ -11,6 +11,7 @@ for(var i=1; i<=5; i++){//loop for circle creation (random)
     strokeColor: 'black',
     id: i,
     insert: false,
+    visible: false,
     data: {
       circleId: i
     }
@@ -35,6 +36,7 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
     content:  "Circle " + i,
     position: c.position,
     insert: false,
+    visible: false,
     data: {
       textId: i
     }
@@ -199,7 +201,11 @@ doSubmit = function(e){
   var obj = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
-
+    var objText = project
+    //.getItem({data: {layerName: "circles"}})
+      .getItem({data: {textId: parseInt(targetName)}});
+  obj.visible = true;
+  objText.visible = true;
   console.log(obj);
   var t = project.getItem({
     //_class: "PointText"
