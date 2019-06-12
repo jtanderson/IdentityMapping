@@ -132,7 +132,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   if(tester){//if it is a circle being hit
     for(var i in iLayer.children){
-      iLayer.children[i].selected = false; 
+      iLayer.children[i].remove; 
     }
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
@@ -170,7 +170,7 @@ function onMouseUp(event){
   if(dragged){//if the user dragged the circle
     //remove all old intersections
     for(var i in iLayer.children){
-      iLayer.children[i].selected = false; 
+      iLayer.children[i].remove; 
     }
     //calculate new intersections by calling graces function
   }
