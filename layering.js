@@ -23,7 +23,7 @@ for(var i=1; i<=5; i++){
   var circle = new Path.Circle({
     center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
     radius: Math.floor(Math.random() * (+max - +min)) + +min,
-    fillColor: 'white',
+    fillColor: new Color(1, 1, 1, 0.75), //'white',
     strokeColor: 'black',
     id: i,
     insert: false,
@@ -48,16 +48,24 @@ for(var i=1;i<6;i++){
     .getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: i}});
   for(var j=i+1;j<6;j++){
-    console.log("checking " + i + " and " + j);
+    //console.log("checking " + i + " and " + j);
     var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
 
     var int_ij = c_i.intersect(c_j, {insert: false});
     int_ij.data.id = ""+i+j;
     intersectionLayer.addChild(int_ij);
-    console.log(int_ij);
-
+    //console.log(int_ij);
+    //console.log("Checking intersection of " + i + " " + j);
+    for(var k = j+1; k<6; ++k){
+      // TODO: actual intersection stuff
+      //console.log("Checking intersection of " + i + " " + j + " " + k);
+      for(var l=k+1; l<6; l++){
+        //console.log("Checking intersection of " + i + " " + j + " " + k + " " + l);
+      }
+    }
   }
   //TODO: think my loops are off but not sure here
+  /*
   for(var k = 1; k < 3; k++){
     var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
     var int_ijk = int_ij.intersect(c_k, {insert: false});
@@ -77,8 +85,10 @@ for(var i=1;i<6;i++){
   int_ijklm.data.id = ""+i+j+k+l+m;
   intersectionLayer.addChild(int_ijklm);
   console.log(int_ijklm);
+  */
 }
 
+//TODO: do intersection of all five
 
 //layer for adding text and manipulating text, will be the top layer, grouping should be here as it ties everything together
 
@@ -134,13 +144,15 @@ function onMouseDown(event){
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-  if(hitResult == iLayer.hitTest(event.point)){//if the intersection layer is hit
-    activeItem = iLayer;//needs to be a certain int not entire layer but not sure how to test which int
-    console.log("Active item has children:");
-    console.log(activeItem.children);
-  }
-  else if(hitResult == cLayer.hitTest(event.point)){//if the circle layer is hit
-    activeItem = cLayer;//same as above need to set one item to active not entire layer
+  // first assigns the test to hitResult
+  // second, evaluates whether it was null or not
+  if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
+    activeItem = hitResult.item; // will be a intersection
+  } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
+    //activeItem = cLayer;//same as above need to set one item to active not entire layer
+    activeItem = hitResult.item; // will be a circle
+    activeItem.selected = true;
+ 
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -150,16 +162,13 @@ function onMouseDown(event){
         tolerance: 5
       }
     );
-    console.log("Active item has children:");
-    console.log(activeItem.children);
-  }
-  else{
+  } else {
     console.log("Nothing hit");
-    for(var i in iLayer){
-      i.selected = false;//??
+    for(var i in iLayer.children){
+      iLayer.children[i].selected = false; //??
     }
-    for(var c in cLayer){
-      c.selected = false;//??
+    for(var i in cLayer.children){
+      cLayer.children[i].selected = false; //??
     }
   }
   fixLayers();
@@ -170,6 +179,9 @@ var segment;
 
 function onMouseDrag(event) {
   dragged = true;
+  
+  // @Grace, as soon as a drag starts, destroy all existing intersections
+  // they will be re-created on the mouseUp event
 
   if ( activeItem){
     // terrible and dirty.
@@ -191,8 +203,8 @@ function onMouseDrag(event) {
     else {
       //activeItem.translate(event.point - activeItem.position);
       // todo: only do this if movement isn't locked
-      console.log(activeItem);
-      console.log("==========");
+      //console.log(activeItem);
+      //console.log("==========");
       activeItem.translate(event.delta);// + activeItem.position);
     }
 
@@ -215,6 +227,9 @@ function onMouseUp(event){
       // TODO: maybe remove if destruction happens in onMouseDrag
       intersections[_int].remove();
     }
+    // @Grace, compare w/ code above, put into own function
+    // iterate every 2, 3, 4-tuple and calculate intersection of all
+    // need to add the 5-tuple after
     for(var i=1;i<6;i++){
       for(var j=i+1;j<6;j++){
         if( groupArray[j].visible ){ // TODO: bring back visibility testing
