@@ -53,7 +53,7 @@ function intersections(){
       .getItem({data: {circleId: i}});
     for(var j=i+1;j<6;j++){
       var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-  
+
       var int_ij = c_i.intersect(c_j, {insert: false});
       int_ij.data.id = ""+i+j;
       intersectionLayer.addChild(int_ij);
@@ -71,6 +71,13 @@ function intersections(){
       }
     }
   }//end intersections loop
+
+
+   var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+    var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
+    int_ijklm.data.id = ""+i+j+k+l+5;
+    intersectionLayer.addChild(int_ijklm);
+}//end intersections function
   
   
    var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
@@ -94,7 +101,7 @@ var tester = false;
 //function when user makes a click
 function onMouseDown(event){
   if(activeItem){
-   // activeItem.selected = false;
+    activeItem.selected = false;
    //need something else here maybe
   }
   handle = null;
