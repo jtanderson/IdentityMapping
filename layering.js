@@ -72,7 +72,7 @@ function intersections(){
     }
   }//end intersections loop
 
-
+//
    var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
     var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
     int_ijklm.data.id = ""+i+j+k+l+5;
