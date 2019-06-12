@@ -101,6 +101,7 @@ function onMouseDown(event){
   // second, evaluates whether it was null or not
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
     activeItem = hitResult.item; // will be a intersection
+    activeItem.selected = true;
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
     //activeItem = cLayer;//same as above need to set one item to active not entire layer
     activeItem = hitResult.item; // will be a circle
@@ -195,7 +196,7 @@ doSubmit = function(e){
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
-
+  localStorage[targetName] = text;
   console.log("Looking for circle " + targetName);
 
   var obj = project
