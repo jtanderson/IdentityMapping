@@ -22,38 +22,7 @@ project.addLayer(circleLayer);//adds the layer
 
 var intersectionLayer = new Layer();//starts the intersection layer
 intersectionLayer.data.layerName = "intersections";
-//loop for creating all the intersection objects
-for(var i=1;i<6;i++){
-  var c_i = project
-    .getItem({data: {layerName: "circles"}})
-    .getItem({data: {circleId: i}});
-  for(var j=i+1;j<6;j++){
-    var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-
-    var int_ij = c_i.intersect(c_j, {insert: false});
-    int_ij.data.id = ""+i+j;
-    intersectionLayer.addChild(int_ij);
-    for(var k = j+1; k<6; ++k){
-         var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-         var int_ijk = int_ij.intersect(c_k, {insert: false});
-        int_ijk.data.id = ""+i+j+k;
-        intersectionLayer.addChild(int_ijk); 
-      for(var l=k+1; l<6; l++){
-        var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
-    var int_ijkl = int_ijk.intersect(c_l, {insert: false});
-    int_ijkl.data.id = ""+i+j+k+l;
-    intersectionLayer.addChild(int_ijkl);
-      }
-    }
-  }
-}//end intersections loop
-
-
- var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
-  var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
-  int_ijklm.data.id = ""+i+j+k+l+5;
-  intersectionLayer.addChild(int_ijklm);
-
+intersections();
 var textLayer = new Layer();//creates the text layer which will be the top layer
 textLayer.data.layerName = "text";
 
@@ -73,6 +42,41 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
 
   textLayer.addChild(text);//adds text to the text layer
 }
+
+//function for creating intersections
+function intersections(){
+  for(var i=1;i<6;i++){
+    var c_i = project
+      .getItem({data: {layerName: "circles"}})
+      .getItem({data: {circleId: i}});
+    for(var j=i+1;j<6;j++){
+      var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+  
+      var int_ij = c_i.intersect(c_j, {insert: false});
+      int_ij.data.id = ""+i+j;
+      intersectionLayer.addChild(int_ij);
+      for(var k = j+1; k<6; ++k){
+           var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+           var int_ijk = int_ij.intersect(c_k, {insert: false});
+          int_ijk.data.id = ""+i+j+k;
+          intersectionLayer.addChild(int_ijk); 
+        for(var l=k+1; l<6; l++){
+          var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
+      var int_ijkl = int_ijk.intersect(c_l, {insert: false});
+      int_ijkl.data.id = ""+i+j+k+l;
+      intersectionLayer.addChild(int_ijkl);
+        }
+      }
+    }
+  }//end intersections loop
+  
+  
+   var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+    var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
+    int_ijklm.data.id = ""+i+j+k+l+5;
+    intersectionLayer.addChild(int_ijklm);
+}//end intersections function
+
 //function for fixing the layers
 var fixLayers = function(){
   textLayer.sendToBack();
@@ -123,7 +127,6 @@ function onMouseDown(event){
   fixLayers();
 }//end of the mouse down function
 
-
 var segment;
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
@@ -155,11 +158,6 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
   } else{
     return false;
   }
-  //test if circle is clicked using items layerName
-    //if it is a handle then resize the circle
-    //else move the circle
-  //otherwise do nothing (don't want to move the intersection, text, etc..)
-
 }//end mouse dragging function
 
 //on mouse up function
@@ -173,6 +171,8 @@ function onMouseUp(event){
     for(var i in iLayer.children){
       iLayer.children[i].remove(); 
     }
+    //create new intersections here
+    intersections();
     //calculate new intersections by calling graces function
   }
   dragged = false;
