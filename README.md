@@ -5,3 +5,7 @@ Current TODO:
     - [x] Test done item
   - [ ] Clean up the codebase, removing old code, comments, and files. Add new documentation as much as possible. Now that all changes will be tracked by git, we can remove/change things frequently without too much risk, as we’ll be able to revert.
   - [ ] Begin the logic of persisting the survey data into a database, to be later linked to a database server that we set up on AWS
+  - [ ] Code organization
+    - [ ] Move "global" variables (global in the sense of `layering.js`) to the top, with documentation for each
+    - [ ] Add "debug mode" to turn logging on or off, for testing purposes
+    - [ ] Clean out old comments
