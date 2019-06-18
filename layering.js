@@ -7,7 +7,7 @@ for(var i=1; i<=5; i++){//loop for circle creation (random)
   var circle = new Path.Circle({
     center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
     radius: Math.floor(Math.random() * (+max - +min)) + +min,
-    fillColor: new Color(1, 1, 1, 0.75), //'white',
+    fillColor: new Color(1, 1, 1), //took out opacity to test intersections
     strokeColor: 'black',
     id: i,
     insert: false,
@@ -49,31 +49,28 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
 function intersections(){
   for(var i=1;i<6;i++){
     var c_i = project
-      .getItem({data: {layerName: "circles"}})
-      .getItem({data: {circleId: i}});
+    .getItem({data: {layerName: "circles"}})
+    .getItem({data: {circleId: i}});
     for(var j=i+1;j<6;j++){
       var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-
       var int_ij = c_i.intersect(c_j, {insert: false});
       int_ij.data.id = ""+i+j;
-      intersectionLayer.addChild(int_ij);
-      for(var k = j+1; k<6; ++k){
-           var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-           var int_ijk = int_ij.intersect(c_k, {insert: false});
-          int_ijk.data.id = ""+i+j+k;
-          intersectionLayer.addChild(int_ijk); 
-        for(var l=k+1; l<6; l++){
+      intersectionLayer.addChild(int_ij); //2
+      for(var k=j+1;k<6;k++){
+        var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+        var int_ijk = int_ij.intersect(c_k, {insert: false});
+       int_ijk.data.id = ""+i+j+k;
+       intersectionLayer.addChild(int_ijk); //3
+        for(var l = k+1;l<6; l++){
           var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
       var int_ijkl = int_ijk.intersect(c_l, {insert: false});
       int_ijkl.data.id = ""+i+j+k+l;
-      intersectionLayer.addChild(int_ijkl);
+      intersectionLayer.addChild(int_ijkl);//4
         }
       }
     }
-  }//end intersections loop
-
-//
-   var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+  }
+     var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
     var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
     int_ijklm.data.id = ""+i+j+k+l+5;
     intersectionLayer.addChild(int_ijklm);
@@ -85,7 +82,7 @@ var fixLayers = function(){
   intersectionLayer.sendToBack();
   circleLayer.sendToBack();
   console.log('Fixed layers...');
-}
+}//end fix layers function
 
 var activeItem; 
 var handle;
