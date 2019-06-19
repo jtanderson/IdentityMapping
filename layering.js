@@ -49,8 +49,8 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
 function intersections(){
   for(var i=1;i<6;i++){
     var c_i = project
-    .getItem({data: {layerName: "circles"}})
-    .getItem({data: {circleId: i}});
+      .getItem({data: {layerName: "circles"}})
+      .getItem({data: {circleId: i}});
     for(var j=i+1;j<6;j++){
       var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
       var int_ij = c_i.intersect(c_j, {insert: false});
@@ -59,21 +59,21 @@ function intersections(){
       for(var k=j+1;k<6;k++){
         var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
         var int_ijk = int_ij.intersect(c_k, {insert: false});
-       int_ijk.data.id = ""+i+j+k;
-       intersectionLayer.addChild(int_ijk); //3
+        int_ijk.data.id = ""+i+j+k;
+        intersectionLayer.addChild(int_ijk); //3
         for(var l = k+1;l<6; l++){
           var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
-      var int_ijkl = int_ijk.intersect(c_l, {insert: false});
-      int_ijkl.data.id = ""+i+j+k+l;
-      intersectionLayer.addChild(int_ijkl);//4
+          var int_ijkl = int_ijk.intersect(c_l, {insert: false});
+          int_ijkl.data.id = ""+i+j+k+l;
+          intersectionLayer.addChild(int_ijkl);//4
         }
       }
     }
   }
-     var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
-    var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
-    int_ijklm.data.id = ""+i+j+k+l+5;
-    intersectionLayer.addChild(int_ijklm);
+  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+  var int_ijklm = int_ijkl.intersect(c_m, {insert: false});
+  int_ijklm.data.id = ""+i+j+k+l+5;
+  intersectionLayer.addChild(int_ijklm);
 }//end intersections function
 
 //function for fixing the layers
@@ -92,7 +92,7 @@ var tester = false;
 function onMouseDown(event){
   if(activeItem){
     activeItem.selected = false;
-   //need something else here maybe
+    //need something else here maybe
   }
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
@@ -108,7 +108,7 @@ function onMouseDown(event){
     activeItem = hitResult.item; // will be a circle
     tester = true;
     activeItem.selected = true;
- 
+
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -168,16 +168,8 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
-  var visibility = true;
-  for(var j in cLayer.children){
-    if(cLayer.children[j].visible == false){
-      visibility = false;
-    }
-  }  
-  if(visibility == true){
-      intersections();
 
-  }
+  intersections();
 
   //need to de select active item
   //TODO: recalculate all intersections
@@ -213,9 +205,9 @@ doSubmit = function(e){
   var obj = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
-    var objText = project
-    //.getItem({data: {layerName: "circles"}})
-      .getItem({data: {textId: parseInt(targetName)}});
+  var objText = project
+  //.getItem({data: {layerName: "circles"}})
+    .getItem({data: {textId: parseInt(targetName)}});
   obj.visible = true;
   objText.visible = true;
   console.log(obj);
@@ -240,12 +232,12 @@ sliderIntersect.addEventListener("change",function(){
   var cLayer = project.getItem({data: {layerName: "circles"}});
   if(hitResult = cLayer.hitTest(event.point)){
     activeItem = hitResult.item; // will be a circle
-        activeItem.children[0].fillColor = "rgb("+r+",0,"+b+")";
+    activeItem.children[0].fillColor = "rgb("+r+",0,"+b+")";
     if(activeItem.value == 0){ // TODO: you mean slider value here?
       activeItem.children[0].fillColor = "white";
     }
   }
-    activeItem.fillColor = "rgb("+r+",0,"+b+")";
+  activeItem.fillColor = "rgb("+r+",0,"+b+")";
 },false);
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 formIntersect1.addEventListener("change",function(){
