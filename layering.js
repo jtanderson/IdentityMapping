@@ -120,6 +120,7 @@ var activeItem;
 var handle;
 var dragged = false; 
 var tester = false;
+var intersect = false;
 //function when user makes a click
 function onMouseDown(event){
   if(activeItem){
@@ -136,12 +137,12 @@ function onMouseDown(event){
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
+    intersect = true;
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
-    //activeItem = cLayer;//same as above need to set one item to active not entire layer
     activeItem = hitResult.item; // will be a circle
     tester = true;
     activeItem.selected = true;
-
+    
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -169,12 +170,10 @@ function onMouseDown(event){
 var segment;
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
-  dragged = true;//not sure if we still need this yet
-  //TODO: need to destroy old intersections here before we test and make any changes
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  if(tester){//if it is a circle being hit
-    iLayer.removeChildren();
+  if(tester && !intersect){//if it is a circle being hit
+    iLayer.removeChildren();//destroying old intersections
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
       var p2 = p + event.delta; // new
@@ -194,7 +193,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
     }
   }
 
-  //intersections();
+  intersections();
   fixLayers();
 }//end mouse dragging function
 
@@ -202,7 +201,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
-
+  intersect = false;
   intersections();
 
   //need to de select active item
