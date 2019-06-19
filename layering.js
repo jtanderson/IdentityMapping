@@ -148,7 +148,7 @@ function onMouseDown(event){
         segments: true,
         stroke: true,
         fill: true,
-        tolerance: 5
+        tolerance: 15
       }
     );
   } else {
@@ -278,10 +278,17 @@ sliderIntersect.addEventListener("change",function(){
   activeItem.fillColor = "rgb("+r+",0,"+b+")";
 },false);
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
+if(formIntersect1.checked){
+  console.log("Checked");
+}
 formIntersect1.addEventListener("change",function(){
+  if(activeItem){
   activeItem.dashArray = false;
+  }
 },false);
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
 formIntersect12.addEventListener("change",function(){
-  activeItem.dashArray = [10,4];
+  if(activeItem){
+    activeItem.dashArray = [10,4];
+  }
 },false);
