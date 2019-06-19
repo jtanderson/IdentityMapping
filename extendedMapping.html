@@ -57,6 +57,8 @@ canvas[resize] {
 
           <h1><p text-center>Style your Identities</p>   </h1>
 <div class="text text-right">
+ 
+  <a class = "btn btn-warning" onClick="document.location.reload(true)">Reset</a>
   <a class="btn btn-danger" href="finished.html">Abort</a>
 </div>
           <div id="StartMapping" class="tabcontent">
@@ -111,13 +113,6 @@ canvas[resize] {
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect12" value="option2">
                   <label class="form-check-label" for="inlineRadio2">Dotted</label>
                 </div>
-
-
-
-
-
-
-
               </div>
 <script>
   
@@ -126,11 +121,13 @@ canvas[resize] {
     var text3 = localStorage["3"];
     var text4 = localStorage["4"];
     var text5 = localStorage["5"];
-  console.log(text1);
+
   function doFunction(){
     locked = true;
     console.log(locked);
+    
   }
+
 </script>
               <div class="col-sm-8">
                 <canvas id="c" resize></canvas>

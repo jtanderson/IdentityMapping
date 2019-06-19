@@ -1,3 +1,4 @@
+var editor = false;
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -110,7 +111,9 @@ var fixLayers = function(){
   textLayer.sendToBack();
   iLayer.sendToBack();
   circleLayer.sendToBack();
+  if(editor){
   console.log('Fixed layers...');
+  }
 }//end fix layers function
 
 var activeItem; 
@@ -149,7 +152,9 @@ function onMouseDown(event){
       }
     );
   } else {
+    if(editor){
     console.log("Nothing hit");
+    }
     activeItem = null;
     for(var i in iLayer.children){
       iLayer.children[i].selected = false; 
@@ -229,8 +234,9 @@ doSubmit = function(e){
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
   localStorage[targetName] = text;
+  if(editor){
   console.log("Looking for circle " + targetName);
-
+  }
   var obj = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
@@ -239,7 +245,9 @@ doSubmit = function(e){
     .getItem({data: {textId: parseInt(targetName)}});
   obj.visible = true;
   objText.visible = true;
+  if(editor){
   console.log(obj);
+  }
   var t = project.getItem({
     //_class: "PointText"
     data: {textId: parseInt(targetName)}
