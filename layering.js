@@ -126,7 +126,7 @@ function onMouseDown(event){
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-
+  //am i updating the right version??
   // first assigns the test to hitResult
   // second, evaluates whether it was null or not
   // TODO: do not test visible items!!!!
