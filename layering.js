@@ -83,7 +83,7 @@ function intersections(){
     } // c_i visible
   } // i loop
 
-  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+  /*var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
   if( c_m.visible ){
     var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false});
     if( int_ijklm ){
@@ -91,7 +91,7 @@ function intersections(){
       //int_ijklm.fillColor = new Color(1,1,0);
       intersectionLayer.addChild(int_ijklm);
     }
-  }
+  }*/
 }//end intersections function
 
 //function for fixing the layers
@@ -139,8 +139,13 @@ var form1 = document.getElementById("inlineRadioIntersect1");
 form1.checked = false;
 var form2 = document.getElementById("inlineRadioIntersect12");
 form2.checked = false;
-
+if(editor){
+console.log("Radios Cleared");
+}
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
+    if(editor){
+      console.log("User clicked an intersection with id " + hitResult.item.data.id);
+      }
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
@@ -148,6 +153,9 @@ form2.checked = false;
     activeItem = hitResult.item; // will be a circle
     tester = true;
     activeItem.selected = true;
+    if(editor){
+      console.log("User clicked circle: " + hitResult.item.data.circleId);
+    }
     
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
@@ -176,6 +184,7 @@ form2.checked = false;
 var segment;
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
+  dragged=true;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   if(tester && !intersect){//if it is a circle being hit
@@ -189,6 +198,9 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
       } else {
         activeItem.scaling += 0.005*event.delta.length;
       }
+      if(editor){
+      console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+      }
     }
     //else move the circle
     else {
@@ -197,6 +209,9 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
       activeItem.translate(event.delta);
       project.getItem({data: {textId: data}}).translate(event.delta);
       // + activeItem.position);
+      if(editor){
+      console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+      }
       }
     }
 
@@ -220,9 +235,16 @@ function onMouseUp(event){
     for(var i in iLayer.children){
       iLayer.children[i].remove(); 
     }
+    if(editor){
+      console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+      
+        console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+    }  
+
     //create new intersections here
     //calculate new intersections by calling graces function
   }
+
   dragged = false;
   fixLayers();
 }//end mouse up function
