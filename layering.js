@@ -130,10 +130,16 @@ function onMouseDown(event){
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  //am i updating the right version??
   // first assigns the test to hitResult
   // second, evaluates whether it was null or not
   // TODO: do not test visible items!!!!
+  //this is where we need to deselect radio buttons i believe
+
+var form1 = document.getElementById("inlineRadioIntersect1");
+form1.checked = false;
+var form2 = document.getElementById("inlineRadioIntersect12");
+form2.checked = false;
+
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
@@ -187,10 +193,13 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
     //else move the circle
     else {
       var data = activeItem.data.circleId;
+      if(activeItem){
       activeItem.translate(event.delta);
       project.getItem({data: {textId: data}}).translate(event.delta);
       // + activeItem.position);
+      }
     }
+
   }
 
   intersections();
@@ -277,9 +286,7 @@ sliderIntersect.addEventListener("change",function(){
   activeItem.fillColor = "rgb("+r+",0,"+b+")";
 },false);
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
-if(formIntersect1.checked){
-  console.log("Checked");
-}
+
 formIntersect1.addEventListener("change",function(){
   if(activeItem){
   activeItem.dashArray = false;
