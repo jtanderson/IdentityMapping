@@ -9,24 +9,89 @@
     <script type="text/javascript" src="paper.js"></script> 
     <!--this is the newest update-->
     <script type="text/paperscript" src="layering.js" canvas="c"></script>
+    
      <style>
-p.solid {border-style: solid;}
+	  p.solid {
+
+	    border-style: solid;
+	    
+	  }
 
 
-.container {
-  position: relative; 
-  width: 98%; /* Maximum width */
- /* margin: 0 auto; /* Center it */
-}
-.buttons{
-  text-align: center;
-}
-.canvas-container{margin: 0 auto;}
-canvas[resize] {
-	border-style: solid;
-  width: 750px;
-  height: 750px;
-}
+	  h1{
+
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+	    
+	  }
+
+	  #StartMapping{
+
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+
+	  }
+
+	  .container {
+	  
+	    position: relative; 
+	    width: 98%; /* Maximum width */
+	  /* margin: 0 auto; /* Center it */
+	  
+	  }
+
+	  input{
+	    
+	    text-align: center;
+	    content:300px 200px;
+
+	  }
+	  
+	  /* ^^ This keeps button text from squashing  */
+	  
+	  input#textInput{
+
+	    text-align: left;
+
+	  }
+
+	  .canvas-container{
+
+	  margin: 0 auto;
+
+	  }
+
+	  canvas[resize] {
+
+	    border-style: solid;
+	    width: 750px;
+	    height: 750px;
+	    
+	  }
+
+	  p.ex1 {
+
+	  display: none;
+
+	  }
+
+	  .container{
+
+	    width: 100%;
+	    
+	  }
+	  
+	  /*
+	  canvas#c{
+	  
+	    text-align: center;
+	  
+	  }
+	  
+	  TODO: Circle text is aligning left
+	  
+	  */
+	  
     </style>
 
   </head>
