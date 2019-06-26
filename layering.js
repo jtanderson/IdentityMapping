@@ -284,11 +284,13 @@ doSubmit = function(e){
   });
   t.content = text;
 
-  // TODO: instead of changing visibility, call "insert" if not already there
-  obj.visible = true;
+  insert = true;
   intersections();
   return false;
 } //end doSubmit function
+
+
+//TODO: @Anderson Please explain color slider to me 
 
 window.doSubmit= doSubmit;
 //handles all color sliders as well as outlines
