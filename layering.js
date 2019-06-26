@@ -1,4 +1,4 @@
-var editor = false;
+var editor = false; //never set to true???? Is this the canvas?
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -8,7 +8,7 @@ for(var i=1; i<=5; i++){//loop for circle creation (random)
   var circle = new Path.Circle({
     center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
     radius: Math.floor(Math.random() * (+max - +min)) + +min,
-    fillColor: new Color(1, 1, 1, 0.75), //took out opacity to test intersections
+    fillColor: new Color(1, 1, 1, 0.75),
     strokeColor: 'black',
     id: i,
     insert: false,
@@ -17,7 +17,7 @@ for(var i=1; i<=5; i++){//loop for circle creation (random)
       circleId: i
     }
   });
-  circleLayer.addChild(circle); //add each circle to the layer
+  circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
 }
 circleLayer.data.layerName = "circles";
 project.addLayer(circleLayer);//adds the layer
@@ -27,8 +27,6 @@ intersectionLayer.data.layerName = "intersections";
 intersections();
 var textLayer = new Layer();//creates the text layer which will be the top layer
 textLayer.data.layerName = "text";
-
-
 
 for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
   var c = project.getItem({data: {circleId: i}});
@@ -55,21 +53,22 @@ function intersections(){
     if( c_i.visible ){
       for(var j=i+1;j<6;j++){
         var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-        if( c_j.visible ){
+        //ij is two-uple intersections for circles i and j 
+        if( c_j.visible ){ //if two circles overlap, then create intersection
           var int_ij = c_i.intersect(c_j, {insert: false});
           int_ij.data.id = ""+i+j;
           //int_ij.fillColor = new Color(1,0,0);
           intersectionLayer.addChild(int_ij); //2
           for(var k=j+1;k<6;k++){
             var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-            if( c_k.visible ){
+            if( c_k.visible ){//if three circles overlap, then create intersection
               var int_ijk = int_ij.intersect(c_k, {insert: false});
               //int_ijk.fillColor = new Color(0,1,0);
               int_ijk.data.id = ""+i+j+k;
               intersectionLayer.addChild(int_ijk); //3
               for(var l = k+1;l<6; l++){
                 var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
-                if( c_l.visible ){
+                if( c_l.visible ){ //if four circles overlap, then create intersection
                   var int_ijkl = int_ijk.intersect(c_l, {insert: false});
                   //int_ijkl.fillColor = new Color(0,0,1);
                   int_ijkl.data.id = ""+i+j+k+l;
@@ -97,23 +96,34 @@ function intersections(){
 //function for fixing the layers
 var fixLayers = function(){
   // do the intersections
-  // TODO: fix, doesn't seem to work sometimes
+
+  /***** Is this why the intersections fall beneath the circles?*****
+
+  Intersections are pulled forward correctly, but colors are being pushed behind as well as other intersection layers
+
+  */
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   for(var i = 2; i<6; i++){
     for(var j=0; j<iLayer.children.length; j++){
       if( iLayer.children[j].data.id.length == i ){
-        iLayer.children[j].bringToFront();
+        console.log("Bringing intersection " + i + " to the front");
+        iLayer.children[j].bringToFront(); //are the colors also the children?
       }
     }
   }
 
   // TODO: get fresh
   textLayer.sendToBack();
+  console.log("Text sent to back");
   iLayer.sendToBack();
+  console.log("Other intersections sent to back");
   circleLayer.sendToBack();
+  console.log("Other circles sent to back");
+
   if(editor){
     console.log('Fixed layers...');
   }
+
 }//end fix layers function
 
 var activeItem; 
@@ -125,6 +135,8 @@ var tester = false;
 
 var intersect = false;
 //function when user makes a click
+
+
 function onMouseDown(event){
   if(activeItem){
     activeItem.selected = false;
@@ -185,9 +197,27 @@ function onMouseDown(event){
 }//end of the mouse down function
 
 var segment;
+
+/*
+
+TODO: onMouseDrag errors:
+
+When trying to drag canvas, activeItem is NULL
+
+*/
+
 //when user clicks and drags
-function onMouseDrag(event){//needs a boolean value for what is clicked and dragged
+function onMouseDrag(event){//needs a boolean value for what is clicked and dragged ??????
+
   dragged=true;
+  
+  /*editor = true;
+
+  If editor is set to true, gives the information in the console.log(s), but activeItem is null after it is found
+  Canvas is also locked after the fix
+
+  */
+
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
@@ -218,16 +248,30 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
           console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
         }
       }
-    }
+    }//end if circle edge or circle
+
+//need if user clicks canvas 
+
+if(editor){
+
+console.log("Clicked canvas");
+
+}
+
+
+
+
 
   }
 
   intersections();
   fixLayers();
+
 }//end mouse dragging function
 
 //on mouse up function
 function onMouseUp(event){
+
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   intersect = false; // why?
@@ -252,6 +296,7 @@ function onMouseUp(event){
 
   dragged = false;
   fixLayers();
+
 }//end mouse up function
 
 var scope = this;
@@ -293,9 +338,6 @@ doSubmit = function(e){
   intersections();
   return false;
 } //end doSubmit function
-
-
-//TODO: @Anderson Please explain color slider to me 
 
 window.doSubmit= doSubmit;
 //handles all color sliders as well as outlines
