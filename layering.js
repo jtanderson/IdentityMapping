@@ -92,7 +92,7 @@ function intersections(){
       intersectionLayer.addChild(int_ijklm);
     }
   }*/
-}//end intersections function
+    }//end intersections function
 
 //function for fixing the layers
 var fixLayers = function(){
@@ -106,20 +106,23 @@ var fixLayers = function(){
       }
     }
   }
-  
+
   // TODO: get fresh
   textLayer.sendToBack();
   iLayer.sendToBack();
   circleLayer.sendToBack();
   if(editor){
-  console.log('Fixed layers...');
+    console.log('Fixed layers...');
   }
 }//end fix layers function
 
 var activeItem; 
 var handle;
 var dragged = false; 
+
+// TODO: logic around this is wrong, it never gets reset
 var tester = false;
+
 var intersect = false;
 //function when user makes a click
 function onMouseDown(event){
@@ -135,17 +138,17 @@ function onMouseDown(event){
   // TODO: do not test visible items!!!!
   //this is where we need to deselect radio buttons i believe
 
-var form1 = document.getElementById("inlineRadioIntersect1");
-form1.checked = false;
-var form2 = document.getElementById("inlineRadioIntersect12");
-form2.checked = false;
-if(editor){
-console.log("Radios Cleared");
-}
+  var form1 = document.getElementById("inlineRadioIntersect1");
+  form1.checked = false;
+  var form2 = document.getElementById("inlineRadioIntersect12");
+  form2.checked = false;
+  if(editor){
+    console.log("Radios Cleared");
+  }
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
     if(editor){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
-      }
+    }
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
@@ -156,7 +159,7 @@ console.log("Radios Cleared");
     if(editor){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
-    
+
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -168,7 +171,7 @@ console.log("Radios Cleared");
     );
   } else {
     if(editor){
-    console.log("Nothing hit");
+      console.log("Nothing hit");
     }
     activeItem = null;
     for(var i in iLayer.children){
@@ -187,7 +190,9 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
   dragged=true;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  if(tester && !intersect){//if it is a circle being hit
+
+  // user is scaling
+  if(tester && !intersect){//if it is a circle boundary being hit
     iLayer.removeChildren();//destroying old intersections
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
@@ -199,19 +204,19 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
         activeItem.scaling += 0.005*event.delta.length;
       }
       if(editor){
-      console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+        console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
       }
     }
     //else move the circle
     else {
       var data = activeItem.data.circleId;
       if(activeItem){
-      activeItem.translate(event.delta);
-      project.getItem({data: {textId: data}}).translate(event.delta);
-      // + activeItem.position);
-      if(editor){
-      console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
-      }
+        activeItem.translate(event.delta);
+        project.getItem({data: {textId: data}}).translate(event.delta);
+        // + activeItem.position);
+        if(editor){
+          console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+        }
       }
     }
 
@@ -225,7 +230,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
-  intersect = false;
+  intersect = false; // why?
   intersections();
 
   //need to de select active item
@@ -237,8 +242,8 @@ function onMouseUp(event){
     }
     if(editor){
       console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
-      
-        console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+
+      console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
     }  
 
     //create new intersections here
@@ -265,7 +270,7 @@ doSubmit = function(e){
   var text = e.target.getElementsByTagName("input")[0].value;
   localStorage[targetName] = text;
   if(editor){
-  console.log("Looking for circle " + targetName);
+    console.log("Looking for circle " + targetName);
   }
   var obj = project
   //.getItem({data: {layerName: "circles"}})
@@ -276,7 +281,7 @@ doSubmit = function(e){
   obj.visible = true;
   objText.visible = true;
   if(editor){
-  console.log(obj);
+    console.log(obj);
   }
   var t = project.getItem({
     //_class: "PointText"
@@ -296,24 +301,18 @@ window.doSubmit= doSubmit;
 //handles all color sliders as well as outlines
 var sliderIntersect=document.getElementById("rangeIntersect");
 sliderIntersect.addEventListener("change",function(){
-  var r,b;
-  r=Math.round(255*(100-sliderIntersect.value)/100);
-  b=Math.round(255*sliderIntersect.value/100);
-  var cLayer = project.getItem({data: {layerName: "circles"}});
-  if(hitResult = cLayer.hitTest(event.point)){
-    activeItem = hitResult.item; // will be a circle
-    activeItem.children[0].fillColor = "rgb("+r+",0,"+b+")";
-    if(activeItem.value == 0){ // TODO: you mean slider value here?
-      activeItem.children[0].fillColor = "white";
-    }
+  if( activeItem ){
+    var r,b;
+    r=Math.round(255*(100-sliderIntersect.value)/100);
+    b=Math.round(255*sliderIntersect.value/100);
+    activeItem.fillColor = "rgb("+r+",0,"+b+")";
   }
-  activeItem.fillColor = "rgb("+r+",0,"+b+")";
 },false);
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
 formIntersect1.addEventListener("change",function(){
   if(activeItem){
-  activeItem.dashArray = false;
+    activeItem.dashArray = false;
   }
 },false);
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
