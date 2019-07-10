@@ -1,4 +1,4 @@
-var editor = false; //never set to true???? Is this the canvas?
+var editor = false; //never set to true???? Is this the canvas? "debug_mode" might be a better name
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -19,6 +19,7 @@ for(var i=1; i<=5; i++){//loop for circle creation (random)
   });
   circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
 }
+
 circleLayer.data.layerName = "circles";
 project.addLayer(circleLayer);//adds the layer
 
@@ -46,6 +47,11 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
 
 //function for creating intersections
 function intersections(){
+  var iLayer = project.getItem({data:{layerName: "intersections"}});
+
+  iLayer.removeChildren();//destroying old intersections
+
+  console.log("iLayer.children.length before insert: " + iLayer.children.length);
   for(var i=1;i<6;i++){
     var c_i = project
       .getItem({data: {layerName: "circles"}})
@@ -81,6 +87,7 @@ function intersections(){
       } // j loop
     } // c_i visible
   } // i loop
+  console.log("iLayer.children.length after insert: " + iLayer.children.length);
 
   /*var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
   if( c_m.visible ){
@@ -91,7 +98,7 @@ function intersections(){
       intersectionLayer.addChild(int_ijklm);
     }
   }*/
-    }//end intersections function
+}//end intersections function
 
 //function for fixing the layers
 var fixLayers = function(){
@@ -106,7 +113,7 @@ var fixLayers = function(){
   for(var i = 2; i<6; i++){
     for(var j=0; j<iLayer.children.length; j++){
       if( iLayer.children[j].data.id.length == i ){
-        console.log("Bringing intersection " + i + " to the front");
+        //console.log("Bringing intersection " + i + " to the front");
         iLayer.children[j].bringToFront(); //are the colors also the children?
       }
     }
@@ -275,15 +282,22 @@ function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   intersect = false; // why?
-  intersections();
+
 
   //need to de select active item
   //TODO: recalculate all intersections
   if(dragged){//if the user dragged the circle
     //remove all old intersections
-    for(var i in iLayer.children){
-      iLayer.children[i].remove(); 
-    }
+    //for(var i in iLayer.children){
+    //  iLayer.children[i].remove(); 
+    //}
+    
+    intersections();
+
+    //console.log("iLayer.children.length before: " + iLayer.children.length);
+    //iLayer.removeChildren();
+    //console.log("iLayer.children.length after: " + iLayer.children.length);
+
     if(editor){
       console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
 
