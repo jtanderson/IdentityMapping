@@ -51,7 +51,7 @@ function intersections(){
 
   iLayer.removeChildren();//destroying old intersections
 
-  console.log("iLayer.children.length before insert: " + iLayer.children.length);
+ // console.log("iLayer.children.length before insert: " + iLayer.children.length);
   for(var i=1;i<6;i++){
     var c_i = project
       .getItem({data: {layerName: "circles"}})
@@ -87,7 +87,7 @@ function intersections(){
       } // j loop
     } // c_i visible
   } // i loop
-  console.log("iLayer.children.length after insert: " + iLayer.children.length);
+  //console.log("iLayer.children.length after insert: " + iLayer.children.length);
 
   /*var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
   if( c_m.visible ){
@@ -100,6 +100,19 @@ function intersections(){
   }*/
 }//end intersections function
 
+var intLayers = function(){
+  var iLayer = project.getItem({data: {layerName: "intersections"}});
+  for(var i = 2; i<6; i++){
+    for(var j=0; j<iLayer.children.length; j++){
+      if( iLayer.children[j].data.id.length == i ){
+        console.log("Bringing intersection " + i + " to the front");
+        iLayer.children[j].bringToFront(); //are the colors also the children?
+      }
+    }
+  }
+
+}
+
 //function for fixing the layers
 var fixLayers = function(){
   // do the intersections
@@ -110,22 +123,11 @@ var fixLayers = function(){
 
   */
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  for(var i = 2; i<6; i++){
-    for(var j=0; j<iLayer.children.length; j++){
-      if( iLayer.children[j].data.id.length == i ){
-        //console.log("Bringing intersection " + i + " to the front");
-        iLayer.children[j].bringToFront(); //are the colors also the children?
-      }
-    }
-  }
-
+  intLayers();
   // TODO: get fresh
   textLayer.sendToBack();
-  console.log("Text sent to back");
   iLayer.sendToBack();
-  console.log("Other intersections sent to back");
   circleLayer.sendToBack();
-  console.log("Other circles sent to back");
 
   if(editor){
     console.log('Fixed layers...');
@@ -272,7 +274,7 @@ console.log("Clicked canvas");
   }
 
   intersections();
-  fixLayers();
+ // fixLayers();
 
 }//end mouse dragging function
 
