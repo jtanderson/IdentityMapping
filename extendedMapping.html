@@ -9,7 +9,17 @@
     <script type="text/javascript" src="paper.js"></script> 
     <!--this is the newest update-->
     <script type="text/paperscript" src="layering.js" canvas="c"></script>
-    
+    <script>
+    var hardReset = function(){
+      var cLayer = paper.project.getItem({data: {layerName: "circles"}});
+      var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
+      var tLayer = paper.project.getItem({data: {layerName: "text"}});
+     cLayer.locked = true;
+     iLayer.locked = true;
+     tLayer.locked = true;
+
+    }
+    </script>
      <style>
 	  p.solid {
 
@@ -123,7 +133,7 @@
           <h1><p text-center>Style your Identities</p>   </h1>
 <div class="text text-right">
  
-  <a class = "btn btn-warning" onClick="document.location.reload(true)">Reset</a>
+  <a class = "btn btn-success" onClick="hardReset();">Lock</a>
   <a class="btn btn-danger" href="finished.html">Abort</a>
 </div>
           <div id="StartMapping" class="tabcontent">
