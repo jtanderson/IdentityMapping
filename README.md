@@ -8,7 +8,7 @@
   - [ ] (Sam) use paper API to implement the "reset" button
   - [x] (Grace) don't re-calculate intersections on every drag
   - [ ] (Grace) Fix "activeItem is null" error in mouse drag function
-  - [ ] (Grace) Don't do anything with intersections when mouse events do not involve any circles
+  - [x] (Grace) Don't do anything with intersections when mouse events do not involve any circles
   - [ ] (CURRENT BUG) Cross browser compatability i.e. chrome
 
 ## Fixed bugs

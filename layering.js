@@ -173,6 +173,7 @@ function onMouseDown(event){
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
+    fixLayers();
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
     activeItem = hitResult.item; // will be a circle
     tester = true;
@@ -190,7 +191,8 @@ function onMouseDown(event){
         tolerance: 15
       }
     );
-  } else {
+    fixLayers();
+  } else {//when nothing is hit
     if(editor){
       console.log("Nothing hit");
     }
@@ -202,29 +204,21 @@ function onMouseDown(event){
       cLayer.children[i].selected = false; 
     }
   }
-  fixLayers();
+  //fixLayers();
 }//end of the mouse down function
 
 var segment;
-
 /*
-
 TODO: onMouseDrag errors:
-
 When trying to drag canvas, activeItem is NULL
-
 */
 
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged ??????
-
   dragged=true;
-  
   /*editor = true;
-
   If editor is set to true, gives the information in the console.log(s), but activeItem is null after it is found
   Canvas is also locked after the fix
-
   */
 
   var cLayer = project.getItem({data: {layerName: "circles"}});
@@ -308,10 +302,11 @@ function onMouseUp(event){
 
     //create new intersections here
     //calculate new intersections by calling graces function
+      fixLayers();
+
   }
 
   dragged = false;
-  fixLayers();
 
 }//end mouse up function
 
