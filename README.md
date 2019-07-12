@@ -4,9 +4,9 @@
 
 ### 7/10 Meeting:
 
-  - [ ] (Sam) FixIntersection function to do layering of the intersections
+  - [x] (Sam) FixIntersection function to do layering of the intersections
   - [ ] (Sam) use paper API to implement the "reset" button
-  - [ ] (Grace) don't re-calculate intersections on every drag
+  - [x] (Grace) don't re-calculate intersections on every drag
   - [ ] (Grace) Fix "activeItem is null" error in mouse drag function
   - [ ] (Grace) Don't do anything with intersections when mouse events do not involve any circles
   - [ ] (CURRENT BUG) Cross browser compatability i.e. chrome

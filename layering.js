@@ -145,7 +145,7 @@ var tester = false;
 var intersect = false;
 //function when user makes a click
 
-
+//mouse down function
 function onMouseDown(event){
   if(activeItem){
     activeItem.selected = false;
