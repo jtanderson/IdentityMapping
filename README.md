@@ -5,7 +5,7 @@
 ### 7/10 Meeting:
 
   - [x] (Sam) FixIntersection function to do layering of the intersections
-  - [ ] (Sam) use paper API to implement the "reset" button
+  - [x] (Sam) use paper API to implement the "reset" button
   - [x] (Grace) don't re-calculate intersections on every drag
   - [ ] (Grace) Fix "activeItem is null" error in mouse drag function
   - [x] (Grace) Don't do anything with intersections when mouse events do not involve any circles

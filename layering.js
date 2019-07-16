@@ -1,4 +1,4 @@
-var editor = false; //never set to true???? Is this the canvas? "debug_mode" might be a better name
+var debug_mode = false; //never set to true???? Is this the canvas? "debug_mode" might be a better name
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -105,7 +105,9 @@ var intLayers = function(){
   for(var i = 2; i<6; i++){
     for(var j=0; j<iLayer.children.length; j++){
       if( iLayer.children[j].data.id.length == i ){
-        console.log("Bringing intersection " + i + " to the front");
+        if(debug_mode){
+          console.log("Bringing intersection " + i + " to the front");
+        }
         iLayer.children[j].bringToFront(); //are the colors also the children?
       }
     }
@@ -129,11 +131,45 @@ var fixLayers = function(){
   iLayer.sendToBack();
   circleLayer.sendToBack();
 
-  if(editor){
+  if(debug_mode){
     console.log('Fixed layers...');
   }
 
 }//end fix layers function
+
+//recreate when canvas reset function
+var recreate = function(){
+  for(var i=1; i<=5; i++){//loop for circle creation (random)
+    var circle = new Path.Circle({
+      center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
+      radius: Math.floor(Math.random() * (+max - +min)) + +min,
+      fillColor: new Color(1, 1, 1, 0.75),
+      strokeColor: 'black',
+      id: i,
+      insert: false,
+      visible: false,
+      data: {
+        circleId: i
+      }
+    });
+    circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
+  }
+  for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
+    var c = project.getItem({data: {circleId: i}});
+    var text = new PointText({
+      fillColor:  'black',
+      content:  "Circle " + i,
+      position: c.position,
+      insert: false,
+      visible: false,
+      data: {
+        textId: i
+      }
+    });
+  
+    textLayer.addChild(text);//adds text to the text layer
+  }
+}
 
 var activeItem; 
 var handle;
@@ -163,11 +199,11 @@ function onMouseDown(event){
   form1.checked = false;
   var form2 = document.getElementById("inlineRadioIntersect12");
   form2.checked = false;
-  if(editor){
+  if(debug_mode){
     console.log("Radios Cleared");
   }
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
-    if(editor){
+    if(debug_mode){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
     activeItem = hitResult.item; // will be a intersection
@@ -178,7 +214,7 @@ function onMouseDown(event){
     activeItem = hitResult.item; // will be a circle
     tester = true;
     activeItem.selected = true;
-    if(editor){
+    if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
 
@@ -193,7 +229,7 @@ function onMouseDown(event){
     );
     fixLayers();
   } else {//when nothing is hit
-    if(editor){
+    if(debug_mode){
       console.log("Nothing hit");
     }
     activeItem = null;
@@ -216,8 +252,8 @@ When trying to drag canvas, activeItem is NULL
 //when user clicks and drags
 function onMouseDrag(event){//needs a boolean value for what is clicked and dragged ??????
   dragged=true;
-  /*editor = true;
-  If editor is set to true, gives the information in the console.log(s), but activeItem is null after it is found
+  /*debug_mode = true;
+  If debug_mode is set to true, gives the information in the console.log(s), but activeItem is null after it is found
   Canvas is also locked after the fix
   */
 
@@ -236,7 +272,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
       } else {
         activeItem.scaling += 0.005*event.delta.length;
       }
-      if(editor){
+      if(debug_mode){
         console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
       }
     }
@@ -247,7 +283,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
         activeItem.translate(event.delta);
         project.getItem({data: {textId: data}}).translate(event.delta);
         // + activeItem.position);
-        if(editor){
+        if(debug_mode){
           console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
         }
       }
@@ -255,7 +291,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 
 //need if user clicks canvas 
 
-if(editor){
+if(debug_mode){
 
 console.log("Clicked canvas");
 
@@ -294,7 +330,7 @@ function onMouseUp(event){
     //iLayer.removeChildren();
     //console.log("iLayer.children.length after: " + iLayer.children.length);
 
-    if(editor){
+    if(debug_mode){
       console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
@@ -325,18 +361,23 @@ doSubmit = function(e){
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
   localStorage[targetName] = text;
-  if(editor){
+  if(debug_mode){
     console.log("Looking for circle " + targetName);
   }
   var obj = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
+    if(obj == null){
+      recreate();
+    }
+    obj = project
+      .getItem({data: {circleId: parseInt(targetName)}});
   var objText = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {textId: parseInt(targetName)}});
   obj.visible = true;
   objText.visible = true;
-  if(editor){
+  if(debug_mode){
     console.log(obj);
   }
   var t = project.getItem({

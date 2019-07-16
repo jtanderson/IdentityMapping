@@ -9,6 +9,34 @@
    
     <!--this is the newest update-->
     <script type="text/paperscript" src="layering.js" canvas="c"></script>
+    <script>
+
+        var reset = function(){
+          var cLayer = paper.project.getItem({data: {layerName: "circles"}});
+        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
+        var tLayer = paper.project.getItem({data: {layerName: "text"}});
+        cLayer.removeChildren();
+        iLayer.removeChildren();
+        tLayer.removeChildren();
+        }
+  
+      var locked = function(){
+        var cLayer = paper.project.getItem({data: {layerName: "circles"}});
+        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
+        var tLayer = paper.project.getItem({data: {layerName: "text"}});
+       cLayer.locked = true;
+       iLayer.locked = true;
+       tLayer.locked = true;
+      }
+      var unLocked = function(){
+        var cLayer = paper.project.getItem({data: {layerName: "circles"}});
+        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
+        var tLayer = paper.project.getItem({data: {layerName: "text"}});
+        tLayer.locked = false;
+        iLayer.locked = false;
+        cLayer.locked = false;
+      }
+      </script>
      <style>
 	      
 	  p.solid {
@@ -115,9 +143,10 @@
           <h1><p text-center>Map your Identities</p>   </h1>
           
       <div class="text text-right">
-	  <a class = "btn btn-warning" onClick="document.location.reload(true)">Reset</a>
-
-	<a class="btn btn-danger" href="finished.html">Abort</a>
+          <a class = "btn btn-warning" onClick="reset();">Reset</a>
+          <a class = "btn btn-success" onClick="unLocked();">Unlock</a>
+          <a class = "btn btn-success" onClick="locked();">Lock</a>
+          <a class="btn btn-danger" href="finished.html">Abort</a>
       </div>
       
           <div id="StartMapping" class="tabcontent">
