@@ -4,11 +4,11 @@
 
 ### 7/10 Meeting:
 
-
   - [ ] (Grace) Fix "activeItem is null" error in mouse drag function
   - [ ] (CURRENT BUG) Cross browser compatability i.e. chrome
 
 ## Fixed bugs
+
   - [x] FixIntersection function to do layering of the intersections
   - [x] use paper API to implement the "reset" button
   - [x] Don't do anything with intersections when mouse events do not involve any circles
