@@ -262,7 +262,7 @@ function onMouseDrag(event){//needs a boolean value for what is clicked and drag
 
   // user is scaling
   if(tester && !intersect){//if it is a circle boundary being hit
-    iLayer.removeChildren();//destroying old intersections
+    iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
     if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
       var p = event.point; // old
       var p2 = p + event.delta; // new
