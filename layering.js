@@ -197,26 +197,6 @@ function onMouseDown(event){
   // TODO: do not test visible items!!!!
   //this is where we need to deselect radio buttons i believe
 
-
-  /*********
-
-
-	THIS IS WHERE ACTIVEITEM = NULL ERROR 
-
-	The var hitResult tests which layer the user clicks, first the intersection layer (since it is on top), then
-	the circle layer (the next layer below intersection).
-
-	If the user clicks the canvas (and we are in debug_mode) we receive the log "Radios Cleared".
-	If the user clicks the canvas and there is nothing there, we receive the "Nothing hit" log.
-	However, then we set activeItem = NULL. 
-
-	With further testing, and the activeItem = NULL commented out, realized that activeItem needs to be defined, and it does not fix itself
-	on onMouseUp. 
-	
-	Solution: add another if/else to break out of onMouseGrad function if activeItem = null
-
-  *********/
-
   var form1 = document.getElementById("inlineRadioIntersect1");
   form1.checked = false;
   var form2 = document.getElementById("inlineRadioIntersect12");
@@ -295,12 +275,6 @@ if(activeItem == null){
 }else{
 
   dragged=true;
-  /*
-
-  If debug_mode is set to true, gives the information in the console.log(s), but activeItem is null after it is found (because of onMouseDown)
-  Canvas locks after clicking, holding, and dragging on the canvas, and moving the mouse around the screen adds to the error
-
-  */
 
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
@@ -341,10 +315,6 @@ if(debug_mode){
 console.log("Clicked canvas");
 
 }
-
-
-
-
 
   }
 
