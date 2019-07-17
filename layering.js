@@ -201,7 +201,7 @@ function onMouseDown(event){
   /*********
 
 
-	THIS IS WHERE ACTIVEITEM = NULL ERROR **LINES 246-257**
+	THIS IS WHERE ACTIVEITEM = NULL ERROR 
 
 	The var hitResult tests which layer the user clicks, first the intersection layer (since it is on top), then
 	the circle layer (the next layer below intersection).
@@ -213,8 +213,7 @@ function onMouseDown(event){
 	With further testing, and the activeItem = NULL commented out, realized that activeItem needs to be defined, and it does not fix itself
 	on onMouseUp. 
 	
-	1. Maybe something along the lines of beginning of function, where activeItem.selected = false?
-			-> activeItem still undefined
+	Solution: add another if/else to break out of onMouseGrad function if activeItem = null
 
   *********/
 
@@ -269,6 +268,9 @@ function onMouseDown(event){
       console.log("Nothing hit");
     }
 
+    //setting activeItem to null here doesn't do anything besides seg fault the page. Another solution?
+    activeItem = null;
+
     for(var i in iLayer.children){
       iLayer.children[i].selected = false; 
     }
@@ -285,10 +287,17 @@ var segment;
 
 //when user clicks, holds down, and drags
 function onMouseDrag(event){
+
+if(activeItem == null){
+
+	return;
+
+}else{
+
   dragged=true;
   /*
 
-  If debug_mode is set to true, gives the information in the console.log(s), but activeItem is null after it is found
+  If debug_mode is set to true, gives the information in the console.log(s), but activeItem is null after it is found (because of onMouseDown)
   Canvas locks after clicking, holding, and dragging on the canvas, and moving the mouse around the screen adds to the error
 
   */
@@ -341,6 +350,8 @@ console.log("Clicked canvas");
 
   intersections();
  // fixLayers();
+
+}//end else
 
 }//end mouse dragging function
 
