@@ -122,18 +122,11 @@ var intLayers = function(){
 
 //function for fixing the layers
 var fixLayers = function(){
-  // do the intersections
-
-  /***** Is this why the intersections fall beneath the circles?*****
-
-  Intersections are pulled forward correctly, but colors are being pushed behind as well as other intersection layers
-
-  */
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var tLayer = project.getItem({data: {layerName: "text"}});
 
-  //intLayers();
+  intLayers();
 
   tLayer.sendToBack();
   iLayer.sendToBack();
@@ -247,8 +240,6 @@ function onMouseDown(event){
         tolerance: 15
       }
     );
-
-    //fixLayers();
 
   } else { //when nothing is hit
 

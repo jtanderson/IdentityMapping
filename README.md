@@ -2,7 +2,7 @@
 
 ## Current TODO
 
-### 7/10 Meeting:
+### 7/17 Meeting:
 
   - [ ] (CURRENT BUG) Cross browser compatability i.e. chrome
   - [ ] Add five-way intersection where appropriate (fixLayers, intersections, etc.)
