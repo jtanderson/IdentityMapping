@@ -1,4 +1,4 @@
-var debug_mode = false; //never set to true???? Is this the canvas? "debug_mode" might be a better name
+var debug_mode = true;
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -176,7 +176,7 @@ var handle;
 var dragged = false; 
 
 // TODO: logic around this is wrong, it never gets reset
-var tester = false;
+var tester = true;
 
 var intersect = false;
 //function when user makes a click
@@ -194,6 +194,23 @@ function onMouseDown(event){
   // second, evaluates whether it was null or not
   // TODO: do not test visible items!!!!
   //this is where we need to deselect radio buttons i believe
+
+
+
+  /*********
+
+
+	THIS IS WHERE ACTIVEITEM = NULL ERROR **LINES 246-257**
+
+	The var hitResult tests which layer the user clicks, first the intersection layer (since it is on top), then
+	the circle layer (the next layer below intersection).
+
+	If the user clicks the canvas (and we are in debug_mode) we receive the log "Radios Cleared".
+	If the user clicks the canvas and there is nothing there, we receive the "Nothing hit" log.
+	However, then we set activeItem = NULL. 
+
+
+  *********/
 
   var form1 = document.getElementById("inlineRadioIntersect1");
   form1.checked = false;
@@ -232,7 +249,7 @@ function onMouseDown(event){
     if(debug_mode){
       console.log("Nothing hit");
     }
-    activeItem = null;
+    //activeItem = null;
     for(var i in iLayer.children){
       iLayer.children[i].selected = false; 
     }
@@ -244,17 +261,15 @@ function onMouseDown(event){
 }//end of the mouse down function
 
 var segment;
-/*
-TODO: onMouseDrag errors:
-When trying to drag canvas, activeItem is NULL
-*/
 
-//when user clicks and drags
-function onMouseDrag(event){//needs a boolean value for what is clicked and dragged ??????
+//when user clicks, holds down, and drags
+function onMouseDrag(event){
   dragged=true;
-  /*debug_mode = true;
+  /*
+
   If debug_mode is set to true, gives the information in the console.log(s), but activeItem is null after it is found
-  Canvas is also locked after the fix
+  Canvas locks after clicking, holding, and dragging on the canvas, and moving the mouse around the screen adds to the error
+
   */
 
   var cLayer = project.getItem({data: {layerName: "circles"}});
