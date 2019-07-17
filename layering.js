@@ -133,7 +133,7 @@ var fixLayers = function(){
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var tLayer = project.getItem({data: {layerName: "text"}});
 
-  //intLayers();
+  intLayers();
 
   tLayer.sendToBack();
   iLayer.sendToBack();
