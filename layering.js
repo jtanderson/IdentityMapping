@@ -183,10 +183,12 @@ var intersect = false;
 
 //mouse down function
 function onMouseDown(event){
+
   if(activeItem){
     activeItem.selected = false;
-    //need something else here maybe
+    //need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
   }
+
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
@@ -194,7 +196,6 @@ function onMouseDown(event){
   // second, evaluates whether it was null or not
   // TODO: do not test visible items!!!!
   //this is where we need to deselect radio buttons i believe
-
 
 
   /*********
@@ -209,6 +210,11 @@ function onMouseDown(event){
 	If the user clicks the canvas and there is nothing there, we receive the "Nothing hit" log.
 	However, then we set activeItem = NULL. 
 
+	With further testing, and the activeItem = NULL commented out, realized that activeItem needs to be defined, and it does not fix itself
+	on onMouseUp. 
+	
+	1. Maybe something along the lines of beginning of function, where activeItem.selected = false?
+			-> activeItem still undefined
 
   *********/
 
@@ -216,21 +222,31 @@ function onMouseDown(event){
   form1.checked = false;
   var form2 = document.getElementById("inlineRadioIntersect12");
   form2.checked = false;
+
+
   if(debug_mode){
     console.log("Radios Cleared");
   }
+
+
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
-    if(debug_mode){
-      console.log("User clicked an intersection with id " + hitResult.item.data.id);
-    }
+
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
     fixLayers();
+
+    if(debug_mode){
+      console.log("User clicked an intersection with id " + hitResult.item.data.id);
+    }
+
+
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
+
     activeItem = hitResult.item; // will be a circle
-    tester = true;
     activeItem.selected = true;
+    tester = true; //this is if clicked??
+
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
@@ -244,18 +260,23 @@ function onMouseDown(event){
         tolerance: 15
       }
     );
+
     fixLayers();
+
   } else {//when nothing is hit
+
     if(debug_mode){
       console.log("Nothing hit");
     }
-    //activeItem = null;
+
     for(var i in iLayer.children){
       iLayer.children[i].selected = false; 
     }
     for(var i in cLayer.children){
       cLayer.children[i].selected = false; 
     }
+
+    fixLayers();
   }
   //fixLayers();
 }//end of the mouse down function
