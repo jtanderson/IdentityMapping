@@ -1,4 +1,4 @@
-var debug_mode = true;
+var debug_mode = false;
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -62,6 +62,7 @@ function intersections(){
         //ij is two-uple intersections for circles i and j 
         if( c_j.visible ){ //if two circles overlap, then create intersection
           var int_ij = c_i.intersect(c_j, {insert: false});
+          int_ij.selected = false;
           int_ij.data.id = ""+i+j;
           //int_ij.fillColor = new Color(1,0,0);
           intersectionLayer.addChild(int_ij); //2
@@ -69,6 +70,7 @@ function intersections(){
             var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
             if( c_k.visible ){//if three circles overlap, then create intersection
               var int_ijk = int_ij.intersect(c_k, {insert: false});
+              int_ijk.selected = false;
               //int_ijk.fillColor = new Color(0,1,0);
               int_ijk.data.id = ""+i+j+k;
               intersectionLayer.addChild(int_ijk); //3
@@ -76,6 +78,7 @@ function intersections(){
                 var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
                 if( c_l.visible ){ //if four circles overlap, then create intersection
                   var int_ijkl = int_ijk.intersect(c_l, {insert: false});
+                  int_ijkl.selected = false;
                   //int_ijkl.fillColor = new Color(0,0,1);
                   int_ijkl.data.id = ""+i+j+k+l;
                   intersectionLayer.addChild(int_ijkl);//4
@@ -103,12 +106,14 @@ function intersections(){
 var intLayers = function(){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   for(var i = 2; i<6; i++){
+    //console.log(i + "-way intersections:");
     for(var j=0; j<iLayer.children.length; j++){
       if( iLayer.children[j].data.id.length == i ){
-        if(debug_mode){
-          console.log("Bringing intersection " + i + " to the front");
+        //console.log(iLayer.children[j].data.id);
+        if(true){ // TODO: put back to debug_mode
+          //console.log("Bringing intersection " + iLayer.children[j].data.id + " to the front");
         }
-        iLayer.children[j].bringToFront(); //are the colors also the children?
+        iLayer.children[j].bringToFront();
       }
     }
   }
@@ -125,11 +130,14 @@ var fixLayers = function(){
 
   */
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  intLayers();
-  // TODO: get fresh
-  textLayer.sendToBack();
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+  var tLayer = project.getItem({data: {layerName: "text"}});
+
+  //intLayers();
+
+  tLayer.sendToBack();
   iLayer.sendToBack();
-  circleLayer.sendToBack();
+  cLayer.sendToBack();
 
   if(debug_mode){
     console.log('Fixed layers...');
@@ -213,7 +221,7 @@ function onMouseDown(event){
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
-    fixLayers();
+    //fixLayers();
 
     if(debug_mode){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
@@ -240,25 +248,29 @@ function onMouseDown(event){
       }
     );
 
-    fixLayers();
+    //fixLayers();
 
-  } else {//when nothing is hit
+  } else { //when nothing is hit
 
     if(debug_mode){
       console.log("Nothing hit");
     }
 
-    //setting activeItem to null here doesn't do anything besides seg fault the page. Another solution?
+    if( activeItem ){
+      activeItem.selected = false;
+    }
     activeItem = null;
 
+    /*
     for(var i in iLayer.children){
       iLayer.children[i].selected = false; 
     }
     for(var i in cLayer.children){
       cLayer.children[i].selected = false; 
     }
+    */
 
-    fixLayers();
+    //fixLayers();
   }
   //fixLayers();
 }//end of the mouse down function
@@ -355,8 +367,7 @@ function onMouseUp(event){
 
     //create new intersections here
     //calculate new intersections by calling graces function
-      fixLayers();
-
+    fixLayers();
   }
 
   dragged = false;
