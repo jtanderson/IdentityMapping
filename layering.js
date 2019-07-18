@@ -406,7 +406,7 @@ doSubmit = function(e){
   t.content = text;
 
   insert = true;
-  intersections();
+  //intersections();
   return false;
 } //end doSubmit function
 

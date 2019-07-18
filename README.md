@@ -6,7 +6,7 @@
 
   - [ ] (CURRENT BUG) Cross browser compatability i.e. chrome
   - [ ] Add five-way intersection where appropriate (fixLayers, intersections, etc.)
-  - [ ] When adding a new circle, fix delete+recreate intersection logic
+  - [x] When adding a new circle, fix delete+recreate intersection logic
   - [ ] (Sam) Try fixing intersection layer problem by putting 5-way first in layer child array, 4-way second, 3-way third, etc...
   - [ ] (Grace) use localstorage to persist circles from initial to extended mapping pages
     - [ ] initial mapping does not allow color, only names and size and position
