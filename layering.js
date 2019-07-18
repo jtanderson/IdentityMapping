@@ -92,15 +92,13 @@ function intersections(){
   } // i loop
   //console.log("iLayer.children.length after insert: " + iLayer.children.length);
 
-  /*var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
   if( c_m.visible ){
     var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false});
-    if( int_ijklm ){
       int_ijklm.data.id = ""+i+j+k+l+"5";
-      //int_ijklm.fillColor = new Color(1,1,0);
       intersectionLayer.addChild(int_ijklm);
-    }
-  }*/
+    
+  }
 }//end intersections function
 
 var intLayers = function(){
