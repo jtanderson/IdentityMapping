@@ -54,97 +54,93 @@ var group5 = new Group();
 //function for creating intersections
 function intersections(){
   var iLayer = project.getItem({data:{layerName: "intersections"}});
-
   iLayer.removeChildren();//destroying old intersections
-
- // console.log("iLayer.children.length before insert: " + iLayer.children.length);
-  for(var i=1;i<6;i++){
+  for(var i = 1; i < 6; i++){
     var c_i = project
       .getItem({data: {layerName: "circles"}})
       .getItem({data: {circleId: i}});
     if( c_i.visible ){
       for(var j=i+1;j<6;j++){
         var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-        //ij is two-uple intersections for circles i and j 
         if( c_j.visible ){ //if two circles overlap, then create intersection
           var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
           int_ij.selected = false;
           int_ij.data.id = ""+i+j;
-          //int_ij.fillColor = new Color(1,0,0);
-         // group2.addChild(int_ij);
-       //   intersectionLayer.addChild(group2);
           intersectionLayer.addChild(int_ij); //2
-          for(var k=j+1;k<6;k++){
-            var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-            if( c_k.visible ){//if three circles overlap, then create intersection
-              var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
-              int_ijk.selected = false;
-              //int_ijk.fillColor = new Color(0,1,0);
-              int_ijk.data.id = ""+i+j+k;
-             // group3.addChild(int_ijk);
-             // intersectionLayer.addChild(group3);
-              intersectionLayer.addChild(int_ijk); //3
-              for(var l = k+1;l<6; l++){
-                var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
-                if( c_l.visible ){ //if four circles overlap, then create intersection
-                  var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
-                  int_ijkl.selected = false;
-                  //int_ijkl.fillColor = new Color(0,0,1);
-                  int_ijkl.data.id = ""+i+j+k+l;
-                 // group4.addChild(int_ijkl);
-                //  intersectionLayer.addChild(group4);
-                  intersectionLayer.addChild(int_ijkl);//4
-                } // c_l visible
-              } // l loop
-            } // c_k visible
-          } // k loop
-        } // c_j visible
-      } // j loop
-    } // c_i visible
-  } // i loop
-  //console.log("iLayer.children.length after insert: " + iLayer.children.length);
-
-  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
-  if( c_m.visible ){
-    var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
-      int_ijklm.data.id = ""+i+j+k+l+"5";
-     // group5.addChild(int_ijklm);
-    //  intersectionLayer.addChild(group5);
-      intersectionLayer.addChild(int_ijklm);
-    
-  }
-}//end intersections function
-
-var intLayers = function(){
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
- for(var i = 2; i<6; i++){
-    //console.log(i + "-way intersections:");
-    for(var j=0; j<iLayer.children.length; j++){
-      if( iLayer.children[j].data.id.length == i ){
-        //console.log(iLayer.children[j].data.id);
-        if(true){ // TODO: put back to debug_mode
-          //console.log("Bringing intersection " + iLayer.children[j].data.id + " to the front");
         }
-        iLayer.children[j].bringToFront();
+      }
+  }
+} //end the twos loop
+for(i=1;i<6;i++){ //1
+  var c_i = project
+    .getItem({data: {layerName: "circles"}})
+    .getItem({data: {circleId: i}});
+  if( c_i.visible ){
+    for(j=i+1;j<6;j++){ //2
+      var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+      if( c_j.visible ){ //if two circles overlap, then create intersection
+        var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+        int_ij.selected = false;
+        int_ij.data.id = ""+i+j;
+        for(var k=j+1;k<6;k++){ //3
+          var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+          if( c_k.visible ){//if three circles overlap, then create intersection
+            var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
+            int_ijk.selected = false;
+            int_ijk.data.id = ""+i+j+k;
+            intersectionLayer.addChild(int_ijk); 
+          }
+        }
       }
     }
- }
-
-  //trying to layer the different groups
-
-
-
-
-}
+  }
+} //end the threes loop
+for(i=1;i<6;i++){ //1
+  var c_i = project
+    .getItem({data: {layerName: "circles"}})
+    .getItem({data: {circleId: i}});
+  if( c_i.visible ){
+    for(j=i+1;j<6;j++){ //2
+      var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+      if( c_j.visible ){ //if two circles overlap, then create intersection
+        var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+        int_ij.selected = false;
+        int_ij.data.id = ""+i+j;
+        for(k=j+1;k<6;k++){ //3
+          var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+          if( c_k.visible ){//if three circles overlap, then create intersection
+            var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
+            int_ijk.selected = false;
+            int_ijk.data.id = ""+i+j+k;
+            for(var l = k+1;l<6; l++){ //4
+              var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
+              if( c_l.visible ){ //if four circles overlap, then create intersection
+                var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
+                int_ijkl.selected = false;
+                int_ijkl.data.id = ""+i+j+k+l;
+                intersectionLayer.addChild(int_ijkl);//4
+              } // c_l visible
+            } // l loop
+          } // c_k visible
+        } // k loop
+      } // c_j visible
+    } // j loop
+  } // c_i visible
+} // i loop 
+//ends the fours loop
+var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
+if( c_m.visible ){
+  var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
+    int_ijklm.data.id = ""+i+j+k+l+"5";
+    intersectionLayer.addChild(int_ijklm); 
+}//end the five single
+}//end intersections function
 
 //function for fixing the layers
 var fixLayers = function(){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var tLayer = project.getItem({data: {layerName: "text"}});
-
-  intLayers();
-
   tLayer.sendToBack();
   iLayer.sendToBack();
   cLayer.sendToBack();
