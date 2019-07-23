@@ -387,7 +387,6 @@ doSubmit = function(e){
   scope.activate();
   e.preventDefault();
 
-
   // the id of the circle we're changing
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry

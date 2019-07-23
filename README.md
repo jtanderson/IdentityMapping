@@ -3,11 +3,15 @@
 ## Current TODO
 
 ### 7/17 Meeting:
-NOTE: removal of colors of intersections should not need to be fixed if first page is only moving and second page is only coloring
-  - [ ] (CURRENT BUG) Cross browser compatability i.e. chrome
+  - [ ] (ALL) Keep testing cross browser compatability i.e. chrome vs. firefox vs. IE/Edge
+  - [ ] (Sam) remember last color used for each intersection
+  - [ ] (Sam) clean up boostrap and other lib dependencies
+  - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
   - [ ] (Grace) use localstorage to persist circles from initial to extended mapping pages
+    - [ ] Possbily break up .js into multiple files (but keep it DRY)
     - [ ] initial mapping does not allow color, only names and size and position
     - [ ] extended mapping should *not* allow movement, renaming, or resizing. but only coloring
+  - [ ] Investigate using JS-backed database stores for data (e.g. firebase)
 
 ## Fixed bugs
   - [x] (Sam) Try fixing intersection layer problem by putting 5-way first in layer child array, 4-way second, 3-way third, etc...
