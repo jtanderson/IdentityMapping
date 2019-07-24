@@ -4,7 +4,6 @@
 
 ### 7/17 Meeting:
   - [ ] (Sam) remember last color used for each intersection
-  - [ ] (Sam) clean up boostrap and other lib dependencies
   - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
   - [ ] (Grace) use localstorage to persist circles from initial to extended mapping pages
     - [ ] Possbily break up .js into multiple files (but keep it DRY)
@@ -13,6 +12,7 @@
   - [ ] Investigate using JS-backed database stores for data (e.g. firebase)
 
 ## Fixed bugs
+  - [x] (Sam) clean up boostrap and other lib dependencies
   - [x] (ALL) Keep testing cross browser compatability i.e. chrome vs. firefox vs. IE/Edge
   - [x] (Sam) Try fixing intersection layer problem by putting 5-way first in layer child array, 4-way second, 3-way third, etc...
   - [x] Add five-way intersection where appropriate (fixLayers, intersections, etc.)
