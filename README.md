@@ -3,7 +3,6 @@
 ## Current TODO
 
 ### 7/17 Meeting:
-  - [ ] (ALL) Keep testing cross browser compatability i.e. chrome vs. firefox vs. IE/Edge
   - [ ] (Sam) remember last color used for each intersection
   - [ ] (Sam) clean up boostrap and other lib dependencies
   - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
@@ -14,6 +13,7 @@
   - [ ] Investigate using JS-backed database stores for data (e.g. firebase)
 
 ## Fixed bugs
+  - [x] (ALL) Keep testing cross browser compatability i.e. chrome vs. firefox vs. IE/Edge
   - [x] (Sam) Try fixing intersection layer problem by putting 5-way first in layer child array, 4-way second, 3-way third, etc...
   - [x] Add five-way intersection where appropriate (fixLayers, intersections, etc.)
   - [x] When adding a new circle, fix delete+recreate intersection logic

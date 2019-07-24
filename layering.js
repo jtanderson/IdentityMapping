@@ -129,7 +129,12 @@ for(i=1;i<6;i++){ //1
 } // i loop 
 //ends the fours loop
 var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
-if( c_m.visible ){
+var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});//5-tuple intersection
+var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});//5-tuple intersection
+var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});//5-tuple intersection
+var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});//5-tuple intersection
+
+if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
   var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
     int_ijklm.data.id = ""+i+j+k+l+"5";
     intersectionLayer.addChild(int_ijklm); 

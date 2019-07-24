@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>	  
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-      
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>     
     <script defer type="text/javascript" src="paper.js"></script> 
-    <!--this is the newest update-->
     <script defer type="text/paperscript" src="layering.js" canvas="c"></script>
+    </head>
     <script>
+  
+    var text1 = localStorage["1"];
+    var text2 = localStorage["2"];
+    var text3 = localStorage["3"];
+    var text4 = localStorage["4"];
+    var text5 = localStorage["5"];
 
+  function doFunction(){
+    locked = true;
+    console.log(locked);
+    
+  }
       var reset = function(){
         var cLayer = paper.project.getItem({data: {layerName: "circles"}});
       var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
@@ -39,78 +45,32 @@
     }
     </script>
      <style>
-	  p.solid {
-
-	    border-style: solid;
-	    
-	  }
-
-
-	  h1{
-
-	    padding-top: 20px;
-	    padding-bottom: 20px;
-	    
-	  }
-
-	  #StartMapping{
-
-	    padding-top: 20px;
-	    padding-bottom: 20px;
-
-	  }
-
 	  .container {
-	  
 	    position: relative; 
-	    width: 98%; /* Maximum width */
-	  /* margin: 0 auto; /* Center it */
-	  
+	    width: 98%; /* Maximum width */	  
 	  }
-
 	  input{
-	    
 	    text-align: center;
 	    content:300px 200px;
-
-	  }
-	  
-	  /* ^^ This keeps button text from squashing  */
-	  
+	  }	  
 	  input#textInput{
-
 	    text-align: left;
-
 	  }
-
 	  .canvas-container{
-
 	  margin: 0 auto;
-
 	  }
-
 	  canvas[resize] {
-
 	    border-style: solid;
 	    width: 750px;
-	    height: 750px;
-	    
+	    height: 750px; 
 	  }
-
 	  p.ex1 {
-
 	  display: none;
-
 	  }
-
 	  .container{
-
 	    width: 100%;
-	    
 	  }	  
     </style>
-
-  </head>
 
   <body>
     <div class="progress">
@@ -183,21 +143,6 @@
                   <label class="form-check-label" for="inlineRadio2">Dotted</label>
                 </div>
               </div>
-<script>
-  
-    var text1 = localStorage["1"];
-    var text2 = localStorage["2"];
-    var text3 = localStorage["3"];
-    var text4 = localStorage["4"];
-    var text5 = localStorage["5"];
-
-  function doFunction(){
-    locked = true;
-    console.log(locked);
-    
-  }
-
-</script>
               <div class="col-sm-8">
                 <canvas id="c" resize></canvas>
               </div>
