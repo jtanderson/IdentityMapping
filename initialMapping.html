@@ -6,7 +6,15 @@
     <script type="text/paperscript" src="layering.js" canvas="c"></script>
     <script>
       var save = function(){
+        var tLayer = paper.project.getItem({data: {layerName: "text"}});
+        console.log(tLayer);
         localStorage["saved"] = paper.project.exportJSON();
+        localStorage["one"] = tLayer.getItem({data: {textId: 1}}).content;
+        localStorage["two"] = tLayer.getItem({data: {textId: 2}}).content;
+        localStorage["three"] = tLayer.getItem({data: {textId: 3}}).content;
+        localStorage["four"] = tLayer.getItem({data: {textId: 4}}).content;
+        localStorage["five"] = tLayer.getItem({data: {textId: 5}}).content;
+        
       }
         var reset = function(){
           var cLayer = paper.project.getItem({data: {layerName: "circles"}});
