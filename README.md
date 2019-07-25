@@ -12,7 +12,8 @@
   - [x] (Grace) use localstorage to persist circles from initial to extended mapping pages
     - [x] Possbily break up .js into multiple files (but keep it DRY)
     - [x] initial mapping does not allow color, only names and size and position
-    - [x] extended mapping should *not* allow movement, renaming, or resizing. but only coloring - [x] (Sam) clean up boostrap and other lib dependencies
+    - [x] extended mapping should *not* allow movement, renaming, or resizing. but only coloring 
+  - [x] (Sam) clean up boostrap and other lib dependencies
   - [x] (ALL) Keep testing cross browser compatability i.e. chrome vs. firefox vs. IE/Edge
   - [x] (Sam) Try fixing intersection layer problem by putting 5-way first in layer child array, 4-way second, 3-way third, etc...
   - [x] Add five-way intersection where appropriate (fixLayers, intersections, etc.)
