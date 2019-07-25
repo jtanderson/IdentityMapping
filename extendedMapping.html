@@ -8,11 +8,7 @@
 
     </head>
     <script>
-  function doFunction(){
-    locked = true;
-    console.log(locked);
-    
-  }
+
       var reset = function(){
         var cLayer = paper.project.getItem({data: {layerName: "circles"}});
       var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
@@ -22,10 +18,6 @@
       tLayer.removeChildren();
       }
 
-    var imported = function(){
-      paper.project.importJSON(localStorage["saved"]);
-    }
- 
     </script>
      <style>
 	  .container {
@@ -90,9 +82,7 @@
             </div>
             <div class="row">
               <div class="col-sm-4">
-                
-                <a class = "btn btn-outline-primary" onClick="imported();">Import Identities</a>
-           <br>
+                           <br>
                 <br>
                 <h5>Active Item Color:<br></h5><input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
 		<h5>Circle Outline:</h5>

@@ -7,14 +7,12 @@
     <script>
       var save = function(){
         var tLayer = paper.project.getItem({data: {layerName: "text"}});
-        console.log(tLayer);
         localStorage["saved"] = paper.project.exportJSON();
         localStorage["one"] = tLayer.getItem({data: {textId: 1}}).content;
         localStorage["two"] = tLayer.getItem({data: {textId: 2}}).content;
         localStorage["three"] = tLayer.getItem({data: {textId: 3}}).content;
         localStorage["four"] = tLayer.getItem({data: {textId: 4}}).content;
         localStorage["five"] = tLayer.getItem({data: {textId: 5}}).content;
-        
       }
         var reset = function(){
           var cLayer = paper.project.getItem({data: {layerName: "circles"}});
@@ -24,23 +22,10 @@
         iLayer.removeChildren();
         tLayer.removeChildren();
         }
+        var funct = function(){
+          console.log("It woked");
+        }
   
-      var locked = function(){
-        var cLayer = paper.project.getItem({data: {layerName: "circles"}});
-        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
-        var tLayer = paper.project.getItem({data: {layerName: "text"}});
-       cLayer.locked = true;
-       iLayer.locked = true;
-       tLayer.locked = true;
-      }
-      var unLocked = function(){
-        var cLayer = paper.project.getItem({data: {layerName: "circles"}});
-        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
-        var tLayer = paper.project.getItem({data: {layerName: "text"}});
-        tLayer.locked = false;
-        iLayer.locked = false;
-        cLayer.locked = false;
-      }
       </script>
      <style>    
 	  canvas[resize] {
@@ -116,9 +101,8 @@ to be placed where you think they fit best.
           
                 <br>
                 <br>
-                <a class = "btn btn-outline-primary" onClick="save();">Save Progress</a>
                 <br><br>
- <h4> <a href="index.html">&larr;&nbsp;Previous</a> &ensp;&ensp; <a href="extendedMapping.html">Next&nbsp;&rarr;</a></h4>
+ <h4> <a href="index.html">&larr;&nbsp;Previous</a> &ensp;&ensp; <a href="extendedMapping.html" onClick="save();">Next&nbsp;&rarr;</a></h4>
 
             <p class="ex1">
                 <input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;

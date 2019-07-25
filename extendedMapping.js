@@ -1,5 +1,5 @@
 var debug_mode = false;
-
+project.importJSON(localStorage["saved"]);
 var activeItem; 
 var handle;
 var dragged = false; 
