@@ -4,7 +4,6 @@ var activeItem;
 var handle;
 var dragged = false; 
 
-// TODO: logic around this is wrong, it never gets reset
 var tester = true;
 
 var intersect = false;
