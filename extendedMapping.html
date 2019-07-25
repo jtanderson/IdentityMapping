@@ -6,13 +6,6 @@
     <script defer type="text/paperscript" src="layering.js" canvas="c"></script>
     </head>
     <script>
-  
-    var text1 = localStorage["1"];
-    var text2 = localStorage["2"];
-    var text3 = localStorage["3"];
-    var text4 = localStorage["4"];
-    var text5 = localStorage["5"];
-
   function doFunction(){
     locked = true;
     console.log(locked);
@@ -36,13 +29,17 @@
      tLayer.locked = true;
     }
     var unLocked = function(){
-      var cLayer = paper.project.getItem({data: {layerName: "circles"}});
+ var cLayer = paper.project.getItem({data: {layerName: "circles"}});
       var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
       var tLayer = paper.project.getItem({data: {layerName: "text"}});
       tLayer.locked = false;
       iLayer.locked = false;
       cLayer.locked = false;
     }
+    var imported = function(){
+      paper.project.importJSON(localStorage["saved"]);
+    }
+ 
     </script>
      <style>
 	  .container {
@@ -101,35 +98,37 @@
             <div class="row">
               <div class="col-sm-4">
                 <br><br>
-                <form action="#" onsubmit="doSubmit(event);">
+                <a class = "btn btn-outline-primary" onClick="imported();">Import Identities</a>
+
+            <!--    <form action="#" onsubmit="doSubmit(event);">
                   <input type="text" name="circleText" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="1"><!-- holds the SUid corresponding to this circle -->
+                  <input type="hidden" name="formId" value="1">
                   <input type="submit" style="width: 30%;" value="Add circle">
                 </form>
 <br><br>
                 <form action="#" onsubmit="doSubmit(event);">
                   <input type="text" name="circleText" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="2"><!-- holds the SUid corresponding to this circle-->
+                  <input type="hidden" name="formId" value="2">
                   <input type="submit" value="Add circle" style="width: 30%;">
                 </form>
 <br><br>
                 <form action="#" onsubmit="doSubmit(event);">
                   <input type="text" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="3"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="hidden" name="formId" value="3">     
                   <input type="submit" value="Add circle" style="width: 30%;">
                 </form>
 <br><br>
                 <form action="#" onsubmit="doSubmit(event);">
                   <input type="text" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="4"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="hidden" name="formId" value="4">      
                   <input type="submit" value="Add circle" style="width: 30%;">
                 </form>
                 <br><br>
                 <form action="#" onsubmit="doSubmit(event);">
                   <input type="text" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="5"><!-- holds the SUid corresponding to this circle-->      
+                  <input type="hidden" name="formId" value="5">     
                   <input type="submit" value="Add circle" style="width: 30%;">
-                </form>
+                </form>-->
            <br>
                 <br>
                 <h5>Active Item Color:<br></h5><input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
