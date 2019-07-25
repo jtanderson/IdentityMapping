@@ -1,4 +1,8 @@
 var debug_mode = false;
+if(localStorage["previous"] == "true"){
+  project.importJSON(localStorage["saved"]);
+  //intersections();
+}
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;

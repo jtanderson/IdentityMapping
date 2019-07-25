@@ -3,7 +3,7 @@
   <head>	  
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>     
     <script defer type="text/javascript" src="paper.js"></script> 
-   <!--- <script defer type="text/paperscript" src="layering.js" canvas="c"></script>-->
+   <!-- <script defer type="text/paperscript" src="layering.js" canvas="c"></script>-->
     <script defer type="text/paperscript" src="extendedMapping.js" canvas="c"></script>
 
     </head>
@@ -16,6 +16,10 @@
       cLayer.removeChildren();
       iLayer.removeChildren();
       tLayer.removeChildren();
+      }
+      var previous = function(){
+        localStorage["saved"] = paper.project.exportJSON();
+        localStorage["previous"] = "true";
       }
 
     </script>
@@ -96,7 +100,7 @@
                 </div>
                             
                 <br><br>
-                <h4> <a href="initialMapping.html">&larr;Previous</a>
+                <h4> <a href="initialMapping.html" onClick="previous();">&larr;Previous</a>
 &ensp;         <a href="survey.html">Next&rarr;</a>&emsp;&emsp;</h4>   </div>  
 
               <div class="col-sm-8">
