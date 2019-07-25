@@ -55,10 +55,7 @@
         <div class="col-sm">
           <h1><p text-center>Map your Identities</p>   </h1>   
       <div class="text text-right">
-          <a class = "btn btn-warning" onClick="reset();">Reset</a>
-          <a class = "btn btn-success" onClick="unLocked();">Unlock</a>
-          <a class = "btn btn-success" onClick="locked();">Lock</a>
-          <a class="btn btn-danger" href="finished.html">Abort</a>
+ 
       </div>
           <div id="StartMapping" class="tabcontent">     
 This is the section where you choose the five social identities that are closest to you and map them onto the canvas where you see fit.
@@ -66,7 +63,16 @@ To add social identities, simply type each one into the corresponding text box t
 to be placed where you think they fit best.
           </div> 
           <div class="container">
-            <br>
+            
+            <div class="row">
+            <div class="col-sm-10">
+
+            </div>
+              <div class="col-sm-2">
+                         &emsp;<a class = "btn btn-warning" onClick="reset();">Reset</a>
+          <a class="btn btn-danger" href="finished.html">Abort</a>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-4">
                 <br><br>
@@ -102,7 +108,9 @@ to be placed where you think they fit best.
           
                 <br>
                 <br>
-                <a class = "btn btn-primary" onClick="save();">Save</a>
+                <a class = "btn btn-outline-primary" onClick="save();">Save Progress</a>
+                <br><br>
+ <h4> <a href="index.html">&larr;&nbsp;Previous</a> &ensp;&ensp; <a href="extendedMapping.html">Next&nbsp;&rarr;</a></h4>
 
             <p class="ex1">
                 <input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
@@ -131,7 +139,6 @@ to be placed where you think they fit best.
   <div class="col-sm-4">
   </div>
   <div class="col-sm-4">
- <h4> <a href="index.html">&larr;&nbsp;Previous</a> &ensp;&ensp; <a href="extendedMapping.html">Next&nbsp;&rarr;</a></h4>
   </div>
 </div>
 </div>

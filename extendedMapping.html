@@ -3,7 +3,9 @@
   <head>	  
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>     
     <script defer type="text/javascript" src="paper.js"></script> 
-    <script defer type="text/paperscript" src="layering.js" canvas="c"></script>
+   <!--- <script defer type="text/paperscript" src="layering.js" canvas="c"></script>-->
+    <script defer type="text/paperscript" src="extendedMapping.js" canvas="c"></script>
+
     </head>
     <script>
   function doFunction(){
@@ -20,22 +22,6 @@
       tLayer.removeChildren();
       }
 
-    var locked = function(){
-      var cLayer = paper.project.getItem({data: {layerName: "circles"}});
-      var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
-      var tLayer = paper.project.getItem({data: {layerName: "text"}});
-     cLayer.locked = true;
-     iLayer.locked = true;
-     tLayer.locked = true;
-    }
-    var unLocked = function(){
- var cLayer = paper.project.getItem({data: {layerName: "circles"}});
-      var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
-      var tLayer = paper.project.getItem({data: {layerName: "text"}});
-      tLayer.locked = false;
-      iLayer.locked = false;
-      cLayer.locked = false;
-    }
     var imported = function(){
       paper.project.importJSON(localStorage["saved"]);
     }
@@ -82,10 +68,7 @@
 
           <h1><p text-center>Style your Identities</p>   </h1>
 <div class="text text-right">
-    <a class = "btn btn-warning" onClick="reset();">Reset</a>
-  <a class = "btn btn-success" onClick="unLocked();">Unlock</a>
-  <a class = "btn btn-success" onClick="locked();">Lock</a>
-  <a class="btn btn-danger" href="finished.html">Abort</a>
+
 </div>
           <div id="StartMapping" class="tabcontent">
             This section is where you add some detail to your map. In this section you may add either a red color for a negative impact on your life. Or you may add the color blue to your circle meaning that this identity makes you content.<br>
@@ -96,39 +79,19 @@
           </div>
             <br>
             <div class="row">
-              <div class="col-sm-4">
-                <br><br>
-                <a class = "btn btn-outline-primary" onClick="imported();">Import Identities</a>
+              <div class="col-sm-10">
 
-            <!--    <form action="#" onsubmit="doSubmit(event);">
-                  <input type="text" name="circleText" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="1">
-                  <input type="submit" style="width: 30%;" value="Add circle">
-                </form>
-<br><br>
-                <form action="#" onsubmit="doSubmit(event);">
-                  <input type="text" name="circleText" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="2">
-                  <input type="submit" value="Add circle" style="width: 30%;">
-                </form>
-<br><br>
-                <form action="#" onsubmit="doSubmit(event);">
-                  <input type="text" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="3">     
-                  <input type="submit" value="Add circle" style="width: 30%;">
-                </form>
-<br><br>
-                <form action="#" onsubmit="doSubmit(event);">
-                  <input type="text" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="4">      
-                  <input type="submit" value="Add circle" style="width: 30%;">
-                </form>
-                <br><br>
-                <form action="#" onsubmit="doSubmit(event);">
-                  <input type="text" id="textInput" style="width: 60%;">
-                  <input type="hidden" name="formId" value="5">     
-                  <input type="submit" value="Add circle" style="width: 30%;">
-                </form>-->
+              </div>
+              <div class="col-sm-2">
+                &emsp;
+                <a class = "btn btn-warning" onClick="reset();">Reset</a>
+  <a class="btn btn-danger" href="finished.html">Abort</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                
+                <a class = "btn btn-outline-primary" onClick="imported();">Import Identities</a>
            <br>
                 <br>
                 <h5>Active Item Color:<br></h5><input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
@@ -141,7 +104,11 @@
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect12" value="option2">
                   <label class="form-check-label" for="inlineRadio2">Dotted</label>
                 </div>
-              </div>
+                            
+                <br><br>
+                <h4> <a href="initialMapping.html">&larr;Previous</a>
+&ensp;         <a href="survey.html">Next&rarr;</a>&emsp;&emsp;</h4>   </div>  
+
               <div class="col-sm-8">
                 <canvas id="c" resize></canvas>
               </div>
@@ -158,8 +125,7 @@
 
         </div>
         <div class="col-sm-6">
-           <h4> <a href="initialMapping.html">&larr;Previous</a>
-&ensp;         <a href="survey.html">Next&rarr;</a>&emsp;&emsp;</h4>
+
 
         </div>
      

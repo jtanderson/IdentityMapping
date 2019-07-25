@@ -258,30 +258,15 @@ function onMouseDown(event){
         tolerance: 15
       }
     );
-
   } else { //when nothing is hit
-
     if(debug_mode){
       console.log("Nothing hit");
     }
-
     if( activeItem ){
       activeItem.selected = false;
     }
     activeItem = null;
-
-    /*
-    for(var i in iLayer.children){
-      iLayer.children[i].selected = false; 
-    }
-    for(var i in cLayer.children){
-      cLayer.children[i].selected = false; 
-    }
-    */
-
-    //fixLayers();
   }
-  //fixLayers();
 }//end of the mouse down function
 
 var segment;
