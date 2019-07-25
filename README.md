@@ -3,12 +3,12 @@
 ## Current TODO
 
 ### 7/17 Meeting:
-  - [ ] (Sam) remember last color used for each intersection
   - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
   - [ ] Allow for user to go back to initial mapping and make changes
   - [ ] Investigate using JS-backed database stores for data (e.g. firebase)
 
 ## Fixed bugs
+  - [x] (Sam) remember last color used for each intersection
   - [x] (Grace) use localstorage to persist circles from initial to extended mapping pages
     - [x] Possbily break up .js into multiple files (but keep it DRY)
     - [x] initial mapping does not allow color, only names and size and position
