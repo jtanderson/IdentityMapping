@@ -7,24 +7,16 @@ var dragged = false;
 var tester = true;
 
 var intersect = false;
-//function when user makes a click
-
 //mouse down function
 function onMouseDown(event){
 
   if(activeItem){
     activeItem.selected = false;
-    //need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
   }
 
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  // first assigns the test to hitResult
-  // second, evaluates whether it was null or not
-  // TODO: do not test visible items!!!!
-  //this is where we need to deselect radio buttons i believe
-
   var form1 = document.getElementById("inlineRadioIntersect1");
   form1.checked = false;
   var form2 = document.getElementById("inlineRadioIntersect12");

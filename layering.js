@@ -135,11 +135,11 @@ for(i=1;i<6;i++){ //1
   } // c_i visible
 } // i loop 
 //ends the fours loop
-var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});//5-tuple intersection
-var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});//5-tuple intersection
-var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});//5-tuple intersection
-var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});//5-tuple intersection
-var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});//5-tuple intersection
+var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
+var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
+var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
+var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});
+var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
 
 if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
   var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
@@ -205,7 +205,6 @@ var dragged = false;
 var tester = true;
 
 var intersect = false;
-//function when user makes a click
 
 //mouse down function
 function onMouseDown(event){
@@ -218,11 +217,6 @@ function onMouseDown(event){
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-  // first assigns the test to hitResult
-  // second, evaluates whether it was null or not
-  // TODO: do not test visible items!!!!
-  //this is where we need to deselect radio buttons i believe
-
   var form1 = document.getElementById("inlineRadioIntersect1");
   form1.checked = false;
   var form2 = document.getElementById("inlineRadioIntersect12");
@@ -232,30 +226,20 @@ function onMouseDown(event){
   if(debug_mode){
     console.log("Radios Cleared");
   }
-
-
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
-
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
-    //fixLayers();
-
     if(debug_mode){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
-
-
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
-
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
-    tester = true; //this is if clicked??
-
+    tester = true; 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
-
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -275,20 +259,13 @@ function onMouseDown(event){
     activeItem = null;
   }
 }//end of the mouse down function
-
 var segment;
-
 //when user clicks, holds down, and drags
 function onMouseDrag(event){
-
 if(activeItem == null){
-
 	return;
-
 }else{
-
   dragged=true;
-
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
@@ -320,66 +297,38 @@ if(activeItem == null){
         }
       }
     }//end if circle edge or circle
-
-//need if user clicks canvas 
-
 if(debug_mode){
-
 console.log("Clicked canvas");
-
 }
-
   }
-
   intersections();
- // fixLayers();
 
 }//end else
-
 }//end mouse dragging function
-
 //on mouse up function
 function onMouseUp(event){
-
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   intersect = false; // why?
 
-
-  //need to de select active item
-  //TODO: recalculate all intersections
   if(dragged){//if the user dragged the circle
-    //remove all old intersections
-    //for(var i in iLayer.children){
-    //  iLayer.children[i].remove(); 
-    //}
+
     
     intersections();
-
-    //console.log("iLayer.children.length before: " + iLayer.children.length);
-    //iLayer.removeChildren();
-    //console.log("iLayer.children.length after: " + iLayer.children.length);
 
     if(debug_mode){
       console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
     }  
-
     //create new intersections here
     //calculate new intersections by calling graces function
     fixLayers();
   }
-
   dragged = false;
-
 }//end mouse up function
-
 var scope = this;
 
-/*
- * Called when "Add Circle" is clicked
- */
 doSubmit = function(e){
   scope.activate();
   e.preventDefault();
