@@ -5,7 +5,7 @@ var db = [
   [" ", " ", " ", " ", " "], 
   [" ", " ", " ", " ", " "], 
   [" ", " ", " ", " ", " "]
-];
+]; //GB: what is this for?
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
@@ -202,6 +202,8 @@ var handle;
 var dragged = false; 
 
 // TODO: logic around this is wrong, it never gets reset
+//G B: Do we even use tester anymore?
+
 var tester = true;
 
 var intersect = false;
@@ -259,7 +261,9 @@ function onMouseDown(event){
     activeItem = null;
   }
 }//end of the mouse down function
+
 var segment;
+
 //when user clicks, holds down, and drags
 function onMouseDrag(event){
 if(activeItem == null){
@@ -301,10 +305,12 @@ if(debug_mode){
 console.log("Clicked canvas");
 }
   }
+
   intersections();
 
 }//end else
 }//end mouse dragging function
+
 //on mouse up function
 function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
@@ -328,6 +334,8 @@ function onMouseUp(event){
   dragged = false;
 }//end mouse up function
 var scope = this;
+
+//sends the circle data to local storage
 
 doSubmit = function(e){
   scope.activate();
@@ -369,26 +377,33 @@ doSubmit = function(e){
 } //end doSubmit function
 
 window.doSubmit= doSubmit;
-//handles all color sliders as well as outlines
+
 var sliderIntersect=document.getElementById("rangeIntersect");
-sliderIntersect.addEventListener("change",function(){
+
+function colorChange(){
   if( activeItem ){
     var r,b;
     r=Math.round(255*(100-sliderIntersect.value)/100);
     b=Math.round(255*sliderIntersect.value/100);
     activeItem.fillColor = "rgb("+r+",0,"+b+")";
-  }
-},false);
+      }
+}
+
+sliderIntersect.addEventListener("change",colorChange(),false);
+
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
+
+//formIntersect1 is when the circle is changed to a solid line. 
 
 formIntersect1.addEventListener("change",function(){
   if(activeItem){
-    activeItem.dashArray = false;
-  }
+    activeItem.dashArray = false; 
+     }
 },false);
+
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
 formIntersect12.addEventListener("change",function(){
   if(activeItem){
     activeItem.dashArray = [10,4];
-  }
+      }
 },false);

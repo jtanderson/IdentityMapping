@@ -81,6 +81,7 @@ sliderIntersect.addEventListener("change",function(){
     r=Math.round(255*(100-sliderIntersect.value)/100);
     b=Math.round(255*sliderIntersect.value/100);
     activeItem.fillColor = "rgb("+r+",0,"+b+")";
+      console.log(activeItem.fillColor.canvasStyle);
   }
 },false);
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
