@@ -4,10 +4,10 @@
 
 ### 7/17 Meeting:
   - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
-	- [ ] Figure out how JS retrieves information from objects-private variables?
-	- [ ] Allow for user to go back to initial mapping and make changes
+  	- [ ] Figure out how JS retrieves information from objects-private variables?
+  	- [ ] Allow for user to go back to initial mapping and make changes
   - [ ] (Grace) Edit HTML/CSS for better interface when rescaling
-  - [ ] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
+  - [x] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
 
 ## Fixed bugs
   - [x] (Sam) remember last color used for each intersection
