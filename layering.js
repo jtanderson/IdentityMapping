@@ -349,6 +349,7 @@ doSubmit = function(e){
   if(debug_mode){
     console.log("Looking for circle " + targetName);
   }
+  localStorage[targetName] = text;
   var obj = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
