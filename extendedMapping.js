@@ -34,8 +34,6 @@ function onMouseDown(event){
     activeItem = hitResult.item; // will be a intersection
     activeItem.selected = true;
     intersect = true;
-    //fixLayers();
-
     if(debug_mode){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
@@ -45,8 +43,9 @@ function onMouseDown(event){
 
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
-    tester = true; //this is if clicked??
-
+    tester = true; 
+    console.log(activeItem.fillColor);
+    //sliderIntersect.value = activeItem.fillcolor;
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
@@ -83,9 +82,16 @@ sliderIntersect.addEventListener("change",function(){
     r=Math.round(255*(100-sliderIntersect.value)/100);
     b=Math.round(255*sliderIntersect.value/100);
     activeItem.fillColor = "rgb("+r+",0,"+b+")";
+<<<<<<< HEAD
     console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
   }
 },true);
+=======
+      console.log(activeItem.fillColor.canvasStyle);
+
+  }
+},false);
+>>>>>>> 64436f9e8d9c848719fd72a1501825e68be48c28
 
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 

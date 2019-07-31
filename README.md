@@ -4,13 +4,14 @@
 
 ### 7/17 Meeting:
   - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
-	-[ ] Figure out how JS retrieves information from objects-private variables?
-	-[ ] Allow for user to go back to initial mapping and make changes
-  - [ ] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
+    - [ ] Figure out how JS retrieves information from objects-private variables?
+  - [ ] Allow for user to go back to initial mapping and make changes
+  - [ ] (Grace) Edit HTML/CSS for better interface when rescaling
+  - [x] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
 
 ## Fixed bugs
   - [x] (Sam) remember last color used for each intersection
-  - [x] (Grace) use localstorage to persist circles from initial to extended mapping pages
+  - [x] (Sam) use localstorage to persist circles from initial to extended mapping pages
     - [x] Possbily break up .js into multiple files (but keep it DRY)
     - [x] initial mapping does not allow color, only names and size and position
     - [x] extended mapping should *not* allow movement, renaming, or resizing. but only coloring 
