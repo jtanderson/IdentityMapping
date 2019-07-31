@@ -3,6 +3,10 @@
 ## Current TODO
 
 ### 7/17 Meeting:
+- [ ]after the user colors circles and intersections, display a page that asks them to interpret each intersection
+- [ ]Include one separate question above that asks to describe the overall “nature” of the intersection (e.g. emotional, behavioral, time spent, etc.)
+- [ ]use the stored circle data to show only questions for the existing intersections, ideally also display (only) the involved circles with the chosen colors and style (so this will be a javascript operation that loops the intersections and generates some html for each one)
+- [ ] After the entire survey, add a page for the user to categorize the label of each circle (according to some set of categories we’ll get from Dr. Tomcho). These options can just be placeholders for now, though.
   - [ ] Allow for user to go back to initial mapping and make changes
   - [ ] (Grace) Edit HTML/CSS for better interface when rescaling
   - [ ] (Grace) Show slider/boundary current values for User (?)
