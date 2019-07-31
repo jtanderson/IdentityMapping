@@ -3,13 +3,13 @@
 ## Current TODO
 
 ### 7/17 Meeting:
-  - [ ] (Grace) update the slider and boundary selector to reflect current values when an object is selected
-    - [ ] Figure out how JS retrieves information from objects-private variables?
   - [ ] Allow for user to go back to initial mapping and make changes
   - [ ] (Grace) Edit HTML/CSS for better interface when rescaling
+  - [ ] (Grace) Show slider/boundary current values for User (?)
   - [x] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
 
 ## Fixed bugs
+  - [x] (Grace) update the slider and boundary selector to reflect current values when an object is selected
   - [x] (Sam) remember last color used for each intersection
   - [x] (Sam) use localstorage to persist circles from initial to extended mapping pages
     - [x] Possbily break up .js into multiple files (but keep it DRY)
