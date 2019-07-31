@@ -17,6 +17,7 @@ function onMouseDown(event){
   handle = null;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
+
   var form1 = document.getElementById("inlineRadioIntersect1");
   form1.checked = false;
   var form2 = document.getElementById("inlineRadioIntersect12");
@@ -75,25 +76,31 @@ var scope = this;
 
 //handles all color sliders as well as outlines
 var sliderIntersect=document.getElementById("rangeIntersect");
+
 sliderIntersect.addEventListener("change",function(){
   if( activeItem ){
     var r,b;
     r=Math.round(255*(100-sliderIntersect.value)/100);
     b=Math.round(255*sliderIntersect.value/100);
     activeItem.fillColor = "rgb("+r+",0,"+b+")";
-      console.log(activeItem.fillColor.canvasStyle);
+    console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
   }
-},false);
+},true);
+
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
 formIntersect1.addEventListener("change",function(){
   if(activeItem){
     activeItem.dashArray = false;
+    console.log("Circle " + activeItem.id +"'s outline is solid");
   }
 },false);
+
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
+
 formIntersect12.addEventListener("change",function(){
   if(activeItem){
     activeItem.dashArray = [10,4];
-  }
+    console.log("Circle " + activeItem.id +"'s outline is dashed");
+      }
 },false);
