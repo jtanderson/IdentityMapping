@@ -13,6 +13,14 @@
         localStorage["three"] = tLayer.getItem({data: {textId: 3}}).content;
         localStorage["four"] = tLayer.getItem({data: {textId: 4}}).content;
         localStorage["five"] = tLayer.getItem({data: {textId: 5}}).content;
+
+        var num = 1;
+        for( i in paper.project.layers[1].children){
+          if(paper.project.layers[1].children[i].closed){
+            num++;
+           }
+          }
+          localStorage["intersections"] = num;
       }
         var reset = function(){
           var cLayer = paper.project.getItem({data: {layerName: "circles"}});
