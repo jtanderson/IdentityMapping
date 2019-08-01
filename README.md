@@ -2,7 +2,7 @@
 
 ## Current TODO
 
-### 7/17 Meeting:
+### 8/7 Meeting:
   - [ ] Include one separate question above that asks to describe the overall “nature” of the intersection (e.g. emotional, behavioral, time spent, etc.)
   - [ ] use the stored circle data to show only questions for the existing intersections, ideally also display (only) the involved circles with the chosen colors and style (so this will be a javascript operation that loops the intersections and generates some html for each one)
 
