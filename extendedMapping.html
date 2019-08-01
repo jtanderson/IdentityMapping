@@ -20,6 +20,7 @@
       var previous = function(){
         localStorage["saved"] = paper.project.exportJSON();
         localStorage["previous"] = "true";
+        window.history.back();
       }
 
     </script>
@@ -100,7 +101,7 @@
                 </div>
                             
                 <br><br>
-                <h4> <a href="initialMapping.html" onClick="previous();">&larr;Previous</a>
+                <h4> <a href="#" onClick="previous();">&larr;Previous</a>
 &ensp;         <a href="afterMapping.html">Next&rarr;</a>&emsp;&emsp;</h4>   </div>  
 
               <div class="col-sm-8">

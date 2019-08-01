@@ -82,16 +82,9 @@ sliderIntersect.addEventListener("change",function(){
     r=Math.round(255*(100-sliderIntersect.value)/100);
     b=Math.round(255*sliderIntersect.value/100);
     activeItem.fillColor = "rgb("+r+",0,"+b+")";
-<<<<<<< HEAD
     console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
   }
 },true);
-=======
-      console.log(activeItem.fillColor.canvasStyle);
-
-  }
-},false);
->>>>>>> 64436f9e8d9c848719fd72a1501825e68be48c28
 
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
