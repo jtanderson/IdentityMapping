@@ -16,8 +16,13 @@
   width: 100%;
   margin: 0 auto; /* Center it */
 }
+.container{
+  width: 100%;
+}
 
-.canvas-container{margin: 0 auto;}</style>
+.canvas-container{
+  width: 100%;
+  margin: 0 auto;}</style>
     <script>
       function local(e){
 
@@ -52,7 +57,12 @@
       <div class="col-sm">
         <br>Rate how strongly held each social identity is when you think about yourself.<br>
         <div class="slidecontainer">
-          &emsp;Identity 1 <form>&emsp;Strongly held &emsp;
+       <b>
+          <script>
+            document.write(localStorage[1]);
+            </script>
+            </b>
+          <form>&emsp;Strongly held &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -79,7 +89,13 @@
           </form>
           <span id="demo"></span>
         </div> <div class="slidecontainer">
-          &emsp;Identity 2: <form>&emsp;Strongly held &emsp;
+
+          <b>
+            <script>
+              document.write(localStorage[2]);
+              </script>
+              </b>
+          <form>&emsp;Strongly held &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -106,7 +122,12 @@
           </form>
           <span id="demo"></span>
         </div> <div class="slidecontainer">
-          &emsp;Identity 3: <form>&emsp;Strongly held &emsp;
+          <b>
+            <script>
+              document.write(localStorage[3]);
+              </script>
+              </b>
+          <form>&emsp;Strongly held &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -135,7 +156,13 @@
         </div>      
 
         <div class="slidecontainer">
-          &emsp;Identity 4: <form>&emsp;Strongly held &emsp;
+         
+          <b>
+            <script>
+              document.write(localStorage[4]);
+              </script>
+              </b>
+          <form>&emsp;Strongly held &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -163,7 +190,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 5: <form>&emsp;Strongly held &emsp;    <label class="radio-inline">
+          <b>
+            <script>
+              document.write(localStorage[5]);
+              </script>
+              </b>
+            <form>&emsp;Strongly held &emsp;    <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
               <label class="radio-inline">
@@ -199,7 +231,12 @@
 
         <br>Rate how important each social identity is to the way you think about yourself<br><br>
         <div class="slidecontainer">
-          Identity 1:<br>&emsp; Not very important&emsp;
+          <b>
+            <script>
+              document.write(localStorage[1]);
+              </script>
+              </b>
+          <br>&emsp; Not very important&emsp;
           <label class="radio-inline">
             <input type="radio" name="optradio" >&emsp;
           </label>
@@ -228,7 +265,12 @@
               <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 2:<br>	  <form>&emsp;Not very important&emsp;
+          <b>
+            <script>
+              document.write(localStorage[2]);
+              </script>
+              </b>
+          <br>	  <form>&emsp;Not very important&emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -256,7 +298,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 3:&emsp;<form>&emsp; Not very important &emsp;	 
+          <b>
+            <script>
+              document.write(localStorage[3]);
+              </script>
+              </b>
+          &emsp;<form>&emsp; Not very important &emsp;	 
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -284,7 +331,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          &emsp;Identity 4: <form>&emsp;Not very important &emsp;
+          <b>
+            <script>
+              document.write(localStorage[4]);
+              </script>
+              </b>
+          <form>&emsp;Not very important &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -312,7 +364,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 5: <form>&emsp;Not Very Important &emsp;    <label class="radio-inline">
+          <b>
+            <script>
+              document.write(localStorage[5]);
+              </script>
+              </b>
+          <form>&emsp;Not Very Important &emsp;    <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
               <label class="radio-inline">
@@ -343,7 +400,12 @@
         <br>Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.<br><br>
         <div class="slidecontainer">
 
-          Identity 1:<br>&emsp; Very close&emsp;
+          <b>
+            <script>
+              document.write(localStorage[1]);
+              </script>
+              </b>
+          <br>&emsp; Very close&emsp;
           <label class="radio-inline">
             <input type="radio" name="optradio" >&emsp;
           </label>
@@ -372,7 +434,12 @@
               <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 2:<br>	  <form>&emsp;Very close&emsp;
+          <b>
+            <script>
+              document.write(localStorage[2]);
+              </script>
+              </b>
+          <br>	  <form>&emsp;Very close&emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -400,7 +467,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 3:&emsp;<form>&emsp; Very close &emsp;	 
+          <b>
+            <script>
+              document.write(localStorage[3]);
+              </script>
+              </b>
+          &emsp;<form>&emsp; Very close &emsp;	 
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -428,7 +500,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          &emsp;Identity 4: <form>&emsp;Very close &emsp;
+          <b>
+            <script>
+              document.write(localStorage[4]);
+              </script>
+              </b>
+          <form>&emsp;Very close &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -456,7 +533,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 5: <form>&emsp;Very close &emsp;    <label class="radio-inline">
+          <b>
+            <script>
+              document.write(localStorage[5]);
+              </script>
+              </b>
+          <form>&emsp;Very close &emsp;    <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
               <label class="radio-inline">
@@ -490,7 +572,12 @@
 
         <br>Rate the distance you believe each social identity is from defining who you are.<br><br>
         <div class="slidecontainer">
-          Identity 1:<br>&emsp; Strongly held&emsp;
+          <b>
+            <script>
+              document.write(localStorage[1]);
+              </script>
+              </b>
+          <br>&emsp; Strongly held&emsp;
           <label class="radio-inline">
             <input type="radio" name="optradio" >&emsp;
           </label>
@@ -519,7 +606,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 2:<br>	  <form>&emsp;Strongly Held&emsp;
+          <b>
+            <script>
+              document.write(localStorage[2]);
+              </script>
+              </b>
+          <br>	  <form>&emsp;Strongly Held&emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -547,7 +639,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 3:&emsp;<form>&emsp; Strongly held &emsp;	 
+          <b>
+            <script>
+              document.write(localStorage[3]);
+              </script>
+              </b>
+          &emsp;<form>&emsp; Strongly held &emsp;	 
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -575,7 +672,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          &emsp;Identity 4: <form>&emsp;Strongly held &emsp;
+          <b>
+            <script>
+              document.write(localStorage[4]);
+              </script>
+              </b>
+          <form>&emsp;Strongly held &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -603,7 +705,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 5: <form>&emsp;Not very close&emsp;    <label class="radio-inline">
+          <b>
+            <script>
+              document.write(localStorage[5]);
+              </script>
+              </b>
+          <form>&emsp;Not very close&emsp;    <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
               <label class="radio-inline">
@@ -633,7 +740,12 @@
 
         <br>How often do you think about having each social identity and what you have in common with others who share that identity?<br><br>
         <div class="slidecontainer">
-          Identity 1:<br>&emsp; Hardly ever&emsp;
+          <b>
+            <script>
+              document.write(localStorage[1]);
+              </script>
+              </b>
+          <br>&emsp; Hardly ever&emsp;
           <label class="radio-inline">
             <input type="radio" name="optradio" >&emsp;
           </label>
@@ -662,7 +774,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 2:<br>	  <form>&emsp;Hardly ever&emsp;
+          <b>
+            <script>
+              document.write(localStorage[2]);
+              </script>
+              </b>
+          <br>	  <form>&emsp;Hardly ever&emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -690,7 +807,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 3:&emsp;<form>&emsp; Hardly ever &emsp;	 
+          <b>
+            <script>
+              document.write(localStorage[3]);
+              </script>
+              </b>
+          &emsp;<form>&emsp; Hardly ever &emsp;	 
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -718,7 +840,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          &emsp;Identity 4: <form>&emsp;Hardly ever&emsp;
+          <b>
+            <script>
+              document.write(localStorage[4]);
+              </script>
+              </b>
+          <form>&emsp;Hardly ever&emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -746,7 +873,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          &emsp;Identity 5: <form>&emsp;Hardly ever &emsp;
+          <b>
+            <script>
+              document.write(localStorage[5]);
+              </script>
+              </b>
+          <form>&emsp;Hardly ever &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -778,7 +910,12 @@
 
         <br>How proud do you feel when someone who shares your social identity accomplishes something outstanding?<br><br>
         <div class="slidecontainer">
-          Identity 1:<br>&emsp; Not at all&emsp;
+          <b>
+            <script>
+              document.write(localStorage[1]);
+              </script>
+              </b>
+          <br>&emsp; Not at all&emsp;
           <label class="radio-inline">
             <input type="radio" name="optradio" >&emsp;
           </label>
@@ -807,7 +944,12 @@
               <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 2:<br>	  <form>&emsp;Not at all&emsp;
+          <b>
+            <script>
+              document.write(localStorage[2]);
+              </script>
+              </b>
+          <br>	  <form>&emsp;Not at all&emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -835,7 +977,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 3:&emsp;<form>&emsp;Not at all &emsp;	 
+          <b>
+            <script>
+              document.write(localStorage[3]);
+              </script>
+              </b>
+          &emsp;<form>&emsp;Not at all &emsp;	 
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -863,7 +1010,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          &emsp;Identity 4: <form>&emsp;Not at all &emsp;
+          <b>
+            <script>
+              document.write(localStorage[4]);
+              </script>
+              </b>
+          <form>&emsp;Not at all &emsp;
             <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
@@ -891,7 +1043,12 @@
           <span id="demo"></span>
         </div>
         <div class="slidecontainer">
-          Identity 5: <form>&emsp;Not at all&emsp;    <label class="radio-inline">
+          <b>
+            <script>
+              document.write(localStorage[5]);
+              </script>
+              </b>
+          <form>&emsp;Not at all&emsp;    <label class="radio-inline">
               <input type="radio" name="optradio" >&emsp;
             </label>
               <label class="radio-inline">
