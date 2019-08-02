@@ -7,6 +7,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       </head>
 
+<style>
+     #html, body{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+  }
+</style>
   <body> 
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
@@ -25,7 +31,7 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
    <script>
-      var num = parseInt(localStorage["numIntersections"]);
+      var num = parseInt(localStorage["numIntersections"]) -1;
       for(var i = 0; i < num; i++){
           document.write("  <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of ____________ intersection (emotional, behavioral, time spent).</label>"
             + " <textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea>      </div>");

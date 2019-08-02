@@ -11,7 +11,8 @@
   - [x] (8/7 meeting fix)Allow for user to go back to initial mapping and make changes
   - [x] Include one separate question above that asks to describe the overall “nature” of the intersection (e.g. emotional, behavioral, time spent, etc.)
    - [x] after the user colors circles and intersections, display a page that asks them to interpret each intersection
-   - [x] After the entire survey, add a page for the user to categorize the label of each circle (according to some set of categories we’ll get from Dr. Tomcho). These options can just be placeholders for now, though. - [x] (Grace) update the slider and boundary selector to reflect current values when an object is selected
+   - [x] After the entire survey, add a page for the user to categorize the label of each circle (according to some set of categories we’ll get from Dr. Tomcho). These options can just be placeholders for now, though.
+   - [x] (Grace) update the slider and boundary selector to reflect current values when an object is selected
   - [x] (Sam) remember last color used for each intersection
   - [x] (Sam) use localstorage to persist circles from initial to extended mapping pages
     - [x] Possbily break up .js into multiple files (but keep it DRY)
