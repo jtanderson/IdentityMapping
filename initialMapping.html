@@ -24,7 +24,9 @@
           var k = 0;
           for(j in paper.project.layers[1].children){
             if(paper.project.layers[1].children[j].closed){
-                arr[k] = paper.project.layers[1].children[j].id;
+                arr[k] = paper.project.layers[1].children[j].data.id;
+                console.log(arr[k]);
+                k++;
             }
           }
           localStorage["numIntersections"] = num;

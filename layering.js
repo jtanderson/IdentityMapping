@@ -345,7 +345,6 @@ doSubmit = function(e){
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
-  localStorage[targetName] = text;
   if(debug_mode){
     console.log("Looking for circle " + targetName);
   }

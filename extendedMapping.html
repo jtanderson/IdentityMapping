@@ -28,6 +28,19 @@
         localStorage["intersect"] = paper.project.layers[1].children;
         localStorage["text"] = paper.project.layers[2].children;
         localStorage["proj"] = paper.project.exportJSON();
+
+        var output = [];
+        var names = [];
+        var ar;
+        ar = localStorage["intersections"];
+        for(var i = 0; i < localStorage["num"]; i+=1){
+          var sNumber = ar[i].toString();
+          for(var j = 0; j < sNumber.length; j+=1) {
+            output.push(+sNumber.charAt(j));
+            names.push(+paper.project.getItem({data: {textId: sNumber.charAt(j)}}).content);
+          }
+
+        }
       }
 
 
