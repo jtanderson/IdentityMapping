@@ -4,8 +4,8 @@
 
 ### 8/7 Meeting:
   - [ ] use the stored circle data to show only questions for the existing intersections, ideally also display (only) the involved circles with the chosen colors and style (so this will be a javascript operation that loops the intersections and generates some html for each one)
-  - [ ] (Grace) Edit HTML/CSS for better interface when rescaling
-  - [ ] (Grace) Show slider/boundary current values for User (?)
+  - [ ] Edit HTML/CSS for better interface when rescaling
+  - [ ] Show slider/boundary current values for User (?)
   - [x] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
 ## Fixed bugs
   - [x] (8/7 meeting fix)Allow for user to go back to initial mapping and make changes

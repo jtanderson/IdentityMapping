@@ -29,9 +29,28 @@
         localStorage["text"] = paper.project.layers[2].children;
         localStorage["proj"] = paper.project.exportJSON();
 
+        var surveyData = [];
+        /*
+          element schema:
+          {
+            circles: [
+              {
+                name: string, // circle name
+                id:   int     // circle id
+              }
+            ],
+            explanation: string  // user's response
+          }
+        */
+
+        // loop through all the intersections
+        // if you want to survey it, add an object to
+        // surveyData with the names of othe circles
+
         var output = [];
         var names = [];
         var ar;
+        /*
         ar = localStorage["intersections"];
         for(var i = 0; i < localStorage["num"]; i+=1){
           var sNumber = ar[i].toString();
@@ -41,6 +60,7 @@
           }
 
         }
+        */
       }
 
 
