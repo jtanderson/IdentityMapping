@@ -2,10 +2,15 @@
 
 ## Current TODO
 
-### 8/7 Meeting:
-  - [ ] use the stored circle data to show only questions for the existing intersections, ideally also display (only) the involved circles with the chosen colors and style (so this will be a javascript operation that loops the intersections and generates some html for each one)
-  - [ ] Show slider/boundary current values for User (?)
-  - [x] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
+### 9/9 Meeting:
+  - [ ] use the stored circle data to show only questions for the existing intersections, ideally also display (only) the involved circles with the chosen colors and style (so this will be a javascript operation that loops the intersections and generates some html for each one) (Sam)
+  - [ ] On "extended" page, when user clicks circle, adjust slider and boundary radio to reflect the current values of that active item (Grace)
+  - [ ] Do not user browser "back" and "forward" features in javascript :) Hard-code the links instead...
+  - [ ] The "description" page loads five Likert scales, regardless of total number of circles
+    - [ ] Same issue with "Categorize your identities"
+  - [ ] Remove "submit" from "Description" page, use "Next" button to save the data
+  - [ ] Investigate using JS-backed database stores for data (e.g. firebase, mongoDB, pouchDB, couchDB)
+    - [ ] MongoDB? If yes, get details, setup plan, etc.
 ## Fixed bugs
    - [x] (8/7 meeting fix)Allow for user to go back to initial mapping and make changes
    - [x] Edit HTML/CSS for better interface when rescaling
