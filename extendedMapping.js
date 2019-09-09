@@ -45,7 +45,8 @@ function onMouseDown(event){
     activeItem.selected = true;
     tester = true; 
     console.log(activeItem.fillColor);
-    //sliderIntersect.value = activeItem.fillcolor;
+    sliderIntersect = document.getElementById("rangeIntersect");
+    //sliderIntersect.value = activeItem.fillcolor; // TODO: need to calculate the correct number
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
