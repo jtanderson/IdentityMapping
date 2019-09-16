@@ -47,6 +47,27 @@
         // if you want to survey it, add an object to
         // surveyData with the names of othe circles
 
+        /*
+        *  Location of a single intersection identifier: projObj[1][1].children[9][1].data.id
+        *  Psuedo-loop
+          name of intersection "kl" is found by the foloowing loop:
+          name = "-"
+          for( i = 0 to projObj[1][1].children.length ){
+              if( projObj[1][1].children[i][1].closed ){
+                for( j = 0 to projObj[2][1].children.length ){
+                  if ( projObj[2][1].children[j][0] == "PointText" &&
+                       projObj[1][1].children[i][1].data.id[0] == projObj[2][1].children[j][1].data["textId"] ){
+                       name = projObj[2][1].children[j][1].content + name;
+                   }
+                   if ( projObj[2][1].children[j][0] == "PointText" &&
+                       projObj[1][1].children[i][1].data.id[1] == projObj[2][1].children[j][1].data["textId"] ){
+                       name = name + projObj[2][1].children[j][1].content;
+                   }
+                }
+              }
+          }
+        */
+
         var output = [];
         var names = [];
         var ar;
