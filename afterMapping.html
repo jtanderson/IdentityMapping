@@ -59,15 +59,17 @@ for(var i = 0; i < 26; i++){
                 output.push(+projObj[1][1].children[i][1].data["id"].charAt(j));
             }
             console.log(projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content);
-       document.write(prefix + projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content + suffix);
+            var copy = projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content;
+            document.write(prefix + projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content + suffix);
           }//end 4 way intersections
             if(projObj[1][1].children[i][1].data["id"].length == 5){//intersection of length 5
     		var output = [];
 			for(var j = 0; j < 5; j++){
                 output.push(+projObj[1][1].children[i][1].data["id"].charAt(j));
             }
-            console.log(projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content + " : " + projObj[2][1].children[output[4]-1][1].content);
-            document.write(prefix + projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content + " : " + projObj[2][1].children[output[4]-1][1].content + suffix);
+            console.log(copy);
+            console.log(projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content);
+            document.write(prefix + "all five identities " + suffix);
           }//end 5 way intersection
        }
      }
