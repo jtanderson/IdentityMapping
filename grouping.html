@@ -112,9 +112,16 @@
     </div>
      <div class="text text-right">
         <br><br><br>
-        <h4><a href="demographics.html">&larr;Previous</a>&ensp;&ensp;<a href="finished.html">Next&rarr;</a>&ensp;&ensp;</h4>
+        <h4><a href="demographics.html">&larr;Previous</a>&ensp;&ensp;<a href="finished.html" onClick="submit()">Next&rarr;</a>&ensp;&ensp;</h4>
       </div>  
      </div>
-
+<script>
+    function submit(){
+      var a = document.getElementsByTagName("select");
+      for(var i in a){
+        console.log(a[i].value);
+      }
+    }
+</script>
   </body>
 </html>
