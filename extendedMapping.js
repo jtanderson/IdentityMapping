@@ -47,12 +47,10 @@ function onMouseDown(event){
     console.log(activeItem.fillColor);
     sliderIntersect = document.getElementById("rangeIntersect");
     //sliderIntersect.value = activeItem.fillcolor; 
-     console.log(activeItem.fillColor);
     //sliderIntersect.value = activeItem.fillcolor; 
     // *******TODO: need to calculate the correct number******
     //set activeItem.fillColor = current_color;
     //sliderIntersect.addEventListener("change",function(){
-    console.log(activeItem.fillColor);
     var colorStr = activeItem.fillColor.canvasStyle;
     var test_r, test_b;
     test_r = colorStr.split("(")[1].split(",")[0];
