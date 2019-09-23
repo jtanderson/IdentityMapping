@@ -51,11 +51,13 @@ function onMouseDown(event){
     // *******TODO: need to calculate the correct number******
     //set activeItem.fillColor = current_color;
     //sliderIntersect.addEventListener("change",function(){
+    //TODO warming: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
     var colorStr = activeItem.fillColor._canvasStyle;
     var test_r, test_b;
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
     console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+    sliderIntersect.value = (test_r/255)*100;
     //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
     var r2, b2;
     r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
