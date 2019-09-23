@@ -60,7 +60,7 @@ function onMouseDown(event){
     var r2, b2;
     r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
     b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
-    sliderIntersect.value = 
+    // sliderIntersect.value = 
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
