@@ -46,7 +46,17 @@ function onMouseDown(event){
     tester = true; 
     console.log(activeItem.fillColor);
     sliderIntersect = document.getElementById("rangeIntersect");
-    //sliderIntersect.value = activeItem.fillcolor; // TODO: need to calculate the correct number
+    //sliderIntersect.value = activeItem.fillcolor; 
+     console.log(activeItem.fillColor);
+    //sliderIntersect.value = activeItem.fillcolor; 
+    // *******TODO: need to calculate the correct number******
+    //set activeItem.fillColor = current_color;
+    //sliderIntersect.addEventListener("change",function(){
+    //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + r + ",0,"+ b +")");
+    //var r2, b2;
+    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
+    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
