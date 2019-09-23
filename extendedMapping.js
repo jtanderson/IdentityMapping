@@ -52,10 +52,17 @@ function onMouseDown(event){
     // *******TODO: need to calculate the correct number******
     //set activeItem.fillColor = current_color;
     //sliderIntersect.addEventListener("change",function(){
-    //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + r + ",0,"+ b +")");
-    //var r2, b2;
-    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+    console.log(activeItem.fillColor);
+    var colorStr = activeItem.fillColor.canvasStyle;
+    var test_r, test_b;
+    test_r = colorStr.split("(")[1].split(",")[0];
+    test_b = colorStr.split("(")[1].split(",")[2];
+    console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+    //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
+    var r2, b2;
+    r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
+    b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+    sliderIntersect.value = 
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
