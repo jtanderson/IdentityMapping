@@ -97,7 +97,7 @@ sliderIntersect.addEventListener("change",function(){
     var r,b;
     r=Math.round(255*(100-sliderIntersect.value)/100);
     b=Math.round(255*sliderIntersect.value/100);
-    activeItem.fillColor = "rgb("+r+",0,"+b+")";
+    activeItem.fillColor = "rgb("+r+",0,"+b+",1)";
     console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
   }
 },true);
