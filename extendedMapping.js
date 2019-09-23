@@ -51,7 +51,7 @@ function onMouseDown(event){
     // *******TODO: need to calculate the correct number******
     //set activeItem.fillColor = current_color;
     //sliderIntersect.addEventListener("change",function(){
-    var colorStr = activeItem.fillColor.canvasStyle;
+    var colorStr = activeItem.fillColor._canvasStyle;
     var test_r, test_b;
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
