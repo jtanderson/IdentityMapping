@@ -57,7 +57,7 @@ function onMouseDown(event){
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
     console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
-    sliderIntersect.value = (test_r/255)*100;
+    sliderIntersect.value = (1-test_r/255)*100;
     //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
     var r2, b2;
     r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
