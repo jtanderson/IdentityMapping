@@ -6,7 +6,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       </head>
-
 <style>
      #html, body{
     font-family: "Times New Roman", Times, serif;
@@ -23,7 +22,6 @@
     <h1>
         Tell Us About Your Intersections
     </h1>
-
     <br>   
 <form>
     <div class="form-group">
@@ -33,7 +31,6 @@
    <script>
                var prefix = "<div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the ";
                   var suffix = " intersection (emotional, behavioral, time spent).</label> <textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>"
-
 var projObj = JSON.parse(localStorage["proj"]);
 for(var i = 0; i < 26; i++){
     if(projObj[1][1].children[i][1].closed){
@@ -73,17 +70,8 @@ for(var i = 0; i < 26; i++){
           }//end 5 way intersection
        }
      }
-
-
       console.log(localStorage);
       var num = parseInt(localStorage["numIntersections"]) -1;
-      //var intersections = 
-     /* for(var i = 0; i < num; i++){
-          var prefix = "<div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the ";
-          var suffix = " intersection (emotional, behavioral, time spent).</label> <textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>"
-          var name = "";
-          document.write(prefix + name + suffix);
-      }*/
       </script>
 </form>
      <div class="text text-right">
