@@ -46,14 +46,6 @@ function onMouseDown(event){
     tester = true; 
     console.log(activeItem.fillColor);
     sliderIntersect = document.getElementById("rangeIntersect");
-  
-    // console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
-    // sliderIntersect.value = (1-test_r/255)*100;
-    // //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
-    // var r2, b2;
-    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
-    // sliderIntersect.value = 
 
     activeItem.colorChange();
 
@@ -101,6 +93,15 @@ function colorChange(){
   }
 
 }
+
+  //Previous logic of colorChange
+    // console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+    // sliderIntersect.value = (1-test_r/255)*100;
+    // //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
+    // var r2, b2;
+    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
+    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+    // sliderIntersect.value = 
 
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
