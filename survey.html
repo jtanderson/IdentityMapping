@@ -62,172 +62,63 @@
       <div class="col-sm">
         <br>Rate how strongly held each social identity is when you think about yourself.<br>
         <div class="slidecontainer">
-       <b>
           <script>
-            document.write(localStorage[1]);
+            if(localStorage[1] != undefined){
+                          document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
+                          document.write("Strongly held <emsp>");
+                          for(var i = 0; i < 7; i++){
+                          document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                          }
+                          document.write(" <emsp>Weakly held<br>");
+
+            }
             </script>
-            </b>
-          <form>&emsp;Strongly held &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div> <div class="slidecontainer">
-
-          <b>
-            <script>
-              document.write(localStorage[2]);
-              </script>
-              </b>
-          <form>&emsp;Strongly held &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div> <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[3]);
-              </script>
-              </b>
-          <form>&emsp;Strongly held &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div>      
-
-        <div class="slidecontainer">
-         
-          <b>
-            <script>
-              document.write(localStorage[4]);
-              </script>
-              </b>
-          <form>&emsp;Strongly held &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[5]);
-              </script>
-              </b>
-            <form>&emsp;Strongly held &emsp;    <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div>
-
-
+                  <script>
+                    if(localStorage[2] != undefined){
+                                  document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
+                                  document.write("Strongly held <emsp>");
+                                  for(var i = 0; i < 7; i++){
+                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                  }
+                                  document.write(" <emsp>Weakly held<br>");
+        
+                    }
+                    </script>
+                              <script>
+                                  if(localStorage[3] != undefined){
+                                                document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
+                                                document.write("Strongly held <emsp>");
+                                                for(var i = 0; i < 7; i++){
+                                                document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                }
+                                                document.write(" <emsp>Weakly held<br>");
+                      
+                                  }
+                                  </script>
+                                    <script>
+                                        if(localStorage[4] != undefined){
+                                                      document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
+                                                      document.write("Strongly held <emsp>");
+                                                      for(var i = 0; i < 7; i++){
+                                                      document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                      }
+                                                      document.write(" <emsp>Weakly held<br>");
+                            
+                                        }
+                                        </script>
+                                          <script>
+                                              if(localStorage[5] != undefined){
+                                                            document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
+                                                            document.write("Strongly held <emsp>");
+                                                            for(var i = 0; i < 7; i++){
+                                                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                            }
+                                                            document.write(" <emsp>Weakly held<br>");
+                                  
+                                              }
+                                              </script>
+      
+                                </div>
 
 
 
@@ -236,849 +127,306 @@
 
         <br>Rate how important each social identity is to the way you think about yourself<br><br>
         <div class="slidecontainer">
-          <b>
             <script>
-              document.write(localStorage[1]);
+              if(localStorage[1] != undefined){
+                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
+                            document.write("Not very important <emsp>");
+                            for(var i = 0; i < 7; i++){
+                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                            }
+                            document.write(" <emsp>Extremely important<br>");
+  
+              }
               </script>
-              </b>
-          <br>&emsp; Not very important&emsp;
-          <label class="radio-inline">
-            <input type="radio" name="optradio"  value="1">&emsp;
-          </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="4">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="5">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="6">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="7">&emsp;
-              </label>
-              Extremely Important
-
-
-              </form>
-              <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[2]);
-              </script>
-              </b>
-          <br>	  <form>&emsp;Not very important&emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Extremely Important
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[3]);
-              </script>
-              </b>
-          &emsp;<form>&emsp; Not very important &emsp;	 
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1" >&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Extremely Important
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[4]);
-              </script>
-              </b>
-          <form>&emsp;Not very important &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio"  value="7">&emsp;
-                </label>
-                Extremely Important
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[5]);
-              </script>
-              </b>
-          <form>&emsp;Not Very Important &emsp;    <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Extremely Important
-
-
-          </form>
-          <span id="demo"></span>
-        </div>
-
+                    <script>
+                      if(localStorage[2] != undefined){
+                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
+                                    document.write("Not very important <emsp>");
+                                    for(var i = 0; i < 7; i++){
+                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                    }
+                                    document.write(" <emsp>Extremely important<br>");
+          
+                      }
+                      </script>
+                                <script>
+                                    if(localStorage[3] != undefined){
+                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
+                                                  document.write("Not very important <emsp>");
+                                                  for(var i = 0; i < 7; i++){
+                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                  }
+                                                  document.write(" <emsp>Extremely important<br>");
+                        
+                                    }
+                                    </script>
+                                      <script>
+                                          if(localStorage[4] != undefined){
+                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
+                                                        document.write("Not very important <emsp>");
+                                                        for(var i = 0; i < 7; i++){
+                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                        }
+                                                        document.write(" <emsp>Extremely important<br>");
+                              
+                                          }
+                                          </script>
+                                            <script>
+                                                if(localStorage[5] != undefined){
+                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
+                                                              document.write("Not very important <emsp>");
+                                                              for(var i = 0; i < 7; i++){
+                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                              }
+                                                              document.write(" <emsp>Extremely important<br>");
+                                    
+                                                }
+                                                </script>
+        
+                                  </div>
         <br>Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.<br><br>
         <div class="slidecontainer">
-
-          <b>
             <script>
-              document.write(localStorage[1]);
+              if(localStorage[1] != undefined){
+                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
+                            document.write("Very close <emsp>");
+                            for(var i = 0; i < 7; i++){
+                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                            }
+                            document.write(" <emsp>Not close<br>");
+  
+              }
               </script>
-              </b>
-          <br>&emsp; Very close&emsp;
-          <label class="radio-inline">
-            <input type="radio" name="optradio"  value="1">&emsp;
-          </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="4">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="5">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="6">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="7">&emsp;
-              </label>
-              Not close
-
-
-              </form>
-              <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[2]);
-              </script>
-              </b>
-          <br>	  <form>&emsp;Very close&emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4" >&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Not close
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[3]);
-              </script>
-              </b>
-          &emsp;<form>&emsp; Very close &emsp;	 
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4" >&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Not close
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[4]);
-              </script>
-              </b>
-          <form>&emsp;Very close &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio"  value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Not close
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[5]);
-              </script>
-              </b>
-          <form>&emsp;Very close &emsp;    <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Not close
-
-
-                <span id="demo"></span>
-        </div>
-
-
+                    <script>
+                      if(localStorage[2] != undefined){
+                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
+                                    document.write("Very close <emsp>");
+                                    for(var i = 0; i < 7; i++){
+                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                    }
+                                    document.write(" <emsp>Not close<br>");
+          
+                      }
+                      </script>
+                                <script>
+                                    if(localStorage[3] != undefined){
+                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
+                                                  document.write("Very close <emsp>");
+                                                  for(var i = 0; i < 7; i++){
+                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                  }
+                                                  document.write(" <emsp>Not close<br>");
+                        
+                                    }
+                                    </script>
+                                      <script>
+                                          if(localStorage[4] != undefined){
+                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
+                                                        document.write("Very close <emsp>");
+                                                        for(var i = 0; i < 7; i++){
+                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                        }
+                                                        document.write(" <emsp>Not close<br>");
+                              
+                                          }
+                                          </script>
+                                            <script>
+                                                if(localStorage[5] != undefined){
+                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
+                                                              document.write("Very close <emsp>");
+                                                              for(var i = 0; i < 7; i++){
+                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                              }
+                                                              document.write(" <emsp>Not close<br>");
+                                    
+                                                }
+                                                </script>
+        
+                                  </div>
 
       </div>
       <div class="col-sm">
 
         <br>Rate the distance you believe each social identity is from defining who you are.<br><br>
         <div class="slidecontainer">
-          <b>
             <script>
-              document.write(localStorage[1]);
+              if(localStorage[1] != undefined){
+                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
+                            document.write("Strongly held <emsp>");
+                            for(var i = 0; i < 7; i++){
+                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                            }
+                            document.write(" <emsp>Weakly held<br>");
+  
+              }
               </script>
-              </b>
-          <br>&emsp; Strongly held&emsp;
-          <label class="radio-inline">
-            <input type="radio" name="optradio" value="1">&emsp;
-          </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="4">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="5">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="6">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="7">&emsp;
-              </label>
-              Weakly Held
-
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[2]);
-              </script>
-              </b>
-          <br>	  <form>&emsp;Strongly Held&emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[3]);
-              </script>
-              </b>
-          &emsp;<form>&emsp; Strongly held &emsp;	 
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[4]);
-              </script>
-              </b>
-          <form>&emsp;Strongly held &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Weakly Held
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[5]);
-              </script>
-              </b>
-          <form>&emsp;Not very close&emsp;    <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                Very close
-
-
-
-                <span id="demo"></span>
-        </div>
+                    <script>
+                      if(localStorage[2] != undefined){
+                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
+                                    document.write("Strongly held <emsp>");
+                                    for(var i = 0; i < 7; i++){
+                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                    }
+                                    document.write(" <emsp>Weakly held<br>");
+          
+                      }
+                      </script>
+                                <script>
+                                    if(localStorage[3] != undefined){
+                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
+                                                  document.write("Strongly held <emsp>");
+                                                  for(var i = 0; i < 7; i++){
+                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                  }
+                                                  document.write(" <emsp>Weakly held<br>");
+                        
+                                    }
+                                    </script>
+                                      <script>
+                                          if(localStorage[4] != undefined){
+                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
+                                                        document.write("Strongly held <emsp>");
+                                                        for(var i = 0; i < 7; i++){
+                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                        }
+                                                        document.write(" <emsp>Weakly held<br>");
+                              
+                                          }
+                                          </script>
+                                            <script>
+                                                if(localStorage[5] != undefined){
+                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
+                                                              document.write("Strongly held <emsp>");
+                                                              for(var i = 0; i < 7; i++){
+                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                              }
+                                                              document.write(" <emsp>Weakly held<br>");
+                                    
+                                                }
+                                                </script>
+        
+                                  </div>
 
         <br>How often do you think about having each social identity and what you have in common with others who share that identity?<br><br>
         <div class="slidecontainer">
-          <b>
             <script>
-              document.write(localStorage[1]);
+              if(localStorage[1] != undefined){
+                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
+                            document.write("Hardly ever <emsp>");
+                            for(var i = 0; i < 7; i++){
+                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                            }
+                            document.write(" <emsp>A lot<br>");
+  
+              }
               </script>
-              </b>
-          <br>&emsp; Hardly ever&emsp;
-          <label class="radio-inline">
-            <input type="radio" name="optradio" value="1" >&emsp;
-          </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="4">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="5">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="6">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="7">&emsp;
-              </label>
-              A lot
-
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[2]);
-              </script>
-              </b>
-          <br>	  <form>&emsp;Hardly ever&emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1" >&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A lot
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[3]);
-              </script>
-              </b>
-          &emsp;<form>&emsp; Hardly ever &emsp;	 
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4" >&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A lot
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[4]);
-              </script>
-              </b>
-          <form>&emsp;Hardly ever&emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4" >&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A lot
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[5]);
-              </script>
-              </b>
-          <form>&emsp;Hardly ever &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A lot
-
-          </form>
-          <span id="demo"></span>
-        </div>
-
+                    <script>
+                      if(localStorage[2] != undefined){
+                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
+                                    document.write("Hardly ever <emsp>");
+                                    for(var i = 0; i < 7; i++){
+                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                    }
+                                    document.write(" <emsp>A lot<br>");
+          
+                      }
+                      </script>
+                                <script>
+                                    if(localStorage[3] != undefined){
+                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
+                                                  document.write("Hardly ever <emsp>");
+                                                  for(var i = 0; i < 7; i++){
+                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                  }
+                                                  document.write(" <emsp>A lot<br>");
+                        
+                                    }
+                                    </script>
+                                      <script>
+                                          if(localStorage[4] != undefined){
+                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
+                                                        document.write("Hardly ever <emsp>");
+                                                        for(var i = 0; i < 7; i++){
+                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                        }
+                                                        document.write(" <emsp>A lot<br>");
+                              
+                                          }
+                                          </script>
+                                            <script>
+                                                if(localStorage[5] != undefined){
+                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
+                                                              document.write("Hardly ever <emsp>");
+                                                              for(var i = 0; i < 7; i++){
+                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                              }
+                                                              document.write(" <emsp>A lot<br>");
+                                    
+                                                }
+                                                </script>
+        
+                                  </div>
 
 
         <br>How proud do you feel when someone who shares your social identity accomplishes something outstanding?<br><br>
         <div class="slidecontainer">
-          <b>
             <script>
-              document.write(localStorage[1]);
+              if(localStorage[1] != undefined){
+                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
+                            document.write("Strongly held <emsp>");
+                            for(var i = 0; i < 7; i++){
+                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                            }
+                            document.write(" <emsp>Weakly held<br>");
+  
+              }
               </script>
-              </b>
-          <br>&emsp; Not at all&emsp;
-          <label class="radio-inline">
-            <input type="radio" name="optradio" value="1">&emsp;
-          </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="4">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="5">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="6">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="7">&emsp;
-              </label>
-              A great deal
-
-
-              </form>
-              <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[2]);
-              </script>
-              </b>
-          <br>	  <form>&emsp;Not at all&emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A great deal
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[3]);
-              </script>
-              </b>
-          &emsp;<form>&emsp;Not at all &emsp;	 
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A great deal
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[4]);
-              </script>
-              </b>
-          <form>&emsp;Not at all &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A great deal
-
-          </form>
-          <span id="demo"></span>
-        </div>
-        <div class="slidecontainer">
-          <b>
-            <script>
-              document.write(localStorage[5]);
-              </script>
-              </b>
-          <form>&emsp;Not at all&emsp;    <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="2">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="3">&emsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" value="4">&emsp;
-              </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="5">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="6">&emsp;
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="optradio" value="7">&emsp;
-                </label>
-                A great deal
-
-                <br><br><br>
-                <span id="demo"></span>
-        </div>
+                    <script>
+                      if(localStorage[2] != undefined){
+                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
+                                    document.write("Not at all <emsp>");
+                                    for(var i = 0; i < 7; i++){
+                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                    }
+                                    document.write(" <emsp>A great deal<br>");
+          
+                      }
+                      </script>
+                                <script>
+                                    if(localStorage[3] != undefined){
+                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
+                                                  document.write("Not at all <emsp>");
+                                                  for(var i = 0; i < 7; i++){
+                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                  }
+                                                  document.write(" <emsp>A great deal<br>");
+                        
+                                    }
+                                    </script>
+                                      <script>
+                                          if(localStorage[4] != undefined){
+                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
+                                                        document.write("Not at all <emsp>");
+                                                        for(var i = 0; i < 7; i++){
+                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                        }
+                                                        document.write(" <emsp>A great deal<br>");
+                              
+                                          }
+                                          </script>
+                                            <script>
+                                                if(localStorage[5] != undefined){
+                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
+                                                              document.write("Not at all <emsp>");
+                                                              for(var i = 0; i < 7; i++){
+                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+                                                              }
+                                                              document.write(" <emsp>A great deal<br>");
+                                    
+                                                }
+                                                </script>
+        
+                                  </div>
       </div>
     </div>
   </div>
