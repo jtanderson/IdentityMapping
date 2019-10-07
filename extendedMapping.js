@@ -46,23 +46,16 @@ function onMouseDown(event){
     tester = true; 
     console.log(activeItem.fillColor);
     sliderIntersect = document.getElementById("rangeIntersect");
-    //sliderIntersect.value = activeItem.fillcolor; 
-    //sliderIntersect.value = activeItem.fillcolor; 
-    // *******TODO: need to calculate the correct number******
-    //set activeItem.fillColor = current_color;
-    //sliderIntersect.addEventListener("change",function(){
-    //TODO warming: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
-    var colorStr = activeItem.fillColor._canvasStyle;
-    var test_r, test_b;
-    test_r = colorStr.split("(")[1].split(",")[0];
-    test_b = colorStr.split("(")[1].split(",")[2];
-    console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
-    sliderIntersect.value = (1-test_r/255)*100;
-    //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
-    var r2, b2;
-    r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+  
+    // console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+    // sliderIntersect.value = (1-test_r/255)*100;
+    // //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
+    // var r2, b2;
+    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
+    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
     // sliderIntersect.value = 
+
+    activeItem.colorChange();
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
@@ -94,15 +87,20 @@ var scope = this;
 //handles all color sliders as well as outlines
 var sliderIntersect=document.getElementById("rangeIntersect");
 
-sliderIntersect.addEventListener("change",function(){
-  if( activeItem ){
-    var r,b;
-    r=Math.round(255*(100-sliderIntersect.value)/100);
-    b=Math.round(255*sliderIntersect.value/100);
-    activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
+sliderIntersect.addEventListener("change",colorChange(),true);
+
+function colorChange(){
+
+   if( activeItem ){
+
+    var colorStr = activeItem.fillColor._canvasStyle;
+    var test_r, test_b;
+    test_r = colorStr.split("(")[1].split(",")[0];
+    test_b = colorStr.split("(")[1].split(",")[2];
     console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
   }
-},true);
+
+}
 
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
