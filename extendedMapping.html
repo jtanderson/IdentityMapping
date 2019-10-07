@@ -166,10 +166,25 @@
                 <br><br><br>
 
                 <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/initialMapping.html">&larr;Previous </a>
-                <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/afterMapping.html" onClick="save();">Next &rarr; </a>
+                <script>
+                if(localStorage["numIntersections"] == 1){
+                  document.write("<a href='https://faculty.salisbury.edu/~jtanderson/identitymapping/survey.html' onClick='save();'>Next &rarr; </a>");
+                }
+                else{
+                  document.write("<a href='https://faculty.salisbury.edu/~jtanderson/identitymapping/afterMapping.html' onClick='save();'>Next &rarr; </a>");
+                }
+                </script>
 
                 <h4> <a href="initialMapping.html">&larr;Previous</a>
-&ensp;         <a href="afterMapping.html" onClick=save();>Next&rarr;</a>&emsp;&emsp;</h4>   </div>  
+                  <script>
+                      if(localStorage["numIntersections"] == 1){
+                        document.write("<a href='survey.html' onClick='save();'>Next &rarr; </a>");
+                      }
+                      else{
+                        document.write("<a href='afterMapping.html' onClick='save();'>Next &rarr; </a>");
+                      }
+                      </script>
+  </div>  
 
               <div class="col-sm-8">
                 <canvas id="c" resize></canvas>
