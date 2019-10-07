@@ -89,7 +89,7 @@ function colorChange(item){
     var test_r, test_b;
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
-    console.log("Circle " + item.id +"'s color is " + "rgb("+r+",0,"+b+")");
+    console.log("Circle " + item.id +"'s color is " + "rgb("+test_r+",0,"+test_b+")");
   }
 
 }
