@@ -7,9 +7,9 @@
   - [ ] The "description" page loads five Likert scales, regardless of total number of circles
     - [ ] Same issue with "Categorize your identities"
   - [ ] going back to initialMapping should populate the old circles, if they exist
-  - [ ] After the user goes back, need to clear the localStorage of the old circle data (after they move back forward)
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
 ## Fixed bugs
+  - [x] After the user goes back, need to clear the localStorage of the old circle data (after they move back forward)
   - [x] All links should assume https (for now)
   - [x] Remove "submit" from "Description" page, use "Next" button to save the data
 - [x] Do not user browser "back" and "forward" features in javascript :) Hard-code the links instead...
