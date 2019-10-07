@@ -2,9 +2,12 @@
 
 ## Current TODO
 
-### 9/9 Meeting:
+### 10/7 Meeting:
   - [ ] going back to initialMapping should populate the old circles, if they exist
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
+  - [ ] (grace) fix color slider regression
+  - [ ] (sam) fix radio buttons
+  - [ ] (both) start some laravel tutorials, get acquainted
 ## Fixed bugs
   - [X] The "description" page loads five Likert scales, regardless of total number of circles
     - [x] Same issue with "Categorize your identities"
