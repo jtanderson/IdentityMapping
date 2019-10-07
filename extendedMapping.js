@@ -47,7 +47,7 @@ function onMouseDown(event){
     console.log(activeItem.fillColor);
     sliderIntersect = document.getElementById("rangeIntersect");
 
-    activeItem.colorChange();
+    colorChange(activeItem);
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
@@ -81,15 +81,15 @@ var sliderIntersect=document.getElementById("rangeIntersect");
 
 sliderIntersect.addEventListener("change",colorChange(),true);
 
-function colorChange(){
+function colorChange(item){
 
-   if( activeItem ){
+   if( item ){
 
-    var colorStr = activeItem.fillColor._canvasStyle;
+    var colorStr = item.fillColor._canvasStyle;
     var test_r, test_b;
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
-    console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
+    console.log("Circle " + item.id +"'s color is " + "rgb("+r+",0,"+b+")");
   }
 
 }
