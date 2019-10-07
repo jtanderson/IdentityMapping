@@ -3,12 +3,12 @@
 ## Current TODO
 
 ### 9/9 Meeting:
-  - [ ] On "extended" page, when user clicks circle, adjust slider and boundary radio to reflect the current values of that active item (Grace)
   - [ ] The "description" page loads five Likert scales, regardless of total number of circles
-    - [ ] Same issue with "Categorize your identities"
+    - [x] Same issue with "Categorize your identities"
   - [ ] going back to initialMapping should populate the old circles, if they exist
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
 ## Fixed bugs
+  - [x] On "extended" page, when user clicks circle, adjust slider and boundary radio to reflect the current values of that active item (Grace)
   - [x] After the user goes back, need to clear the localStorage of the old circle data (after they move back forward)
   - [x] All links should assume https (for now)
   - [x] Remove "submit" from "Description" page, use "Next" button to save the data
