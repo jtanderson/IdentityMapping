@@ -6,9 +6,9 @@
   - [ ] going back to initialMapping should populate the old circles, if they exist
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
   - [ ] (grace) fix color slider regression
-  - [ ] (sam) fix radio buttons
   - [ ] (both) start some laravel tutorials, get acquainted
 ## Fixed bugs
+  - [x] (sam) fix radio buttons
   - [X] The "description" page loads five Likert scales, regardless of total number of circles
     - [x] Same issue with "Categorize your identities"
   - [x] On "extended" page, when user clicks circle, adjust slider and boundary radio to reflect the current values of that active item (Grace)
