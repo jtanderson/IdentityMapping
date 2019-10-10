@@ -8,7 +8,6 @@ var db = [
 ]; //GB: what is this for?
 
 //creating an object to be stores in local storage later
-var dbobj = new Object();
 
 
 var circleLayer = new Layer();//creates the circle layer
