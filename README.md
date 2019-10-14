@@ -7,6 +7,10 @@
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
   - [ ] (grace) fix color slider regression
   - [ ] (both) start some laravel tutorials, get acquainted
+  - [ ] use typography on "afterMapping" to set names of intersections apart
+  - [ ] clean up the "survey.html" code, will make easier for php templating
+  - [ ] do some tests, timing the survey. too long? general QA
+  - [ ] (grace) play with text centering? maybe calculate dynamically (use bounding boxes, radii of circes, etc.)
 ## Fixed bugs
   - [x] (sam) fix radio buttons
   - [X] The "description" page loads five Likert scales, regardless of total number of circles
