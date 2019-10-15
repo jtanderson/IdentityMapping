@@ -1,13 +1,7 @@
 var debug_mode = false;
-var db = [
-  [" ", " ", " ", " ", " "], 
-  [" ", " ", " ", " ", " "], 
-  [" ", " ", " ", " ", " "], 
-  [" ", " ", " ", " ", " "], 
-  [" ", " ", " ", " ", " "]
-]; //GB: what is this for?
 
-//creating an object to be stores in local storage later
+
+//creating an array to be stores in local storage later
 
 
 var circleLayer = new Layer();//creates the circle layer

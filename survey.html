@@ -30,423 +30,58 @@
   }
   </style>
     <script>
-      function local(e){
-
-      }
-
-
       function survey(question, prefix, suffix){
                   document.write(question + "<br>");
-        for(var i = 1; i < 6; i++){
-            if(localStorage[i] != undefined){
+        for(var i = 1; i < 6; ++i){
+          if(localStorage[i] != undefined){
               document.write("<b>" + localStorage[i] + "</b><br><emsp><emsp>");
               document.write("<form>" + prefix + " <emsp>");
-              for(var i = 0; i < 7; i++){
-                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+              for(var j = 0; j < 7; j++){
+                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=j>&emsp;</label>");
                }
               document.write(" <emsp>" + suffix + "<br></form>");
             }
+           
         }
+        document.write("<br>");
       }
     </script>
-
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
         <span class="sr-only">60% Complete</span>
       </div>
     </div>
-
     <body>
       <div class="container">
         <h1> Description</h1>
-
-
-
         <div class="row">
           <div class="col-sm">
-
-
-
   <div class="text text-right">
     <a href="finished.html" class="btn btn-danger">Abort</a>
   </div>
   Now that your map is complete, we are going to ask you some questions about those five identities. <b>Please respond to the following questions thinking about each identity one at a time.</b><br>
-
   <div class="container">
-    <script>
-      survey("Rate how strongly held each social identity is when you think about yourself.", "Strongly held", "Weakly held");
-      </script>
-      here here here
     <div class="row">
       <div class="col-sm">
-        <br>Rate how strongly held each social identity is when you think about yourself.<br>
-        <div class="slidecontainer">
-          <script>
-            if(localStorage[1] != undefined){
-                          document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
-                          document.write("<form>Strongly held <emsp>");
-                          document.write("");
-                          for(var i = 0; i < 7; i++){
-                          document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                          }
-                          document.write(" <emsp>Weakly held<br></form>");
-
-            }
-            </script>
-            </div>
-            <div class="slidecontainer">
-                  <script>
-                    if(localStorage[2] != undefined){
-                                  document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
-                                  document.write("<form>Strongly held <emsp>");
-                                  for(var i = 0; i < 7; i++){
-                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                  }
-                                  document.write(" <emsp>Weakly held<br></form>");
-        
-                    }
-                    </script>
-                              <script>
-                                  if(localStorage[3] != undefined){
-                                                document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
-                                                document.write("<form>Strongly held <emsp>");
-                                                for(var i = 0; i < 7; i++){
-                                                document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                }
-                                                document.write(" <emsp>Weakly held<br></form>");
-                      
-                                  }
-                                  </script>
-                                    <script>
-                                        if(localStorage[4] != undefined){
-                                                      document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
-                                                      document.write("<form>Strongly held <emsp>");
-                                                      for(var i = 0; i < 7; i++){
-                                                      document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                      }
-                                                      document.write(" <emsp>Weakly held<br></form>");
-                            
-                                        }
-                                        </script>
-                                          <script>
-                                              if(localStorage[5] != undefined){
-                                                            document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
-                                                            document.write("<form>Strongly held <emsp>");
-                                                            for(var i = 0; i < 7; i++){
-                                                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                            }
-                                                            document.write(" <emsp>Weakly held<br></form>");                                 
-                                              }
-                                              </script>
-                                </div>
-        <br>Rate how important each social identity is to the way you think about yourself<br><br>
-        <div class="slidecontainer">
-            <script>
-              if(localStorage[1] != undefined){
-                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
-                            document.write("<form>Not very important <emsp>");
-                            for(var i = 0; i < 7; i++){
-                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                            }
-                            document.write(" <emsp>Extremely important<br></form>");
-  
-              }
-              </script>
-                    <script>
-                      if(localStorage[2] != undefined){
-                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
-                                    document.write("<form>Not very important <emsp>");
-                                    for(var i = 0; i < 7; i++){
-                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                    }
-                                    document.write(" <emsp>Extremely important<br></form>");
-          
-                      }
-                      </script>
-                                <script>
-                                    if(localStorage[3] != undefined){
-                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
-                                                  document.write("<form>Not very important <emsp>");
-                                                  for(var i = 0; i < 7; i++){
-                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                  }
-                                                  document.write(" <emsp>Extremely important<br></form>");
-                        
-                                    }
-                                    </script>
-                                      <script>
-                                          if(localStorage[4] != undefined){
-                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
-                                                        document.write("<form>Not very important <emsp>");
-                                                        for(var i = 0; i < 7; i++){
-                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                        }
-                                                        document.write(" <emsp>Extremely important<br></form>");
-                              
-                                          }
-                                          </script>
-                                            <script>
-                                                if(localStorage[5] != undefined){
-                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
-                                                              document.write("<form>Not very important <emsp>");
-                                                              for(var i = 0; i < 7; i++){
-                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                              }
-                                                              document.write(" <emsp>Extremely important<br></form>");
-                                    
-                                                }
-                                                </script>
-        
-                                  </div>
-        <br>Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.<br><br>
-        <div class="slidecontainer">
-            <script>
-              if(localStorage[1] != undefined){
-                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
-                            document.write("<form>Very close <emsp>");
-                            for(var i = 0; i < 7; i++){
-                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                            }
-                            document.write(" <emsp>Not close<br></form>");
-  
-              }
-              </script>
-                    <script>
-                      if(localStorage[2] != undefined){
-                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
-                                    document.write("<form>Very close <emsp>");
-                                    for(var i = 0; i < 7; i++){
-                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                    }
-                                    document.write(" <emsp>Not close<br></form>");
-          
-                      }
-                      </script>
-                                <script>
-                                    if(localStorage[3] != undefined){
-                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
-                                                  document.write("<form>Very close <emsp>");
-                                                  for(var i = 0; i < 7; i++){
-                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                  }
-                                                  document.write(" <emsp>Not close<br></form>");
-                        
-                                    }
-                                    </script>
-                                      <script>
-                                          if(localStorage[4] != undefined){
-                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
-                                                        document.write("<form>Very close <emsp>");
-                                                        for(var i = 0; i < 7; i++){
-                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                        }
-                                                        document.write(" <emsp>Not close<br></form>");
-                              
-                                          }
-                                          </script>
-                                            <script>
-                                                if(localStorage[5] != undefined){
-                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
-                                                              document.write("<form>Very close <emsp>");
-                                                              for(var i = 0; i < 7; i++){
-                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                              }
-                                                              document.write(" <emsp>Not close<br></form>");
-                                    
-                                                }
-                                                </script>
-        
-                                  </div>
+        <br>
+    <script>
+      survey("Rate how strongly held each social identity is when you think about yourself.", "Strongly held", "Weakly held");
+      survey("Rate how important each social identity is to the way you think about yourself.", "Not very important", "Extremely important");
+      survey("Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.", "Very close", "Not close");
+      </script>
 
       </div>
       <div class="col-sm">
-
-        <br>Rate the distance you believe each social identity is from defining who you are.<br><br>
-        <div class="slidecontainer">
-            <script>
-              if(localStorage[1] != undefined){
-                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
-                            document.write("<form>Strongly held <emsp>");
-                            for(var i = 0; i < 7; i++){
-                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                            }
-                            document.write(" <emsp>Weakly held<br></form>");
-  
-              }
-              </script>
-                    <script>
-                      if(localStorage[2] != undefined){
-                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
-                                    document.write("<form>Strongly held <emsp>");
-                                    for(var i = 0; i < 7; i++){
-                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                    }
-                                    document.write(" <emsp>Weakly held<br></form>");
-          
-                      }
-                      </script>
-                                <script>
-                                    if(localStorage[3] != undefined){
-                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
-                                                  document.write("<form>Strongly held <emsp>");
-                                                  for(var i = 0; i < 7; i++){
-                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                  }
-                                                  document.write(" <emsp>Weakly held<br></form>");
-                        
-                                    }
-                                    </script>
-                                      <script>
-                                          if(localStorage[4] != undefined){
-                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
-                                                        document.write("<form>Strongly held <emsp>");
-                                                        for(var i = 0; i < 7; i++){
-                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                        }
-                                                        document.write(" <emsp>Weakly held<br></form>");
-                              
-                                          }
-                                          </script>
-                                            <script>
-                                                if(localStorage[5] != undefined){
-                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
-                                                              document.write("<form>Strongly held <emsp>");
-                                                              for(var i = 0; i < 7; i++){
-                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                              }
-                                                              document.write(" <emsp>Weakly held<br></form>");
-                                    
-                                                }
-                                                </script>
-        
-                                  </div>
-
-        <br>How often do you think about having each social identity and what you have in common with others who share that identity?<br><br>
-        <div class="slidecontainer">
-            <script>
-              if(localStorage[1] != undefined){
-                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
-                            document.write("<form>Hardly ever <emsp>");
-                            for(var i = 0; i < 7; i++){
-                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                            }
-                            document.write(" <emsp>A lot<br></form>");
-  
-              }
-              </script>
-                    <script>
-                      if(localStorage[2] != undefined){
-                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
-                                    document.write("<form>Hardly ever <emsp>");
-                                    for(var i = 0; i < 7; i++){
-                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                    }
-                                    document.write(" <emsp>A lot<br></form>");
-          
-                      }
-                      </script>
-                                <script>
-                                    if(localStorage[3] != undefined){
-                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
-                                                  document.write("<form>Hardly ever <emsp>");
-                                                  for(var i = 0; i < 7; i++){
-                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                  }
-                                                  document.write(" <emsp>A lot<br></form>");
-                        
-                                    }
-                                    </script>
-                                      <script>
-                                          if(localStorage[4] != undefined){
-                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
-                                                        document.write("<form>Hardly ever <emsp>");
-                                                        for(var i = 0; i < 7; i++){
-                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                        }
-                                                        document.write(" <emsp>A lot<br></form>");
-                              
-                                          }
-                                          </script>
-                                            <script>
-                                                if(localStorage[5] != undefined){
-                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
-                                                              document.write("<form>Hardly ever <emsp>");
-                                                              for(var i = 0; i < 7; i++){
-                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                              }
-                                                              document.write(" <emsp>A lot<br></form>");
-                                    
-                                                }
-                                                </script>
-        
-                                  </div>
-
-
-        <br>How proud do you feel when someone who shares your social identity accomplishes something outstanding?<br><br>
-        <div class="slidecontainer">
-            <script>
-              if(localStorage[1] != undefined){
-                            document.write("<b>" + localStorage[1] + "</b><br><emsp><emsp>");
-                            document.write("<form>Not at all <emsp>");
-                            for(var i = 0; i < 7; i++){
-                            document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                            }
-                            document.write(" <emsp>A great deal<br></form>");
-  
-              }
-              </script>
-                    <script>
-                      if(localStorage[2] != undefined){
-                                    document.write("<b>" + localStorage[2] + "</b><br><emsp><emsp>");
-                                    document.write("<form>Not at all <emsp>");
-                                    for(var i = 0; i < 7; i++){
-                                    document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                    }
-                                    document.write(" <emsp>A great deal<br></form");
-          
-                      }
-                      </script>
-                                <script>
-                                    if(localStorage[3] != undefined){
-                                                  document.write("<b>" + localStorage[3] + "</b><br><emsp><emsp>");
-                                                  document.write("<form>Not at all <emsp>");
-                                                  for(var i = 0; i < 7; i++){
-                                                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                  }
-                                                  document.write(" <emsp>A great deal<br></form");
-                        
-                                    }
-                                    </script>
-                                      <script>
-                                          if(localStorage[4] != undefined){
-                                                        document.write("<b>" + localStorage[4] + "</b><br><emsp><emsp>");
-                                                        document.write("<form>Not at all <emsp>");
-                                                        for(var i = 0; i < 7; i++){
-                                                        document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                        }
-                                                        document.write(" <emsp>A great deal<br></form>");
-                              
-                                          }
-                                          </script>
-                                            <script>
-                                                if(localStorage[5] != undefined){
-                                                              document.write("<b>" + localStorage[5] + "</b><br><emsp><emsp>");
-                                                              document.write("<form>Not at all <emsp>");
-                                                              for(var i = 0; i < 7; i++){
-                                                              document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
-                                                              }
-                                                              document.write(" <emsp>A great deal<br></form>");
-                                    
-                                                }
-                                                </script>
-        
-                                  </div>
+<br>
+        <script>
+          survey("Rate the distance you believe each social identity is from defining who you are.", "Strongly held", "Weakly held");
+          survey("How often do you think about having each social identity and what you have in common with others who share that identity?", "Hardly ever", "A lot");
+          survey("How proud do you feel when someone who shares your social identity accomplishes something outstanding?", "Not at all", "A great deal");
+          </script>
       </div>
     </div>
   </div>
           </div>
-
-
         </div></div></div>
         <div class="text text-right">
             <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/afterMapping.html">&larr;Previous </a>
@@ -454,16 +89,8 @@
 
           <h4><a href="afterMapping.html">&larr;Previous</a>&ensp;&ensp;<a onclick="doSubmit();" href="demographics.html">Next&rarr;</a>&ensp;&ensp;</h4>
         </div>
-
-
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-
-
-
     </body>
     <script type="text/javascript">
       function doSubmit(){
@@ -475,8 +102,5 @@
         }
         return false;
       }
-
- 
-
     </script>
 </html>
