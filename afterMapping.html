@@ -29,8 +29,8 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
    <script>
-               var prefix = "<div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the ";
-                  var suffix = " intersection (emotional, behavioral, time spent).</label> <textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>"
+               var prefix = "<div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the <b>";
+                  var suffix = "</b> intersection (emotional, behavioral, time spent).</label> <textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>"
 var projObj = JSON.parse(localStorage["proj"]);
 for(var i = 0; i < 26; i++){
     if(projObj[1][1].children[i][1].closed){
@@ -57,7 +57,7 @@ for(var i = 0; i < 26; i++){
             }
             console.log(projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content);
             var copy = projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content;
-            document.write(prefix + projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content + suffix);
+            document.write(prefix + "<b>" +  projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content + "</b>" + suffix);
           }//end 4 way intersections
             if(projObj[1][1].children[i][1].data["id"].length == 5){//intersection of length 5
     		var output = [];
@@ -66,7 +66,7 @@ for(var i = 0; i < 26; i++){
             }
             console.log(copy);
             console.log(projObj[2][1].children[output[0]-1][1].content + " : " + projObj[2][1].children[output[1]-1][1].content + " : " + projObj[2][1].children[output[2]-1][1].content  + " : " + projObj[2][1].children[output[3]-1][1].content);
-            document.write(prefix + "all five identities " + suffix);
+            document.write(prefix + "<b>all five identities </b>" + suffix);
           }//end 5 way intersection
        }
      }
