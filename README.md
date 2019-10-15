@@ -2,17 +2,17 @@
 
 ## Current TODO
 
-### 10/7 Meeting:
+### 10/21 Meeting:
   - [ ] going back to initialMapping should populate the old circles, if they exist
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
   - [ ] (grace) fix color slider regression
   - [ ] (both) start some laravel tutorials, get acquainted
-  - [x] use typography on "afterMapping" to set names of intersections apart
   - [ ] clean up the "survey.html" code, will make easier for php templating
-  - [x] do some tests, timing the survey. too long? general QA:  10 minutes 35 seconds (SB)
   - [ ] clean up the parapgraphs on each page, some directions are not accurate anymore and spelling mistakes
   - [ ] (grace) play with text centering? maybe calculate dynamically (use bounding boxes, radii of circes, etc.)
 ## Fixed bugs
+  - [x] use typography on "afterMapping" to set names of intersections apart
+  - [x] do some tests, timing the survey. too long? general QA:  10 minutes 35 seconds (SB)
   - [x] (sam) fix radio buttons
   - [X] The "description" page loads five Likert scales, regardless of total number of circles
     - [x] Same issue with "Categorize your identities"
