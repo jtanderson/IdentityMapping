@@ -8,9 +8,9 @@
   - [ ] (grace) fix color slider regression
   - [ ] (both) start some laravel tutorials, get acquainted
   - [ ] clean up the "survey.html" code, will make easier for php templating
-  - [ ] clean up the parapgraphs on each page, some directions are not accurate anymore and spelling mistakes
   - [ ] (grace) play with text centering? maybe calculate dynamically (use bounding boxes, radii of circes, etc.)
 ## Fixed bugs
+  - [x] clean up the parapgraphs on each page, some directions are not accurate anymore and spelling mistakes
   - [x] use typography on "afterMapping" to set names of intersections apart
   - [x] do some tests, timing the survey. too long? general QA:  10 minutes 35 seconds (SB)
   - [x] (sam) fix radio buttons
