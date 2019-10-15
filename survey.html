@@ -33,6 +33,21 @@
       function local(e){
 
       }
+
+
+      function survey(question, prefix, suffix){
+                  document.write(question + "<br>");
+        for(var i = 1; i < 6; i++){
+            if(localStorage[i] != undefined){
+              document.write("<b>" + localStorage[i] + "</b><br><emsp><emsp>");
+              document.write("<form>" + prefix + " <emsp>");
+              for(var i = 0; i < 7; i++){
+                  document.write("<label class='radio-inline'><input type='radio' name='optradio' value=i>&emsp;</label>");
+               }
+              document.write(" <emsp>" + suffix + "<br></form>");
+            }
+        }
+      }
     </script>
 
     <div class="progress">
@@ -58,7 +73,10 @@
   Now that your map is complete, we are going to ask you some questions about those five identities. <b>Please respond to the following questions thinking about each identity one at a time.</b><br>
 
   <div class="container">
-
+    <script>
+      survey("Rate how strongly held each social identity is when you think about yourself.", "Strongly held", "Weakly held");
+      </script>
+      here here here
     <div class="row">
       <div class="col-sm">
         <br>Rate how strongly held each social identity is when you think about yourself.<br>
@@ -457,6 +475,8 @@
         }
         return false;
       }
+
+ 
 
     </script>
 </html>
