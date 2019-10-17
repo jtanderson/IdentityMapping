@@ -2,7 +2,11 @@ var debug_mode = false;
 
 
 //creating an array to be stores in local storage later
-
+var answer = localStorage["extended"];
+if(answer == "true"){
+  project.importJSON(localStorage["saved"]);
+  //creation();
+}
 
 var circleLayer = new Layer();//creates the circle layer
 var min = 55;
@@ -55,6 +59,14 @@ var group2 = new Group();
 var group3 = new Group();
 var group4 = new Group();
 var group5 = new Group(); 
+
+function creation(){
+ 
+  for(var k = 0; k < 5; k++){
+    project._children[0].children[i] = project._children[3].children[i];
+  }
+
+}
 
 //function for creating intersections
 function intersections(){
@@ -208,7 +220,6 @@ var intersect = false;
 
 //mouse down function
 function onMouseDown(event){
-
   if(activeItem){
     activeItem.selected = false;
     //need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
@@ -314,7 +325,6 @@ function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   intersect = false; // why?
-
   if(dragged){//if the user dragged the circle
 
     

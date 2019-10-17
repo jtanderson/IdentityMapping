@@ -20,7 +20,6 @@
       var previous = function(){
         localStorage["saved"] = paper.project.exportJSON();
         localStorage["previous"] = "true";
-        window.history.back();
       }
 
       var save=function(){
@@ -133,7 +132,7 @@
                             
                 <br><br><br>
 
-                <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/initialMapping.html" onClick = "update();">&larr;Previous </a>
+                <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/initialMapping.html" onClick = "previous();">&larr;Previous </a>
                 <script>
                 if(localStorage["numIntersections"] == 1){
                   document.write("<a href='https://faculty.salisbury.edu/~jtanderson/identitymapping/survey.html' onClick='save();'>Next &rarr; </a>");
@@ -143,7 +142,7 @@
                 }
                 </script>
 
-                <h4> <a href="initialMapping.html" onClick = "update();">&larr;Previous</a>
+                <h4> <a href="initialMapping.html" onClick = "previous();">&larr;Previous</a>
                   <script>
                       if(localStorage["numIntersections"] == 1){
                         document.write("<a href='survey.html' onClick='save();'>Next &rarr; </a>");

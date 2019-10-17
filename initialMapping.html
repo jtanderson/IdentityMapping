@@ -13,6 +13,7 @@
         localStorage["three"] = tLayer.getItem({data: {textId: 3}}).content;
         localStorage["four"] = tLayer.getItem({data: {textId: 4}}).content;
         localStorage["five"] = tLayer.getItem({data: {textId: 5}}).content;
+        localStorage["extended"] = true;
 
         var num = 1;
         for( i in paper.project.layers[1].children){
@@ -40,9 +41,7 @@
         iLayer.removeChildren();
         tLayer.removeChildren();
         }
-        var funct = function(){
-          console.log("It woked");
-        }
+    
   
       </script>
      <style>    
