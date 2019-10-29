@@ -70,6 +70,7 @@ function creation(){
   var tLayer = project.getItem({data:{layerName: "text"}});
   for(var i in cLayer.children){
     cLayer.children[i].fillColor = new Color(1, 1, 1, 0.75);
+    cLayer.children[i].dashArray = false;
   }
   for(var j in iLayer.children){
     iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);

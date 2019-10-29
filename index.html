@@ -12,6 +12,11 @@
     font-size: 20px;
   }
   </style>
+  <script>
+  function submit(){
+    localStorage.clear();
+  }
+  </script>
 <body>
   <section class="jumbotron text-center bg-primary" style="color: white;">
 	    <h1>Social Identity Mapping</h1>
@@ -48,7 +53,7 @@
 <a href="terms.html">Terms and Conditions</a>
 <div class="text text-right">
   <h4>
-    <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/initialMapping.html">Next &rarr;</a>
+    <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/initialMapping.html" onClick = "submit();">Next &rarr;</a>
   </h4></div> 
 </body>
 </html>
