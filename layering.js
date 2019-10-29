@@ -1,11 +1,12 @@
 var debug_mode = false;
-
+var dbarray = new Array();
 
 //creating an array to be stores in local storage later
 var answer = localStorage["extended"];
 if(answer == "true"){
   project.importJSON(localStorage["saved"]);
   creation();
+  dbarray.push(paper.project.exportJSON());
 }
 else{
   var circleLayer = new Layer();//creates the circle layer
@@ -251,6 +252,8 @@ function onMouseDown(event){
     if(debug_mode){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
+    dbarray.push(paper.project.exportJSON());
+
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
@@ -258,6 +261,8 @@ function onMouseDown(event){
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
+    dbarray.push(paper.project.exportJSON());
+
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -341,9 +346,12 @@ function onMouseUp(event){
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
     }  
+
     //create new intersections here
     //calculate new intersections by calling graces function
     fixLayers();
+        dbarray.push(paper.project.exportJSON());
+
   }
   dragged = false;
 }//end mouse up function
@@ -387,6 +395,8 @@ doSubmit = function(e){
 
   insert = true;
   intersections();
+  dbarray.push(paper.project.exportJSON());
+ // console.log(dbarray);
   return false;
 } //end doSubmit function
 

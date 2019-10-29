@@ -3,7 +3,7 @@ project.importJSON(localStorage["saved"]);
 var activeItem; 
 var handle;
 var dragged = false; 
-
+var dbarray = new Array();
 var tester = true;
 
 var intersect = false;
@@ -37,6 +37,8 @@ function onMouseDown(event){
     if(debug_mode){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
+    dbarray.push(paper.project.exportJSON());
+
 
 
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
@@ -45,6 +47,8 @@ function onMouseDown(event){
     activeItem.selected = true;
     tester = true; 
     console.log(activeItem.fillColor);
+    dbarray.push(paper.project.exportJSON());
+
     sliderIntersect = document.getElementById("rangeIntersect");
     //sliderIntersect.value = activeItem.fillcolor; 
     //sliderIntersect.value = activeItem.fillcolor; 
@@ -67,6 +71,7 @@ function onMouseDown(event){
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
+    dbarray.push(paper.project.exportJSON());
 
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
@@ -119,6 +124,8 @@ formIntersect1.addEventListener("change",function(){
   if(activeItem){
     activeItem.dashArray = false;
     console.log("Circle " + activeItem.id +"'s outline is solid");
+    dbarray.push(paper.project.exportJSON());
+
   }
 },false);
 
@@ -128,5 +135,7 @@ formIntersect12.addEventListener("change",function(){
   if(activeItem){
     activeItem.dashArray = [10,4];
     console.log("Circle " + activeItem.id +"'s outline is dashed");
+    dbarray.push(paper.project.exportJSON());
+
       }
 },false);
