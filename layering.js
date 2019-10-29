@@ -5,10 +5,10 @@ var debug_mode = false;
 var answer = localStorage["extended"];
 if(answer == "true"){
   project.importJSON(localStorage["saved"]);
-  //creation();
+  creation();
 }
-
-var circleLayer = new Layer();//creates the circle layer
+else{
+  var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
 var minR = 125;
@@ -53,6 +53,9 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
 
   textLayer.addChild(text);//adds text to the text layer
 }
+}
+
+
 
 //group creation for layering the intersections
 var group2 = new Group();
@@ -61,11 +64,15 @@ var group4 = new Group();
 var group5 = new Group(); 
 
 function creation(){
- 
-  for(var k = 0; k < 5; k++){
-    project._children[0].children[i] = project._children[3].children[i];
+  var iLayer = project.getItem({data:{layerName: "intersections"}});
+  var cLayer = project.getItem({data:{layerName: "circles"}});
+  var tLayer = project.getItem({data:{layerName: "text"}});
+  for(var i in cLayer.children){
+    cLayer.children[i].fillColor = new Color(1, 1, 1, 0.75);
   }
-
+  for(var j in iLayer.children){
+    iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);
+  }
 }
 
 //function for creating intersections
@@ -83,7 +90,7 @@ function intersections(){
           var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
           int_ij.selected = false;
           int_ij.data.id = ""+i+j;
-          intersectionLayer.addChild(int_ij); //2
+          iLayer.addChild(int_ij); //2
         }
       }
   }
@@ -105,7 +112,7 @@ for(i=1;i<6;i++){ //1
             var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
             int_ijk.selected = false;
             int_ijk.data.id = ""+i+j+k;
-            intersectionLayer.addChild(int_ijk); 
+            iLayer.addChild(int_ijk); 
           }
         }
       }
@@ -135,7 +142,7 @@ for(i=1;i<6;i++){ //1
                 var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
                 int_ijkl.selected = false;
                 int_ijkl.data.id = ""+i+j+k+l;
-                intersectionLayer.addChild(int_ijkl);//4
+                iLayer.addChild(int_ijkl);//4
               } // c_l visible
             } // l loop
           } // c_k visible
@@ -152,9 +159,9 @@ var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circl
 var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
 
 if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
-  var int_ijklm = intersectionLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
+  var int_ijklm = iLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
     int_ijklm.data.id = ""+i+j+k+l+"5";
-    intersectionLayer.addChild(int_ijklm); 
+    iLayer.addChild(int_ijklm); 
 }//end the five single
 }//end intersections function
 
@@ -281,7 +288,6 @@ if(activeItem == null){
   dragged=true;
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
-
   // user is scaling
   if(tester && !intersect){//if it is a circle boundary being hit
     iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
@@ -380,7 +386,7 @@ doSubmit = function(e){
   t.content = text;
 
   insert = true;
-  //intersections();
+  intersections();
   return false;
 } //end doSubmit function
 

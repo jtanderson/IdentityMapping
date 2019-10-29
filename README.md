@@ -3,12 +3,12 @@
 ## Current TODO
 
 ### 10/21 Meeting:
-  - [ ] going back to initialMapping should populate the old circles, if they exist
   - [ ] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
   - [ ] (grace) fix color slider regression
   - [ ] (both) start some laravel tutorials, get acquainted
   - [ ] (grace) play with text centering? maybe calculate dynamically (use bounding boxes, radii of circes, etc.)
 ## Fixed bugs
+  - [x] going back to initialMapping should populate the old circles, if they exist
   - [x] clean up the "survey.html" code, will make easier for php templating
   - [x] clean up the parapgraphs on each page, some directions are not accurate anymore and spelling mistakes
   - [x] use typography on "afterMapping" to set names of intersections apart
