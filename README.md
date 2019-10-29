@@ -3,6 +3,7 @@
 ## Current TODO
 
 ### 10/21 Meeting:
+  - [ ] Survey bubbles in edge and explorer are bunched together w/o spacing
   - [ ] (both) start some laravel tutorials, get acquainted
   - [ ] (grace) play with text centering? maybe calculate dynamically (use bounding boxes, radii of circes, etc.)
 ## Fixed bugs
