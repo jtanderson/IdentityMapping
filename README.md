@@ -3,10 +3,10 @@
 ## Current TODO
 
 ### 10/21 Meeting:
-  - [ ] (grace) fix color slider regression
   - [ ] (both) start some laravel tutorials, get acquainted
   - [ ] (grace) play with text centering? maybe calculate dynamically (use bounding boxes, radii of circes, etc.)
 ## Fixed bugs
+  - [x] (grace) fix color slider regression
   - [x] start recording *EVERY* user-interface event into an object in localStorage (will be written out to the database later)
   - [x] going back to initialMapping should populate the old circles, if they exist
   - [x] clean up the "survey.html" code, will make easier for php templating

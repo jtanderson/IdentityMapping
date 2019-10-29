@@ -38,8 +38,7 @@ function onMouseDown(event){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
     dbarray.push(paper.project.exportJSON());
-
-
+coloring();
 
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
 
@@ -49,24 +48,7 @@ function onMouseDown(event){
     console.log(activeItem.fillColor);
     dbarray.push(paper.project.exportJSON());
 
-    sliderIntersect = document.getElementById("rangeIntersect");
-    //sliderIntersect.value = activeItem.fillcolor; 
-    //sliderIntersect.value = activeItem.fillcolor; 
-    // *******TODO: need to calculate the correct number******
-    //set activeItem.fillColor = current_color;
-    //sliderIntersect.addEventListener("change",function(){
-    //TODO warming: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
-    var colorStr = activeItem.fillColor._canvasStyle;
-    var test_r, test_b;
-    test_r = colorStr.split("(")[1].split(",")[0];
-    test_b = colorStr.split("(")[1].split(",")[2];
-    console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
-    sliderIntersect.value = (1-test_r/255)*100;
-    //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
-    var r2, b2;
-    r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
-    // sliderIntersect.value = 
+   coloring();
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
@@ -109,15 +91,6 @@ sliderIntersect.addEventListener("change",function(){
   }
 },true);
 
-  //Previous logic of colorChange
-    // console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
-    // sliderIntersect.value = (1-test_r/255)*100;
-    // //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
-    // var r2, b2;
-    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
-    // sliderIntersect.value = 
-
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
 formIntersect1.addEventListener("change",function(){
@@ -139,3 +112,16 @@ formIntersect12.addEventListener("change",function(){
 
       }
 },false);
+
+var coloring = function(){
+  sliderIntersect = document.getElementById("rangeIntersect");
+  var colorStr = activeItem.fillColor._canvasStyle;
+  var test_r, test_b;
+  test_r = colorStr.split("(")[1].split(",")[0];
+  test_b = colorStr.split("(")[1].split(",")[2];
+  console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+  sliderIntersect.value = (1-test_r/255)*100;
+  var r2, b2;
+  r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
+  b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+}
