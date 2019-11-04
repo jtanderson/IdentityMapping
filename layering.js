@@ -36,15 +36,21 @@ project.addLayer(circleLayer);//adds the layer
 var intersectionLayer = new Layer();//starts the intersection layer
 intersectionLayer.data.layerName = "intersections";
 intersections();
+
+
 var textLayer = new Layer();//creates the text layer which will be the top layer
 textLayer.data.layerName = "text";
+
+//confused, difference between point and position?
+//want to do "bounding box" around text to always center on diameter
+//we already have center calculated, keep position/point @ center
 
 for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
   var c = project.getItem({data: {circleId: i}});
   var text = new PointText({
-    fillColor:  'black',
+    fillColor:  'red',
     content:  "Circle " + i,
-    position: c.position,
+    position: c.getItem({data: {center}});
     insert: false,
     visible: false,
     data: {
