@@ -1,18 +1,6 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Identity Mapping</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">  
-  </head>
-  <style>
-  #html, body{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 20px;
-  }
-  </style>
-<body>
+﻿@extends('layouts.app')
+
+@section('content')
   <section class="jumbotron text-center bg-primary" style="color: white;">
 	    <h1>Social Identity Mapping</h1>
     </section>
@@ -50,5 +38,4 @@
   <h4>
 <a href="initialMapping.html">Next &rarr;</a>&emsp;&emsp;
   </h4></div> 
-</body>
-</html>
+@endsection
