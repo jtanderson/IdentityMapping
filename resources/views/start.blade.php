@@ -2,7 +2,7 @@
 
 @section('content')
   <section class="jumbotron text-center bg-primary" style="color: white;">
-	    <h1>Social Identity Mapping</h1>
+	    <h1>Social Identity Mapping!</h1>
     </section>
     <div class="container">
     <div class="text">

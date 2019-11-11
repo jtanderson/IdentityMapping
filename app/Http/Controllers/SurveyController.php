@@ -8,4 +8,8 @@ class SurveyController extends Controller{
   public function start(){
     return view('start', array());
   }
+
+  public function initial(){
+  	return view('initial', array());
+  }
 }
