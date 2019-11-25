@@ -1,5 +1,10 @@
+paper = require('paper/dist/paper-full');
+
 var debug_mode = false;
 var dbarray = new Array();
+
+  console.log(paper);
+  console.log("LKJSDFLKDJF");
 
 //creating an array to be stores in local storage later
 var answer = localStorage["extended"];
@@ -9,7 +14,7 @@ if(answer == "true"){
   dbarray.push(paper.project.exportJSON());
 }
 else{
-  var circleLayer = new Layer();//creates the circle layer
+var circleLayer = new Layer();//creates the circle layer
 var min = 55;
 var max = 135;
 var minR = 125;
