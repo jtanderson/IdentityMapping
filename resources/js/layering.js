@@ -50,7 +50,7 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
   var text = new PointText({
     fillColor:  'red',
     content:  "Circle " + i,
-    position: c.getItem({data: {center}});
+    position: c.getItem({data: {center}}),
     insert: false,
     visible: false,
     data: {
