@@ -12,5 +12,5 @@
 */
 
 Route::get('/', 'SurveyController@start');
-
-Route::get('intial', 'SurveyController@initial');
+Route::get('/start', 'SurveyController@start');
+Route::get('/position', 'SurveyController@position');

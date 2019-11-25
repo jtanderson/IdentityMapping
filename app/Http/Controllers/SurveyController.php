@@ -9,7 +9,10 @@ class SurveyController extends Controller{
     return view('start', array());
   }
 
-  public function initial(){
-  	return view('initial', array());
+  public function position(){
+    return view('position', array(
+      'var1' => 'Grace',
+      'var2' => 'Sam'
+    ));
   }
 }
