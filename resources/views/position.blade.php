@@ -9,5 +9,6 @@ Var 2 is: {{ $var2 }} <br>
 @endsection
 
 @section('javascript')
+<script type="text/javascript" src="{{ asset('js/paper.js') }}"></script>
 <script type="text/paperscript" src="{{ asset('js/layering.js') }}" canvas="myCanvas"></script>
 @endsection

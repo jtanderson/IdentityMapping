@@ -1,17 +1,16 @@
-paper = require('paper/dist/paper-full');
+//paper = require('paper/dist/paper-full');
 
 var debug_mode = false;
 var dbarray = new Array();
 
-  console.log(paper);
-  console.log("LKJSDFLKDJF");
+console.log("LKJSDFLKDJF");
 
 //creating an array to be stores in local storage later
 var answer = localStorage["extended"];
 if(answer == "true"){
   project.importJSON(localStorage["saved"]);
   creation();
-  dbarray.push(paper.project.exportJSON());
+  dbarray.push(project.exportJSON());
 }
 else{
 var circleLayer = new Layer();//creates the circle layer
@@ -55,7 +54,7 @@ for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle o
   var text = new PointText({
     fillColor:  'red',
     content:  "Circle " + i,
-    position: c.getItem({data: {center}}),
+    //position: c.getItem({data: {center}}),
     insert: false,
     visible: false,
     data: {
