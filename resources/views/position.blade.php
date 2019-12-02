@@ -1,73 +1,14 @@
 @extends('layouts.app')
 
+@section('css')
+#c {
+  border-style: solid;
+  width: 750px;
+  height: 750px;
+}
+@endsection
+
 @section('content')
-PUT THE PAPER CANVAS AND STUFF HERE<br>
-Var 1 is: {{ $var1 }} <br>
-Var 2 is: {{ $var2 }} <br>
-
-<canvas id="myCanvas"></canvas>
-
-
-<script>
-      var save = function(){
-        var tLayer = paper.project.getItem({data: {layerName: "text"}});
-        localStorage["saved"] = paper.project.exportJSON();
-        localStorage["one"] = tLayer.getItem({data: {textId: 1}}).content;
-        localStorage["two"] = tLayer.getItem({data: {textId: 2}}).content;
-        localStorage["three"] = tLayer.getItem({data: {textId: 3}}).content;
-        localStorage["four"] = tLayer.getItem({data: {textId: 4}}).content;
-        localStorage["five"] = tLayer.getItem({data: {textId: 5}}).content;
-        localStorage["extended"] = true;
-        var num = 1;
-        for( i in paper.project.layers[1].children){
-          if(paper.project.layers[1].children[i].closed){
-            num++;
-           }
-          }
-          var arr = new Array(num);
-          var k = 0;
-          for(j in paper.project.layers[1].children){
-            if(paper.project.layers[1].children[j].closed){
-                arr[k] = paper.project.layers[1].children[j].data.id;
-                console.log(arr[k]);
-                k++;
-            }
-          }
-          localStorage["numIntersections"] = num;
-          localStorage["intersections"] = arr;
-      }
-        var reset = function(){
-          var cLayer = paper.project.getItem({data: {layerName: "circles"}});
-        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
-        var tLayer = paper.project.getItem({data: {layerName: "text"}});
-        cLayer.removeChildren();
-        iLayer.removeChildren();
-        tLayer.removeChildren();
-        }
-    
-  
-      </script>
-     <style>    
-	  canvas[resize] {
-	    border-style: solid;
-	    width: 750px;
-	    height: 750px;
-	  }
-	  p.ex1 {
-	  display: none;
-	  }
-    #html, body{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 20px;
-  }
-    </style>
-
-<body> 
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-        <span class="sr-only">40% Complete</span>
-      </div>
-    </div>
     <div class="container">
       <div class="row">
         <div class="col-sm">
@@ -154,17 +95,6 @@ to be placed where you think they fit best.
           <br>   
         </div></div>
     </div>
-    <div class="container">
-<div class="row">
-  <div class="col-sm-4">
-  </div>
-  <div class="col-sm-4">
-  </div>
-</div>
-</div>
-</div>
-  </body>
-
 
 @endsection
 
@@ -172,4 +102,41 @@ to be placed where you think they fit best.
 @section('javascript')
 <script type="text/javascript" src="{{ asset('js/paper.js') }}"></script>
 <script type="text/paperscript" src="{{ asset('js/layering.js') }}" canvas="c"></script>
+<script type="text/javascript">
+      var save = function(){
+        var tLayer = paper.project.getItem({data: {layerName: "text"}});
+        localStorage["saved"] = paper.project.exportJSON();
+        localStorage["one"] = tLayer.getItem({data: {textId: 1}}).content;
+        localStorage["two"] = tLayer.getItem({data: {textId: 2}}).content;
+        localStorage["three"] = tLayer.getItem({data: {textId: 3}}).content;
+        localStorage["four"] = tLayer.getItem({data: {textId: 4}}).content;
+        localStorage["five"] = tLayer.getItem({data: {textId: 5}}).content;
+        localStorage["extended"] = true;
+        var num = 1;
+        for( i in paper.project.layers[1].children){
+          if(paper.project.layers[1].children[i].closed){
+            num++;
+           }
+          }
+          var arr = new Array(num);
+          var k = 0;
+          for(j in paper.project.layers[1].children){
+            if(paper.project.layers[1].children[j].closed){
+                arr[k] = paper.project.layers[1].children[j].data.id;
+                console.log(arr[k]);
+                k++;
+            }
+          }
+          localStorage["numIntersections"] = num;
+          localStorage["intersections"] = arr;
+      }
+        var reset = function(){
+          var cLayer = paper.project.getItem({data: {layerName: "circles"}});
+        var iLayer = paper.project.getItem({data: {layerName: "intersections"}});
+        var tLayer = paper.project.getItem({data: {layerName: "text"}});
+        cLayer.removeChildren();
+        iLayer.removeChildren();
+        tLayer.removeChildren();
+        }
+      </script>
 @endsection

@@ -34,8 +34,6 @@
         </div>
     </div>
 <a href="terms.html">Terms and Conditions</a>
-<div class="text text-right">
-  <h4>
-<a href="initialMapping.html">Next &rarr;</a>&emsp;&emsp;
-  </h4></div> 
+
+</div> <!-- close container -->
 @endsection

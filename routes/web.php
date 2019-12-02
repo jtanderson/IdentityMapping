@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'SurveyController@start');
-Route::get('/start', 'SurveyController@start');
-Route::get('/position', 'SurveyController@position');
+Route::get('/start', 'SurveyController@start')->name('start');
+Route::get('/position', 'SurveyController@position')->name('position');
+Route::get('/color', 'SurveyController@color')->name('color');
