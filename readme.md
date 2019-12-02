@@ -22,9 +22,9 @@ Using Laravel:
 * Creating a new page
  * Add a new route to the web.php
  * Make a new blade.php file corresponding to the name used in the new route
-    * Using "@extends('layouts.app') at the beginning of the function calls the template for the webpage, which brings header, body, progress bar, and the navigation links.
-    * Using "@section('content')", fill the rest of the page with the old HTML code, keeping aware of the inherited items above. End the section with @endsection
+    * Using `@extends('layouts.app')`at the beginning of the function calls the template for the webpage, which brings header, body, progress bar, and the navigation links.
+    * Using `@section('content')`, fill the rest of the page with the old HTML code, keeping aware of the inherited items above. End the section with @endsection
     * For any JavaScript code, make a new section with 'javascript' instead of 'content', and fill with the HTML script link. 
-        * The JS file itself needs to be in the resources/js folder to be accessed with "{{ asset('js/example.js') }}"
+        * The JS file itself needs to be in the resources/js folder to be accessed with `{{ asset('js/example.js') }}`
         
         
