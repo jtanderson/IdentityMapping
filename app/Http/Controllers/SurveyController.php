@@ -28,4 +28,11 @@ class SurveyController extends Controller{
       'nextURL' => route('color'),
     ));
   }
+  public function intersections(){
+    return view('color', array(
+      'progress' => '80',
+      'prevURL' => route('color'),
+      'nextURL' => route('survey'),
+    ));
+  }
 }

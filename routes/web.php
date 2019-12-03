@@ -15,3 +15,4 @@ Route::get('/', 'SurveyController@start');
 Route::get('/start', 'SurveyController@start')->name('start');
 Route::get('/position', 'SurveyController@position')->name('position');
 Route::get('/color', 'SurveyController@color')->name('color');
+Route::get('/intersections', 'SurveyController@intersections')->name('intersections');
