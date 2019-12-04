@@ -55,23 +55,10 @@ for(var i = 0; i < 26; i++){
           }//end 5 way intersection
        }
      }
-
-
       console.log(localStorage);
       var num = parseInt(localStorage["numIntersections"]) -1;
-      //var intersections = 
-     /* for(var i = 0; i < num; i++){
-          var prefix = "<div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the ";
-          var suffix = " intersection (emotional, behavioral, time spent).</label> <textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>"
-          var name = "";
-          document.write(prefix + name + suffix);
-      }*/
       </script>
 </form>
-     <div class="text text-right">
-        <br><br><br>
-        <h4><a href="extendedMapping.html">&larr;Previous</a>&ensp;&ensp;<a href="survey.html">Next&rarr;</a>&ensp;&ensp;</h4>
-      </div>  
      </div>
 @endsection
 

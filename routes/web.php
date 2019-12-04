@@ -16,3 +16,7 @@ Route::get('/start', 'SurveyController@start')->name('start');
 Route::get('/position', 'SurveyController@position')->name('position');
 Route::get('/color', 'SurveyController@color')->name('color');
 Route::get('/intersections', 'SurveyController@intersections')->name('intersections');
+Route::get('/survey', 'SurveyController@survey')->name('survey');
+Route::get('/demographics', 'SurveyController@demographics')->name('demographics');
+Route::get('/grouping', 'SurveyController@grouping')->name('grouping');
+Route::get('/finished', 'SurveyController@finished')->name('finished');
