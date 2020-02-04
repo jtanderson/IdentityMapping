@@ -70,14 +70,6 @@ to be placed where you think they fit best.
                 <br><br>
                 <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/index.html">&larr;Previous </a>
                 <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/extendedMapping.html" onClick = "save();">Next &rarr; </a>
-
-
-
-            <p class="ex1">
-                <input type="range" id="rangeIntersect" min="0" max="100" value = "0"/>&emsp;
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect1" value="option1">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioIntersect12" value="option2">
-                  </p>    
               </div>
 <script>
   function doFunction(){

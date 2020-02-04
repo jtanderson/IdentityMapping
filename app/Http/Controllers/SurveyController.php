@@ -56,3 +56,37 @@ class SurveyController extends Controller{
   }
 
 }
+  // public function intersections(){
+  //   return view('intersections', array(
+  //     'progress' => '80',
+  //     'prevURL' => route('color'),
+  //     'nextURL' => route('survey'),
+  //   ));
+  // }
+  // public function survey(){
+  //   return view('survey', array(
+  //     'progress' => '100',
+  //     'prevURL' => route('intersections'),
+  //     'nextURL' => route('demographics'),
+  //   ));
+  // }
+  // public function deomographics(){
+  //   return view('demographics', array(
+  //     'progress' => '100',
+  //     'prevURL' => route('survey'),
+  //     'nextURL' => route('grouping'),
+  //   ));
+  // }
+  // public function grouping(){
+  //   return view('grouping', array(
+  //     'progress' => '100',
+  //     'prevURL' => route('demographics'),
+  //     'nextURL' => route('finished'),
+  //   ));
+  // }
+  // public function finished(){
+  //   return view('finished', array(
+  //     'progress' => '100',
+  //     'prevURL' => route('grouping'),
+  //   ));
+  // }
