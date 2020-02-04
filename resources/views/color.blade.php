@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <script>
 var reset = function(){
         var cLayer = paper.project.getItem({data: {layerName: "circles"}});
@@ -32,7 +31,8 @@ var save=function(){
       }
 
 
-    </script>
+  </script>
+
      <style>
       .bg{
         background-image: url("img/colorSlider.PNG");
@@ -69,11 +69,6 @@ var save=function(){
 	  }	  
     </style>
 
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-        <span class="sr-only">40% Complete</span>
-      </div>
-    </div>
     <div class="container">
 
       <div class="row">
@@ -120,8 +115,7 @@ var save=function(){
                 </div>
                             
                 <br><br><br>
-                <h4> <a href="initialMapping.html">&larr;Previous</a>
-&ensp;         <a href="afterMapping.html" onClick=save();>Next&rarr;</a>&emsp;&emsp;</h4>   </div>  
+                   </div>  
 
               <div class="col-sm-8">
                 <canvas id="c" resize></canvas>
@@ -145,4 +139,8 @@ var save=function(){
      
       </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript" src="{{ asset('js/extended.js') }}"></script>
 @endsection

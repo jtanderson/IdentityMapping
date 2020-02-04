@@ -2,8 +2,9 @@
 
 @section('content')
   <section class="jumbotron text-center bg-primary" style="color: white;">
-	    <h1>Social Identity Mapping!</h1>
-    </section>
+      <h1>Social Identity Mapping!</h1>
+  </section>
+
     <div class="container">
     <div class="text">
       Psychologists distinguish between our personal identities and our social identities.  Personal identities involve descriptions of our self, <span style="color: red">separate from others.</span>  
@@ -16,23 +17,23 @@
 <div class="row">
   <div class="col col-sm-4">
       <figure class="figure" style=" height:90%;">
-  <img src="img/inline.png" style="height:80%; width:100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+  <img src="/app/resources/img/inline.png" style="height:80%; width:100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
   <figcaption class="figure-caption">This example demonstrates the aligning of your identities in a straight line which could describe your identities of equal importance.</figcaption>
 </figure>
     </div>
     <div class="col col-sm-4">
         <figure class="figure" style=" height: 90%; width: 100%;">
-  <img src="img/random.png" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+  <img src="/app/resources/img/random.png" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
   <figcaption class="figure-caption">This example shows a random mapping that could depict your interpretation of your identities in a unique way from something else.</figcaption>
 </figure>
       </div>
       <div class="col col-sm-4">
           <figure class="figure" style="height: 90%;">
-  <img src="img/bullsye.png" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+  <img src="/app/resources/img/bullsye.png" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
   <figcaption class="figure-caption">This example is a popular mapping opf yoiur identities in a bullseye putting the most important identity at the center and smallest meaning most important.</figcaption>
 </figure>
         </div>
-    </div>
+</div>
 <a href="terms.html">Terms and Conditions</a>
 
 </div> <!-- close container -->

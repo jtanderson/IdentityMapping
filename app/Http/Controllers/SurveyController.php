@@ -15,7 +15,7 @@ class SurveyController extends Controller{
 
   public function position(){
     return view('position', array(
-      'progress' => '40',
+      'progress' => '20',
       'prevURL' => route('start'),
       'nextURL' => route('color'),
     ));
@@ -23,9 +23,36 @@ class SurveyController extends Controller{
 
   public function color(){
     return view('color', array(
-      'progress' => '60',
+      'progress' => '40',
       'prevURL' => route('start'),
-      'nextURL' => route('color'),
+      'nextURL' => route('survey'),
     ));
   }
+
+
+
+  public function survey(){
+    return view('survey', array(
+      'progress' => '60',
+      'prevURL' => route('color'),
+      'nextURL' => route('demographic'),
+    ));
+  }
+
+    public function demographic(){
+    return view('demographic', array(
+      'progress' => '80',
+      'prevURL' => route('survey'),
+      'nextURL' => route('end'),
+    ));
+  }
+
+    public function end(){
+    return view('end', array(
+      'progress' => '100',
+      'nextURL' => route('end'),
+      'prevURL' => '',
+    ));
+  }
+
 }

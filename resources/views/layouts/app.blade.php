@@ -21,7 +21,7 @@
     </head>
     <body>
 
-      <div class="progress">
+      <div class="progress" style = "margin-bottom: 30px;">
         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress }}%;">
           <span class="sr-only">{{ $progress }}% Complete</span>
         </div>
@@ -35,7 +35,7 @@
               <div class="col-sm-6">
                 <div class="text text-left">
                   @if ($prevURL != '')
-                  <h4><a href="{{ $prevURL }}">&larr;&nbsp;Previous</a></h4>
+                  <h4><a href="{{ $prevURL }}">&larr;&nbsp; Previous</a></h4>
                   @endif
                 </div>
               </div>

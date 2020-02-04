@@ -4,6 +4,7 @@ var debug_mode = false;
 var dbarray = new Array();
 
 console.log("LKJSDFLKDJF");
+console.log(Layer);
 
 //creating an array to be stores in local storage later
 var answer = localStorage["extended"];
@@ -371,6 +372,8 @@ var scope = this;
 //sends the circle data to local storage
 
 doSubmit = function(e){
+  console.log("LSKDJFLSKDJFLDKJF");
+  return false;
   scope.activate();
   e.preventDefault();
 

@@ -1,7 +1,7 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
+@extends('layouts.app')
+
+@section('content')
+
     <style>
 
 .jumbotron{
@@ -9,8 +9,6 @@
   background-size: cover;
   color: white;
 }
-
-
 
 .container {
   position: relative; 
@@ -43,6 +41,7 @@
 
     <body>
       <div class="container">
+
         <h1> Description</h1>
 
 
@@ -1086,10 +1085,6 @@
 
 
         </div></div></div>
-        <div class="text text-right">
-          <h4><a href="afterMapping.html">&larr;Previous</a>&ensp;&ensp;<a onclick="doSubmit();" href="demographics.html">Next&rarr;</a>&ensp;&ensp;</h4>
-        </div>
-
 
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -1112,4 +1107,5 @@
       }
 
     </script>
-</html>
+
+@endsection
