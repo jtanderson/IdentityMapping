@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-    <div class="container">
       <div class="row">
         <div class="col-sm">
           <h1><p text-center>Map your Identities</p>   </h1>   
@@ -75,7 +74,6 @@
           </div>
           <br>   
         </div></div>
-    </div>
 
 @endsection
 
