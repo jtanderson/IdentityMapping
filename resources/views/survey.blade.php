@@ -50,10 +50,6 @@
           <div class="col-sm">
 
 
-
-  <div class="text text-right">
-    <a href="finished.html" class="btn btn-danger">Abort</a>
-  </div>
   Now that your map is complete, we are going to ask you some questions about those five identities. <b>Please respond to the following questions thinking about each identity one at a time.</b><br>
 
   <div class="container">

@@ -17,21 +17,12 @@
  
       </div>
           <div id="StartMapping" class="tabcontent">     
-This is the section where you choose the five social identities that are closest to you and map them onto the canvas where you see fit.
-To add social identities, simply type each one into the corresponding text box then click add circle. Once a circle has been added you can move them on the screen
-to be placed where you think they fit best.
+            This is the section where you choose the five social identities that are closest to you and map them onto the canvas where you see fit.
+            To add social identities, simply type each one into the corresponding text box then click add circle. Once a circle has been added you can move them on the screen
+            to be placed where you think they fit best.
+            <br>
           </div> 
           <div class="container">
-            
-            <div class="row">
-            <div class="col-sm-10">
-
-            </div>
-              <div class="col-sm-2">
-                         &emsp;<a class = "btn btn-warning" onClick="reset();">Reset</a>
-          <a class="btn btn-danger" href="finished.html">Abort</a>
-              </div>
-            </div>
             <div class="row">
               <div class="col-sm-4">
                 <br><br>
@@ -68,8 +59,6 @@ to be placed where you think they fit best.
                 <br>
                 <br>
                 <br><br>
-                <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/index.html">&larr;Previous </a>
-                <a href="https://faculty.salisbury.edu/~jtanderson/identitymapping/extendedMapping.html" onClick = "save();">Next &rarr; </a>
               </div>
 <script>
   function doFunction(){

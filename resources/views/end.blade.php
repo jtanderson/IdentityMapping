@@ -11,14 +11,6 @@
 
 .canvas-container{margin: 0 auto;}</style>
 
-
-<!-- <div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-    <span class="sr-only">60% Complete</span>
-  </div>
-</div> -->
-
-
     <body>
 	     <div class="container">
       <div class="row">

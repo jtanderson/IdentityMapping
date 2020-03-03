@@ -31,10 +31,9 @@
 
       <h1>Demographics</h1>
     </head>
-    <div class="text text-right">
-      <a href="finished.html" class="btn btn-danger">Abort</a>
-    </div>
-    Please tell us aboiut yourself now so that we can compare you to people that are related to you in demographics. This will help in determining who you associate with and who you are likely to associate with in the future. After filling this out you will be prompted to the end of the survey where you can submit all of your work for final comparison and the assignment will be completed.<br>
+    <div class="text text-left">
+    Please tell us aboiut yourself now so that we can compare you to people that are related to you in demographics. This will help in determining who you associate with and who you are likely to associate with in the future. After filling this out you will be prompted to the end of the survey where you can submit all of your work for final comparison and the assignment will be completed.<br><br>
+  </div>
     <div class="row">
       <div class="col-sm-6">
         What gender do you associate yourself with?
@@ -49,8 +48,6 @@
         <br> Which of these options describes your age?
         <select class="form-control form-control-sm">
           <option>Select</option>
-          <option>Under 12 years old</option>
-          <option>12-17 years old</option>
           <option>18-24 years old</option>
           <option>25-34 years old</option>
           <option>35-44 years old</option>

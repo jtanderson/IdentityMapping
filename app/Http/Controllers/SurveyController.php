@@ -24,8 +24,8 @@ class SurveyController extends Controller{
   public function color(){
     return view('color', array(
       'progress' => '20',
-      'prevURL' => route('start'),
-      'nextURL' => route('survey'),
+      'prevURL' => route('position'),
+      'nextURL' => route('intersections'),
     ));
   }
 
@@ -41,6 +41,14 @@ class SurveyController extends Controller{
     return view('survey', array(
       'progress' => '60',
       'prevURL' => route('color'),
+      'nextURL' => route('category'),
+    ));
+  }
+
+  public function category(){
+    return view('category', array(
+      'progress' => '70',
+      'prevURL' => route('survey'),
       'nextURL' => route('demographic'),
     ));
   }
@@ -61,7 +69,7 @@ class SurveyController extends Controller{
     ));
   }
 
-
+}
 
   // public function survey(){
   //   return view('survey', array(
@@ -90,3 +98,4 @@ class SurveyController extends Controller{
   //     'prevURL' => route('grouping'),
   //   ));
   // }
+

@@ -28,6 +28,9 @@
       </div>
 
         <div id="app" class="container">
+          <div class="col-sm-2" style="float: right;">
+                <a class="btn btn-danger" href="finished.html">Abort</a>
+            </div>
             <div class="row">
               @yield('content')
             </div>

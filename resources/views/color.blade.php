@@ -81,18 +81,13 @@ var save=function(){
           <div id="StartMapping" class="tabcontent">
             This section is where you add some detail to your map. In this section you may add either a red color for a negative impact on your life. Or you may add the color blue to your circle meaning that this identity makes you content.<br>
             <div id="detail" class="tabcontent">
-              <br>To add color to your circle, use the slider below the form where entering the circles identity. This slider starts at white then goes from red to purple to blue. To the right of the color slider are two radio buttons where you can select the outline of the circle to be either solid or a dotted outline to represent a "conflicted" relationship. After you input your five identities, you can choose the color of the intersecting cirles on the map using the "Intersection Slider". <br>
+              <br>To add color to your circle, use the slider below the form where entering the circles identity. This slider starts at white then goes from red to purple to blue. To the right of the color slider are two radio buttons where you can select the outline of the circle to be either solid or a dotted outline to represent a "conflicted" relationship. After you input your five identities, you can choose the color of the intersecting cirles on the map using the "Intersection Slider". <br><br>
             </div>
 
           </div>
             
             <div class="row">
               <div class="col-sm-11">
-
-              </div>
-              <div class="col-sm-1">
-                &emsp;
-  <a class="btn btn-danger" href="finished.html">Abort</a>
 
               </div>
             </div>

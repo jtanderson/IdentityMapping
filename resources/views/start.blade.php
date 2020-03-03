@@ -1,7 +1,7 @@
 ﻿@extends('layouts.app')
 
 @section('content')
-  <section class="jumbotron text-center bg-primary" style="color: white;">
+  <section class="jumbotron text-center bg-primary" style="color: white; padding: 4rem, 12rem;">
       <h1>Social Identity Mapping!</h1>
   </section>
 
