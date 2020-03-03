@@ -46,7 +46,7 @@ class SurveyController extends Controller{
   }
 
   public function category(){
-    return view('category', array(
+    return view('grouping', array(
       'progress' => '70',
       'prevURL' => route('survey'),
       'nextURL' => route('demographic'),
