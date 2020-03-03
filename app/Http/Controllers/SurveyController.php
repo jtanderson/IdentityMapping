@@ -14,6 +14,8 @@ class SurveyController extends Controller{
   }
 
   public function position(){
+    // TODO:
+    // - check if the user has circles in-progress and load them, if yes
     return view('position', array(
       'progress' => '10',
       'prevURL' => route('start'),
@@ -21,7 +23,10 @@ class SurveyController extends Controller{
     ));
   }
 
-  public function color(){
+  public function color(Request $request){
+    // TODO:
+    // - save the user circles to the database
+    // - render them to the coloring canvas
     return view('color', array(
       'progress' => '20',
       'prevURL' => route('position'),

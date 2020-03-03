@@ -5,7 +5,7 @@
 ### 2/11 Meeting:
   - [ ] Intersection survey table migration made
   - [x] Clean up web application on Laravel
-  - [ ] Double check web routes (are all surveys in there?)
+  - [x] Double check web routes (are all surveys in there?)
 
 ### 2/25 Meeting:
   - [x] Only allow ages 18+ in dropdowns

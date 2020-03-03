@@ -538,7 +538,9 @@ var dragged = false; // TODO: logic around this is wrong, it never gets reset
 var tester = true;
 var intersect = false; //mouse down function
 
-function onMouseDown(event) {
+paper.tool.onMouseDown = function (event) {
+  console.log("onMouseDown running!");
+
   if (activeItem) {
     activeItem.selected = false; //need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
   }
@@ -554,14 +556,6 @@ function onMouseDown(event) {
       layerName: "intersections"
     }
   });
-  var form1 = document.getElementById("inlineRadioIntersect1");
-  form1.checked = false;
-  var form2 = document.getElementById("inlineRadioIntersect12");
-  form2.checked = false;
-
-  if (debug_mode) {
-    console.log("Radios Cleared");
-  }
 
   if (hitResult = iLayer.hitTest(event.point)) {
     //if the intersection layer is hit
@@ -606,12 +600,12 @@ function onMouseDown(event) {
 
     activeItem = null;
   }
-} //end of the mouse down function
+}; //end of the mouse down function
 
 
 var segment; //when user clicks, holds down, and drags
 
-function onMouseDrag(event) {
+paper.tool.onMouseDrag = function (event) {
   if (activeItem == null) {
     return;
   } else {
@@ -674,7 +668,7 @@ function onMouseDrag(event) {
     intersections();
   } //end else
 
-} //end mouse dragging function
+}; //end mouse dragging function
 //on mouse up function
 
 
@@ -713,9 +707,8 @@ function onMouseUp(event) {
 var scope = this; //sends the circle data to local storage
 
 doSubmit = function doSubmit(e) {
-  console.log("LSKDJFLSKDJFLDKJF");
-  return false;
-  scope.activate();
+  console.log("YOOOO"); //scope.activate();
+
   e.preventDefault(); // the id of the circle we're changing
 
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase(); // holds the user's text entry
@@ -772,31 +765,6 @@ doSubmit = function doSubmit(e) {
 
 
 window.doSubmit = doSubmit;
-var sliderIntersect = document.getElementById("rangeIntersect");
-
-function colorChange() {
-  if (activeItem) {
-    var r, b;
-    r = Math.round(255 * (100 - sliderIntersect.value) / 100);
-    b = Math.round(255 * sliderIntersect.value / 100);
-    activeItem.fillColor = "rgb(" + r + ",0," + b + ")";
-  }
-}
-
-sliderIntersect.addEventListener("change", colorChange(), false);
-var formIntersect1 = document.getElementById("inlineRadioIntersect1"); //formIntersect1 is when the circle is changed to a solid line. 
-
-formIntersect1.addEventListener("change", function () {
-  if (activeItem) {
-    activeItem.dashArray = false;
-  }
-}, false);
-var formIntersect12 = document.getElementById("inlineRadioIntersect12");
-formIntersect12.addEventListener("change", function () {
-  if (activeItem) {
-    activeItem.dashArray = [10, 4];
-  }
-}, false);
 
 /***/ }),
 
