@@ -4,16 +4,12 @@
 
 ### 2/11 Meeting:
   - [ ] Intersection survey table migration made
-  - [x] Clean up web application on Laravel
-  - [x] Double check web routes (are all surveys in there?)
-
+  
 ### 2/25 Meeting:
-  - [x] Only allow ages 18+ in dropdowns
   - [ ] On the positioning page, when one circle is completely inside another (paperjs has a test for this), if they click that circle, make the click attach to the circle, not the intersection (outsibe-in)
     - Low priority for now
     - As a shim, add text to the user in the instructions to mention this awkward case
   - [ ] Survey for how the user feels about the interface
-  - [x] Change final "next" button to be "finish"
   - [ ] Remove javascript from views, use laravel templating to loop with data pulled from DB
 
 ### 2/26 Meeting:
@@ -34,10 +30,18 @@
     - original is done in LaTeX tables
     - remove "distance" row
   - [ ] Maybe change bg color to off-white to emphasize canvas element
-  - [ ] *Intent to submit to SUSRC (deadline: march 15)*
   - [ ] find replacement for grace (:()
+  
+### 3/24 Meeting: 
   - [ ] *Submit to Guerri summer research (deadline: march 13)*
-  - [ ] Move demographics after categorize
+  - [ ] Position "Next" - submit data into JSON object -> database by writing PHP code for Laravel (associative array with AJAX request (example is inside layering.js))
+    - [ ] Anytime using 'local storage' should we be sending to db? 
+  - [ ] Move circle text from 0,0 to center of circle
+  
+## Fixed bugs:
+  - [x] Only allow ages 18+ in dropdowns
+  - [x] Change final "next" button to be "finish"
+  - [x] Clean up web application on Laravel
+  - [x] Double check web routes (are all surveys in there?)
+  - [x] Move demographics after categorize
 
-## Fixed bugs
- 
