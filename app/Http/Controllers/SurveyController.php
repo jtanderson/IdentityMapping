@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class SurveyController extends Controller{
   public function start(){
@@ -13,9 +15,21 @@ class SurveyController extends Controller{
     ));
   }
 
-  public function position(){
+  // only for AJAX endpoint
+  public function saveCircleData(Request $request){
+    Log::info("HERE");
+    Log::info($request);
+    // TODO: Save request data to appropriate database tables
+  }
+
+  public function position(Request $request){
     // TODO:
     // - check if the user has circles in-progress and load them, if yes
+
+    Log::info("Request:");
+    Log::info($request->fullUrl());
+    //Log::info(print_r($request,true));
+
     return view('position', array(
       'progress' => '10',
       'prevURL' => route('start'),
@@ -27,6 +41,7 @@ class SurveyController extends Controller{
     // TODO:
     // - save the user circles to the database
     // - render them to the coloring canvas
+    Log::info(print_r($request,true));
     return view('color', array(
       'progress' => '20',
       'prevURL' => route('position'),

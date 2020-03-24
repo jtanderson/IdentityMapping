@@ -1,4 +1,9 @@
 //paper = require('paper/dist/paper-full');
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 
 var debug_mode = false;
 var dbarray = new Array();
@@ -267,6 +272,8 @@ paper.tool.onMouseDown = function(event){
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
     }
+
+    // TODO: replace with an ajax call to send the JSON to the backend database
     dbarray.push(paper.project.exportJSON());
 
     //creates circles handle
@@ -370,6 +377,14 @@ doSubmit = function(e){
 
   //scope.activate();
   e.preventDefault();
+
+  // TODO: example ajax request
+  
+
+  $.post("/saveCircleData", {"item one": 1, "item two": 2})
+  .done(function(data){
+    console.log("Save complete!");
+  });
 
   // the id of the circle we're changing
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
