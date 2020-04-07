@@ -3,11 +3,10 @@
 ## Current TODO
 
 ### 2/25 Meeting:
-  - [ ] On the positioning page, when one circle is completely inside another (paperjs has a test for this), if they click that circle, make the click attach to the circle, not the intersection (outsibe-in)
+  - [ ] On the positioning page, when one circle is completely inside another (paperjs has a test for this- #### Q is this isBelow?), if they click that circle, make the click attach to the circle, not the intersection (outside-in)
     - Low priority for now
     - As a shim, add text to the user in the instructions to mention this awkward case
-  - [x] *Survey for how the user feels about the interface*
-  
+    
 ### 2/26 Meeting:
   - [ ] Intersection questions -> likert scale questions
     - [ ] Necessary database updates
@@ -32,6 +31,7 @@
   - [] Move circle text from 0,0 to center of circle (?)
   
 ## Fixed bugs:
+  - [x] *Survey for how the user feels about the interface* - needs more questions
   - [x] Only allow ages 18+ in dropdowns
   - [x] Change final "next" button to be "finish"
   - [x] Clean up web application on Laravel
