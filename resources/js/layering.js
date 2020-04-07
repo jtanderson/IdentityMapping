@@ -10,51 +10,6 @@ var dbarray = new Array();
 console.log("Loading Layering");
 console.log(Layer);
 
-//******************************************************
-
-// <script>
-// <?php
-//     $circlelayer = project.getItem({data: {layerName: "circles"}});
-//     $intlayer = project.getItem({data: {layerName: "intersections"}});
-//     $textlayer = project.getItem({data: {layerName: "text"}});
-
-//     $dataObject = $_POST;
-//     var_dump($dataObject);
-
-//     $json = json_encode($dataObject);
-//     file_put_contents('data.txt', $json);
-// ?>
-// <script>
-
-// $(document).ready(function(){
-//   localStorage.clear();
-
-//   $("form").on("submit", function() {
-//       if(window.localStorage!==undefined) {
-//           var fields = $(this).serialize();
-
-//           localStorage.setItem("eloqua-fields", JSON.stringify(fields));
-//           alert("Stored Succesfully");
-//           $(this).find("input[type=text]").val(""); //clears input fields, not select boxes etc.
-//           alert("Now Passing stored data to Server through AJAX jQuery");
-
-//           $.ajax({
-//              type: "POST",
-//              url: "backend.php", //where does this get sent to in db?         
-//              data: fields,
-//              success: function(data) {
-//                 $('#output').html(data); //JSON output goes here
-//              }
-//           });
-
-//       } else {
-//           alert("Storage Failed. Try refreshing");
-//       }
-//   });
-// });
-
-//**************************************************
-
 //if there are circles already saved in this session
 var answer = localStorage["extended"];
 if(answer == "true"){
@@ -263,18 +218,19 @@ var recreate = function(){
     circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
   }
 
+  
   for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
     var c = project.getItem({data: {circleId: i}});
     var text = new PointText({
-      fillColor:  'black',
+      fillColor:  'red',
       content:  "Circle " + i,
-      position: c.center,
+      position: c.getItem({data: {center}});
       insert: false,
       visible: false,
       data: {
         textId: i
       }
-    });
+  });
 
     textLayer.addChild(text);//adds text to the text layer
   }
@@ -283,11 +239,6 @@ var recreate = function(){
 var activeItem; 
 var handle;
 var dragged = false; 
-
-// TODO: logic around this is wrong, it never gets reset
-//G B: Do we even use tester anymore?
-
-
 var intersect = false;
 
 //mouse down function
@@ -315,6 +266,9 @@ paper.tool.onMouseDown = function(event){
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
     console.log("User clicked circle: " + hitResult.item.data.circleId);
+
+    hitResult.item.data.circleId.bringtoFront();
+    //bring circle selected to top of canvas?
 
     // TODO: replace with an ajax call to send the JSON to the backend database
     dbarray.push(paper.project.exportJSON());
@@ -412,20 +366,24 @@ doSubmit = function(e){
   //scope.activate();
   e.preventDefault();
 
-  // TODO: example ajax request
-  
-
-  $.post("/saveCircleData", {"item one": 1, "item two": 2})
   .done(function(data){
     console.log("Save complete!");
   });
 
-  // the id of the circle we're changing
+  // TODO: example ajax request
+   // the id of the circle we're changing
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
 
     console.log("Looking for circle " + targetName);
+
+
+  $.post("/saveCircleData", {"item one": project
+    .getItem({data: {circleId: parseInt(targetName)}}), "item two": project
+    .getItem({data: {circleId: parseInt(targetName)}})
+  })
+
 
   localStorage[targetName] = text;
   var obj = project

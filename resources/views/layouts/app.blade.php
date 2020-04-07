@@ -51,8 +51,8 @@
         <div class="text text-right">
           @if ($nextURL != '')
           <h4><a href="{{ $nextURL }}">Next &rarr;</a>&emsp;&emsp;</h4>
-         <!--  @elseif ($prevURL == '/')
-          <h4><a href=""> Finished </a>&emsp;&emsp;</h4> -->
+          @elseif ($prevURL == '/demographic')
+          <h4><a href=""> Finished </a>&emsp;&emsp;</h4>
           @endif
         </div> 
       </div>

@@ -20,6 +20,7 @@ class SurveyController extends Controller{
     Log::info("HERE");
     Log::info($request);
     // TODO: Save request data to appropriate database tables
+    
   }
 
   public function position(Request $request){
