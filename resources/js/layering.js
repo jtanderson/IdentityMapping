@@ -55,18 +55,19 @@ else{
   for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
     var c = project.getItem({data: {circleId: i}});
     var text = new PointText({
-      fillColor:  'red',
+      fillColor:  'black',
       content:  "Circle " + i,
-      position: c.getItem({data: {center}});
+      //position: //c.getItem({data: {"center"}}),
+      position: c.position, //new Point(c.position._x, c.position._y),
       insert: false,
       visible: false,
       data: {
         textId: i
       }
-  });
+    });
 
-  textLayer.addChild(text);//adds text to the text layer
-}
+    textLayer.addChild(text);//adds text to the text layer
+  }
 }
 
 
@@ -224,7 +225,8 @@ var recreate = function(){
     var text = new PointText({
       fillColor:  'red',
       content:  "Circle " + i,
-      position: c.getItem({data: {center}});
+      //position: c.getItem({data: {center}}),
+      position: c.center,
       insert: false,
       visible: false,
       data: {
@@ -236,9 +238,16 @@ var recreate = function(){
   }
 }
 
-var activeItem; 
+// the one object that is under user focus
+// NEEDS TO BE MAINTAINED VIGILANTLY
+var activeItem = null;
+
+// ??? hitTests within x pixels of circle boundary, to detect resize instead of drag
 var handle;
+
+// if this ever becomes true, we need to recalculate intersections
 var dragged = false; 
+
 var intersect = false;
 
 //mouse down function
@@ -254,10 +263,10 @@ paper.tool.onMouseDown = function(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
 
-  if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
+  hitResult = iLayer.hitTest(event.point);
+  if(false && hitResult != null ){//if the intersection layer is hit
     activeItem = hitResult.item; // will be a intersection
-    activeItem.selected = false; //turn off intersection selection
-    intersect = true;
+    //activeItem.selected = false; //turn off intersection selection
     console.log("User clicked an intersection with id " + hitResult.item.data.id);
 
     dbarray.push(paper.project.exportJSON());
@@ -267,8 +276,8 @@ paper.tool.onMouseDown = function(event){
     activeItem.selected = true;
     console.log("User clicked circle: " + hitResult.item.data.circleId);
 
-    hitResult.item.data.circleId.bringtoFront();
     //bring circle selected to top of canvas?
+    //hitResult.item.data.circleId.bringToFront();
 
     // TODO: replace with an ajax call to send the JSON to the backend database
     dbarray.push(paper.project.exportJSON());
@@ -302,8 +311,14 @@ paper.tool.onMouseDrag = function(event){
     var cLayer = project.getItem({data: {layerName: "circles"}});
     var iLayer = project.getItem({data: {layerName: "intersections"}});
     // user is scaling
-    if(!intersect){//if it is a circle boundary being hit
+    
+    // TODO: instead of using a variable, test which layer activeItem is in!!
+    // circleLayer.isAncestor(activeItem)
+    //if(!intersect){
+    if( cLayer.isAncestor(activeItem) ){
       iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
+
+      //if it is a circle boundary being hit, the user clicked near the boundary
       if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
         var p = event.point; // old
         var p2 = p + event.delta; // new
@@ -338,7 +353,7 @@ paper.tool.onMouseDrag = function(event){
 function onMouseUp(event){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
-  intersect = false; // why?
+  //intersect = false; // why?
   if(dragged){//if the user dragged the circle
 
 
@@ -366,10 +381,6 @@ doSubmit = function(e){
   //scope.activate();
   e.preventDefault();
 
-  .done(function(data){
-    console.log("Save complete!");
-  });
-
   // TODO: example ajax request
    // the id of the circle we're changing
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
@@ -379,20 +390,27 @@ doSubmit = function(e){
     console.log("Looking for circle " + targetName);
 
 
-  $.post("/saveCircleData", {"item one": project
-    .getItem({data: {circleId: parseInt(targetName)}}), "item two": project
-    .getItem({data: {circleId: parseInt(targetName)}})
+  $.post("/saveCircleData", {
+    "item one": "def",
+    "item two": "abc"
   })
+  .done(function(data){
+    console.log("Save complete!");
+  });
+
 
 
   localStorage[targetName] = text;
   var obj = project
     .getItem({data: {circleId: parseInt(targetName)}});
+  /*
   if(obj == null){
+    console.log("WTF IS HAPPENING???");
     recreate();
   }
   obj = project
     .getItem({data: {circleId: parseInt(targetName)}});
+  */
   var objText = project
   //.getItem({data: {layerName: "circles"}})
     .getItem({data: {textId: parseInt(targetName)}});
