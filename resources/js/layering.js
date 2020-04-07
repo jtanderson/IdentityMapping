@@ -5,13 +5,57 @@ $.ajaxSetup({
   }
 });
 
-var debug_mode = false;
 var dbarray = new Array();
 
-console.log("LKJSDFLKDJF");
+console.log("Loading Layering");
 console.log(Layer);
 
-//creating an array to be stores in local storage later
+//******************************************************
+
+// <script>
+// <?php
+//     $circlelayer = project.getItem({data: {layerName: "circles"}});
+//     $intlayer = project.getItem({data: {layerName: "intersections"}});
+//     $textlayer = project.getItem({data: {layerName: "text"}});
+
+//     $dataObject = $_POST;
+//     var_dump($dataObject);
+
+//     $json = json_encode($dataObject);
+//     file_put_contents('data.txt', $json);
+// ?>
+// <script>
+
+// $(document).ready(function(){
+//   localStorage.clear();
+
+//   $("form").on("submit", function() {
+//       if(window.localStorage!==undefined) {
+//           var fields = $(this).serialize();
+
+//           localStorage.setItem("eloqua-fields", JSON.stringify(fields));
+//           alert("Stored Succesfully");
+//           $(this).find("input[type=text]").val(""); //clears input fields, not select boxes etc.
+//           alert("Now Passing stored data to Server through AJAX jQuery");
+
+//           $.ajax({
+//              type: "POST",
+//              url: "backend.php", //where does this get sent to in db?         
+//              data: fields,
+//              success: function(data) {
+//                 $('#output').html(data); //JSON output goes here
+//              }
+//           });
+
+//       } else {
+//           alert("Storage Failed. Try refreshing");
+//       }
+//   });
+// });
+
+//**************************************************
+
+//if there are circles already saved in this session
 var answer = localStorage["extended"];
 if(answer == "true"){
   project.importJSON(localStorage["saved"]);
@@ -19,12 +63,14 @@ if(answer == "true"){
   dbarray.push(project.exportJSON());
 }
 else{
+
   var circleLayer = new Layer();//creates the circle layer
   var min = 55;
   var max = 135;
   var minR = 125;
   var maxR = 650;
   for(var i=1; i<=5; i++){//loop for circle creation (random)
+
     var circle = new Path.Circle({
       center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
       radius: Math.floor(Math.random() * (+max - +min)) + +min,
@@ -47,29 +93,25 @@ else{
   intersectionLayer.data.layerName = "intersections";
   intersections();
 
-
-  var textLayer = new Layer();//creates the text layer which will be the top layer
+//creates the text layer which will be the top layer
+  var textLayer = new Layer();
   textLayer.data.layerName = "text";
-
-  //confused, difference between point and position?
-  //want to do "bounding box" around text to always center on diameter
-  //we already have center calculated, keep position/point @ center
 
   for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
     var c = project.getItem({data: {circleId: i}});
     var text = new PointText({
       fillColor:  'red',
       content:  "Circle " + i,
-      //position: c.getItem({data: {center}}),
+      position: c.getItem({data: {center}});
       insert: false,
       visible: false,
       data: {
         textId: i
       }
-    });
+  });
 
-    textLayer.addChild(text);//adds text to the text layer
-  }
+  textLayer.addChild(text);//adds text to the text layer
+}
 }
 
 
@@ -97,6 +139,7 @@ function creation(){
 function intersections(){
   var iLayer = project.getItem({data:{layerName: "intersections"}});
   iLayer.removeChildren();//destroying old intersections
+
   for(var i = 1; i < 6; i++){
     var c_i = project
       .getItem({data: {layerName: "circles"}})
@@ -113,6 +156,7 @@ function intersections(){
       }
     }
   } //end the twos loop
+
   for(i=1;i<6;i++){ //1
     var c_i = project
       .getItem({data: {layerName: "circles"}})
@@ -137,6 +181,7 @@ function intersections(){
       }
     }
   } //end the threes loop
+
   for(i=1;i<6;i++){ //1
     var c_i = project
       .getItem({data: {layerName: "circles"}})
@@ -170,6 +215,7 @@ function intersections(){
     } // c_i visible
   } // i loop 
   //ends the fours loop
+
   var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
   var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
   var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
@@ -181,6 +227,7 @@ function intersections(){
     int_ijklm.data.id = ""+i+j+k+l+"5";
     iLayer.addChild(int_ijklm); 
   }//end the five single
+
 }//end intersections function
 
 //function for fixing the layers
@@ -215,12 +262,13 @@ var recreate = function(){
     });
     circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
   }
+
   for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
     var c = project.getItem({data: {circleId: i}});
     var text = new PointText({
       fillColor:  'black',
       content:  "Circle " + i,
-      position: c.position,
+      position: c.center,
       insert: false,
       visible: false,
       data: {
@@ -239,7 +287,6 @@ var dragged = false;
 // TODO: logic around this is wrong, it never gets reset
 //G B: Do we even use tester anymore?
 
-var tester = true;
 
 var intersect = false;
 
@@ -258,20 +305,16 @@ paper.tool.onMouseDown = function(event){
 
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
     activeItem = hitResult.item; // will be a intersection
-    activeItem.selected = true;
+    activeItem.selected = false; //turn off intersection selection
     intersect = true;
-    if(debug_mode){
-      console.log("User clicked an intersection with id " + hitResult.item.data.id);
-    }
+    console.log("User clicked an intersection with id " + hitResult.item.data.id);
+
     dbarray.push(paper.project.exportJSON());
 
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
-    tester = true; 
-    if(debug_mode){
-      console.log("User clicked circle: " + hitResult.item.data.circleId);
-    }
+    console.log("User clicked circle: " + hitResult.item.data.circleId);
 
     // TODO: replace with an ajax call to send the JSON to the backend database
     dbarray.push(paper.project.exportJSON());
@@ -286,9 +329,7 @@ paper.tool.onMouseDown = function(event){
       }
     );
   } else { //when nothing is hit
-    if(debug_mode){
       console.log("Nothing hit");
-    }
     if( activeItem ){
       activeItem.selected = false;
     }
@@ -307,7 +348,7 @@ paper.tool.onMouseDrag = function(event){
     var cLayer = project.getItem({data: {layerName: "circles"}});
     var iLayer = project.getItem({data: {layerName: "intersections"}});
     // user is scaling
-    if(tester && !intersect){//if it is a circle boundary being hit
+    if(!intersect){//if it is a circle boundary being hit
       iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
       if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
         var p = event.point; // old
@@ -318,9 +359,8 @@ paper.tool.onMouseDrag = function(event){
         } else {
           activeItem.scaling += 0.005*event.delta.length;
         }
-        if(debug_mode){
-          console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
-        }
+        
+        console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
       }
       //else move the circle
       else {
@@ -329,14 +369,10 @@ paper.tool.onMouseDrag = function(event){
           activeItem.translate(event.delta);
           project.getItem({data: {textId: data}}).translate(event.delta);
           // + activeItem.position);
-          if(debug_mode){
             console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
-          }
         }
       }//end if circle edge or circle
-      if(debug_mode){
         console.log("Clicked canvas");
-      }
     }
 
     intersections();
@@ -354,11 +390,9 @@ function onMouseUp(event){
 
     intersections();
 
-    if(debug_mode){
       console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
-    }  
 
     //create new intersections here
     //calculate new intersections by calling graces function
@@ -373,7 +407,7 @@ var scope = this;
 //sends the circle data to local storage
 
 doSubmit = function(e){
-  console.log("YOOOO");
+  console.log("doSumbit here");
 
   //scope.activate();
   e.preventDefault();
@@ -390,12 +424,11 @@ doSubmit = function(e){
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
-  if(debug_mode){
+
     console.log("Looking for circle " + targetName);
-  }
+
   localStorage[targetName] = text;
   var obj = project
-  //.getItem({data: {layerName: "circles"}})
     .getItem({data: {circleId: parseInt(targetName)}});
   if(obj == null){
     recreate();
@@ -407,10 +440,10 @@ doSubmit = function(e){
     .getItem({data: {textId: parseInt(targetName)}});
   obj.visible = true;
   objText.visible = true;
-  if(debug_mode){
+
     console.log(obj);
-  }
-  var t = project.getItem({
+  
+    var t = project.getItem({
     //_class: "PointText"
     data: {textId: parseInt(targetName)}
   });
@@ -423,5 +456,6 @@ doSubmit = function(e){
   return false;
 } //end doSubmit function
 
+//submits json
 window.doSubmit= doSubmit;
 

@@ -6,12 +6,10 @@
 
 @section('content')
 
+<h1> Description</h1>
 <div class="row">
-  <h1> Description</h1>
   <div class="col-sm">
     Now that your map is complete, we are going to ask you some questions about those five identities. <b>Please respond to the following questions thinking about each identity one at a time.</b><br>
-
-    <div class="container">
       <div class="row">
         <div class="col-sm">
           <br>Rate how strongly held each social identity is when you think about yourself.<br>
@@ -115,7 +113,7 @@
         </div>      
 
         <div class="slidecontainer">
-         
+
           <b>
             <script>
               document.write(localStorage[4]);
@@ -1036,8 +1034,6 @@
 </div>
 </div>
 </div>
-</div>
-
 
 </div></div>
 

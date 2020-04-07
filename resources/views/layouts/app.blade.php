@@ -31,23 +31,28 @@
 
     @yield('content')
 
+    <br><br>
     <div class="row">
-      <div class="col-sm-4">
+      <div class = "col-sm-3">
+      </div>
+      <div class="col-sm-3">
         <div class="text text-left">
           @if ($prevURL != '')
           <h4><a href="{{ $prevURL }}">&larr;&nbsp; Previous</a></h4>
           @endif
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="text text-left">
           <a class="btn btn-danger" href="">Abort</a>
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="text text-right">
           @if ($nextURL != '')
           <h4><a href="{{ $nextURL }}">Next &rarr;</a>&emsp;&emsp;</h4>
+         <!--  @elseif ($prevURL == '/')
+          <h4><a href=""> Finished </a>&emsp;&emsp;</h4> -->
           @endif
         </div> 
       </div>

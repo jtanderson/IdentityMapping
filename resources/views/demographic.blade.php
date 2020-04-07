@@ -26,20 +26,10 @@
       </select>
 
 
-      <br> Which of these options describes your age?
-      <select class="form-control form-control-sm">
-        <option>Select</option>
-        <option>18-24 years old</option>
-        <option>25-34 years old</option>
-        <option>35-44 years old</option>
-        <option>45-54 years old</option>
-        <option>55-64 years old</option>
-        <option>65-74 years old</option>
-        <option>Over 75 years old</option>
-
-      </select>
-
-
+      <br> Please enter your age.
+      <form>
+        <input type = "text"> </input>
+      </form>
 
       <br>Are you Hispanic, Latino or of Spanish origin?
       <select class="form-control form-control-sm">
@@ -84,6 +74,11 @@
         <option>Doctorate (e.g. PhD, EdD)</option>
 
       </select>
+
+      <br> If you are pursuing secondary education, What is your Major?
+      <form>
+        <input type = "text"> </input>
+      </form>
 
       <br>What is your current employment status?
       <select class="form-control form-control-sm">

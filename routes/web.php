@@ -21,7 +21,3 @@ Route::get('/demographic', 'SurveyController@demographic')->name('demographic');
 Route::get('/category', 'SurveyController@category')->name('category');
 Route::get('/end', 'SurveyController@end')->name('end');
 Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCircleData');
-// Route::get('/survey', 'SurveyController@survey')->name('survey');
-// Route::get('/demographics', 'SurveyController@demographics')->name('demographics');
-// Route::get('/grouping', 'SurveyController@grouping')->name('grouping');
-// Route::get('/finished', 'SurveyController@finished')->name('finished');
