@@ -28,8 +28,8 @@
   
 ### 4/7 Meetng:
   - [ ] activeItem.fillcolor in extended.js logic extended to intersections through function.
-  - [ ] "local storage" issue - Have some code to take a look at. Also, where in the db does this ajax get sent?
-  - [?] Move circle text from 0,0 to center of circle
+  - [ ] "local storage" issue - Rewrite of doSubmit to AJAX?
+  - [] Move circle text from 0,0 to center of circle (?)
   
 ## Fixed bugs:
   - [x] Only allow ages 18+ in dropdowns
