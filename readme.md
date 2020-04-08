@@ -3,7 +3,7 @@
 ## Current TODO
 
 ### 2/25 Meeting:
-  - [ ] On the positioning page, when one circle is completely inside another (paperjs has a test for this- #### Q is this isBelow?), if they click that circle, make the click attach to the circle, not the intersection (outside-in)
+  - [ ] On the positioning page, when one circle is completely inside another (paperjs has a test for this- isAncestor), if they click that circle, make the click attach to the circle, not the intersection (outside-in)
     - Low priority for now
     - As a shim, add text to the user in the instructions to mention this awkward case
     
@@ -28,7 +28,6 @@
 ### 4/7 Meetng:
   - [ ] activeItem.fillcolor in extended.js logic extended to intersections through function.
   - [ ] "local storage" issue - Rewrite of doSubmit to AJAX?
-  - [] Move circle text from 0,0 to center of circle (?)
   
 ## Fixed bugs:
   - [x] *Survey for how the user feels about the interface* - needs more questions
@@ -40,6 +39,7 @@
   - [x] Intersection survey table migration made
   - [x] Remove javascript from views, use laravel templating to loop with data pulled from DB
   - [x] Specific ages (need validation)
+  - [x] Move circle text from 0,0 to center of circle 
   - [x] Extra de-briefing questions
     - Major (demographics)
     - Year (demographics)
