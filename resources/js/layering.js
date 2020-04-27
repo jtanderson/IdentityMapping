@@ -376,6 +376,7 @@ var scope = this;
 //sends the circle data to local storage
 
 doSubmit = function(e){
+
   console.log("doSumbit here");
 
   //scope.activate();
@@ -383,55 +384,64 @@ doSubmit = function(e){
 
   // TODO: example ajax request
    // the id of the circle we're changing
+
+   var xhttp = new XMLHttpRequest();
+
+   xhttp.open("METHOD", url, async);
+   //method is either GET or POST
+   //URL server location
+   //true (asynchronous) or false (synchronous)
+   //async : the JavaScript does not have to wait for the server response, but can instead:
+    // execute other scripts while waiting for server response
+    // deal with the response after the response is ready
+
+   xhttp.send(STRING);
+   //send request to server (in POST case, a string (JSON))
+
+
+
   var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // holds the user's text entry
   var text = e.target.getElementsByTagName("input")[0].value;
 
     console.log("Looking for circle " + targetName);
 
-
+//save entire canvas view here
+//var cLayer, var iLayer
   $.post("/saveCircleData", {
-    "item one": "def",
-    "item two": "abc"
+
+    "circle": "def",
+    
   })
   .done(function(data){
     console.log("Save complete!");
   });
 
 
+  // var obj = project
+  //   .getItem({data: {circleId: parseInt(targetName)}});
 
-  localStorage[targetName] = text;
-  var obj = project
-    .getItem({data: {circleId: parseInt(targetName)}});
-  /*
-  if(obj == null){
-    console.log("WTF IS HAPPENING???");
-    recreate();
-  }
-  obj = project
-    .getItem({data: {circleId: parseInt(targetName)}});
-  */
-  var objText = project
-  //.getItem({data: {layerName: "circles"}})
-    .getItem({data: {textId: parseInt(targetName)}});
-  obj.visible = true;
-  objText.visible = true;
+  // var objText = project
+  //   .getItem({data: {textId: parseInt(targetName)}});
+  // obj.visible = true;
+  // objText.visible = true;
 
-    console.log(obj);
+  //   console.log(obj);
   
-    var t = project.getItem({
-    //_class: "PointText"
-    data: {textId: parseInt(targetName)}
-  });
-  t.content = text;
+  //   var t = project.getItem({
+  //   data: {textId: parseInt(targetName)}
+  // });
+  // t.content = text;
 
-  insert = true;
+  // insert = true;
+
   intersections();
+
   dbarray.push(paper.project.exportJSON());
   // console.log(dbarray);
   return false;
 } //end doSubmit function
 
 //submits json
-window.doSubmit= doSubmit;
+window.doSubmit = doSubmit;
 
