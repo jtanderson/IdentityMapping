@@ -385,9 +385,9 @@ doSubmit = function(e){
   // TODO: example ajax request
    // the id of the circle we're changing
 
-   var xhttp = new XMLHttpRequest();
+   // var xhttp = new XMLHttpRequest();
 
-   xhttp.open("METHOD", url, async);
+   // xhttp.open("POST", /saveCircleData, async);
    //method is either GET or POST
    //URL server location
    //true (asynchronous) or false (synchronous)
@@ -395,45 +395,45 @@ doSubmit = function(e){
     // execute other scripts while waiting for server response
     // deal with the response after the response is ready
 
-   xhttp.send(STRING);
+   // xhttp.send(STRING);
    //send request to server (in POST case, a string (JSON))
 
+  // var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
+  // // holds the user's text entry
+  // var text = e.target.getElementsByTagName("input")[0].value;
 
-
-  var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
-  // holds the user's text entry
-  var text = e.target.getElementsByTagName("input")[0].value;
-
-    console.log("Looking for circle " + targetName);
+  //   console.log("Looking for circle " + targetName);
 
 //save entire canvas view here
-//var cLayer, var iLayer
-  $.post("/saveCircleData", {
+//obj:objText is circle:circleName?
 
-    "circle": "def",
-    
+//we want to save 
+//var cLayer, var iLayer, (var textLayer)?
+  $.post("/saveCircleData", {
+    // "targetName": "text",
+    "obj":"objText",
   })
   .done(function(data){
     console.log("Save complete!");
   });
 
 
-  // var obj = project
-  //   .getItem({data: {circleId: parseInt(targetName)}});
+  var obj = project
+    .getItem({data: {circleId: parseInt(targetName)}});
 
-  // var objText = project
-  //   .getItem({data: {textId: parseInt(targetName)}});
-  // obj.visible = true;
-  // objText.visible = true;
+  var objText = project
+    .getItem({data: {textId: parseInt(targetName)}});
+  obj.visible = true;
+  objText.visible = true;
 
-  //   console.log(obj);
+    console.log(obj);
   
-  //   var t = project.getItem({
-  //   data: {textId: parseInt(targetName)}
-  // });
-  // t.content = text;
+    var t = project.getItem({
+    data: {textId: parseInt(targetName)}
+  });
+  t.content = text;
 
-  // insert = true;
+  insert = true;
 
   intersections();
 
