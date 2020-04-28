@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SurveyController extends Controller{
-  public function start(){
+  public function start(Request $request){
+    // make sure there is a session
+    //session()->regenerate();
+    // TODO: generate a uniqe session_id and save it here
+    $request->session()->put('session_id', 'lkjsdflksjdflkj');
+
     return view('start', array(
       'progress' => '0',
       'prevURL' => '',
@@ -30,7 +35,15 @@ class SurveyController extends Controller{
 
   public function position(Request $request){
     // TODO:
-    // - check if the user has circles in-progress and load them, if yes
+    // - check if this session key is associated to a particpant
+    //    - if not, add them to the participant table
+    //    - if yes, check if the user has circles in-progress and load them
+
+    $sessKey = $request->session()->get('key');
+    $data = $request->session()->all();
+    Log::info(print_r($data, true));
+
+    Log::info("Position with key" . $sessKey);
 
     Log::info("Request:");
     Log::info($request->fullUrl());
