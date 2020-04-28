@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SurveyController extends Controller{
   public function start(){
@@ -20,6 +21,10 @@ class SurveyController extends Controller{
     Log::info("HERE");
     Log::info($request);
     // TODO: Save request data to appropriate database tables
+    // TODO: Parse the request object ($request) into the correct
+    // format for the "circle" table
+    // TODO: Use DB::table('circle')->insert($arrOfParseData)
+    // (or) use DB::table('cirlce')->where('id', $somethingYouHaveToCompute)->update($arrOfData)
     
   }
 

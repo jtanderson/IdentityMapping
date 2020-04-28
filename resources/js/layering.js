@@ -398,9 +398,9 @@ doSubmit = function(e){
    // xhttp.send(STRING);
    //send request to server (in POST case, a string (JSON))
 
-  // var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
+  var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
   // // holds the user's text entry
-  // var text = e.target.getElementsByTagName("input")[0].value;
+  var text = e.target.getElementsByTagName("input")[0].value;
 
   //   console.log("Looking for circle " + targetName);
 
@@ -411,7 +411,10 @@ doSubmit = function(e){
 //var cLayer, var iLayer, (var textLayer)?
   $.post("/saveCircleData", {
     // "targetName": "text",
-    "obj":"objText",
+    "circle1": {
+      "position_x": 10,
+      "position_y": 34
+    },
   })
   .done(function(data){
     console.log("Save complete!");
