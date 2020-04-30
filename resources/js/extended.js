@@ -108,8 +108,11 @@ var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
 formIntersect1.addEventListener("change",function(){
   if(activeItem){
-    activeItem.dashArray = false;
-    console.log("Circle " + activeItem.id +"'s outline is solid");
+    var line = activeItem.dashArray;
+    if (activeItem.dashArray = false){
+
+      console.log("Circle " + activeItem.id +"'s outline is solid");
+    }
   }
 },false);
 
@@ -121,3 +124,50 @@ formIntersect12.addEventListener("change",function(){
     console.log("Circle " + activeItem.id +"'s outline is dashed");
       }
 },false);
+
+
+doSubmit = function(e){
+
+  console.log("doSumbit Coloring here");
+
+  //scope.activate();
+  e.preventDefault();
+
+ //what is the difference between t, text, and objText
+
+  var circleID = e.target.querySelector("[name=formId]").value;
+
+  //get array of elements, [0]th element's value
+  var circleText = e.target.querySelector("[name=circleText]").value;
+
+  //actual circle obj itself - with ID that we need 
+  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+  var objText = project.getItem({data: {textId: parseInt(circleID)}});
+
+    obj.visible = true;
+    objText.visible = true;
+
+  $.post("/saveCircleData", {
+    
+    //change circle1 to auto increment id (??)
+    "circle1": {
+
+      "color": obj.fillColor,
+      "line_style": line,
+    }
+  })
+  .done(function(data){
+    console.log("Save complete!");
+  });
+
+  insert = true;
+
+  intersections();
+
+  return false;
+} //end doSubmit function
+
+//submits json
+window.doSubmit = doSubmit;
+
