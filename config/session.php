@@ -18,7 +18,8 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    // TODO: this is awful, fix the stupid configuration
+    'driver' => 'database', //env('SESSION_DRIVER', 'database'),
 
     /*
     |--------------------------------------------------------------------------

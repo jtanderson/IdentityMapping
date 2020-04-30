@@ -14,6 +14,11 @@ class SurveyController extends Controller{
     // TODO: generate a uniqe session_id and save it here
     $request->session()->put('session_id', 'lkjsdflksjdflkj');
 
+    Log::info("Env check: " . env('DB_CONNECTION', 'mysql'));
+
+    $config = config('session');
+    Log::info(print_r($config,true));
+
     return view('start', array(
       'progress' => '0',
       'prevURL' => '',
@@ -30,6 +35,7 @@ class SurveyController extends Controller{
     $sessKey = $request->session()->get('session_id');
     $data = $request->session()->all();
     Log::info(print_r($data, true));
+    Log::info("session id: " .  session()->getId());
 
     Log::info("Position with key" . $sessKey);
 
