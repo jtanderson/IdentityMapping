@@ -14,24 +14,11 @@ class SurveyController extends Controller{
     // TODO: generate a uniqe session_id and save it here
     $request->session()->put('session_id', 'lkjsdflksjdflkj');
 
-
     return view('start', array(
       'progress' => '0',
       'prevURL' => '',
       'nextURL' => route('position'),
     ));
-  }
-
-  // only for AJAX endpoint
-  public function saveCircleData(Request $request){
-    Log::info("HERE");
-    Log::info($request);
-    // TODO: Save request data to appropriate database tables
-    // TODO: Parse the request object ($request) into the correct
-    // format for the "circle" table
-    // TODO: Use DB::table('circle')->insert($arrOfParseData)
-    // (or) use DB::table('cirlce')->where('id', $somethingYouHaveToCompute)->update($arrOfData)
-    
   }
 
   public function position(Request $request){
@@ -58,15 +45,39 @@ class SurveyController extends Controller{
   }
 
   public function color(Request $request){
-    // TODO:
-    // - save the user circles to the database
-    // - render them to the coloring canvas
+    
+    DB::table('circle')->insertGetId([
+      
+      ['color' => 'color'],
+      ['line_style' => 'line_style']
+    ]);
+
+
     Log::info(print_r($request,true));
     return view('color', array(
       'progress' => '20',
       'prevURL' => route('position'),
       'nextURL' => route('intersections'),
     ));
+  }
+
+
+  // only for AJAX endpoint
+  public function saveCircleData(Request $request){
+    Log::info("Saving circle data...");
+    Log::info($request);
+
+    //on right is AJAX right is database
+    DB::table('circle')->insertGetId([
+      ['position_x' => 'center_x'],
+      ['position_y' => 'center_y'],
+      ['label' => 'label'],
+      ['radius' => 'radius'],
+      ['color' => 'color'],
+      ['line_style' => 'line_style'],
+      [$request->session()->get('key') => 'participant_id']
+    ]);
+
   }
 
   public function intersections(){

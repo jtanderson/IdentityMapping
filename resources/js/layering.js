@@ -373,68 +373,54 @@ function onMouseUp(event){
 }//end mouse up function
 var scope = this;
 
-//sends the circle data to local storage
+//sends the circle data to DB storage
 
 doSubmit = function(e){
 
-  console.log("doSumbit here");
+  // var cLayer = project.getItem({data: {layerName: "circles"}});
 
-  //scope.activate();
+  console.log("doSumbit Layering here");
+
   e.preventDefault();
 
-  // TODO: example ajax request
-   // the id of the circle we're changing
+  //what is the difference between t, text, and objText
 
-   // var xhttp = new XMLHttpRequest();
+  var circleID = e.target.querySelector("[name=formId]").value;
 
-   // xhttp.open("POST", /saveCircleData, async);
-   //method is either GET or POST
-   //URL server location
-   //true (asynchronous) or false (synchronous)
-   //async : the JavaScript does not have to wait for the server response, but can instead:
-    // execute other scripts while waiting for server response
-    // deal with the response after the response is ready
+  //get array of elements, [0]th element's value
+  var circleText = e.target.querySelector("[name=circleText]").value;
 
-   // xhttp.send(STRING);
-   //send request to server (in POST case, a string (JSON))
+  //actual circle obj itself - with ID that we need 
+  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
-  var targetName = e.target.querySelector("[name=formId]").value.toLowerCase();
-  // // holds the user's text entry
-  var text = e.target.getElementsByTagName("input")[0].value;
+  var objText = project.getItem({data: {textId: parseInt(circleID)}});
+
+    obj.visible = true;
+    objText.visible = true;
+
+    console.log(obj);
+  // var t = project.getItem({data: {textId: parseInt(circleID)}});
+
+  // t.content = text;
 
   //   console.log("Looking for circle " + targetName);
 
-//save entire canvas view here
-//obj:objText is circle:circleName?
-
-//we want to save 
-//var cLayer, var iLayer, (var textLayer)?
   $.post("/saveCircleData", {
-    // "targetName": "text",
-    "circle1": {
-      "position_x": 10,
-      "position_y": 34
-    },
+    //loop through like recreate function
+    //change circle1 to auto increment id (??)
+    "circle": {
+      "id": circleID,
+      "position_x": obj.position.x,
+      "position_y": obj.position.y,
+      "label": circleText,
+      "radius": (obj.bounds.width/2),
+      //Laravel session tools
+    }
   })
   .done(function(data){
     console.log("Save complete!");
   });
 
-
-  var obj = project
-    .getItem({data: {circleId: parseInt(targetName)}});
-
-  var objText = project
-    .getItem({data: {textId: parseInt(targetName)}});
-  obj.visible = true;
-  objText.visible = true;
-
-    console.log(obj);
-  
-    var t = project.getItem({
-    data: {textId: parseInt(targetName)}
-  });
-  t.content = text;
 
   insert = true;
 
