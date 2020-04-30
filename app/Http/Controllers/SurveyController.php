@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\DB;
 class SurveyController extends Controller{
   public function start(Request $request){
     // make sure there is a session
-    //session()->regenerate();
+    $request->session()->regenerate();
     // TODO: generate a uniqe session_id and save it here
     $request->session()->put('session_id', 'lkjsdflksjdflkj');
+
 
     return view('start', array(
       'progress' => '0',
@@ -39,7 +40,7 @@ class SurveyController extends Controller{
     //    - if not, add them to the participant table
     //    - if yes, check if the user has circles in-progress and load them
 
-    $sessKey = $request->session()->get('key');
+    $sessKey = $request->session()->get('session_id');
     $data = $request->session()->all();
     Log::info(print_r($data, true));
 
