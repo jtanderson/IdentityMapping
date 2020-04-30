@@ -9,15 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class SurveyController extends Controller{
   public function start(Request $request){
+
+    // TODO: move this to a custom "middleware"
     // make sure there is a session
-    $request->session()->regenerate();
-    // TODO: generate a uniqe session_id and save it here
-    $request->session()->put('session_id', 'lkjsdflksjdflkj');
-
-    Log::info("Env check: " . env('DB_CONNECTION', 'mysql'));
-
-    $config = config('session');
-    Log::info(print_r($config,true));
+    // OR, verify that this is unecessary (I think it might be)
+    //if(!$request->session()){
+      //$request->session()->regenerate();
+    //}
 
     return view('start', array(
       'progress' => '0',
@@ -32,16 +30,9 @@ class SurveyController extends Controller{
     //    - if not, add them to the participant table
     //    - if yes, check if the user has circles in-progress and load them
 
-    $sessKey = $request->session()->get('session_id');
-    $data = $request->session()->all();
-    Log::info(print_r($data, true));
-    Log::info("session id: " .  session()->getId());
-
-    Log::info("Position with key" . $sessKey);
-
-    Log::info("Request:");
-    Log::info($request->fullUrl());
-    //Log::info(print_r($request,true));
+    // note: this should exist, in theory, but could use middleware to make sure
+    $sessId = $request->session()->getId();
+    Log::info("session id: " .  $sessId);
 
     return view('position', array(
       'progress' => '10',
