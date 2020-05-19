@@ -399,23 +399,13 @@ doSubmit = function(e){
     objText.visible = true;
 
     console.log(obj);
-  // var t = project.getItem({data: {textId: parseInt(circleID)}});
-
-  // t.content = text;
-
-  //   console.log("Looking for circle " + targetName);
-
+ 
   $.post("/saveCircleData", {
-    //loop through like recreate function
-    //change circle1 to auto increment id (??)
-    "circle": {
       "id": circleID,
       "position_x": obj.position.x,
       "position_y": obj.position.y,
       "label": circleText,
       "radius": (obj.bounds.width/2),
-      //Laravel session tools
-    }
   })
   .done(function(data){
     console.log("Save complete!");

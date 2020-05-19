@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\DB;
 class SurveyController extends Controller{
   public function start(Request $request){
 
-    // TODO: move this to a custom "middleware"
-    // make sure there is a session
-    // OR, verify that this is unecessary (I think it might be)
-    //if(!$request->session()){
-      //$request->session()->regenerate();
-    //}
-
     return view('start', array(
       'progress' => '0',
       'prevURL' => '',
@@ -25,14 +18,11 @@ class SurveyController extends Controller{
   }
 
   public function position(Request $request){
-    // TODO:
-    // - check if this session key is associated to a particpant
-    //    - if not, add them to the participant table
-    //    - if yes, check if the user has circles in-progress and load them
 
-    // note: this should exist, in theory, but could use middleware to make sure
-    $sessId = $request->session()->getId();
-    Log::info("session id: " .  $sessId);
+    // $sessId = $request->session()->getId();
+    // Log::info("session id: " .  $sessId);
+
+    //TODO: check if the user has circles in-progress and load them
 
     return view('position', array(
       'progress' => '10',
@@ -64,15 +54,15 @@ class SurveyController extends Controller{
     Log::info("Saving circle data...");
     Log::info($request);
 
-    //on right is AJAX right is database
+    //on right is AJAX left is database
     DB::table('circle')->insertGetId([
-      ['position_x' => 'center_x'],
-      ['position_y' => 'center_y'],
-      ['label' => 'label'],
-      ['radius' => 'radius'],
-      ['color' => 'color'],
-      ['line_style' => 'line_style'],
-      [$request->session()->get('key') => 'participant_id']
+      ['position_x' => $request->input('position_x')],
+      ['position_y' => $request->input('position_y')],
+      ['label' => $request->input('label')],
+      ['radius' => $request->input('radius')],
+      ['color' =>$request->input('color')],
+      ['line_style' => $request->input('position_x')],
+      ['participant_id' => $request->session()->getId()]
     ]);
 
   }
