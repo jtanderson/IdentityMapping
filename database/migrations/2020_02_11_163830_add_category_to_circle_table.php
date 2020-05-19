@@ -14,10 +14,11 @@ class AddCategoryToCircleTable extends Migration
     public function up()
     {
         Schema::table('circle', function (Blueprint $table) {
-          $table->unsignedBigInteger('category_id');
+          $table->unsignedBigInteger('category_id')->nullable();
           $table->foreign('category_id')
             ->references('id')
             ->on('category');
+          //$table->unsignedBigInteger('category_id')->nullable()->change();
         });
     }
 
