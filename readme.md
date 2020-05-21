@@ -30,6 +30,7 @@
   - [x] (IN PROGRESS) "local storage" issue - Rewrite of doSubmit to AJAX?
   
 ### 5/19 Meeting:
+  - [ ] revisit extended.js (especially intersection logic) for AJAX posting to DB 
 
 ## Fixed bugs:
   - [ ] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
