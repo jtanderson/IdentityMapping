@@ -24,14 +24,17 @@
   
 ### 3/24 Meeting: 
   - [x] (IN PROGRESS) Position "Next" - submit data into JSON object -> database by writing PHP code for Laravel (associative array with AJAX request (example is inside layering.js))
+    - ** We might want to rethink this, or at least, attach doSubmit to more than just "Next"
   
 ### 4/7 Meeting:
-  - [ ] activeItem.fillcolor in extended.js logic extended to intersections through function. (?)
+  - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function.
+        - [ ] Assuming this means having an AJAX submission for Intersections to DB
   - [x] (IN PROGRESS) "local storage" issue - Rewrite of doSubmit to AJAX?
   
 ### 5/19 Meeting:
   - [ ] revisit extended.js (especially intersection logic) for AJAX posting to DB 
+        - Looked at extended.js: At start of extended.js, we want to check db for user's sessId & return the circles & intersections
 
 ## Fixed bugs:
-  - [ ] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
+  - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
 
