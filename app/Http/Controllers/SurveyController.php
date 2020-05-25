@@ -34,9 +34,8 @@ class SurveyController extends Controller{
   public function color(Request $request){
     
     DB::table('circle')->insertGetId([
-      
-      ['color' => 'color'],
-      ['line_style' => 'line_style']
+      ['color' => $request->input('color')],
+      ['line_style' => $request->input('line_style')]
     ]);
 
 
@@ -56,17 +55,34 @@ class SurveyController extends Controller{
 
     //on right is AJAX left is database
     DB::table('circle')->insertGetId([
+      ['number' => $request->input('number')],
       ['position_x' => $request->input('position_x')],
       ['position_y' => $request->input('position_y')],
       ['label' => $request->input('label')],
       ['radius' => $request->input('radius')],
-      ['color' =>$request->input('color')],
-      ['line_style' => $request->input('position_x')],
+      ['color' => $request->input('color')],
+      ['line_style' => $request->input('line_style')],
       ['participant_id' => $request->session()->getId()]
     ]);
 
   }
 
+  public function saveIntersectData(Request $request){
+    Log::info("Saving intersection data...");
+    Log::info($request);
+
+    DB::table('intersection')->insertGetId([
+        ['created_at' => $request->input('')],
+        ['updated_at' => $request->input('')],
+        ['circle1_id' => $request->input('')],
+        ['circle2_id' => $request->input('')],
+        ['color' => $request->input('')],
+        ['area' => $request->input('')],
+    ])
+
+  }
+
+//intersection survey
   public function intersections(){
     return view('intersections', array(
       'progress' => '40',

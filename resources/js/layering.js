@@ -91,86 +91,89 @@ function creation(){
   }
 }
 
+
+
 //function for creating intersections
 function intersections(){
-  var iLayer = project.getItem({data:{layerName: "intersections"}});
-  iLayer.removeChildren();//destroying old intersections
+    
+    var iLayer = project.getItem({data:{layerName: "intersections"}});
+    iLayer.removeChildren();//destroying old intersections
 
-  for(var i = 1; i < 6; i++){
-    var c_i = project
-      .getItem({data: {layerName: "circles"}})
-      .getItem({data: {circleId: i}});
-    if( c_i.visible ){
-      for(var j=i+1;j<6;j++){
-        var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-        if( c_j.visible ){ //if two circles overlap, then create intersection
-          var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
-          int_ij.selected = false;
-          int_ij.data.id = ""+i+j;
-          iLayer.addChild(int_ij); //2
+    for(var i = 1; i < 6; i++){
+      var c_i = project
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
+      if( c_i.visible ){
+        for(var j=i+1;j<6;j++){
+          var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+          if( c_j.visible ){ //if two circles overlap, then create intersection
+            var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+            int_ij.selected = false;
+            int_ij.data.id = ""+i+j;
+            iLayer.addChild(int_ij); //2
+          }
         }
       }
-    }
-  } //end the twos loop
+    } //end the twos loop
 
-  for(i=1;i<6;i++){ //1
-    var c_i = project
-      .getItem({data: {layerName: "circles"}})
-      .getItem({data: {circleId: i}});
-    if( c_i.visible ){
-      for(j=i+1;j<6;j++){ //2
-        var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-        if( c_j.visible ){ //if two circles overlap, then create intersection
-          var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
-          int_ij.selected = false;
-          int_ij.data.id = ""+i+j;
-          for(var k=j+1;k<6;k++){ //3
-            var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-            if( c_k.visible ){//if three circles overlap, then create intersection
-              var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
-              int_ijk.selected = false;
-              int_ijk.data.id = ""+i+j+k;
-              iLayer.addChild(int_ijk); 
+    for(i=1;i<6;i++){ //1
+      var c_i = project
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
+      if( c_i.visible ){
+        for(j=i+1;j<6;j++){ //2
+          var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+          if( c_j.visible ){ //if two circles overlap, then create intersection
+            var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+            int_ij.selected = false;
+            int_ij.data.id = ""+i+j;
+            for(var k=j+1;k<6;k++){ //3
+              var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+              if( c_k.visible ){//if three circles overlap, then create intersection
+                var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
+                int_ijk.selected = false;
+                int_ijk.data.id = ""+i+j+k;
+                iLayer.addChild(int_ijk); 
+              }
             }
           }
         }
       }
-    }
-  } //end the threes loop
+    } //end the threes loop
 
-  for(i=1;i<6;i++){ //1
-    var c_i = project
-      .getItem({data: {layerName: "circles"}})
-      .getItem({data: {circleId: i}});
-    if( c_i.visible ){
-      for(j=i+1;j<6;j++){ //2
-        var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
-        if( c_j.visible ){ //if two circles overlap, then create intersection
-          var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
-          int_ij.selected = false;
-          int_ij.data.id = ""+i+j;
-          for(k=j+1;k<6;k++){ //3
-            var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
-            if( c_k.visible ){//if three circles overlap, then create intersection
-              var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
-              int_ijk.selected = false;
-              int_ijk.data.id = ""+i+j+k;
-              for(var l = k+1;l<6; l++){ //4
-                var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
-                if( c_l.visible ){ //if four circles overlap, then create intersection
-                  var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
-                  int_ijkl.selected = false;
-                  int_ijkl.data.id = ""+i+j+k+l;
-                  iLayer.addChild(int_ijkl);//4
-                } // c_l visible
-              } // l loop
-            } // c_k visible
-          } // k loop
-        } // c_j visible
-      } // j loop
-    } // c_i visible
-  } // i loop 
-  //ends the fours loop
+    for(i=1;i<6;i++){ //1
+      var c_i = project
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
+      if( c_i.visible ){
+        for(j=i+1;j<6;j++){ //2
+          var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+          if( c_j.visible ){ //if two circles overlap, then create intersection
+            var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+            int_ij.selected = false;
+            int_ij.data.id = ""+i+j;
+            for(k=j+1;k<6;k++){ //3
+              var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+              if( c_k.visible ){//if three circles overlap, then create intersection
+                var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
+                int_ijk.selected = false;
+                int_ijk.data.id = ""+i+j+k;
+                for(var l = k+1;l<6; l++){ //4
+                  var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
+                  if( c_l.visible ){ //if four circles overlap, then create intersection
+                    var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
+                    int_ijkl.selected = false;
+                    int_ijkl.data.id = ""+i+j+k+l;
+                    iLayer.addChild(int_ijkl);//4
+                  } // c_l visible
+                } // l loop
+              } // c_k visible
+            } // k loop
+          } // c_j visible
+        } // j loop
+      } // c_i visible
+    } // i loop 
+    //ends the fours loop
 
   var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
   var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
@@ -183,6 +186,8 @@ function intersections(){
     int_ijklm.data.id = ""+i+j+k+l+"5";
     iLayer.addChild(int_ijklm); 
   }//end the five single
+
+  //add intersections to db?
 
 }//end intersections function
 
@@ -239,23 +244,21 @@ var recreate = function(){
 }
 
 // the one object that is under user focus
-// NEEDS TO BE MAINTAINED VIGILANTLY
+// (nullity) NEEDS TO BE MAINTAINED VIGILANTLY
 var activeItem = null;
-
-// ??? hitTests within x pixels of circle boundary, to detect resize instead of drag
+// hitTests within x pixels of circle boundary, to detect resize instead of drag
 var handle;
-
 // if this ever becomes true, we need to recalculate intersections
 var dragged = false; 
-
 var intersect = false;
 
 //mouse down function
 paper.tool.onMouseDown = function(event){
+
   console.log("onMouseDown running!");
   if(activeItem){
     activeItem.selected = false;
-    //need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
+    //(G: ??) need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
   }
 
   handle = null;
@@ -265,10 +268,9 @@ paper.tool.onMouseDown = function(event){
 
   hitResult = iLayer.hitTest(event.point);
   if(false && hitResult != null ){//if the intersection layer is hit
-    activeItem = hitResult.item; // will be a intersection
-    //activeItem.selected = false; //turn off intersection selection
+    activeItem = hitResult.item; //activeItem will be a intersection
+    
     console.log("User clicked an intersection with id " + hitResult.item.data.id);
-
     dbarray.push(paper.project.exportJSON());
 
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
@@ -349,13 +351,15 @@ paper.tool.onMouseDrag = function(event){
   }//end else
 }//end mouse dragging function
 
+
 //on mouse up function
+//G: I think this is where the intersections & circles should be saved to db
 function onMouseUp(event){
+
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
-  //intersect = false; // why?
-  if(dragged){//if the user dragged the circle
 
+  if(dragged){//if the user dragged the circle
 
     intersections();
 
@@ -363,12 +367,14 @@ function onMouseUp(event){
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
 
-    //create new intersections here
-    //calculate new intersections by calling graces function
     fixLayers();
-    dbarray.push(paper.project.exportJSON());
+
+    //Should we be sending circle data here? Because doSubmit is currently connected
+    // to creating a circle, not onMouseUp (on canvas). 
+    //old information -> dbarray.push(paper.project.exportJSON());
 
   }
+
   dragged = false;
 }//end mouse up function
 var scope = this;
@@ -376,8 +382,6 @@ var scope = this;
 //sends the circle data to DB storage
 
 doSubmit = function(e){
-
-  // var cLayer = project.getItem({data: {layerName: "circles"}});
 
   console.log("doSumbit Layering here");
 
@@ -398,10 +402,12 @@ doSubmit = function(e){
     obj.visible = true;
     objText.visible = true;
 
-    console.log(obj);
+  console.log(obj);
+
+  //G: Should be moved to onMouseUp?
  
   $.post("/saveCircleData", {
-      "id": circleID,
+      "number": circleID,
       "position_x": obj.position.x,
       "position_y": obj.position.y,
       "label": circleText,
@@ -411,16 +417,27 @@ doSubmit = function(e){
     console.log("Save complete!");
   });
 
+  $.post("/saveIntersectData", {
+        "created": /*time stamp here */,
+        "updated": /*time stamp here */,
+        "circle1": /*circle 1 id*/,
+        "circle2": /*circle 2 id*/,
+        "area": /*calculated in intersection function*/
+  })
+  .done(function(data){
+    console.log("Save complete!");
+  });
 
   insert = true;
 
   intersections();
 
-  dbarray.push(paper.project.exportJSON());
-  // console.log(dbarray);
+  //old logic -> dbarray.push(paper.project.exportJSON());
+  //             console.log(dbarray);
+  
   return false;
 } //end doSubmit function
 
-//submits json
-window.doSubmit = doSubmit;
+//G: Do we still need line below?
+//window.doSubmit = doSubmit;
 

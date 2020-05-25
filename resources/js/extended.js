@@ -1,12 +1,15 @@
 var debug_mode = false;
-project.importJSON(localStorage["saved"]);
+
+//instead of importing local storage, search db for sessid/userid, return circles
+  // project.importJSON(localStorage["saved"]);
+
 var activeItem; 
 var handle;
 var dragged = false; 
 
-var tester = true;
-
 var intersect = false;
+
+
 //mouse down function
 function onMouseDown(event){
 
@@ -43,26 +46,31 @@ function onMouseDown(event){
 
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
-    tester = true; 
     console.log(activeItem.fillColor);
     sliderIntersect = document.getElementById("rangeIntersect");
-    //sliderIntersect.value = activeItem.fillcolor; 
-    //sliderIntersect.value = activeItem.fillcolor; 
-    // *******TODO: need to calculate the correct number******
-    //set activeItem.fillColor = current_color;
-    //sliderIntersect.addEventListener("change",function(){
-    //TODO warming: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
+            //sliderIntersect.value = activeItem.fillcolor; 
+            //sliderIntersect.value = activeItem.fillcolor; 
+            // *******TODO: need to calculate the correct number******
+            //set activeItem.fillColor = current_color;
+            //sliderIntersect.addEventListener("change",function(){
+            //TODO warming: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
+    
     var colorStr = activeItem.fillColor._canvasStyle;
     var test_r, test_b;
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
+
     console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+
     sliderIntersect.value = (1-test_r/255)*100;
-    //console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
-    var r2, b2;
-    r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
-    // sliderIntersect.value = 
+
+    console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
+    
+    //What is all of this?
+    // var r2, b2;
+    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
+    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
+    // // 
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
@@ -74,13 +82,16 @@ function onMouseDown(event){
         segments: true,
         stroke: true,
         fill: true,
-        tolerance: 15
+        tolerance: 30
       }
     );
   } else { //when nothing is hit
+
     if(debug_mode){
       console.log("Nothing hit");
     }
+
+    //turn activeItem from true -> false
     if( activeItem ){
       activeItem.selected = false;
     }
@@ -88,12 +99,15 @@ function onMouseDown(event){
   }
 }//end of the mouse down function
 
+
+
 var segment;
 var scope = this;
 
 //handles all color sliders as well as outlines
-var sliderIntersect=document.getElementById("rangeIntersect");
+var sliderIntersect = document.getElementById("rangeIntersect");
 
+//color circles 
 sliderIntersect.addEventListener("change",function(){
   if( activeItem ){
     var r,b;
@@ -104,11 +118,16 @@ sliderIntersect.addEventListener("change",function(){
   }
 },true);
 
+//change stroke value (dotted/solid)
+
+//solid button 
 var formIntersect1 = document.getElementById("inlineRadioIntersect1");
 
+//if it is not dashed, it is solid (Isn't this default though?)
 formIntersect1.addEventListener("change",function(){
   if(activeItem){
-    var line = activeItem.dashArray;
+    
+    //does this do anything? var line = activeItem.dashArray;
     if (activeItem.dashArray = false){
 
       console.log("Circle " + activeItem.id +"'s outline is solid");
@@ -116,10 +135,13 @@ formIntersect1.addEventListener("change",function(){
   }
 },false);
 
+//dashed button
 var formIntersect12 = document.getElementById("inlineRadioIntersect12");
 
 formIntersect12.addEventListener("change",function(){
   if(activeItem){
+
+    //true or false, not specified values
     activeItem.dashArray = [10,4];
     console.log("Circle " + activeItem.id +"'s outline is dashed");
       }
@@ -132,8 +154,6 @@ doSubmit = function(e){
 
   //scope.activate();
   e.preventDefault();
-
- //what is the difference between t, text, and objText
 
   var circleID = e.target.querySelector("[name=formId]").value;
 
@@ -149,13 +169,17 @@ doSubmit = function(e){
     objText.visible = true;
 
   $.post("/saveCircleData", {
-    
-    //change circle1 to auto increment id (??)
-    "circle1": {
 
       "color": obj.fillColor,
-      "line_style": line,
-    }
+      "line_style": obj.stroke,
+  })
+  .done(function(data){
+    console.log("Save complete!");
+  });
+
+  $.post("/saveIntersectData", {
+
+      "color": /*intersectObj(Probably the area var?).fillColor*/,
   })
   .done(function(data){
     console.log("Save complete!");
@@ -168,6 +192,5 @@ doSubmit = function(e){
   return false;
 } //end doSubmit function
 
-//submits json
-window.doSubmit = doSubmit;
-
+//G: Do we still need line below?
+//window.doSubmit = doSubmit;
