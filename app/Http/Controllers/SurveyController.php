@@ -52,7 +52,7 @@ class SurveyController extends Controller{
     // into the canvas by javascript
     // TODO: need more qualification, get only most recent version of each circle
     // "group by" number and order by created_at, then take only the top of each group
-    DB::table('cirlce')->where('participant_id', $request->session->get('participant_id');
+    DB::table('cirlce')->where('participant_id', $request->session->get('participant_id'));
 
 
     //Log::info(print_r($request,true));
@@ -78,7 +78,7 @@ class SurveyController extends Controller{
       'radius' => $request->input('radius'),
       'color' => $request->input('color') ?? "",
       'line_style' => $request->input('line_style') ?? "",
-      'participant_id' => $request->session->get('participant_id') //$request->session()->getId()
+      'participant_id' => $request->session()->get('participant_id') //$request->session()->getId()
     ]);
 
   }

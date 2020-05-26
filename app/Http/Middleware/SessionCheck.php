@@ -18,14 +18,14 @@ class SessionCheck
     $participant = DB::table('participant')->where('session_token', $sessId)->first();
 
     if($participant){
-      $request->session->put('participant_id', $participant->id);
+      $request->session()->put('participant_id', $participant->id);
     } else {
       //field name on left, value on right
       $participant_id = DB::table('participant')->insertGetId([
         'session_token' => $sessId,
         'intersection_meaning' => '',
       ]);
-      $request->session->put('participant_id', $participant_id);
+      $request->session()->put('participant_id', $participant_id);
       return redirect('/start');
     }
 
