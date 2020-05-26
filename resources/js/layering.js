@@ -418,11 +418,11 @@ doSubmit = function(e){
   });
 
   $.post("/saveIntersectData", {
-        "created": /*time stamp here */,
-        "updated": /*time stamp here */,
-        "circle1": /*circle 1 id*/,
-        "circle2": /*circle 2 id*/,
-        "area": /*calculated in intersection function*/
+        "created": "" /*time stamp here */,
+        "updated": "" /*time stamp here */,
+        "circle1": "" /*circle 1 id*/,
+        "circle2": "" /*circle 2 id*/,
+        "area": "" /*calculated in intersection function*/
   })
   .done(function(data){
     console.log("Save complete!");

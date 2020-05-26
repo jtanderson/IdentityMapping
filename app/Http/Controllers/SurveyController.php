@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SurveyController extends Controller{
+  public function __construct(){
+    $this->middleware('participant');
+  }
+
   public function start(Request $request){
 
     return view('start', array(
@@ -33,13 +37,25 @@ class SurveyController extends Controller{
 
   public function color(Request $request){
     
+    /*
     DB::table('circle')->insertGetId([
       ['color' => $request->input('color')],
       ['line_style' => $request->input('line_style')]
     ]);
+     */
 
 
-    Log::info(print_r($request,true));
+    // TODO: select from DB where user_id is
+    // the user. Load the circle into an array,
+    // then pass that array of circle data
+    // to the view so that they can be inserted
+    // into the canvas by javascript
+    // TODO: need more qualification, get only most recent version of each circle
+    // "group by" number and order by created_at, then take only the top of each group
+    DB::table('cirlce')->where('participant_id', $request->session->get('participant_id');
+
+
+    //Log::info(print_r($request,true));
     return view('color', array(
       'progress' => '20',
       'prevURL' => route('position'),
@@ -55,14 +71,14 @@ class SurveyController extends Controller{
 
     //on right is AJAX left is database
     DB::table('circle')->insertGetId([
-      ['number' => $request->input('number')],
-      ['position_x' => $request->input('position_x')],
-      ['position_y' => $request->input('position_y')],
-      ['label' => $request->input('label')],
-      ['radius' => $request->input('radius')],
-      ['color' => $request->input('color')],
-      ['line_style' => $request->input('line_style')],
-      ['participant_id' => $request->session()->getId()]
+      'number' => $request->input('number'),
+      'center_x' => $request->input('position_x'),
+      'center_y' => $request->input('position_y'),
+      'label' => $request->input('label'),
+      'radius' => $request->input('radius'),
+      'color' => $request->input('color') ?? "",
+      'line_style' => $request->input('line_style') ?? "",
+      'participant_id' => $request->session->get('participant_id') //$request->session()->getId()
     ]);
 
   }
@@ -78,7 +94,7 @@ class SurveyController extends Controller{
         ['circle2_id' => $request->input('')],
         ['color' => $request->input('')],
         ['area' => $request->input('')],
-    ])
+    ]);
 
   }
 
