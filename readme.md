@@ -34,6 +34,10 @@
 ### 5/19 Meeting:
   - [ ] revisit extended.js (especially intersection logic) for AJAX posting to DB 
         - Looked at extended.js: At start of extended.js, we want to check db for user's sessId & return the circles & intersections
+        
+### 5/26 Meeting:
+- [ ] Figure out where session is created!
+- [ ] Need more qualification (in SurveyController color) in get request, must get MOST RECENT (maybe groupby (circleId) orderedby (created at) take (most recent timestamp)
 
 ## Fixed bugs:
   - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
