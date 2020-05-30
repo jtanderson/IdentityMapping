@@ -37,7 +37,8 @@
      - Looked at extended.js: At start of extended.js, we want to check db for user's sessId & return the circles & intersections
         
 ### 5/26 Meeting:
-- [ ] Figure out where session is created (?)
+- [ ] session()->exists - check if participant needs to be added at all
+    - [ ] Also consider session time, what if same session token is used?
 - [ ] Need more qualification (in SurveyController color) in get request, must get MOST RECENT (maybe groupby (circleId) orderedby (created at) take (most recent timestamp) - use Eloquent?
 
 - [ ] for loop verus foreach circles loop
