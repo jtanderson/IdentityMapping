@@ -398,9 +398,10 @@ doSubmit = function(e){
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
   var objText = project.getItem({data: {textId: parseInt(circleID)}});
+  objText.content = circleText;
 
-    obj.visible = true;
-    objText.visible = true;
+  obj.visible = true;
+  objText.visible = true;
 
   console.log(obj);
 
