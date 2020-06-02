@@ -29,21 +29,19 @@
   
 ### 4/7 Meeting:
   - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function.
-        - [ ] Assuming this means having an AJAX submission for Intersections to DB
-  - [x] (IN PROGRESS) "local storage" issue - Rewrite of doSubmit to AJAX?
-  
+        - [ ] Detangle rest of local storage logic in JS.
+        
 ### 5/19 Meeting:
-  - [ ] revisit extended.js (especially intersection logic) for AJAX posting to DB 
-     - Looked at extended.js: At start of extended.js, we want to check db for user's sessId & return the circles & intersections
+- [ ] Return the circles & intersections on color()
         
 ### 5/26 Meeting:
 - [ ] session()->exists - check if participant needs to be added at all
     - [ ] Also consider session time, what if same session token is used?
-- [ ] Need more qualification (in SurveyController color) in get request, must get MOST RECENT (maybe groupby (circleId) orderedby (created at) take (most recent timestamp) - use Eloquent?
-
-- [ ] for loop verus foreach circles loop
-- [ ] Figure out Eloquent's naming system for variables, thought it only needed for us to make a class variable & then it could pull data through it
 
 ## Fixed bugs:
   - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
+  - [x] "local storage" issue - Rewrite of doSubmit to AJAX?
+  - [x] Make category_id nullable (find migration to do so)
+
+
 
