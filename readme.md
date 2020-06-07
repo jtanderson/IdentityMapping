@@ -8,18 +8,10 @@
     - As a shim, add text to the user in the instructions to mention this awkward case
     
 ### 2/26 Meeting: 
-    (Maybe zoom call with Dr. Tomcho & Dr. Harris soon?)
   - [ ] Intersection questions -> likert scale questions
-    - [ ] Necessary database updates
-    - [ ] UI + backend updates
     - [ ] Questions:
       - Positive vs negative
       - TBD, from Dr. Tomcho
-  - [ ] UI usability (notes), after intersection explations
-  - [ ] Replace first page images with chart from (Martin Czellar, 2016) ?
-    - re-create with fewer columns, no footnotes, etc.
-    - original is done in LaTeX tables
-    - remove "distance" row
   - [ ] Maybe change bg color to off-white to emphasize canvas element
   - [ ] find replacement for grace ( :( )
   
@@ -28,7 +20,7 @@
     - ** We might want to rethink this, or at least, attach doSubmit to more than just "Next"
   
 ### 4/7 Meeting:
-  - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function.
+  - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function. (i.e. Write a AJAX function for intersection?)
         - [ ] Detangle rest of local storage logic in JS.
         
 ### 5/19 Meeting:
@@ -37,6 +29,10 @@
 ### 5/26 Meeting:
 - [ ] session()->exists - check if participant needs to be added at all
     - [ ] Also consider session time, what if same session token is used?
+    
+### 6/7:
+- [ ] circleID starts at 2 - blade templating issue (even though it starts at 1...?)
+- [ ] AJAX post in layering is null when sent to controller
 
 ## Fixed bugs:
   - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
