@@ -84,6 +84,7 @@ class SurveyController extends Controller{
     Log::info($request);
 
     //on right is AJAX left is database
+    /*
     DB::table('circle')->insertGetId([
       'number' => $request->input('number'),
       'center_x' => $request->input('position_x'),
@@ -94,7 +95,21 @@ class SurveyController extends Controller{
       'line_style' => $request->input('line_style') ?? "",
       'participant_id' => $request->session()->get('participant_id') //$request->session()->getId()
     ]);
+     */
 
+    $circle = new \App\Circle;
+    $circle->label = $request->input('label');
+    $circle->number = $request->input('number');
+    $circle->center_x = $request->input('position_x');
+    $circle->center_y = $request->input('position_y');
+    $circle->radius = $request->input('radius');
+    $circle->color = $request->input('color','');
+    $circle->line_style = $request->input('line_style','');
+    $circle->participant_id = $request->session()->get('participant_id','');
+
+    Log::info($circle);
+
+    $circle->save();
   }
 
   public function saveIntersectData(Request $request){
