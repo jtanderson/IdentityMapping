@@ -29,17 +29,8 @@ class SurveyController extends Controller{
     $sessId = $request->session()->getId();
 
     $participant = \App\Participant::where('session_token', $sessId);
-
-    //does this pull all the data we need?
-    //What we want: ALL circles & their data with participant_id being the same as the current session
     
     $circles = \App\Circle::where('participant_id', $participant);
-
-    // if($circles){
-    //   //inline JS load circles into paper using (blade)
-    // }else{
-    //   //return default circles i.e. empty
-    // }
 
     return view('position', array(
       'progress' => '10',
@@ -51,27 +42,11 @@ class SurveyController extends Controller{
 
   public function color(Request $request){
     
-    /*
-    DB::table('circle')->insertGetId([
-      ['color' => $request->input('color')],
-      ['line_style' => $request->input('line_style')]
-    ]);
-     */
-
-
-    // TODO: 
-    //select from DB where user_id is the user. 
-    //Load the circle into an array, then pass that array of circle data
-    // to the view so that they can be inserted into the canvas by javascript
-
-    // "group by" number and ***** "order by" created_at, then take only the top of each group (first())
-
-    // $circleArray = DB::table('circle')->where('participant_id', $request->session->get('participant_id'))->first();
-
 
     //Log::info(print_r($request,true));
     return view('color', array(
       'progress' => '20',
+      'circles' => $circles,
       'prevURL' => route('position'),
       'nextURL' => route('intersections'),
     ));
@@ -82,20 +57,6 @@ class SurveyController extends Controller{
   public function saveCircleData(Request $request){
     Log::info("Saving circle data...");
     Log::info($request);
-
-    //on right is AJAX left is database
-    /*
-    DB::table('circle')->insertGetId([
-      'number' => $request->input('number'),
-      'center_x' => $request->input('position_x'),
-      'center_y' => $request->input('position_y'),
-      'label' => $request->input('label'),
-      'radius' => $request->input('radius'),
-      'color' => $request->input('color') ?? "",
-      'line_style' => $request->input('line_style') ?? "",
-      'participant_id' => $request->session()->get('participant_id') //$request->session()->getId()
-    ]);
-     */
 
     $circle = new \App\Circle;
     $circle->label = $request->input('label');
@@ -116,14 +77,15 @@ class SurveyController extends Controller{
     Log::info("Saving intersection data...");
     Log::info($request);
 
-    DB::table('intersection')->insertGetId([
-        ['created_at' => $request->input('')],
-        ['updated_at' => $request->input('')],
-        ['circle1_id' => $request->input('')],
-        ['circle2_id' => $request->input('')],
-        ['color' => $request->input('')],
-        ['area' => $request->input('')],
-    ]);
+    $intersection = new \App\Intersection;
+    $intersection->circle1_id = $request->input('');
+    $intersection->circle2_id = $request->input('');
+    $intersection->color = $request->input('color', '');
+    $intersection->area = $request->input('area');
+
+    Log::info($intersection);
+
+    $intersection->save();
 
   }
 
