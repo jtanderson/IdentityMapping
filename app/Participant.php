@@ -13,4 +13,19 @@ class Participant extends Model
     protected $attributes = [
     	'intersection_meaning' => "",
     ];
+
+    protected $table = 'participant';
+
+    public function getCircles(){
+      $circlesArr = $this->hasMany('\App\Circle');
+      $circles = [
+        '1' => $this->hasMany('\App\Circle')->where('number', '1')->latest()->first(),
+        '2' => $this->hasMany('\App\Circle')->where('number', '2')->latest()->first(),
+        '3' => $this->hasMany('\App\Circle')->where('number', '3')->latest()->first(),
+        '4' => $this->hasMany('\App\Circle')->where('number', '4')->latest()->first(),
+        '5' => $this->hasMany('\App\Circle')->where('number', '5')->latest()->first(),
+      ];
+
+      return $circles;
+    }
 }
