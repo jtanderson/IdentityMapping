@@ -21,15 +21,10 @@
   
 ### 4/7 Meeting:
   - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function. (i.e. Write a AJAX function for intersection?)
-        
-### 5/26 Meeting:
-- [ ] session()->exists - check if participant needs to be added at all
-    - [ ] Also consider session time, what if same session token is used?
     
-### 6/8:
+### 6/0 Meeting:
 - [ ] Detangle rest of local storage logic in JS.
-- [ ] Return the circles & intersections on color()
-- [ ] session() information in the wiki
+- [ ] Return the circles on color()
 
 
 ## Fixed bugs:
@@ -38,6 +33,8 @@
   - [x] Make category_id nullable (find migration to do so)
   - [x] AJAX post in layering is null when sent to controller (Anderson fixed)
   - [x] circleID starts at 2 - blade templating issue (even though it starts at 1...?) (Anderson fixed)
+  - [x] session()->exists - check if participant needs to be added at all (SessionCheck does this)
+    - [ ] Also consider session time, what if same session token is used?
 
 
 
