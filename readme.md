@@ -22,8 +22,10 @@
 ### 4/7 Meeting:
   - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function. (i.e. Write a AJAX function for intersection?)
     
-### 6/0 Meeting:
+### 6/12:
 - [ ] Detangle rest of local storage logic in JS.
+- [ ] Retrieving hidden data from HTML & recreating circles:
+    - [ ] layering.js... we need to fill an object (5 times) with hidden input data and then create a circle into the paper.js view
 - [ ] Return the circles on color()
 
 
