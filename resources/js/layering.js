@@ -5,19 +5,36 @@ $.ajaxSetup({
   }
 });
 
-var dbarray = new Array();
-
 console.log("Loading Layering");
 console.log(Layer);
 
-//if there are circles already saved in this session
-var answer = localStorage["extended"];
-if(answer == "true"){
-  project.importJSON(localStorage["saved"]);
-  creation();
-  dbarray.push(project.exportJSON());
-}
-else{
+//check each circle using document.getElementById("circle-1") which is a form
+//check if it has hidden input etc. if yes, load their values into a new circle
+
+  for(var i=1; i<=5; i++){
+
+    circle[i] = array();
+
+    // var form = document.getElementById("circle-" + i);
+    var circle_x = document.getElementById("circle-"+i+"-center_x");
+    var circle_y = document.getElementById("circle-"+i+"-center_y");
+    var rd = document.getElementById("circle-"+i+"-radius");
+    var label = document.getElementById("circle-"+i+"-label");
+    //add information to circle[i].circle_x = circle_x
+   
+     //getElementById returns NULL if the id is not found
+
+    circle[i]['circle_x'] = circle_x;
+    circle[i]['circle_y']  = circle_x;
+    circle[i]['radius'] = rd;
+    circle[i]['label'] = label;
+
+    //make new circle if data is not empty
+    //recreate(data[i]) 
+  }
+
+//----------------------------
+
 
   var circleLayer = new Layer();//creates the circle layer
   var min = 55;
@@ -68,7 +85,7 @@ else{
 
     textLayer.addChild(text);//adds text to the text layer
   }
-}
+
 
 
 
@@ -206,12 +223,12 @@ var fixLayers = function(){
 
 }//end fix layers function
 
-//recreate when canvas reset function
-var recreate = function(){
+//recreate when canvas reset function, now with object parameter
+var recreate = function(data){
   for(var i=1; i<=5; i++){//loop for circle creation (random)
     var circle = new Path.Circle({
-      center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
-      radius: Math.floor(Math.random() * (+max - +min)) + +min,
+      center: center: [data["center_x"], data["center_y"]],
+      radius: data["radius"],
       fillColor: new Color(1, 1, 1, 0.75),
       strokeColor: 'black',
       id: i,
@@ -228,9 +245,8 @@ var recreate = function(){
   for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
     var c = project.getItem({data: {circleId: i}});
     var text = new PointText({
-      fillColor:  'red',
-      content:  "Circle " + i,
-      //position: c.getItem({data: {center}}),
+      fillColor:  'black',
+      content:  data["label"],
       position: c.center,
       insert: false,
       visible: false,

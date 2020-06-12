@@ -25,15 +25,14 @@
       <div class="col-sm-4">
         <br><br>
 
-        @for ($i = 1; $i < 6; $i++)
-                <form action="#" onsubmit="doSubmit(event);">
+        @foreach ( $circles as $key => $value )
+                <form action="#" id="circle-{{ $key }}" onsubmit="doSubmit(event);">
                 <input type="text" name="circleText" id="textInput" style="width: 60%;">
-                <input type="hidden" name="formId" value="{{ $i ?? $circles->number }}">
-
+                <input type="hidden" id="circle-{{ $key }}-{{ $value }}" value="{{ $value }}"/>
                 <input type="submit" value="Add circle">
                 </form>
               <br><br>
-        @endfor
+        @endforeach
       </div>
 
       <script>

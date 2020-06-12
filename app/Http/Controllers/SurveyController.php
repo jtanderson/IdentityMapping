@@ -24,13 +24,9 @@ class SurveyController extends Controller{
 
   public function position(Request $request){
 
-    //TODO: check if the user has circles in-progress and load them USING PARTICIPANT & CIRCLES CLASS
-
-    $sessId = $request->session()->getId();
-
-    $participant = \App\Participant::where('session_token', $sessId);
+    $participant = \App\Participant::find(session()->get('participant_id'));
     
-    $circles = \App\Circle::where('participant_id', $participant);
+    $circles = $participant->getCircles();
 
     return view('position', array(
       'progress' => '10',
@@ -42,8 +38,10 @@ class SurveyController extends Controller{
 
   public function color(Request $request){
     
+    $participant = \App\Participant::find(1)->first();
+    
+    $circles = $participant->getCircles();
 
-    //Log::info(print_r($request,true));
     return view('color', array(
       'progress' => '20',
       'circles' => $circles,
