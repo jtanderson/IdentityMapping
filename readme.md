@@ -22,10 +22,9 @@
 ### 4/7 Meeting:
   - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function. (i.e. Write a AJAX function for intersection?)
     
-### 6/12:
-- [ ] Detangle rest of local storage logic in JS.
+### 6/13 Meeting:
 - [ ] Retrieving hidden data from HTML & recreating circles:
-    - [ ] layering.js... we need to fill an object (5 times) with hidden input data and then create a circle into the paper.js view
+    - [ ] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and then create a circle into the paper.js view 
 - [ ] Return the circles on color()
 
 
@@ -37,6 +36,7 @@
   - [x] circleID starts at 2 - blade templating issue (even though it starts at 1...?) (Anderson fixed)
   - [x] session()->exists - check if participant needs to be added at all (SessionCheck does this)
     - [ ] Also consider session time, what if same session token is used?
+  - [x] Detangle rest of local storage logic in JS.
 
 
 
