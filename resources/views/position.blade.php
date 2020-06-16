@@ -25,10 +25,19 @@
       <div class="col-sm-4">
         <br><br>
 
+      <?php
+        //print_r($circles);
+      ?>
         @foreach ( $circles as $key => $value )
+                <?php //print_r($value); ?>
                 <form action="#" id="circle-{{ $key }}" onsubmit="doSubmit(event);">
                 <input type="text" name="circleText" id="textInput" style="width: 60%;">
-                <input type="hidden" id="circle-{{ $key }}-{{ $value }}" value="{{ $value }}"/>
+                <input type="hidden" name="circle-number" value="{{ $key }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-x" value="{{ $value['center_x'] }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-y" value="{{ $value['center_y'] }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value['radius'] }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-label" value="{{ $value['label'] }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-line_style" value="{{ $value['line_style'] }}"/>
                 <input type="submit" value="Add circle">
                 </form>
               <br><br>

@@ -24,7 +24,8 @@ class SurveyController extends Controller{
 
   public function position(Request $request){
 
-    $participant = \App\Participant::find(session()->get('participant_id'));
+    $participant = \App\Participant::find('1');
+      // session()->get('participant_id'));
     
     $circles = $participant->getCircles();
 

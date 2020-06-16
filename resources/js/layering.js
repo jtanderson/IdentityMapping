@@ -11,29 +11,51 @@ console.log(Layer);
 //check each circle using document.getElementById("circle-1") which is a form
 //check if it has hidden input etc. if yes, load their values into a new circle
 
-  for(var i=1; i<=5; i++){
+  // TODO: move this to circle loading phase
+  // var radius = e.target.getElementById("circle-"+circleID+"-radius");
+  // console.log("Loading circle "+circleID+ "'s radius as "+radius);
 
-    circle[i] = array();
+function findCircles(){
 
-    // var form = document.getElementById("circle-" + i);
-    var circle_x = document.getElementById("circle-"+i+"-center_x");
-    var circle_y = document.getElementById("circle-"+i+"-center_y");
-    var rd = document.getElementById("circle-"+i+"-radius");
-    var label = document.getElementById("circle-"+i+"-label");
-    //add information to circle[i].circle_x = circle_x
-   
-     //getElementById returns NULL if the id is not found
+  var circleID = querySelector("[name=circle-number]").value;
 
-    circle[i]['circle_x'] = circle_x;
-    circle[i]['circle_y']  = circle_x;
-    circle[i]['radius'] = rd;
-    circle[i]['label'] = label;
+    for(var i=1; i<=5; i++){
 
-    //make new circle if data is not empty
-    //recreate(data[i]) 
+      circle[i] = array();
+
+      // var form = document.getElementById("circle-" + i);
+      var circle_x = document.getElementById("circle-"+circleID+"-center_x");
+      var circle_y = document.getElementById("circle-"+circleID+"-center_y");
+      var radius = document.getElementById("circle-"+circleID+"-radius");
+      var line_style = document.getElementById("circle-"+circleID+"-line_style");
+      var label = document.getElementById("circleText");
+      //add information to circle[i].circle_x = circle_x
+     
+       //getElementById returns NULL if the id is not found
+
+      circle[i]['circle_x'] = circle_x;
+      circle[i]['circle_y']  = circle_x;
+      circle[i]['radius'] = radius;
+      circle[i]['label'] = label;
+
+      //make new circle if data is not empty
+
+      if(circle[i].length > 1){
+        recreate(circle[i]);
+      }
+
+      //else{
+      //   load new circles
+      // }
+
   }
 
+}
+
 //----------------------------
+
+
+  findCircles();
 
 
   var circleLayer = new Layer();//creates the circle layer
@@ -403,9 +425,8 @@ doSubmit = function(e){
 
   e.preventDefault();
 
-  //what is the difference between t, text, and objText
-
-  var circleID = e.target.querySelector("[name=formId]").value;
+  //should work when circles are inputted/created 
+  var circleID = e.target.querySelector("[name=circle-number]").value;
 
   //get array of elements, [0]th element's value
   var circleText = e.target.querySelector("[name=circleText]").value;
