@@ -24,8 +24,10 @@
     
 ### 6/13 Meeting:
 - [ ] Retrieving hidden data from HTML & recreating circles:
-    - [ ] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and then create a circle into the paper.js view 
+    - [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
+    - [ ] then create a circle into the paper.js view 
 - [ ] Return the circles on color()
+- [ ] "e.target.querySelector(...) is null" on doSubmit for adding a new circle to the page (where is this happening? Due to the fact that things have been ripped up? Shouldn't be because of circleID anymore)
 
 
 ## Fixed bugs:
