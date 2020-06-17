@@ -24,10 +24,11 @@
     
 ### 6/13 Meeting:
 - [ ] Retrieving hidden data from HTML & recreating circles:
-    - [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
-    - [ ] then create a circle into the paper.js view 
+    - [ ] Create a circle into the paper.js view 
+     - [ ] Current bug: Controller is giving "NaN" or "?" values
 - [ ] Return the circles on color()
-- [ ] "e.target.querySelector(...) is null" on doSubmit for adding a new circle to the page (where is this happening? Due to the fact that things have been ripped up? Shouldn't be because of circleID anymore)
+- [ ] 
+
 
 
 ## Fixed bugs:
@@ -39,6 +40,6 @@
   - [x] session()->exists - check if participant needs to be added at all (SessionCheck does this)
     - [ ] Also consider session time, what if same session token is used?
   - [x] Detangle rest of local storage logic in JS.
-
+  - [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
 
 
