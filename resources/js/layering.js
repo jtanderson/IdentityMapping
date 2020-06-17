@@ -6,32 +6,42 @@ $.ajaxSetup({
 });
 
 console.log("Loading Layering");
-console.log(Layer);
 
-//check each circle using document.getElementById("circle-1") which is a form
-//check if it has hidden input etc. if yes, load their values into a new circle
+var circleLayer = new Layer();//creates the circle layer
+circleLayer.data.layerName = "circles";
+project.addLayer(circleLayer);//adds the layer
 
-  // TODO: move this to circle loading phase
-  // var radius = e.target.getElementById("circle-"+circleID+"-radius");
-  // console.log("Loading circle "+circleID+ "'s radius as "+radius);
+var intersectionLayer = new Layer();//starts the intersection layer
+intersectionLayer.data.layerName = "intersections";
+project.addLayer(intersectionLayer); //adds int layer
 
-function findCircles(){
+//creates the label layer which will be the top layer
+var labelLayer = new Layer();
+labelLayer.data.layerName = "labels";
+project.addLayer(labelLayer);
 
-  var circleID = querySelector("[name=circle-number]").value;
 
-    for(var i=1; i<=5; i++){
+//TODO: move to document.onready event / read up on better options
 
-      circle[i] = array();
+function loadCircles(){
+
+  var circle = Array(5);
+
+   for(var i=1; i<=5; i++){
+
+      var circleID = i;
+
+      circle[i] = Array();
 
       // var form = document.getElementById("circle-" + i);
-      var circle_x = document.getElementById("circle-"+circleID+"-center_x");
-      var circle_y = document.getElementById("circle-"+circleID+"-center_y");
-      var radius = document.getElementById("circle-"+circleID+"-radius");
-      var line_style = document.getElementById("circle-"+circleID+"-line_style");
-      var label = document.getElementById("circleText");
+      var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
+      var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
+      var radius = document.getElementById("circle-"+circleID+"-radius").value;
+      var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
+      var label = document.getElementById("circle-"+circleID+"-label");
       //add information to circle[i].circle_x = circle_x
      
-       //getElementById returns NULL if the id is not found
+       //should return "" if no circle
 
       circle[i]['circle_x'] = circle_x;
       circle[i]['circle_y']  = circle_x;
@@ -40,73 +50,129 @@ function findCircles(){
 
       //make new circle if data is not empty
 
-      if(circle[i].length > 1){
-        recreate(circle[i]);
-      }
-
-      //else{
-      //   load new circles
-      // }
-
   }
 
+    return circle;
 }
 
-//----------------------------
+//recreate when canvas reset function, now with object parameter
+var intialize = function(){
 
-
-  findCircles();
-
-
-  var circleLayer = new Layer();//creates the circle layer
   var min = 55;
   var max = 135;
   var minR = 125;
   var maxR = 650;
+
+  var circles = loadCircles();
+
   for(var i=1; i<=5; i++){//loop for circle creation (random)
 
+    var existed = true;
+
+    if(circles[i]["center_x"] == ""){
+
+      circles[i]["center_x"] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+    }
+    if(circles[i]["center_y"] == ""){
+
+      circles[i]["center_y"] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+    }
+    if(circles[i]["radius"] == ""){
+
+      circles[i]["radius"] = Math.floor(Math.random() * (+max - +min)) + +min;
+    }
+    if(circles[i]["label"] == ""){
+      existed = false;
+      circles[i]["label"] = "Circle " + i;
+    }
+
+
     var circle = new Path.Circle({
-      center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
-      radius: Math.floor(Math.random() * (+max - +min)) + +min,
+      center: [circles[i]["center_x"], circles[i]["center_y"]],
+      radius: circles[i]["radius"],
       fillColor: new Color(1, 1, 1, 0.75),
       strokeColor: 'black',
-      id: i,
-      insert: false,
-      visible: false,
+      // id: i,
+      insert: existed,
+      visible: existed,
       data: {
         circleId: i
       }
     });
-    circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
-  }
 
-  circleLayer.data.layerName = "circles";
-  project.addLayer(circleLayer);//adds the layer
+    var iLayer = project.getItem({data:{layerName: "intersections"}});
+    var cLayer = project.getItem({data:{layerName: "circles"}});
+    var tLayer = project.getItem({data:{layerName: "labels"}});
 
-  var intersectionLayer = new Layer();//starts the intersection layer
-  intersectionLayer.data.layerName = "intersections";
-  intersections();
+    cLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
+    //avoid global handles
 
-//creates the text layer which will be the top layer
-  var textLayer = new Layer();
-  textLayer.data.layerName = "text";
-
-  for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
     var c = project.getItem({data: {circleId: i}});
-    var text = new PointText({
+
+    var label = new PointText({
       fillColor:  'black',
-      content:  "Circle " + i,
-      //position: //c.getItem({data: {"center"}}),
-      position: c.position, //new Point(c.position._x, c.position._y),
-      insert: false,
-      visible: false,
+      content: circles[i]["label"],
+      position: c.center,
+      insert: existed,
+      visible: existed,
       data: {
-        textId: i
+        labelId: i
       }
     });
 
-    textLayer.addChild(text);//adds text to the text layer
-  }
+    tLayer.addChild(label);//adds text to the text layer
+  
+  }//end for
+
+}
+
+intialize();
+
+//----------------------------
+
+  // var min = 55;
+  // var max = 135;
+  // var minR = 125;
+  // var maxR = 650;
+  // for(var i=1; i<=5; i++){//loop for circle creation (random)
+
+  //   var circle = new Path.Circle({
+  //     center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
+  //     radius: Math.floor(Math.random() * (+max - +min)) + +min,
+  //     fillColor: new Color(1, 1, 1, 0.75),
+  //     strokeColor: 'black',
+  //     id: i,
+  //     insert: false,
+  //     visible: false,
+  //     data: {
+  //       circleId: i
+  //     }
+  //   });
+  //   circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
+  // }
+
+  intersections();
+
+//creates the text layer which will be the top layer
+  // var textLayer = new Layer();
+  // textLayer.data.layerName = "text";
+
+  // for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
+  //   var c = project.getItem({data: {circleId: i}});
+  //   var text = new PointText({
+  //     fillColor:  'black',
+  //     content:  "Circle " + i,
+  //     //position: //c.getItem({data: {"center"}}),
+  //     position: c.position, //new Point(c.position._x, c.position._y),
+  //     insert: false,
+  //     visible: false,
+  //     data: {
+  //       textId: i
+  //     }
+  //   });
+
+  //   textLayer.addChild(text);//adds text to the text layer
+  // }
 
 
 
@@ -120,7 +186,7 @@ var group5 = new Group();
 function creation(){
   var iLayer = project.getItem({data:{layerName: "intersections"}});
   var cLayer = project.getItem({data:{layerName: "circles"}});
-  var tLayer = project.getItem({data:{layerName: "text"}});
+  var tLayer = project.getItem({data:{layerName: "labels"}});
   for(var i in cLayer.children){
     cLayer.children[i].fillColor = new Color(1, 1, 1, 0.75);
     cLayer.children[i].dashArray = false;
@@ -234,7 +300,7 @@ function intersections(){
 var fixLayers = function(){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
-  var tLayer = project.getItem({data: {layerName: "text"}});
+  var tLayer = project.getItem({data: {layerName: "labels"}});
   tLayer.sendToBack();
   iLayer.sendToBack();
   cLayer.sendToBack();
@@ -245,41 +311,6 @@ var fixLayers = function(){
 
 }//end fix layers function
 
-//recreate when canvas reset function, now with object parameter
-var recreate = function(data){
-  for(var i=1; i<=5; i++){//loop for circle creation (random)
-    var circle = new Path.Circle({
-      center: center: [data["center_x"], data["center_y"]],
-      radius: data["radius"],
-      fillColor: new Color(1, 1, 1, 0.75),
-      strokeColor: 'black',
-      id: i,
-      insert: false,
-      visible: false,
-      data: {
-        circleId: i
-      }
-    });
-    circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
-  }
-
-  
-  for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
-    var c = project.getItem({data: {circleId: i}});
-    var text = new PointText({
-      fillColor:  'black',
-      content:  data["label"],
-      position: c.center,
-      insert: false,
-      visible: false,
-      data: {
-        textId: i
-      }
-  });
-
-    textLayer.addChild(text);//adds text to the text layer
-  }
-}
 
 // the one object that is under user focus
 // (nullity) NEEDS TO BE MAINTAINED VIGILANTLY
@@ -319,9 +350,6 @@ paper.tool.onMouseDown = function(event){
     //bring circle selected to top of canvas?
     //hitResult.item.data.circleId.bringToFront();
 
-    // TODO: replace with an ajax call to send the JSON to the backend database
-    dbarray.push(paper.project.exportJSON());
-
     //creates circles handle
     handle = activeItem.hitTest(event.point, 
       {
@@ -354,6 +382,7 @@ paper.tool.onMouseDrag = function(event){
     
     // TODO: instead of using a variable, test which layer activeItem is in!!
     // circleLayer.isAncestor(activeItem)
+
     //if(!intersect){
     if( cLayer.isAncestor(activeItem) ){
       iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
@@ -376,7 +405,7 @@ paper.tool.onMouseDrag = function(event){
         var data = activeItem.data.circleId;
         if(activeItem){
           activeItem.translate(event.delta);
-          project.getItem({data: {textId: data}}).translate(event.delta);
+          project.getItem({data: {labelId: data}}).translate(event.delta);
           // + activeItem.position);
             console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
         }
@@ -407,9 +436,7 @@ function onMouseUp(event){
 
     fixLayers();
 
-    //Should we be sending circle data here? Because doSubmit is currently connected
-    // to creating a circle, not onMouseUp (on canvas). 
-    //old information -> dbarray.push(paper.project.exportJSON());
+    //TODO: FUTURE send data to db UPDATE GOES HERE
 
   }
 
@@ -419,6 +446,8 @@ var scope = this;
 
 //sends the circle data to DB storage
 
+//TODO: Gets wrong information now
+
 doSubmit = function(e){
 
   console.log("doSumbit Layering here");
@@ -426,29 +455,29 @@ doSubmit = function(e){
   e.preventDefault();
 
   //should work when circles are inputted/created 
-  var circleID = e.target.querySelector("[name=circle-number]").value;
+  var circleID = e.target.id.split("-")[1];
 
   //get array of elements, [0]th element's value
-  var circleText = e.target.querySelector("[name=circleText]").value;
+  var circleLabel = e.target.querySelector("#circle-"+circleID+"-label");
 
-  //actual circle obj itself - with ID that we need 
+  //??
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
-  var objText = project.getItem({data: {textId: parseInt(circleID)}});
-  objText.content = circleText;
+  var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+  objLabel.content = circleLabel;
 
   obj.visible = true;
-  objText.visible = true;
+  objLabel.visible = true;
 
   console.log(obj);
-
-  //G: Should be moved to onMouseUp?
  
+
+ //TODO: PROBLEM HERE - maybe same as issue from before "not a number but ?/NaN"
   $.post("/saveCircleData", {
       "number": circleID,
       "position_x": obj.position.x,
       "position_y": obj.position.y,
-      "label": circleText,
+      "label": circleLabel,
       "radius": (obj.bounds.width/2),
   })
   .done(function(data){
