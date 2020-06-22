@@ -23,7 +23,8 @@ project.addLayer(labelLayer);
 
 //TODO: move to document.onready event / read up on better options
 
-function loadCircles(){
+var intialize = function(){
+// function loadCircles(){
 
   var circle = Array(5);
 
@@ -35,8 +36,11 @@ function loadCircles(){
 
       // var form = document.getElementById("circle-" + i);
       var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
+      console.log("circle "+i+" x retrieved is " + circle_x);
       var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
+      console.log("circle "+i+" y retrieved is " + circle_y);
       var radius = document.getElementById("circle-"+circleID+"-radius").value;
+      console.log("circle "+i+" radius retrieved is " + radius);
       var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
       var label = document.getElementById("circle-"+circleID+"-label");
       //add information to circle[i].circle_x = circle_x
@@ -44,52 +48,55 @@ function loadCircles(){
        //should return "" if no circle
 
       circle[i]['circle_x'] = circle_x;
+      console.log(circle[i]['circle_x']);
       circle[i]['circle_y']  = circle_x;
       circle[i]['radius'] = radius;
       circle[i]['label'] = label;
 
-      //make new circle if data is not empty
+//   }
 
-  }
+//     return circle;
+//     //G: 6/14 this isn't returning the right thing
+// }
 
-    return circle;
-}
-
-//recreate when canvas reset function, now with object parameter
-var intialize = function(){
+// //recreate when canvas reset function, now with object parameter
+// var intialize = function(){
 
   var min = 55;
   var max = 135;
   var minR = 125;
   var maxR = 650;
 
-  var circles = loadCircles();
+//   var circles = loadCircles();
 
-  for(var i=1; i<=5; i++){//loop for circle creation (random)
+//   for(var i=1; i<=5; i++){//loop for circle creation (random)
 
     var existed = true;
 
-    if(circles[i]["center_x"] == ""){
-
-      circles[i]["center_x"] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+    if(circle[i]['circle_x'] == ""){
+      circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
     }
-    if(circles[i]["center_y"] == ""){
+    console.log("circle " + i + "x position is: "+ circle[i]['circle_x']);
 
-      circles[i]["center_y"] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+    if(circle[i]['circle_y'] == ""){
+      circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
     }
-    if(circles[i]["radius"] == ""){
+    console.log("circle " + i + "y position is: "+ circle[i]['circle_y']);
 
-      circles[i]["radius"] = Math.floor(Math.random() * (+max - +min)) + +min;
+    if(circle[i]['radius'] == ""){
+      // circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
     }
-    if(circles[i]["label"] == ""){
+    console.log("circle " + i + "radius is: "+ circle[i]['radius']);
+
+    if(circle[i]['label'] == ""){
       existed = false;
-      circles[i]["label"] = "Circle " + i;
+      circle[i]['label'] = "Circle " + i;
     }
 
 
-    var circle = new Path.Circle({
-      center: [circles[i]["center_x"], circles[i]["center_y"]],
-      radius: circles[i]["radius"],
+    var Circle = new Path.Circle({
+      center: [circle[i]['circle_x'], circle[i]['circle_y']],
+      radius: circle[i]['radius'],
       fillColor: new Color(1, 1, 1, 0.75),
       strokeColor: 'black',
       // id: i,
@@ -104,14 +111,15 @@ var intialize = function(){
     var cLayer = project.getItem({data:{layerName: "circles"}});
     var tLayer = project.getItem({data:{layerName: "labels"}});
 
-    cLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
+    // console.log(circle);
+    cLayer.addChild(Circle); //add each circle to the layer WITHOUT visibility
     //avoid global handles
 
     var c = project.getItem({data: {circleId: i}});
 
     var label = new PointText({
       fillColor:  'black',
-      content: circles[i]["label"],
+      content: circle[i]['label'],
       position: c.center,
       insert: existed,
       visible: existed,
@@ -382,6 +390,7 @@ paper.tool.onMouseDrag = function(event){
     
     // TODO: instead of using a variable, test which layer activeItem is in!!
     // circleLayer.isAncestor(activeItem)
+    //6/22: (?)
 
     //if(!intersect){
     if( cLayer.isAncestor(activeItem) ){
@@ -446,7 +455,7 @@ var scope = this;
 
 //sends the circle data to DB storage
 
-//TODO: Gets wrong information now
+//TODO: Gets wrong information now (?)
 
 doSubmit = function(e){
 
@@ -456,12 +465,18 @@ doSubmit = function(e){
 
   //should work when circles are inputted/created 
   var circleID = e.target.id.split("-")[1];
+  console.log(circleID);
 
   //get array of elements, [0]th element's value
-  var circleLabel = e.target.querySelector("#circle-"+circleID+"-label");
+  var circleLabel = e.target.document.getElementById("circle-"+circleID+"-label");
+  console.log(circleLabel);
 
-  //??
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+  console.log(obj.position.x);
+  console.log(obj.position.y);
+  console.log(obj.bounds.width/2);
+
 
   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
   objLabel.content = circleLabel;
@@ -471,8 +486,7 @@ doSubmit = function(e){
 
   console.log(obj);
  
-
- //TODO: PROBLEM HERE - maybe same as issue from before "not a number but ?/NaN"
+ //TODO: *** PROBLEM HERE - maybe same as issue from before "not a number but ?/NaN"
   $.post("/saveCircleData", {
       "number": circleID,
       "position_x": obj.position.x,
