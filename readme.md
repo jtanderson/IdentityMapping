@@ -23,10 +23,12 @@
   - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function. (i.e. Write a AJAX function for intersection?)
     
 ### 6/13 Meeting:
-- [ ] Retrieving hidden data from HTML & recreating circles:
-    - [ ] Create a circle into the paper.js view 
-     - [ ] Going from one function to the other gives weird values
 - [ ] Return the circles on color()
+- [ ] saveCircleData should be on every user action
+
+### 6/22:
+- [ ] saveCircleData is not sending information to controller.
+    - Able to retrieve obj's x, y, but unable to $.post to DB (TypeError: 'stepUp' called on an object that does not implement interface HTMLInputElement.)
 
 
 
@@ -40,5 +42,6 @@
     - [ ] Also consider session time, what if same session token is used?
   - [x] Detangle rest of local storage logic in JS.
   - [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
-
+- [x] Retrieving hidden data from HTML & recreating circles:
+    - [x] Create a circle into the paper.js view 
 
