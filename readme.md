@@ -27,8 +27,8 @@
 - [ ] saveCircleData should be on every user action
 
 ### 6/22:
-- [ ] saveCircleData is not sending information to controller.
-    - Able to retrieve obj's x, y, but unable to $.post to DB (TypeError: 'stepUp' called on an object that does not implement interface HTMLInputElement.)
+- [ ] session()->get('participant_id') isn't seen by controller as object, instead as a number so it can't use it to getCircles()
+- [ ] Create circles after doSubmit (how did we do this before?, calling recreate()?)
 
 
 
