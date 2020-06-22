@@ -25,9 +25,8 @@
 ### 6/13 Meeting:
 - [ ] Retrieving hidden data from HTML & recreating circles:
     - [ ] Create a circle into the paper.js view 
-     - [ ] Current bug: Controller is giving "NaN" or "?" values
+     - [ ] Going from one function to the other gives weird values
 - [ ] Return the circles on color()
-- [ ] 
 
 
 
