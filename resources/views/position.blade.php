@@ -31,12 +31,12 @@
         @foreach ( $circles as $key => $value )
                 <?php //print_r($value); ?>
                 <form action="#" id="circle-{{ $key }}-form" onsubmit="doSubmit(event);">
-                <input type="text" name="circle-{{ $key }}" id="circle-{{ $key }}-label" value="{{ $value['label'] }}" style="width: 60%;">
-                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-x" value="{{ $value['center_x'] }}"/>
-                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-y" value="{{ $value['center_y'] }}"/>
-                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value['radius'] }}"/>
-                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-line_style" value="{{ $value['line_style'] }}"/>
-                <input type="hidden" name="circle-{{ $key }}" id="circle-{{ $key }}-id" value="{{ $value['id'] }}" />
+                <input type="text" name="circle-{{ $key }}" id="circle-{{ $key }}-label" value="{{ $value ? $value['label'] : "" }}" style="width: 60%;">
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-x" value="{{ $value ? $value['center_x'] : "" }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-y" value="{{ $value ? $value['center_y'] : "" }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value ? $value['radius'] : "" }}"/>
+                <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-line_style" value="{{ $value ? $value['line_style'] : "" }}"/>
+                <input type="hidden" name="circle-{{ $key }}" id="circle-{{ $key }}-id" value="{{ $value ? $value['id'] : "" }}" />
                 <input type="submit" value="Add circle">
                 </form>
               <br><br>
