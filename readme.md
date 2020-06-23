@@ -15,22 +15,15 @@
   - [ ] Maybe change bg color to off-white to emphasize canvas element
   - [ ] find replacement for grace ( :( )
   
-### 3/24 Meeting: 
-  - [x] (IN PROGRESS) Position "Next" - submit data into JSON object -> database by writing PHP code for Laravel (associative array with AJAX request (example is inside layering.js))
-    - **We might want to rethink this, or at least, attach doSubmit to more than just "Next"
-  
 ### 4/7 Meeting:
-  - [ ] (IN PROGRESS) activeItem.fillcolor in extended.js logic extended to intersections through function. (i.e. Write a AJAX function for intersection?)
+- [ ] (3) (IN PROGRESS) Write a AJAX function for intersection
     
 ### 6/13 Meeting:
-- [ ] Return the circles on color()
-- [ ] saveCircleData should be on every user action
+- [ ] (2) Return the circles on color()
+- [ ] (1!) saveCircleData should be on every user action
 
-### 6/22:
-- [ ] session()->get('participant_id') isn't seen by controller as object, instead as a number so it can't use it to getCircles()
-- [ ] Create circles after doSubmit (how did we do this before?, calling recreate()?)
-
-
+### 6/23 Meeting: 
+- [ ] (4) Abort button should delete entire participant & their data (W/ WARNING!) (cuz privacy)
 
 ## Fixed bugs:
   - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
@@ -44,4 +37,6 @@
   - [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
 - [x] Retrieving hidden data from HTML & recreating circles:
     - [x] Create a circle into the paper.js view 
-
+- [x] session()->get('participant_id') isn't seen by controller as object, instead as a number so it can't use it to getCircles()
+- [x] Create circles after doSubmit (how did we do this before?, calling recreate()?)
+- [x] (IN PROGRESS) Position "Next" - submit data into JSON object -> database by writing PHP code for Laravel (associative array with AJAX request (example is inside layering.js))
