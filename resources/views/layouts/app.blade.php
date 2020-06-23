@@ -13,7 +13,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">  
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 
   <style>
     @yield('css')
@@ -61,7 +61,7 @@
 
   <!-- Scripts -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+  <script type="text/javascript" src="{{ secure_asset('js/app.js') }}"></script>
   @yield('javascript')
 </body>
 </html>
