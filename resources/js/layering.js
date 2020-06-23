@@ -36,22 +36,26 @@ var intialize = function(){
 
       // var form = document.getElementById("circle-" + i);
       var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-      console.log("circle "+i+" x retrieved is " + circle_x);
+      // console.log("circle "+i+" x retrieved is " + circle_x);
       var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-      console.log("circle "+i+" y retrieved is " + circle_y);
+      // console.log("circle "+i+" y retrieved is " + circle_y);
       var radius = document.getElementById("circle-"+circleID+"-radius").value;
-      console.log("circle "+i+" radius retrieved is " + radius);
+      // console.log("circle "+i+" radius retrieved is " + radius);
       var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
-      var label = document.getElementById("circle-"+circleID+"-label");
+
+      var dbid = document.getElementById("circle-"+circleID+"-id").value;
+      
+      var label = document.getElementById("circle-"+circleID+"-label").value;
       //add information to circle[i].circle_x = circle_x
      
        //should return "" if no circle
 
       circle[i]['circle_x'] = circle_x;
-      console.log(circle[i]['circle_x']);
+      // console.log(circle[i]['circle_x']);
       circle[i]['circle_y']  = circle_x;
       circle[i]['radius'] = radius;
       circle[i]['label'] = label;
+      circle[i]['dbid'] = dbid;
 
 //   }
 
@@ -71,37 +75,27 @@ var intialize = function(){
 
 //   for(var i=1; i<=5; i++){//loop for circle creation (random)
 
-    var existed = true;
+    var exists = true;
 
-    if(circle[i]['circle_x'] == ""){
-      circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-    }
-    console.log("circle " + i + "x position is: "+ circle[i]['circle_x']);
+    if(circle[i]['dbid'] == ""){
 
-    if(circle[i]['circle_y'] == ""){
-      circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-    }
-    console.log("circle " + i + "y position is: "+ circle[i]['circle_y']);
-
-    if(circle[i]['radius'] == ""){
-      // circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
-    }
-    console.log("circle " + i + "radius is: "+ circle[i]['radius']);
-
-    if(circle[i]['label'] == ""){
-      existed = false;
+      exists = false;
+      console.log("I think, therefore I don't exist");
       circle[i]['label'] = "Circle " + i;
+      circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+      circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+      circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
     }
 
 
-    var Circle = new Path.Circle({
+    var circ = new Path.Circle({
       center: [circle[i]['circle_x'], circle[i]['circle_y']],
       radius: circle[i]['radius'],
       fillColor: new Color(1, 1, 1, 0.75),
       strokeColor: 'black',
       // id: i,
-      insert: existed,
-      visible: existed,
+      insert: exists,
+      visible: exists,
       data: {
         circleId: i
       }
@@ -112,17 +106,19 @@ var intialize = function(){
     var tLayer = project.getItem({data:{layerName: "labels"}});
 
     // console.log(circle);
-    cLayer.addChild(Circle); //add each circle to the layer WITHOUT visibility
+    cLayer.addChild(circ); //add each circle to the layer WITHOUT visibility
     //avoid global handles
 
-    var c = project.getItem({data: {circleId: i}});
+    // var c = project.getItem({data: {circleId: i}});
+
+    // console.log(circ.center);
 
     var label = new PointText({
       fillColor:  'black',
       content: circle[i]['label'],
-      position: c.center,
-      insert: existed,
-      visible: existed,
+      position: circ.position,
+      insert: exists,
+      visible: exists,
       data: {
         labelId: i
       }
@@ -454,8 +450,7 @@ function onMouseUp(event){
 var scope = this;
 
 //sends the circle data to DB storage
-
-//TODO: Gets wrong information now (?)
+//TODO: Won't add circle to page now (6/22) - cuz of circleLabel
 
 doSubmit = function(e){
 
@@ -467,15 +462,14 @@ doSubmit = function(e){
   var circleID = e.target.id.split("-")[1];
   console.log(circleID);
 
-  //get array of elements, [0]th element's value
-  var circleLabel = e.target.document.getElementById("circle-"+circleID+"-label");
+  var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
 
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
-  console.log(obj.position.x);
-  console.log(obj.position.y);
-  console.log(obj.bounds.width/2);
+  // console.log(obj.position.x);
+  // console.log(obj.position.y);
+  // console.log(obj.bounds.width/2);
 
 
   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
@@ -484,9 +478,10 @@ doSubmit = function(e){
   obj.visible = true;
   objLabel.visible = true;
 
-  console.log(obj);
+  // console.log(obj);
+
+  insert = true;
  
- //TODO: *** PROBLEM HERE - maybe same as issue from before "not a number but ?/NaN"
   $.post("/saveCircleData", {
       "number": circleID,
       "position_x": obj.position.x,
@@ -509,7 +504,7 @@ doSubmit = function(e){
     console.log("Save complete!");
   });
 
-  insert = true;
+  // insert = true;
 
   intersections();
 

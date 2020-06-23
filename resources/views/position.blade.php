@@ -36,6 +36,7 @@
                 <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-y" value="{{ $value['center_y'] }}"/>
                 <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value['radius'] }}"/>
                 <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-line_style" value="{{ $value['line_style'] }}"/>
+                <input type="hidden" name="circle-{{ $key }}" id="circle-{{ $key }}-id" value="{{ $value['id'] }}" />
                 <input type="submit" value="Add circle">
                 </form>
               <br><br>

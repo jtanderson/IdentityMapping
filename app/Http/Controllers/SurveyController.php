@@ -24,8 +24,7 @@ class SurveyController extends Controller{
 
   public function position(Request $request){
 
-    $participant = \App\Participant::find(3);
-      // session()->get('participant_id'));
+    $participant = \App\Participant::find(session()->get('participant_id'));
     
     $circles = $participant->getCircles();
 
@@ -39,7 +38,7 @@ class SurveyController extends Controller{
 
   public function color(Request $request){
     
-    $participant = \App\Participant::find(3);
+    $participant = \App\Participant::find(session()->get('participant_id'));
     
     $circles = $participant->getCircles();
 
