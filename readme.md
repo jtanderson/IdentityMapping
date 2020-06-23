@@ -24,6 +24,7 @@
 
 ### 6/23 Meeting: 
 - [ ] (4) Abort button should delete entire participant & their data (W/ WARNING!) (cuz privacy)
+    - [ ] Remove abort button on `/start` page
 
 ## Fixed bugs:
   - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
