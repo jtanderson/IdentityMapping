@@ -57,74 +57,62 @@ var intialize = function(){
       circle[i]['label'] = label;
       circle[i]['dbid'] = dbid;
 
-//   }
 
-//     return circle;
-//     //G: 6/14 this isn't returning the right thing
-// }
+      var min = 55;
+      var max = 135;
+      var minR = 125;
+      var maxR = 650;
 
-// //recreate when canvas reset function, now with object parameter
-// var intialize = function(){
+      var exists = true;
 
-  var min = 55;
-  var max = 135;
-  var minR = 125;
-  var maxR = 650;
+      if(circle[i]['dbid'] == ""){
 
-//   var circles = loadCircles();
-
-//   for(var i=1; i<=5; i++){//loop for circle creation (random)
-
-    var exists = true;
-
-    if(circle[i]['dbid'] == ""){
-
-      exists = false;
-      console.log("I think, therefore I don't exist");
-      circle[i]['label'] = "Circle " + i;
-      circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-      circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-      circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
-    }
-
-
-    var circ = new Path.Circle({
-      center: [circle[i]['circle_x'], circle[i]['circle_y']],
-      radius: circle[i]['radius'],
-      fillColor: new Color(1, 1, 1, 0.75),
-      strokeColor: 'black',
-      // id: i,
-      insert: exists,
-      visible: exists,
-      data: {
-        circleId: i
+        exists = false;
+        console.log("I think, therefore I don't exist");
+        circle[i]['label'] = "Circle " + i;
+        circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+        circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+        circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
       }
-    });
 
-    var iLayer = project.getItem({data:{layerName: "intersections"}});
-    var cLayer = project.getItem({data:{layerName: "circles"}});
-    var tLayer = project.getItem({data:{layerName: "labels"}});
 
-    // console.log(circle);
-    cLayer.addChild(circ); //add each circle to the layer WITHOUT visibility
-    //avoid global handles
+      var circ = new Path.Circle({
+        center: [circle[i]['circle_x'], circle[i]['circle_y']],
+        radius: circle[i]['radius'],
+        fillColor: new Color(1, 1, 1, 0.75),
+        strokeColor: 'black',
+        // id: i,
+        insert: exists,
+        visible: exists,
+        data: {
+          circleId: i
+        }
+      });
 
-    // var c = project.getItem({data: {circleId: i}});
+      var iLayer = project.getItem({data:{layerName: "intersections"}});
+      var cLayer = project.getItem({data:{layerName: "circles"}});
+      var tLayer = project.getItem({data:{layerName: "labels"}});
 
-    // console.log(circ.center);
+      // console.log(circle);
+      cLayer.addChild(circ); //add each circle to the layer WITHOUT visibility
+      //avoid global handles
 
-    var label = new PointText({
-      fillColor:  'black',
-      content: circle[i]['label'],
-      position: circ.position,
-      insert: exists,
-      visible: exists,
-      data: {
-        labelId: i
-      }
-    });
+      // var c = project.getItem({data: {circleId: i}});
 
-    tLayer.addChild(label);//adds text to the text layer
+      // console.log(circ.center);
+
+      var label = new PointText({
+        fillColor:  'black',
+        content: circle[i]['label'],
+        position: circ.position,
+        insert: exists,
+        visible: exists,
+        data: {
+          labelId: i
+        }
+      });
+
+      tLayer.addChild(label);//adds text to the text layer
   
   }//end for
 
@@ -132,54 +120,7 @@ var intialize = function(){
 
 intialize();
 
-//----------------------------
-
-  // var min = 55;
-  // var max = 135;
-  // var minR = 125;
-  // var maxR = 650;
-  // for(var i=1; i<=5; i++){//loop for circle creation (random)
-
-  //   var circle = new Path.Circle({
-  //     center: [Math.floor(Math.random() * (+maxR - +minR)) + +minR, Math.floor(Math.random() * (+maxR - +minR)) + +minR],
-  //     radius: Math.floor(Math.random() * (+max - +min)) + +min,
-  //     fillColor: new Color(1, 1, 1, 0.75),
-  //     strokeColor: 'black',
-  //     id: i,
-  //     insert: false,
-  //     visible: false,
-  //     data: {
-  //       circleId: i
-  //     }
-  //   });
-  //   circleLayer.addChild(circle); //add each circle to the layer WITHOUT visibility
-  // }
-
-  intersections();
-
-//creates the text layer which will be the top layer
-  // var textLayer = new Layer();
-  // textLayer.data.layerName = "text";
-
-  // for(var i=1; i<=5; i++){//loops the five text creation and binds to the circle objects position
-  //   var c = project.getItem({data: {circleId: i}});
-  //   var text = new PointText({
-  //     fillColor:  'black',
-  //     content:  "Circle " + i,
-  //     //position: //c.getItem({data: {"center"}}),
-  //     position: c.position, //new Point(c.position._x, c.position._y),
-  //     insert: false,
-  //     visible: false,
-  //     data: {
-  //       textId: i
-  //     }
-  //   });
-
-  //   textLayer.addChild(text);//adds text to the text layer
-  // }
-
-
-
+intersections();
 
 //group creation for layering the intersections
 var group2 = new Group();
@@ -199,8 +140,6 @@ function creation(){
     iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);
   }
 }
-
-
 
 //function for creating intersections
 function intersections(){
@@ -385,8 +324,7 @@ paper.tool.onMouseDrag = function(event){
     // user is scaling
     
     // TODO: instead of using a variable, test which layer activeItem is in!!
-    // circleLayer.isAncestor(activeItem)
-    //6/22: (?)
+    // circleLayer.isAncestor(activeItem) (For circles inside circles)
 
     //if(!intersect){
     if( cLayer.isAncestor(activeItem) ){
@@ -414,9 +352,54 @@ paper.tool.onMouseDrag = function(event){
           // + activeItem.position);
             console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
         }
+
+
       }//end if circle edge or circle
         console.log("Clicked canvas");
     }
+
+      // //should work when circles are inputted/created 
+      // var circleID = event.target.id.split("-")[1];
+      // console.log(circleID);
+
+      // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+      // console.log(circleLabel);
+
+      // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+      // // console.log(obj.position.x);
+      // // console.log(obj.position.y);
+      // // console.log(obj.bounds.width/2);
+
+
+      // var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+      // objLabel.content = circleLabel;
+
+      // obj.visible = true;
+      // objLabel.visible = true;
+
+
+      //   $.post("/saveCircleData", {
+      //     "number": circleID,
+      //     "position_x": obj.position.x,
+      //     "position_y": obj.position.y,
+      //     "label": circleLabel,
+      //     "radius": (obj.bounds.width/2),
+      // })
+      // .done(function(data){
+      //   console.log("Save complete!");
+      // });
+
+      // $.post("/saveIntersectData", {
+      //       "created": "" /*time stamp here */,
+      //       "updated": "" /*time stamp here */,
+      //       "circle1": "" /*circle 1 id*/,
+      //       "circle2": "" /*circle 2 id*/,
+      //       "area": "" /*calculated in intersection function*/
+      // })
+      // .done(function(data){
+      //   console.log("Save complete!");
+      // });
 
     intersections();
 
@@ -428,6 +411,8 @@ paper.tool.onMouseDrag = function(event){
 //G: I think this is where the intersections & circles should be saved to db
 function onMouseUp(event){
 
+  console.log("HERE");
+
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
 
@@ -435,22 +420,70 @@ function onMouseUp(event){
 
     intersections();
 
-      console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+      // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+
+      console.log("HERE2");
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
 
-    fixLayers();
+       //should work when circles are inputted/created 
+    var circleID = event.target.id.split("-")[1];
+    console.log(circleID);
+
+    var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+    console.log(circleLabel);
+
+    var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+    // console.log(obj.position.x);
+    // console.log(obj.position.y);
+    // console.log(obj.bounds.width/2);
+
+
+    var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+    objLabel.content = circleLabel;
+
+    obj.visible = true;
+    objLabel.visible = true;
+
+
+      $.post("/saveCircleData", {
+        "number": circleID,
+        "position_x": obj.position.x,
+        "position_y": obj.position.y,
+        "label": circleLabel,
+        "radius": (obj.bounds.width/2),
+    })
+    .done(function(data){
+      console.log("Save complete!");
+    });
+
+    $.post("/saveIntersectData", {
+          "created": "" /*time stamp here */,
+          "updated": "" /*time stamp here */,
+          "circle1": "" /*circle 1 id*/,
+          "circle2": "" /*circle 2 id*/,
+          "area": "" /*calculated in intersection function*/
+    })
+    .done(function(data){
+      console.log("Save complete!");
+    });
+
+      fixLayers();
 
     //TODO: FUTURE send data to db UPDATE GOES HERE
 
   }
 
   dragged = false;
+
+
 }//end mouse up function
+
+
 var scope = this;
 
 //sends the circle data to DB storage
-//TODO: Won't add circle to page now (6/22) - cuz of circleLabel
 
 doSubmit = function(e){
 

@@ -51,6 +51,16 @@ height: 750px;
         <br><br><br>
       </div>  
 
+       @foreach ( $circles as $key => $value )
+
+        <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-x" value="{{ $value ? $value['center_x'] : "" }}"/>
+        <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-y" value="{{ $value ? $value['center_y'] : "" }}"/>
+        <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value ? $value['radius'] : "" }}"/>
+        <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-line_style" value="{{ $value ? $value['line_style'] : "" }}"/>
+        <input type="hidden" name="circle-{{ $key }}" id="circle-{{ $key }}-id" value="{{ $value ? $value['id'] : "" }}" />
+
+      @endforeach
+
       <div class="col-sm-8">
         <canvas id="c" resize></canvas>
       </div>
@@ -85,25 +95,25 @@ height: 750px;
     iLayer.removeChildren();
     tLayer.removeChildren();
   }
-  var previous = function(){
-    localStorage["saved"] = paper.project.exportJSON();
-    localStorage["previous"] = "true";
-    window.history.back();
-  }
+  // // var previous = function(){
+  // //   localStorage["saved"] = paper.project.exportJSON();
+  // //   localStorage["previous"] = "true";
+  // //   window.history.back();
+  // // }
 
-  var save=function(){
-    localStorage["circles"] = paper.project.layers[0].children[4].id;
-    localStorage["intersect"] = paper.project.layers[1].children;
-    localStorage["text"] = paper.project.layers[2].children;
-    localStorage["proj"] = paper.project.exportJSON();
+  // var save=function(){
+  //   localStorage["circles"] = paper.project.layers[0].children[4].id;
+  //   localStorage["intersect"] = paper.project.layers[1].children;
+  //   localStorage["text"] = paper.project.layers[2].children;
+  //   localStorage["proj"] = paper.project.exportJSON();
 
-    var surveyData = [];
+  //   var surveyData = [];
 
-    var output = [];
-    var names = [];
-    var ar;
+  //   var output = [];
+  //   var names = [];
+  //   var ar;
     
-  }
+  // }
 
 
 </script>
