@@ -248,9 +248,9 @@ var fixLayers = function(){
   iLayer.sendToBack();
   cLayer.sendToBack();
 
-  if(debug_mode){
-    console.log('Fixed layers...');
-  }
+  // if(debug_mode){
+  //   console.log('Fixed layers...');
+  // }
 
 }//end fix layers function
 
@@ -358,49 +358,6 @@ paper.tool.onMouseDrag = function(event){
         console.log("Clicked canvas");
     }
 
-      // //should work when circles are inputted/created 
-      // var circleID = event.target.id.split("-")[1];
-      // console.log(circleID);
-
-      // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-      // console.log(circleLabel);
-
-      // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
-
-      // // console.log(obj.position.x);
-      // // console.log(obj.position.y);
-      // // console.log(obj.bounds.width/2);
-
-
-      // var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-      // objLabel.content = circleLabel;
-
-      // obj.visible = true;
-      // objLabel.visible = true;
-
-
-      //   $.post("/saveCircleData", {
-      //     "number": circleID,
-      //     "position_x": obj.position.x,
-      //     "position_y": obj.position.y,
-      //     "label": circleLabel,
-      //     "radius": (obj.bounds.width/2),
-      // })
-      // .done(function(data){
-      //   console.log("Save complete!");
-      // });
-
-      // $.post("/saveIntersectData", {
-      //       "created": "" /*time stamp here */,
-      //       "updated": "" /*time stamp here */,
-      //       "circle1": "" /*circle 1 id*/,
-      //       "circle2": "" /*circle 2 id*/,
-      //       "area": "" /*calculated in intersection function*/
-      // })
-      // .done(function(data){
-      //   console.log("Save complete!");
-      // });
-
     intersections();
 
   }//end else
@@ -409,7 +366,7 @@ paper.tool.onMouseDrag = function(event){
 
 //on mouse up function
 //G: I think this is where the intersections & circles should be saved to db
-function onMouseUp(event){
+paper.tool.onMouseUp = function(event){
 
   console.log("HERE");
 
@@ -425,49 +382,6 @@ function onMouseUp(event){
       console.log("HERE2");
 
       console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
-
-       //should work when circles are inputted/created 
-    var circleID = event.target.id.split("-")[1];
-    console.log(circleID);
-
-    var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-    console.log(circleLabel);
-
-    var obj = project.getItem({data: {circleId: parseInt(circleID)}});
-
-    // console.log(obj.position.x);
-    // console.log(obj.position.y);
-    // console.log(obj.bounds.width/2);
-
-
-    var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-    objLabel.content = circleLabel;
-
-    obj.visible = true;
-    objLabel.visible = true;
-
-
-      $.post("/saveCircleData", {
-        "number": circleID,
-        "position_x": obj.position.x,
-        "position_y": obj.position.y,
-        "label": circleLabel,
-        "radius": (obj.bounds.width/2),
-    })
-    .done(function(data){
-      console.log("Save complete!");
-    });
-
-    $.post("/saveIntersectData", {
-          "created": "" /*time stamp here */,
-          "updated": "" /*time stamp here */,
-          "circle1": "" /*circle 1 id*/,
-          "circle2": "" /*circle 2 id*/,
-          "area": "" /*calculated in intersection function*/
-    })
-    .done(function(data){
-      console.log("Save complete!");
-    });
 
       fixLayers();
 
@@ -549,4 +463,3 @@ doSubmit = function(e){
 
 //G: Do we still need line below?
 //window.doSubmit = doSubmit;
-
