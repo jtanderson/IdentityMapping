@@ -16,15 +16,15 @@
   - [ ] find replacement for grace ( :( )
   
 ### 4/7 Meeting:
-- [ ] (3) (IN PROGRESS) Write a AJAX function for intersection
+- [ ] (3) Write a AJAX function for intersection - (**work on this 6/30)
     
 ### 6/13 Meeting:
 - [ ] (2) Return the circles on color()
-- [ ] (1!) saveCircleData should be on every user action
+- [x] (1!) saveCircleData should be on every user action
 
 ### 6/23 Meeting: 
-- [ ] (4) Abort button should delete entire participant & their data (W/ WARNING!) (cuz privacy)
-    - [ ] Remove abort button on `/start` page
+- [ ] (4) Abort button should delete entire participant & their data (W/ WARNING!) - (go into DB, find participant by id, and then delete p at that id)
+    - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
 
 ## Fixed bugs:
   - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
