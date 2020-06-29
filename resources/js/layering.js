@@ -118,6 +118,12 @@ var intialize = function(){
 
 }
 
+//need to find circleID outside of doSubmit
+//var circleID = 
+//add event listener to element
+//document.getElementById("circle-"+c).addEventListener("onmouseup", saveData);
+//saveData()
+
 intialize();
 
 intersections();
@@ -364,50 +370,8 @@ paper.tool.onMouseDrag = function(event){
 }//end mouse dragging function
 
 
-//on mouse up function
-//G: I think this is where the intersections & circles should be saved to db
-paper.tool.onMouseUp = function(event){
-
-  console.log("HERE");
-
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
-  var cLayer = project.getItem({data: {layerName: "circles"}});
-
-  if(dragged){//if the user dragged the circle
-
-    intersections();
-
-      // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
-
-      console.log("HERE2");
-
-      console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
-
-      fixLayers();
-
-    //TODO: FUTURE send data to db UPDATE GOES HERE
-
-  }
-
-  dragged = false;
-
-
-}//end mouse up function
-
-
-var scope = this;
-
 //sends the circle data to DB storage
-
-doSubmit = function(e){
-
-  console.log("doSumbit Layering here");
-
-  e.preventDefault();
-
-  //should work when circles are inputted/created 
-  var circleID = e.target.id.split("-")[1];
-  console.log(circleID);
+saveData = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
@@ -418,7 +382,6 @@ doSubmit = function(e){
   // console.log(obj.position.y);
   // console.log(obj.bounds.width/2);
 
-
   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
   objLabel.content = circleLabel;
 
@@ -426,8 +389,6 @@ doSubmit = function(e){
   objLabel.visible = true;
 
   // console.log(obj);
-
-  insert = true;
  
   $.post("/saveCircleData", {
       "number": circleID,
@@ -449,7 +410,102 @@ doSubmit = function(e){
   })
   .done(function(data){
     console.log("Save complete!");
-  });
+  }); 
+}
+
+
+//on mouse up function
+//G: I think this is where the intersections & circles should be saved to db
+paper.tool.onMouseUp = function(event){
+
+  // event.preventDefault();
+
+  var circleID = activeItem.data.circleId;
+  console.log("calculated circle id");
+  console.log(circleID);
+
+  var iLayer = project.getItem({data: {layerName: "intersections"}});
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+
+  if(dragged){//if the user dragged the circle
+
+    intersections();
+
+      // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+
+      console.log("HERE2");
+
+      console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+
+      fixLayers();
+
+    //TODO: FUTURE send data to db UPDATE GOES HERE
+
+  }
+
+  saveData(circleID);
+
+  dragged = false;
+
+
+}//end mouse up function
+
+
+var scope = this;
+
+//function tied to btn that first adds circle
+doSubmit = function(e){
+
+  console.log("doSumbit Layering here");
+
+  e.preventDefault();
+
+  //should work when circles are inputted/created 
+  var circleID = e.target.id.split("-")[1];
+  console.log(circleID);
+
+  saveData(circleID);
+
+  // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+  // console.log(circleLabel);
+
+  // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+  // // console.log(obj.position.x);
+  // // console.log(obj.position.y);
+  // // console.log(obj.bounds.width/2);
+
+  // var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+  // objLabel.content = circleLabel;
+
+  // obj.visible = true;
+  // objLabel.visible = true;
+
+  // // console.log(obj);
+
+  // insert = true;
+ 
+  // $.post("/saveCircleData", {
+  //     "number": circleID,
+  //     "position_x": obj.position.x,
+  //     "position_y": obj.position.y,
+  //     "label": circleLabel,
+  //     "radius": (obj.bounds.width/2),
+  // })
+  // .done(function(data){
+  //   console.log("Save complete!");
+  // });
+
+  // $.post("/saveIntersectData", {
+  //       "created": "" /*time stamp here */,
+  //       "updated": "" /*time stamp here */,
+  //       "circle1": "" /*circle 1 id*/,
+  //       "circle2": "" /*circle 2 id*/,
+  //       "area": "" /*calculated in intersection function*/
+  // })
+  // .done(function(data){
+  //   console.log("Save complete!");
+  // });
 
   // insert = true;
 
@@ -463,3 +519,4 @@ doSubmit = function(e){
 
 //G: Do we still need line below?
 //window.doSubmit = doSubmit;
+
