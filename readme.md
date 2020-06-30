@@ -17,11 +17,7 @@
   
 ### 4/7 Meeting:
 - [ ] (3) Write a AJAX function for intersection - (**work on this 6/30)
-    
-### 6/13 Meeting:
-- [ ] (2) Return the circles on color()
-- [x] (1!) saveCircleData should be on every user action
-
+   
 ### 6/23 Meeting: 
 - [ ] (4) Abort button should delete entire participant & their data (W/ WARNING!) - (go into DB, find participant by id, and then delete p at that id)
     - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
@@ -41,3 +37,5 @@
 - [x] session()->get('participant_id') isn't seen by controller as object, instead as a number so it can't use it to getCircles()
 - [x] Create circles after doSubmit (how did we do this before?, calling recreate()?)
 - [x] (IN PROGRESS) Position "Next" - submit data into JSON object -> database by writing PHP code for Laravel (associative array with AJAX request (example is inside layering.js))
+- [x] (2) Return the circles on color()
+- [x] (1!) saveCircleData should be on every user action
