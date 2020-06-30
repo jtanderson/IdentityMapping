@@ -7,9 +7,22 @@ var handle;
 var dragged = false; 
 var intersect = false;
 
-console.log("Before init");
+var circleLayer = new Layer();//creates the circle layer
+circleLayer.data.layerName = "circles";
+project.addLayer(circleLayer);//adds the layer
 
+var intersectionLayer = new Layer();//starts the intersection layer
+intersectionLayer.data.layerName = "intersections";
+project.addLayer(intersectionLayer); //adds int layer
 
+//creates the label layer which will be the top layer
+var labelLayer = new Layer();
+labelLayer.data.layerName = "labels";
+project.addLayer(labelLayer);
+
+// console.log("Before init");
+
+//only needs to recreate circles on page
 var intialize = function(){
 // function loadCircles(){
 
@@ -106,11 +119,12 @@ var intialize = function(){
 
 intialize();
 
-console.log(" after init ");
+// console.log(" after init ");
 
 //mouse down function
-function onMouseDown(event){
+paper.tool.onMouseDown = function(event){
 
+  //why???
   if(activeItem){
     activeItem.selected = false;
   }
@@ -119,16 +133,19 @@ function onMouseDown(event){
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-  var form1 = document.getElementById("inlineRadioIntersect1");
-  form1.checked = false;
-  var form2 = document.getElementById("inlineRadioIntersect12");
-  form2.checked = false;
+  //get the solid button
+  var solidBtn = document.getElementById("inlineRadioIntersect1");
+  solidBtn.checked = false;
 
+  //get the dashed button
+  var dashedBtn = document.getElementById("inlineRadioIntersect12");
+  dashedBtn.checked = false;
 
   if(debug_mode){
     console.log("Radios Cleared");
   }
 
+  //hit testing
 
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
 
@@ -139,36 +156,36 @@ function onMouseDown(event){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
 
-
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
 
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
+
     console.log(activeItem.fillColor);
-    sliderIntersect = document.getElementById("rangeIntersect");
-            //sliderIntersect.value = activeItem.fillcolor; 
-            //sliderIntersect.value = activeItem.fillcolor; 
-            // *******TODO: need to calculate the correct number******
-            //set activeItem.fillColor = current_color;
-            //sliderIntersect.addEventListener("change",function(){
-            //TODO warming: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
-    
-    var colorStr = activeItem.fillColor._canvasStyle;
-    var test_r, test_b;
-    test_r = colorStr.split("(")[1].split(",")[0];
-    test_b = colorStr.split("(")[1].split(",")[2];
 
-    console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+    //retrieves color slider
+    colorSlider = document.getElementById("rangeIntersect");
 
-    sliderIntersect.value = (1-test_r/255)*100;
+      //should be tied to eventlistener for sliderIntersect (horrible name)
 
-    console.log("Circle " + activeItem.id+"'s color is " + "rgb(" + activeItem.fillColor.r + ",0,"+ b +")");
-    
-    //What is all of this?
-    // var r2, b2;
-    // r2 = (((sliderIntersect.value-100)*100)/255); //which theoretically is r
-    // b2 = ((sliderIntersect.value*100)/255); //which theoretically is b
-    // // 
+      //sliderIntersect.addEventListener("change",function(){
+      //TODO warning: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
+      //do we need to?
+
+      //retrieves color
+      var colorStr = activeItem.fillColor._canvasStyle;
+      var test_r, test_b;
+      //retrieves r and b
+      test_r = colorStr.split("(")[1].split(",")[0];
+      test_b = colorStr.split("(")[1].split(",")[2];
+
+      console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
+
+      //sets sliderIntersect value (slider's position) to that "color" on its range
+      colorSlider.value = (1-test_r/255)*100;
+
+      //fill selected circle with that color
+      //set activeItem.fillColor = current_color;
 
     if(debug_mode){
       console.log("User clicked circle: " + hitResult.item.data.circleId);
@@ -185,121 +202,186 @@ function onMouseDown(event){
     );
   } else { //when nothing is hit
 
-    if(debug_mode){
-      console.log("Nothing hit");
-    }
+      if(debug_mode){
+        console.log("Nothing hit");
+      }
 
-    //turn activeItem from true -> false
-    if( activeItem ){
-      activeItem.selected = false;
-    }
-    activeItem = null;
+      //turn activeItem from true -> false
+      if( activeItem ){
+        activeItem.selected = false;
+      }
+      activeItem = null;
+
   }
+
+
 }//end of the mouse down function
 
 var segment;
 var scope = this;
 
-//handles all color sliders as well as outlines
-var sliderIntersect = document.getElementById("rangeIntersect");
+//since all of these are event listeners, should saveData() be on each of these? YES (X)
 
-//color circles 
-sliderIntersect.addEventListener("change",function(){
-  if( activeItem ){
-    var r,b;
-    r=Math.round(255*(100-sliderIntersect.value)/100);
-    b=Math.round(255*sliderIntersect.value/100);
-    activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
-    console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
-  }
-},true);
+  //handles color slider
+    var colorSlider = document.getElementById("rangeIntersect");
 
-//change stroke value (dotted/solid)
+    //color circles 
+    colorSlider.addEventListener("change",function(){
+        if( activeItem ){
+          var r,b;
+          r=Math.round(255*(100-sliderIntersect.value)/100);
+          b=Math.round(255*sliderIntersect.value/100);
+          activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
+          console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
 
-//solid button 
-var formIntersect1 = document.getElementById("inlineRadioIntersect1");
+          var circleID = activeItem.data.circleId;
+          console.log("calculated circle id");
+          console.log(circleID);
 
-//if it is not dashed, it is solid (Isn't this default though?)
-formIntersect1.addEventListener("change",function(){
-  if(activeItem){
-    
-    //does this do anything? var line = activeItem.dashArray;
-    if (activeItem.dashArray = false){
+          saveData(circleID);
+        }
+    },true);
 
-      console.log("Circle " + activeItem.id +"'s outline is solid");
-    }
-  }
-},false);
+  //change stroke value (dotted/solid)
 
-//dashed button
-var formIntersect12 = document.getElementById("inlineRadioIntersect12");
+    //solid button 
+    var solidBtn = document.getElementById("inlineRadioIntersect1");
 
-formIntersect12.addEventListener("change",function(){
-  if(activeItem){
+    solidBtn.addEventListener("change",function(){
+      if(activeItem){
 
-    //true or false, not specified values
-    activeItem.dashArray = [10,4];
-    console.log("Circle " + activeItem.id +"'s outline is dashed");
+        var circleID = activeItem.data.circleId;
+        console.log("calculated circle id");
+        console.log(circleID);
+        
+        if (activeItem.dashArray = false){
+
+          console.log("Circle " + activeItem.id +"'s outline is solid");
+          saveData(circleID);
+        }
       }
-},false);
+    },false);
 
+    //dashed button
+    var dashedBtn = document.getElementById("inlineRadioIntersect12");
+
+    dashedBtn.addEventListener("change",function(){
+      if(activeItem){
+
+        var circleID = activeItem.data.circleId;
+        console.log("calculated circle id");
+        console.log(circleID);
+
+        //true or false, not specified values
+        activeItem.dashArray = [10,4];
+        console.log("Circle " + activeItem.id +"'s outline is dashed");
+
+        saveData(circleID);
+
+      }
+    },false);
+
+
+// }
+
+
+//sends the circle data to DB storage
+saveData = function(circleID){
+
+  var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+  console.log(circleLabel);
+
+  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+  // console.log(obj.position.x);
+  // console.log(obj.position.y);
+  // console.log(obj.bounds.width/2);
+
+  var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+  objLabel.content = circleLabel;
+
+  obj.visible = true;
+  objLabel.visible = true;
+
+  // console.log(obj);
+ 
+  $.post("/saveCircleData", {
+      "number": circleID,
+      "position_x": obj.position.x,
+      "position_y": obj.position.y,
+      "label": circleLabel,
+      "radius": (obj.bounds.width/2),
+      "line_style": obj.dashArray,
+      "color": obj.fillColor,
+
+  })
+  .done(function(data){
+    console.log("Save complete!");
+  });
+
+  $.post("/saveIntersectData", {
+        "created": "" /*time stamp here */,
+        "updated": "" /*time stamp here */,
+        "circle1": "" /*circle 1 id*/,
+        "circle2": "" /*circle 2 id*/,
+        "area": "" /*calculated in intersection function*/
+  })
+  .done(function(data){
+    console.log("Save complete!");
+  }); 
+}
 
 doSubmit = function(e){
-
-  console.log("doSumbit Coloring here");
-
-  console.log("doSumbit Layering here");
 
   e.preventDefault();
 
     var circleID = event.target.id.split("-")[1];
     console.log(circleID);
 
-    var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-    console.log(circleLabel);
+    saveData(circleID);
 
-    var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+  //   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+  //   console.log(circleLabel);
 
-    // console.log(obj.position.x);
-    // console.log(obj.position.y);
-    // console.log(obj.bounds.width/2);
+  //   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
-
-    var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-    objLabel.content = circleLabel;
-
-    obj.visible = true;
-    objLabel.visible = true;
-
-      $.post("/saveCircleData", {
-        "number": circleID,
-        "position_x": obj.position.x,
-        "position_y": obj.position.y,
-        "label": circleLabel,
-        "radius": (obj.bounds.width/2),
-    })
-    .done(function(data){
-      console.log("Save complete!");
-    });
-
-    $.post("/saveIntersectData", {
-          "created": "" /*time stamp here */,
-          "updated": "" /*time stamp here */,
-          "circle1": "" /*circle 1 id*/,
-          "circle2": "" /*circle 2 id*/,
-          "area": "" /*calculated in intersection function*/
-    })
-    .done(function(data){
-      console.log("Save complete!");
-    });
+  //   // console.log(obj.position.x);
+  //   // console.log(obj.position.y);
+  //   // console.log(obj.bounds.width/2);
 
 
-  insert = true;
+  //   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+  //   objLabel.content = circleLabel;
+
+  //   obj.visible = true;
+  //   objLabel.visible = true;
+
+  //     $.post("/saveCircleData", {
+  //       "number": circleID,
+  //       "position_x": obj.position.x,
+  //       "position_y": obj.position.y,
+  //       "label": circleLabel,
+  //       "radius": (obj.bounds.width/2),
+  //   })
+  //   .done(function(data){
+  //     console.log("Save complete!");
+  //   });
+
+  //   $.post("/saveIntersectData", {
+  //         "created": "" /*time stamp here */,
+  //         "updated": "" /*time stamp here */,
+  //         "circle1": "" /*circle 1 id*/,
+  //         "circle2": "" /*circle 2 id*/,
+  //         "area": "" /*calculated in intersection function*/
+  //   })
+  //   .done(function(data){
+  //     console.log("Save complete!");
+  //   });
+
+
+  // insert = true;
 
   intersections();
 
   return false;
 } //end doSubmit function
-
-//G: Do we still need line below?
-//window.doSubmit = doSubmit;

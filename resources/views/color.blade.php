@@ -58,6 +58,8 @@ height: 750px;
         <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value ? $value['radius'] : "" }}"/>
         <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-line_style" value="{{ $value ? $value['line_style'] : "" }}"/>
         <input type="hidden" name="circle-{{ $key }}" id="circle-{{ $key }}-id" value="{{ $value ? $value['id'] : "" }}" />
+        <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-label" value="{{ $value ? $value['label'] : "" }}"/>
+
 
       @endforeach
 
@@ -85,7 +87,8 @@ height: 750px;
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('js/extended.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/paper.js') }}"></script>
+  <script type="text/paperscript" src="{{ asset('js/extended.js') }}" canvas="c"></script>
 <script>
   var reset = function(){
     var cLayer = paper.project.getItem({data: {layerName: "circles"}});
