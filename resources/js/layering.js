@@ -21,7 +21,7 @@ labelLayer.data.layerName = "labels";
 project.addLayer(labelLayer);
 
 
-//TODO: move to document.onready event / read up on better options
+//TODO: move to document.onready event (window load) / read up on better options
 
 var intialize = function(){
 // function loadCircles(){
@@ -126,13 +126,18 @@ var intialize = function(){
 
 intialize();
 
-saveIntersect = function(circle1ID, circle2ID){
+saveIntersect = function(circleID){
 
-  // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+  var circles = [];
+
+  for(var i in iLayer.children){
+    if(iLayer.children[i].id.includes(circleID)){
+        circles[i] = iLayer.children[i];
+    }
+  }
 
   $.post("/saveIntersectData", {
-        "circle1": circle1ID, 
-        "circle2": circle2ID
+        "circles": /* an array which holds all intersections */ 
   })
   .done(function(data){
     console.log("Save complete!");
@@ -179,7 +184,6 @@ function intersections(){
             int_ij.selected = false;
             int_ij.data.id = ""+i+j;
             iLayer.addChild(int_ij); //2
-            saveIntersect(i, j);
           }
         }
       }
@@ -423,31 +427,33 @@ saveCircle = function(circleID){
 //G: I think this is where the intersections & circles should be saved to db
 paper.tool.onMouseUp = function(event){
 
-  // event.preventDefault();
+  //is circle check
+  if( cLayer.isAncestor(activeItem) ){
 
-  var circleID = activeItem.data.circleId;
-  console.log("calculated circle id");
-  console.log(circleID);
+      var circleID = activeItem.data.circleId;
+      console.log("calculated circle id");
+      console.log(circleID);
 
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
-  var cLayer = project.getItem({data: {layerName: "circles"}});
+      var iLayer = project.getItem({data: {layerName: "intersections"}});
+      var cLayer = project.getItem({data: {layerName: "circles"}});
 
-  if(dragged){//if the user dragged the circle
+      if(dragged){//if the user dragged the circle
 
-    intersections();
+        intersections();
 
-      // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+          // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
 
-      console.log("HERE2");
+          // console.log("HERE2");
 
-      console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+          console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
 
-      fixLayers();
+          fixLayers();
 
-    //TODO: FUTURE send data to db UPDATE GOES HERE
+      }
 
-  }
+  }//end iscircle check
 
+  saveIntersect(circleID);
   saveCircle(circleID);
 
   dragged = false;

@@ -156,6 +156,8 @@ paper.tool.onMouseDown = function(event){
       console.log("User clicked an intersection with id " + hitResult.item.data.id);
     }
 
+    //saving the new colors on that intersection
+
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
 
     activeItem = hitResult.item; // will be a circle
@@ -234,6 +236,8 @@ var scope = this;
           activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
           console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
 
+          // (7/1) (3) assuming activeItem is a circle -> check if intersection or NULL
+          //know which circles involved -> query db for the intersection which involves both circles -> update that int obj color
           var circleID = activeItem.data.circleId;
           console.log("calculated circle id");
           console.log(circleID);
@@ -276,7 +280,7 @@ var scope = this;
         activeItem.dashArray = [10,4];
         console.log("Circle " + activeItem.id +"'s outline is dashed");
 
-        saveData(circleID);
+        saveCircle(circleID);
 
       }
     },false);
@@ -285,8 +289,10 @@ var scope = this;
 // }
 
 
+// (2) Fix this to saveCircle
+
 //sends the circle data to DB storage
-saveData = function(circleID){
+saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
@@ -319,16 +325,16 @@ saveData = function(circleID){
     console.log("Save complete!");
   });
 
-  $.post("/saveIntersectData", {
-        "created": "" /*time stamp here */,
-        "updated": "" /*time stamp here */,
-        "circle1": "" /*circle 1 id*/,
-        "circle2": "" /*circle 2 id*/,
-        "area": "" /*calculated in intersection function*/
-  })
-  .done(function(data){
-    console.log("Save complete!");
-  }); 
+  // $.post("/saveIntersectData", {
+  //       "created": "" /*time stamp here */,
+  //       "updated": "" /*time stamp here */,
+  //       "circle1": "" /*circle 1 id*/,
+  //       "circle2": "" /*circle 2 id*/,
+  //       "area": "" /*calculated in intersection function*/
+  // })
+  // .done(function(data){
+  //   console.log("Save complete!");
+  // }); 
 }
 
 doSubmit = function(e){
@@ -338,7 +344,7 @@ doSubmit = function(e){
     var circleID = event.target.id.split("-")[1];
     console.log(circleID);
 
-    saveData(circleID);
+    saveCircle(circleID);
 
   //   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   //   console.log(circleLabel);

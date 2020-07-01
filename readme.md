@@ -21,7 +21,7 @@
 
 ### 7/1 Meeting:
 Write a AJAX function for intersection
-- [ ] (1) onMouseUp 
+- [x]  (EDITED, NOT TESTED) (1) onMouseUp 
     - after circle has moved
     - on circle's circleID
      - check all int which include that circleID
