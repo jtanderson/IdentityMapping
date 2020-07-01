@@ -21,3 +21,4 @@ Route::get('/demographic', 'SurveyController@demographic')->name('demographic');
 Route::get('/category', 'SurveyController@category')->name('category');
 Route::get('/end', 'SurveyController@end')->name('end');
 Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCircleData');
+Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('saveIntersectData');

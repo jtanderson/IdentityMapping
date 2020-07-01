@@ -76,10 +76,10 @@ class SurveyController extends Controller{
     Log::info($request);
 
     $intersection = new \App\Intersection;
-    $intersection->circle1_id = $request->input('');
-    $intersection->circle2_id = $request->input('');
+    $intersection->circle1_id = $request->input('circle1');
+    $intersection->circle2_id = $request->input('circle2');
     $intersection->color = $request->input('color', '');
-    $intersection->area = $request->input('area');
+    $intersection->area = $request->input('area', '');
 
     Log::info($intersection);
 

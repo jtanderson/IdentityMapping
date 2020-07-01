@@ -126,6 +126,20 @@ var intialize = function(){
 
 intialize();
 
+saveIntersect = function(circle1ID, circle2ID){
+
+  // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+
+  $.post("/saveIntersectData", {
+        "circle1": circle1ID, 
+        "circle2": circle2ID
+  })
+  .done(function(data){
+    console.log("Save complete!");
+  }); 
+
+}
+
 intersections();
 
 //group creation for layering the intersections
@@ -165,6 +179,7 @@ function intersections(){
             int_ij.selected = false;
             int_ij.data.id = ""+i+j;
             iLayer.addChild(int_ij); //2
+            saveIntersect(i, j);
           }
         }
       }
@@ -371,7 +386,7 @@ paper.tool.onMouseDrag = function(event){
 
 
 //sends the circle data to DB storage
-saveData = function(circleID){
+saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
@@ -401,16 +416,6 @@ saveData = function(circleID){
     console.log("Save complete!");
   });
 
-  $.post("/saveIntersectData", {
-        "created": "" /*time stamp here */,
-        "updated": "" /*time stamp here */,
-        "circle1": "" /*circle 1 id*/,
-        "circle2": "" /*circle 2 id*/,
-        "area": "" /*calculated in intersection function*/
-  })
-  .done(function(data){
-    console.log("Save complete!");
-  }); 
 }
 
 
@@ -443,7 +448,7 @@ paper.tool.onMouseUp = function(event){
 
   }
 
-  saveData(circleID);
+  saveCircle(circleID);
 
   dragged = false;
 
@@ -464,7 +469,7 @@ doSubmit = function(e){
   var circleID = e.target.id.split("-")[1];
   console.log(circleID);
 
-  saveData(circleID);
+  saveCircle(circleID);
 
   // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   // console.log(circleLabel);
