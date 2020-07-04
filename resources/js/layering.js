@@ -24,7 +24,6 @@ project.addLayer(labelLayer);
 //TODO: move to document.onready event (window load) / read up on better options
 
 var intialize = function(){
-// function loadCircles(){
 
   var circle = Array(5);
 
@@ -118,15 +117,11 @@ var intialize = function(){
 
 }
 
-//need to find circleID outside of doSubmit
-//var circleID = 
-//add event listener to element
-//document.getElementById("circle-"+c).addEventListener("onmouseup", saveData);
-//saveData()
-
 intialize();
 
 saveIntersect = function(circleID){
+
+  var iLayer = project.getItem({data: {layerName: "intersections"}});
 
   var circles = [];
 
@@ -137,7 +132,7 @@ saveIntersect = function(circleID){
   }
 
   $.post("/saveIntersectData", {
-        "circles": /* an array which holds all intersections */ 
+        "circles": "", /* an array which holds all intersections */ 
   })
   .done(function(data){
     console.log("Save complete!");
@@ -293,6 +288,7 @@ var intersect = false;
 paper.tool.onMouseDown = function(event){
 
   console.log("onMouseDown running!");
+
   if(activeItem){
     activeItem.selected = false;
     //(G: ??) need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
@@ -342,20 +338,21 @@ var segment;
 paper.tool.onMouseDrag = function(event){
   if(activeItem == null){
     return;
-  }else{
+  }
+  else{
+
     dragged=true;
     var cLayer = project.getItem({data: {layerName: "circles"}});
     var iLayer = project.getItem({data: {layerName: "intersections"}});
-    // user is scaling
     
     // TODO: instead of using a variable, test which layer activeItem is in!!
     // circleLayer.isAncestor(activeItem) (For circles inside circles)
 
-    //if(!intersect){
-    if( cLayer.isAncestor(activeItem) ){
+    if( cLayer.isAncestor(activeItem) ){ //if circle
+
       iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
 
-      //if it is a circle boundary being hit, the user clicked near the boundary
+      //if the user clicked near the circles boundary
       if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
         var p = event.point; // old
         var p2 = p + event.delta; // new
@@ -374,7 +371,6 @@ paper.tool.onMouseDrag = function(event){
         if(activeItem){
           activeItem.translate(event.delta);
           project.getItem({data: {labelId: data}}).translate(event.delta);
-          // + activeItem.position);
             console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
         }
 
@@ -424,8 +420,10 @@ saveCircle = function(circleID){
 
 
 //on mouse up function
-//G: I think this is where the intersections & circles should be saved to db
 paper.tool.onMouseUp = function(event){
+
+  var cLayer = project.getItem({data:{layerName: "circles"}});
+  var iLayer = project.getItem({data: {layerName: "intersections"}});
 
   //is circle check
   if( cLayer.isAncestor(activeItem) ){
@@ -434,8 +432,8 @@ paper.tool.onMouseUp = function(event){
       console.log("calculated circle id");
       console.log(circleID);
 
-      var iLayer = project.getItem({data: {layerName: "intersections"}});
-      var cLayer = project.getItem({data: {layerName: "circles"}});
+      // var iLayer = project.getItem({data: {layerName: "intersections"}});
+      // var cLayer = project.getItem({data: {layerName: "circles"}});
 
       if(dragged){//if the user dragged the circle
 
