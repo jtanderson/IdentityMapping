@@ -18,8 +18,14 @@ class CreateIntersectionTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('circle1_id');
             $table->unsignedBigInteger('circle2_id');
+            $table->unsignedBigInteger('circle3_id');
+            $table->unsignedBigInteger('circle4_id');
+            $table->unsignedBigInteger('circle5_id');
             $table->foreign('circle1_id')->references('id')->on('circle');
             $table->foreign('circle2_id')->references('id')->on('circle');
+            $table->foreign('circle3_id')->references('id')->on('circle');
+            $table->foreign('circle4_id')->references('id')->on('circle');
+            $table->foreign('circle5_id')->references('id')->on('circle');
             $table->string('color');
             $table->string('area');
         });
