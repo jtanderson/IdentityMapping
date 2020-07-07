@@ -18,28 +18,28 @@
 ### 6/23 Meeting: 
 - [ ] (3) Abort button should delete entire participant & their data (W/ WARNING!) - (go into DB, find participant by id, and then delete p at that id)
     - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
-
-### 7/1 Meeting:
-Write a AJAX function for intersection
-- [x]  (EDITED, NOT TESTED) (1) onMouseUp 
-    - after circle has moved
-    - on circle's circleID
-     - check all int which include that circleID
-     - send all ints to DB as array
      
-- [ ] (2) DB intersection migration 
-   - add id1-5 & make them intersection
+### 7/7 Meeting
+- [ ] (1) We create new circles with saveCircle - using numbers aren't right - saveCircles before saveIntersections
+    - [ ] saveIntersect should be in success callback for saveCircle **makes sure it is called directly after AJAX call
+- [ ] (2) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
+
+### Future:
+- [ ] Survey questions - way to manage the Qs in DB... (SQL insert? Admin page where Admins could add in questions.) new controller, views, etc. build in data analytics
+(Maybe weekend project?)
+    - OR seed data with laravel - data that always seed (admin, user acct.) in our case, survey questions... 
+     
 
 ## Fixed bugs:
-  - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
-  - [x] "local storage" issue - Rewrite of doSubmit to AJAX?
-  - [x] Make category_id nullable (find migration to do so)
-  - [x] AJAX post in layering is null when sent to controller (Anderson fixed)
-  - [x] circleID starts at 2 - blade templating issue (even though it starts at 1...?) (Anderson fixed)
-  - [x] session()->exists - check if participant needs to be added at all (SessionCheck does this)
+- [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
+- [x] "local storage" issue - Rewrite of doSubmit to AJAX?
+- [x] Make category_id nullable (find migration to do so)
+- [x] AJAX post in layering is null when sent to controller (Anderson fixed)
+- [x] circleID starts at 2 - blade templating issue (even though it starts at 1...?) (Anderson fixed)
+- [x] session()->exists - check if participant needs to be added at all (SessionCheck does this)
     - [ ] Also consider session time, what if same session token is used?
-  - [x] Detangle rest of local storage logic in JS.
-  - [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
+- [x] Detangle rest of local storage logic in JS.
+- [x] (IN PROGRESS) layering.js... we need to fill an object (5 times) with hidden input data and 
 - [x] Retrieving hidden data from HTML & recreating circles:
     - [x] Create a circle into the paper.js view 
 - [x] session()->get('participant_id') isn't seen by controller as object, instead as a number so it can't use it to getCircles()
@@ -47,3 +47,5 @@ Write a AJAX function for intersection
 - [x] (IN PROGRESS) Position "Next" - submit data into JSON object -> database by writing PHP code for Laravel (associative array with AJAX request (example is inside layering.js))
 - [x] (2) Return the circles on color()
 - [x] (1!) saveCircleData should be on every user action
+- [x] (2) DB intersection migration 
+   - add id1-5 & make them intersection
