@@ -17,10 +17,10 @@ class CreateIntersectionTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->unsignedBigInteger('circle1_id');
-            $table->unsignedBigInteger('circle2_id');
-            $table->unsignedBigInteger('circle3_id');
-            $table->unsignedBigInteger('circle4_id');
-            $table->unsignedBigInteger('circle5_id');
+            $table->unsignedBigInteger('circle2_id')->nullable();
+            $table->unsignedBigInteger('circle3_id')->nullable();
+            $table->unsignedBigInteger('circle4_id')->nullable();
+            $table->unsignedBigInteger('circle5_id')->nullable();
             $table->foreign('circle1_id')->references('id')->on('circle');
             $table->foreign('circle2_id')->references('id')->on('circle');
             $table->foreign('circle3_id')->references('id')->on('circle');

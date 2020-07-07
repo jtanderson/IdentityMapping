@@ -75,15 +75,37 @@ class SurveyController extends Controller{
     Log::info("Saving intersection data...");
     Log::info($request);
 
-    $intersection = new \App\Intersection;
-    $intersection->circle1_id = $request->input('circles'); //will be an array
-    $intersection->circle2_id = $request->input('circle2');
-    $intersection->color = $request->input('color', '');
-    $intersection->area = $request->input('area', '');
+    //split the id ex "12"
 
-    Log::info($intersection);
+    $arr = $request->input('intersections');
 
-    $intersection->save();
+    Log::info($arr);
+
+    foreach ($arr as $obj) {
+
+      $intersection = new \App\Intersection;
+
+      //$participant circle with index ("") match circle number with circle id ['id'][0] & get actual dbid 
+
+      $intersection->circle1_id = $obj['id'][0];
+      $intersection->circle2_id = $obj['id'][1];
+      
+      if(strlen($obj['id']) >= 3)
+        $intersection->circle3_id = $obj['id'][2];
+      if(strlen($obj['id']) >= 4)
+        $intersection->circle4_id = $obj['id'][3];
+      if(strlen($obj['id']) >= 5)
+        $intersection->circle5_id = $obj['id'][4];
+
+      
+      $intersection->color = $request->input('color', '');
+      $intersection->area = $request->input('area', '');
+
+      $intersection->save();
+
+      Log::info($intersection);
+    
+    }
 
   }
 

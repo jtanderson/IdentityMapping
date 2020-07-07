@@ -123,16 +123,26 @@ saveIntersect = function(circleID){
 
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-  var circles = [];
+  var intersections = Array();
+
+  console.log("saveIntersect here");
 
   for(var i in iLayer.children){
-    if(iLayer.children[i].id.includes(circleID)){
-        circles[i] = iLayer.children[i];
+
+    var child = {};
+
+    console.log("This is iLayer.children " + iLayer.children[i]);
+    if(iLayer.children[i].data.id.includes(circleID)){
+
+      child.id = iLayer.children[i].data.id; 
+      child.area =  iLayer.children[i].area;
+      
+      intersections[i] = child;
     }
   }
 
   $.post("/saveIntersectData", {
-        "circles": "", /* an array which holds all intersections */ 
+        "intersections": intersections, /* an array which holds all intersections */ 
   })
   .done(function(data){
     console.log("Save complete!");
