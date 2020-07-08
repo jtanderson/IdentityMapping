@@ -127,11 +127,17 @@ saveIntersect = function(circleID){
 
   console.log("saveIntersect here");
 
+  console.log("This is iLayer.children length " + iLayer.children.length);
+
+  console.log("This is iLayer.children " + iLayer.children);
+
   for(var i in iLayer.children){
 
     var child = {};
 
     console.log("This is iLayer.children " + iLayer.children[i]);
+    console.log("This is iLayer.children id " + iLayer.children[i].data.id);
+
     if(iLayer.children[i].data.id.includes(circleID)){
 
       child.id = iLayer.children[i].data.id; 
@@ -145,18 +151,18 @@ saveIntersect = function(circleID){
         "intersections": intersections, /* an array which holds all intersections */ 
   })
   .done(function(data){
-    console.log("Save complete!");
+    console.log("Save intersection complete!");
   }); 
 
 }
 
 intersections();
 
-//group creation for layering the intersections
-var group2 = new Group();
-var group3 = new Group();
-var group4 = new Group();
-var group5 = new Group(); 
+// //group creation for layering the intersections
+// var group2 = new Group();
+// var group3 = new Group();
+// var group4 = new Group();
+// var group5 = new Group(); 
 
 function creation(){
   var iLayer = project.getItem({data:{layerName: "intersections"}});
@@ -423,7 +429,11 @@ saveCircle = function(circleID){
       "radius": (obj.bounds.width/2),
   })
   .done(function(data){
-    console.log("Save complete!");
+
+    console.log("Save circle complete!");
+
+    saveIntersect(circleID);
+
   });
 
 }
@@ -461,7 +471,7 @@ paper.tool.onMouseUp = function(event){
 
   }//end iscircle check
 
-  saveIntersect(circleID);
+  // saveIntersect(circleID);
   saveCircle(circleID);
 
   dragged = false;
