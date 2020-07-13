@@ -20,10 +20,8 @@
     - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
      
 ### 7/7 Meeting
-- [ ] (1) We create new circles with saveCircle - using numbers aren't right - saveCircles before saveIntersections
-    - [ ] saveIntersect should be in success callback for saveCircle **makes sure it is called directly after AJAX call
-- [ ] (2) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
-
+- [x] (IN PROGRESS) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
+   - [ ] (7/13) save area correctly 
 ### Future:
 - [ ] Survey questions - way to manage the Qs in DB... (SQL insert? Admin page where Admins could add in questions.) new controller, views, etc. build in data analytics
 (Maybe weekend project?)
@@ -49,3 +47,5 @@
 - [x] (1!) saveCircleData should be on every user action
 - [x] (2) DB intersection migration 
    - add id1-5 & make them intersection
+- [x] (1) We create new circles with saveCircle - using numbers aren't right - saveCircles before saveIntersections
+    - [x] saveIntersect should be in success callback for saveCircle **makes sure it is called directly after AJAX call
