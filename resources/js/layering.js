@@ -305,9 +305,9 @@ paper.tool.onMouseDown = function(event){
 
   console.log("onMouseDown running!");
 
+  //(7/8) error somewhere, maybe here?
   if(activeItem){
     activeItem.selected = false;
-    //(G: ??) need something else here maybe, is this where tester comes in--tester is if clicked, and if clicked, item = activeItem?
   }
 
   handle = null;
@@ -407,11 +407,9 @@ saveCircle = function(circleID){
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
 
-  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+  var dbid = document.getElementById("circle-"+circleID+"-id");
 
-  // console.log(obj.position.x);
-  // console.log(obj.position.y);
-  // console.log(obj.bounds.width/2);
+  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
   objLabel.content = circleLabel;
@@ -427,6 +425,7 @@ saveCircle = function(circleID){
       "position_y": obj.position.y,
       "label": circleLabel,
       "radius": (obj.bounds.width/2),
+      "dbid": dbid,
   })
   .done(function(data){
 
@@ -448,6 +447,7 @@ paper.tool.onMouseUp = function(event){
   //is circle check
   if( cLayer.isAncestor(activeItem) ){
 
+      //(7/8) I think this is where the error is
       var circleID = activeItem.data.circleId;
       console.log("calculated circle id");
       console.log(circleID);

@@ -59,6 +59,7 @@ class SurveyController extends Controller{
     $circle = new \App\Circle;
     $circle->label = $request->input('label');
     $circle->number = $request->input('number');
+    // $circle->dbid = $request->input('dbid');
     $circle->center_x = $request->input('position_x');
     $circle->center_y = $request->input('position_y');
     $circle->radius = $request->input('radius');
@@ -75,27 +76,73 @@ class SurveyController extends Controller{
     Log::info("Saving intersection data...");
     Log::info($request);
 
+    $participant = \App\Participant::find(session()->get('participant_id'));
+
     //split the id ex "12"
 
-    $arr = $request->input('intersections');
+    $circles = $participant->getCircles();
 
+    $arr = $request->input('intersections');
     Log::info($arr);
+
+//intersections passed from layering.js (saveIntersect())
+
+//     //local.INFO: array (
+// myapp_1    |   'intersections' => 
+// myapp_1    |   array (
+// myapp_1    |     0 => 
+// myapp_1    |     array (
+// myapp_1    |       'id' => '12',
+// myapp_1    |       'area' => '5316.506290736899',
+// myapp_1    |     ),
+// myapp_1    |   ),
+// myapp_1    | ) 
 
     foreach ($arr as $obj) {
 
       $intersection = new \App\Intersection;
 
-      //$participant circle with index ("") match circle number with circle id ['id'][0] & get actual dbid 
+      Log::info($obj);
 
-      $intersection->circle1_id = $obj['id'][0];
-      $intersection->circle2_id = $obj['id'][1];
-      
-      if(strlen($obj['id']) >= 3)
-        $intersection->circle3_id = $obj['id'][2];
-      if(strlen($obj['id']) >= 4)
-        $intersection->circle4_id = $obj['id'][3];
-      if(strlen($obj['id']) >= 5)
-        $intersection->circle5_id = $obj['id'][4];
+// local.INFO: array (
+// myapp_1    |   0 => 
+// myapp_1    |   array (
+// myapp_1    |     'id' => '12',
+// myapp_1    |     'area' => '12530.66999727977',
+// myapp_1    |   ),
+// myapp_1    | )  
+
+      //$participant->getCircles with index (number) ("") match circle number with circle id ['id'][0] 
+      //!!!!!!!! & get actual dbid
+
+      $findid1 = $obj['id'][0];
+      Log::info($findid1); 
+      $index1 = intval($findid1);
+
+      $findid2 = $obj['id'][1];
+      Log::info($findid2);
+      $index2 = intval($findid2);
+
+      $intersection->circle1_id = $circles[$index1]['id'];
+      $intersection->circle2_id = $circles[$index2]['id'];
+
+      if(strlen($obj['id']) >= 3){
+        $findid3 = $obj['id'][2];
+        $index3 = intval($findid3);
+        $intersection->circle3_id = $circles[$index3]['id'];
+      }
+
+      if(strlen($obj['id']) >= 4){
+        $findid4 = $obj['id'][3];
+        $index4 = intval($findid4);
+        $intersection->circle4_id = $circles[$index4]['id'];
+      }
+
+      if(strlen($obj['id']) >= 5){
+        $findid5 = $obj['id'][4];
+        $index5 = intval($findid5);
+        $intersection->circle5_id = $circles[$index5]['id'];
+      }
 
       
       $intersection->color = $request->input('color', '');
@@ -104,6 +151,12 @@ class SurveyController extends Controller{
       $intersection->save();
 
       Log::info($intersection);
+
+// local.INFO: array (
+// myapp_1    |   'id' => '12',
+// myapp_1    |   'area' => '12530.66999727977',
+// myapp_1    | )  
+
     
     }
 
