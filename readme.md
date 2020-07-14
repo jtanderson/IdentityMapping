@@ -16,15 +16,23 @@
   - [ ] find replacement for grace ( :( )
    
 ### 6/23 Meeting: 
-- [ ] (3) Abort button should delete entire participant & their data (W/ WARNING!) - (go into DB, find participant by id, and then delete p at that id)
+- [ ] (2) Abort button should delete entire participant & their data (W/ WARNING!) - (go into DB, find participant by id, and then delete p at that id)
     - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
      
 ### 7/7 Meeting
 - [x] (IN PROGRESS) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
-   - [ ] (7/13) save area correctly 
+   - [x] (7/13) save area correctly 
+   
+### 7/14 Meeting 
+- [ ] (1) Fix circle color (7/14) 
+- [ ] /category "@ensection" 
+- [ ] /end page has "Next" button
+- [ ] refactor survey & category pages 
+
 ### Future:
-- [ ] Survey questions - way to manage the Qs in DB... (SQL insert? Admin page where Admins could add in questions.) new controller, views, etc. build in data analytics
+- [ ] **Survey questions - way to manage the Qs in DB... (SQL insert? Admin page where Admins could add in questions.) new controller, views, etc. build in data analytics
 (Maybe weekend project?)
+  - Add/remove survey questions...
     - OR seed data with laravel - data that always seed (admin, user acct.) in our case, survey questions... 
      
 
