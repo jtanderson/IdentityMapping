@@ -138,12 +138,12 @@ saveIntersect = function(circleID){
     console.log("This is iLayer.children " + iLayer.children[i]);
     console.log("This is iLayer.children id " + iLayer.children[i].data.id);
 
-    if(iLayer.children[i].data.id.includes(circleID)){
+    if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.id.includes(circleID)){
 
       child.id = iLayer.children[i].data.id; 
       child.area =  iLayer.children[i].area;
       
-      intersections[i] = child;
+      intersections.push(child);
     }
   }
 
@@ -407,7 +407,7 @@ saveCircle = function(circleID){
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
 
-  var dbid = document.getElementById("circle-"+circleID+"-id");
+  // var dbid = document.getElementById("circle-"+circleID+"-id").value;
 
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
@@ -425,7 +425,6 @@ saveCircle = function(circleID){
       "position_y": obj.position.y,
       "label": circleLabel,
       "radius": (obj.bounds.width/2),
-      "dbid": dbid,
   })
   .done(function(data){
 

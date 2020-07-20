@@ -1,6 +1,10 @@
-var debug_mode = false;
+$.ajaxSetup({
+  headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 
-//instead of importing local storage, search db for sessid/userid, return circles
+var debug_mode = false;
 
 var activeItem; 
 var handle;
@@ -24,8 +28,6 @@ project.addLayer(labelLayer);
 
 //only needs to recreate circles on page
 var intialize = function(){
-// function loadCircles(){
-
   var circle = Array(5);
 
    for(var i=1; i<=5; i++){
@@ -41,7 +43,7 @@ var intialize = function(){
       // console.log("circle "+i+" y retrieved is " + circle_y);
       var radius = document.getElementById("circle-"+circleID+"-radius").value;
       // console.log("circle "+i+" radius retrieved is " + radius);
-      var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
+      var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split(",");
 
       var dbid = document.getElementById("circle-"+circleID+"-id").value;
       
@@ -56,6 +58,7 @@ var intialize = function(){
       circle[i]['radius'] = radius;
       circle[i]['label'] = label;
       circle[i]['dbid'] = dbid;
+      circle[i]['line_style'] = line_style;
 
 
       var min = 55;
@@ -73,6 +76,7 @@ var intialize = function(){
         circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
         circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
         circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
+        circle[i]['line_style'] = [];
       }
 
 
@@ -81,7 +85,7 @@ var intialize = function(){
         radius: circle[i]['radius'],
         fillColor: new Color(1, 1, 1, 0.75),
         strokeColor: 'black',
-        // id: i,
+        dashArray: circle[i]['line_style'],
         insert: exists,
         visible: exists,
         data: {
@@ -119,12 +123,9 @@ var intialize = function(){
 
 intialize();
 
-// console.log(" after init ");
-
 //mouse down function
 paper.tool.onMouseDown = function(event){
 
-  //why???
   if(activeItem){
     activeItem.selected = false;
   }
@@ -170,10 +171,6 @@ paper.tool.onMouseDown = function(event){
 
       //should be tied to eventlistener for sliderIntersect (horrible name)
 
-      //sliderIntersect.addEventListener("change",function(){
-      //TODO warning: this logic needs to be duplicated for intersections! make it a function, updateSlider(activeItem)
-      //do we need to?
-
       //retrieves color
       var colorStr = activeItem.fillColor._canvasStyle;
       var test_r, test_b;
@@ -185,7 +182,9 @@ paper.tool.onMouseDown = function(event){
 
       //sets sliderIntersect value (slider's position) to that "color" on its range
       colorSlider.value = (1-test_r/255)*100;
+      //(7/20) calls change event 
 
+      //**occurs in event listener
       //fill selected circle with that color
       //set activeItem.fillColor = current_color;
 
@@ -231,18 +230,17 @@ var scope = this;
     colorSlider.addEventListener("change",function(){
         if( activeItem ){
           var r,b;
-          r=Math.round(255*(100-sliderIntersect.value)/100);
-          b=Math.round(255*sliderIntersect.value/100);
+          r=Math.round(255*(100-colorSlider.value)/100);
+          b=Math.round(255*colorSlider.value/100);
           activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
           console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
 
-          // (7/1) (3) assuming activeItem is a circle -> check if intersection or NULL
-          //know which circles involved -> query db for the intersection which involves both circles -> update that int obj color
           var circleID = activeItem.data.circleId;
-          console.log("calculated circle id");
+          // console.log("calculated circle id");
           console.log(circleID);
-
-          saveData(circleID);
+          //(7/20) recursion error happening here
+          console.log("recursion @ colorslide?");
+          saveCircle(circleID);
         }
     },true);
 
@@ -258,10 +256,10 @@ var scope = this;
         console.log("calculated circle id");
         console.log(circleID);
         
-        if (activeItem.dashArray = false){
+        if (activeItem.dashArray.length == 0){//if line style is empty
 
           console.log("Circle " + activeItem.id +"'s outline is solid");
-          saveData(circleID);
+          saveCircle(circleID);
         }
       }
     },false);
@@ -289,19 +287,13 @@ var scope = this;
 // }
 
 
-// (2) Fix this to saveCircle
-
 //sends the circle data to DB storage
 saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-  console.log(circleLabel);
+  console.log("recursion saveCircle?");
 
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
-
-  // console.log(obj.position.x);
-  // console.log(obj.position.y);
-  // console.log(obj.bounds.width/2);
 
   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
   objLabel.content = circleLabel;
@@ -309,32 +301,27 @@ saveCircle = function(circleID){
   obj.visible = true;
   objLabel.visible = true;
 
-  // console.log(obj);
- 
-  $.post("/saveCircleData", {
+  var problem = {
       "number": circleID,
       "position_x": obj.position.x,
       "position_y": obj.position.y,
       "label": circleLabel,
       "radius": (obj.bounds.width/2),
-      "line_style": obj.dashArray,
-      "color": obj.fillColor,
+      "line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
+      "color": obj.fillColor.getComponents().toString(), //this is a string from the color OBJ
+      //ex) "rgba(38,0,217,0.9)"  
+  };
 
-  })
-  .done(function(data){
+  console.log(obj);
+  console.log(obj.fillColor);
+  console.log(obj.fillColor.canvasStyle);
+
+  console.log(problem);
+ 
+  $.post("/saveCircleData", problem).done(function(data){
     console.log("Save complete!");
   });
 
-  // $.post("/saveIntersectData", {
-  //       "created": "" /*time stamp here */,
-  //       "updated": "" /*time stamp here */,
-  //       "circle1": "" /*circle 1 id*/,
-  //       "circle2": "" /*circle 2 id*/,
-  //       "area": "" /*calculated in intersection function*/
-  // })
-  // .done(function(data){
-  //   console.log("Save complete!");
-  // }); 
 }
 
 doSubmit = function(e){
@@ -345,47 +332,6 @@ doSubmit = function(e){
     console.log(circleID);
 
     saveCircle(circleID);
-
-  //   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-  //   console.log(circleLabel);
-
-  //   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
-
-  //   // console.log(obj.position.x);
-  //   // console.log(obj.position.y);
-  //   // console.log(obj.bounds.width/2);
-
-
-  //   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-  //   objLabel.content = circleLabel;
-
-  //   obj.visible = true;
-  //   objLabel.visible = true;
-
-  //     $.post("/saveCircleData", {
-  //       "number": circleID,
-  //       "position_x": obj.position.x,
-  //       "position_y": obj.position.y,
-  //       "label": circleLabel,
-  //       "radius": (obj.bounds.width/2),
-  //   })
-  //   .done(function(data){
-  //     console.log("Save complete!");
-  //   });
-
-  //   $.post("/saveIntersectData", {
-  //         "created": "" /*time stamp here */,
-  //         "updated": "" /*time stamp here */,
-  //         "circle1": "" /*circle 1 id*/,
-  //         "circle2": "" /*circle 2 id*/,
-  //         "area": "" /*calculated in intersection function*/
-  //   })
-  //   .done(function(data){
-  //     console.log("Save complete!");
-  //   });
-
-
-  // insert = true;
 
   intersections();
 

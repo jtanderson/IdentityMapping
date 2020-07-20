@@ -64,6 +64,9 @@ class SurveyController extends Controller{
     $circle->center_y = $request->input('position_y');
     $circle->radius = $request->input('radius');
     $circle->color = $request->input('color','');
+    //needs a sort of test (not NULL) OR
+    //can also be nullable()?
+    // & make sure everything is OK with it
     $circle->line_style = $request->input('line_style','');
     $circle->participant_id = $request->session()->get('participant_id','');
 
@@ -83,7 +86,7 @@ class SurveyController extends Controller{
     $circles = $participant->getCircles();
 
     $arr = $request->input('intersections');
-    Log::info($arr);
+    // Log::info($arr);
 
 //intersections passed from layering.js (saveIntersect())
 
@@ -102,7 +105,7 @@ class SurveyController extends Controller{
 
       $intersection = new \App\Intersection;
 
-      Log::info($obj);
+      // Log::info($obj);
 
 // local.INFO: array (
 // myapp_1    |   0 => 
@@ -146,7 +149,7 @@ class SurveyController extends Controller{
 
       
       $intersection->color = $request->input('color', '');
-      $intersection->area = $request->input('area', '');
+      $intersection->area = $obj['area'];
 
       $intersection->save();
 

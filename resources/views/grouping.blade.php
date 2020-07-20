@@ -81,4 +81,4 @@
     }
   }
 </script>
-@ensection
+@endsection

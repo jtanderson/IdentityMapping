@@ -20,8 +20,8 @@ class CreateCircleTable extends Migration
             $table->string('radius');
             $table->string('center_x');
             $table->string('center_y');
-            $table->string('color');
-            $table->string('line_style');
+            $table->string('color')->nullable();
+            $table->string('line_style')->nullable();
             $table->string('number');
         });
     }
