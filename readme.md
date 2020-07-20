@@ -24,9 +24,9 @@
    - [x] (7/13) save area correctly 
    
 ### 7/14 Meeting 
-- [ ] (1) Fix circle color (7/14) 
-- [ ] /category "@ensection" 
-- [ ] /end page has "Next" button
+- [x] (1) Fix circle color (7/20) 
+- [x] /category "@ensection" 
+- [ ] (currently working on) /end page has "Next" button
 - [ ] refactor survey & category pages 
 
 ### Future:
