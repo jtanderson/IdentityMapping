@@ -24,18 +24,14 @@
    - [x] (7/13) save area correctly 
    
 ### 7/14 Meeting 
-- [x] (1) Fix circle color (7/20) 
-- [x] /category "@ensection" 
-- [ ] (currently working on) /end page has "Next" button
-- [ ] refactor survey & category pages 
+- [ ] (currently working on) /end page has "Next" button - if/else isn't working on template, maybe take @end out of template?
 
-### Future:
-- [ ] **Survey questions - way to manage the Qs in DB... (SQL insert? Admin page where Admins could add in questions.) new controller, views, etc. build in data analytics
-(Maybe weekend project?)
-  - Add/remove survey questions...
-    - OR seed data with laravel - data that always seed (admin, user acct.) in our case, survey questions... 
+### 7/21 Meeting:
+- [ ] Admin page where Admins could add in questions (Maybe 7/21-23 project?)
+    - [ ] new controller, views, etc. build in data analytics
+  - Add/remove survey questions... (to DB and then choose which ones to use?)
+  - OR seed data with laravel - data that always seed (admin, user acct.) in our case, survey questions... 
      
-
 ## Fixed bugs:
 - [x] create sessionCheck middleware that checks if participant has a sessId already recorded in the db. If not, add them to db and launch start
 - [x] "local storage" issue - Rewrite of doSubmit to AJAX?
@@ -56,4 +52,6 @@
 - [x] (2) DB intersection migration 
    - add id1-5 & make them intersection
 - [x] (1) We create new circles with saveCircle - using numbers aren't right - saveCircles before saveIntersections
-    - [x] saveIntersect should be in success callback for saveCircle **makes sure it is called directly after AJAX call
+- [x] saveIntersect should be in success callback for saveCircle **makes sure it is called directly after AJAX call
+- [x] (1) Fix circle color (7/20) 
+- [x] /category "@ensection" 
