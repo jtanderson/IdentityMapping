@@ -11,19 +11,22 @@
         "postinstall": "npm run prod"
     },
     "devDependencies": {
-        "axios": "^0.19",
+        "axios": "^0.19.2",
+        "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
+        "jquery": "^3.5.1",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
+        "sass": "^1.26.10",
         "sass-loader": "^7.1.0",
-        "vue-template-compiler": "^2.6.10"
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
         "extend": "^3.0.2",
-        "jquery": "^3.4.1",
-        "paper": "^0.12.3",
+        "paper": "^0.12.11",
         "self": "^1.0.0"
     }
 }
