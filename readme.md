@@ -18,15 +18,17 @@
 ### 6/23 Meeting: 
 - [ ] (2) Abort button should delete entire participant & their data (W/ WARNING!) - (go into DB, find participant by id, and then delete p at that id)
     - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
-     
-### 7/7 Meeting
-- [x] (IN PROGRESS) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
-   - [x] (7/13) save area correctly 
    
 ### 7/14 Meeting 
 - [ ] (currently working on) /end page has "Next" button - if/else isn't working on template, maybe take @end out of template?
 
 ### 7/21 Meeting:
+- [ ] FINISH saveIntersect on coloring
+- [ ] Null check on color & linestyle in controller (make sure works)
+- [ ] if select canvas ("Nothing hit") - will break the doc.getElementById() 
+    - prevent function from running/nullity check
+    
+### Later?: 
 - [ ] Admin page where Admins could add in questions (Maybe 7/21-23 project?)
     - [ ] new controller, views, etc. build in data analytics
   - Add/remove survey questions... (to DB and then choose which ones to use?)
@@ -55,3 +57,5 @@
 - [x] saveIntersect should be in success callback for saveCircle **makes sure it is called directly after AJAX call
 - [x] (1) Fix circle color (7/20) 
 - [x] /category "@ensection" 
+- [x] (IN PROGRESS) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
+   - [x] (7/13) save area correctly 
