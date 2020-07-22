@@ -1,29 +1,29 @@
-//paper = require('paper/dist/paper-full');
-$.ajaxSetup({
+  //paper = require('paper/dist/paper-full');
+  $.ajaxSetup({
   headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
-});
+  });
 
-console.log("Loading Layering");
+  console.log("Loading Layering");
 
-var circleLayer = new Layer();//creates the circle layer
-circleLayer.data.layerName = "circles";
-project.addLayer(circleLayer);//adds the layer
+  var circleLayer = new Layer();//creates the circle layer
+  circleLayer.data.layerName = "circles";
+  project.addLayer(circleLayer);//adds the layer
 
-var intersectionLayer = new Layer();//starts the intersection layer
-intersectionLayer.data.layerName = "intersections";
-project.addLayer(intersectionLayer); //adds int layer
+  var intersectionLayer = new Layer();//starts the intersection layer
+  intersectionLayer.data.layerName = "intersections";
+  project.addLayer(intersectionLayer); //adds int layer
 
-//creates the label layer which will be the top layer
-var labelLayer = new Layer();
-labelLayer.data.layerName = "labels";
-project.addLayer(labelLayer);
+  //creates the label layer which will be the top layer
+  var labelLayer = new Layer();
+  labelLayer.data.layerName = "labels";
+  project.addLayer(labelLayer);
 
 
-//TODO: move to document.onready event (window load) / read up on better options
+  //TODO: move to document.onready event (window load) / read up on better options
 
-var intialize = function(){
+  var intialize = function(){
 
   var circle = Array(5);
 
@@ -112,14 +112,14 @@ var intialize = function(){
       });
 
       tLayer.addChild(label);//adds text to the text layer
-  
+
   }//end for
 
-}
+  }
 
-intialize();
+  intialize();
 
-saveIntersect = function(circleID){
+  saveIntersect = function(circleID){
 
   var iLayer = project.getItem({data: {layerName: "intersections"}});
 
@@ -154,17 +154,17 @@ saveIntersect = function(circleID){
     console.log("Save intersection complete!");
   }); 
 
-}
+  }
 
-intersections();
+  intersections();
 
-// //group creation for layering the intersections
-// var group2 = new Group();
-// var group3 = new Group();
-// var group4 = new Group();
-// var group5 = new Group(); 
+  // //group creation for layering the intersections
+  // var group2 = new Group();
+  // var group3 = new Group();
+  // var group4 = new Group();
+  // var group5 = new Group(); 
 
-function creation(){
+  function creation(){
   var iLayer = project.getItem({data:{layerName: "intersections"}});
   var cLayer = project.getItem({data:{layerName: "circles"}});
   var tLayer = project.getItem({data:{layerName: "labels"}});
@@ -175,10 +175,10 @@ function creation(){
   for(var j in iLayer.children){
     iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);
   }
-}
+  }
 
-//function for creating intersections
-function intersections(){
+  //function for creating intersections
+  function intersections(){
     
     var iLayer = project.getItem({data:{layerName: "intersections"}});
     iLayer.removeChildren();//destroying old intersections
@@ -271,12 +271,10 @@ function intersections(){
     iLayer.addChild(int_ijklm); 
   }//end the five single
 
-  //add intersections to db?
+  }//end intersections function
 
-}//end intersections function
-
-//function for fixing the layers
-var fixLayers = function(){
+  //function for fixing the layers
+  var fixLayers = function(){
   var iLayer = project.getItem({data: {layerName: "intersections"}});
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var tLayer = project.getItem({data: {layerName: "labels"}});
@@ -288,24 +286,23 @@ var fixLayers = function(){
   //   console.log('Fixed layers...');
   // }
 
-}//end fix layers function
+  }//end fix layers function
 
 
-// the one object that is under user focus
-// (nullity) NEEDS TO BE MAINTAINED VIGILANTLY
-var activeItem = null;
-// hitTests within x pixels of circle boundary, to detect resize instead of drag
-var handle;
-// if this ever becomes true, we need to recalculate intersections
-var dragged = false; 
-var intersect = false;
+  // the one object that is under user focus
+  // (nullity) NEEDS TO BE MAINTAINED VIGILANTLY
+  var activeItem = null;
+  // hitTests within x pixels of circle boundary, to detect resize instead of drag
+  var handle;
+  // if this ever becomes true, we need to recalculate intersections
+  var dragged = false; 
+  var intersect = false;
 
-//mouse down function
-paper.tool.onMouseDown = function(event){
+  //mouse down function
+  paper.tool.onMouseDown = function(event){
 
   console.log("onMouseDown running!");
 
-  //(7/8) error somewhere, maybe here?
   if(activeItem){
     activeItem.selected = false;
   }
@@ -320,7 +317,6 @@ paper.tool.onMouseDown = function(event){
     activeItem = hitResult.item; //activeItem will be a intersection
     
     console.log("User clicked an intersection with id " + hitResult.item.data.id);
-    dbarray.push(paper.project.exportJSON());
 
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
     activeItem = hitResult.item; // will be a circle
@@ -346,12 +342,12 @@ paper.tool.onMouseDown = function(event){
     }
     activeItem = null;
   }
-}//end of the mouse down function
+  }//end of the mouse down function
 
-var segment;
+  var segment;
 
-//when user clicks, holds down, and drags
-paper.tool.onMouseDrag = function(event){
+  //when user clicks, holds down, and drags
+  paper.tool.onMouseDrag = function(event){
   if(activeItem == null){
     return;
   }
@@ -398,11 +394,11 @@ paper.tool.onMouseDrag = function(event){
     intersections();
 
   }//end else
-}//end mouse dragging function
+  }//end mouse dragging function
 
 
-//sends the circle data to DB storage
-saveCircle = function(circleID){
+  //sends the circle data to DB storage
+  saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
   console.log(circleLabel);
@@ -418,7 +414,7 @@ saveCircle = function(circleID){
   objLabel.visible = true;
 
   // console.log(obj);
- 
+
   $.post("/saveCircleData", {
       "number": circleID,
       "position_x": obj.position.x,
@@ -434,11 +430,11 @@ saveCircle = function(circleID){
 
   });
 
-}
+  }
 
 
-//on mouse up function
-paper.tool.onMouseUp = function(event){
+  //on mouse up function
+  paper.tool.onMouseUp = function(event){
 
   var cLayer = project.getItem({data:{layerName: "circles"}});
   var iLayer = project.getItem({data: {layerName: "intersections"}});
@@ -446,13 +442,9 @@ paper.tool.onMouseUp = function(event){
   //is circle check
   if( cLayer.isAncestor(activeItem) ){
 
-      //(7/8) I think this is where the error is
       var circleID = activeItem.data.circleId;
-      console.log("calculated circle id");
-      console.log(circleID);
-
-      // var iLayer = project.getItem({data: {layerName: "intersections"}});
-      // var cLayer = project.getItem({data: {layerName: "circles"}});
+      // console.log("calculated circle id");
+      // console.log(circleID);
 
       if(dragged){//if the user dragged the circle
 
@@ -468,21 +460,35 @@ paper.tool.onMouseUp = function(event){
 
       }
 
-  }//end iscircle check
+        saveCircle(circleID);
 
-  // saveIntersect(circleID);
-  saveCircle(circleID);
+  }else if(false && hitResult != null ){
 
+    console.log("Releasing selected item");
+    if( activeItem ){
+      activeItem.selected = false;
+    }
+
+  }
+  else{
+
+    console.log("onMouseUp null");
+    if( activeItem ){
+      activeItem.selected = false;
+    }
+    activeItem = null;
+
+  }
   dragged = false;
 
 
-}//end mouse up function
+  }//end mouse up function
 
 
-var scope = this;
+  var scope = this;
 
-//function tied to btn that first adds circle
-doSubmit = function(e){
+  //function tied to btn that first adds circle
+  doSubmit = function(e){
 
   console.log("doSumbit Layering here");
 
@@ -512,7 +518,7 @@ doSubmit = function(e){
   // // console.log(obj);
 
   // insert = true;
- 
+
   // $.post("/saveCircleData", {
   //     "number": circleID,
   //     "position_x": obj.position.x,
@@ -541,10 +547,10 @@ doSubmit = function(e){
 
   //old logic -> dbarray.push(paper.project.exportJSON());
   //             console.log(dbarray);
-  
-  return false;
-} //end doSubmit function
 
-//G: Do we still need line below?
-//window.doSubmit = doSubmit;
+  return false;
+  } //end doSubmit function
+
+  //G: Do we still need line below?
+  //window.doSubmit = doSubmit;
 
