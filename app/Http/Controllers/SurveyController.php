@@ -86,7 +86,7 @@ class SurveyController extends Controller{
     $circles = $participant->getCircles();
 
     $arr = $request->input('intersections');
-    // Log::info($arr);
+    Log::info($arr);
 
 //intersections passed from layering.js (saveIntersect())
 

@@ -341,76 +341,76 @@
   var segment;
   var scope = this;
 
-  //handles color slider
-    var colorSlider = document.getElementById("rangeIntersect");
+  //colors circles & intersections
+  var colorSlider = document.getElementById("rangeIntersect");
+  
+  //(7/22): Need to check if circle or intersection before using saveCircle/saveInt.
+  colorSlider.addEventListener("change",function(){
 
-    //colors circles & intersections
+    var cLayer = project.getItem({data: {layerName: "circles"}});
+    var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-    //(7/22): Need to check if circle or intersection before using saveCircle/saveInt.
+      if( activeItem ){
+        var r,b;
+        r=Math.round(255*(100-colorSlider.value)/100);
+        b=Math.round(255*colorSlider.value/100);
+        activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
+        // console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
 
-    colorSlider.addEventListener("change",function(){
-
-      var cLayer = project.getItem({data: {layerName: "circles"}});
-      var iLayer = project.getItem({data: {layerName: "intersections"}});
-
-        if( activeItem ){
-          var r,b;
-          r=Math.round(255*(100-colorSlider.value)/100);
-          b=Math.round(255*colorSlider.value/100);
-          activeItem.fillColor = "rgb("+r+",0,"+b+",0.9)";
-          console.log("Circle " + activeItem.id +"'s color is " + "rgb("+r+",0,"+b+")");
-
-          if(hitResult = iLayer.hitTest(event.point)){
-            
-            var intID = activeItem.data.circleId;
-            saveIntersect(intID);
-
-          }else if(hitResult = cLayer.hitTest(event.point)){
-
-            var circleID = activeItem.data.circleId;
-            saveCircle(circleID);
-          }
-        }
-    },true);
-
-  //change stroke value (dotted/solid)
-
-    //solid button 
-    var solidBtn = document.getElementById("inlineRadioIntersect1");
-
-    solidBtn.addEventListener("change",function(){
-      if(activeItem){
-
-        var circleID = activeItem.data.circleId;
-        console.log("calculated circle id");
+        var circleID = activeItem.data.id;
         console.log(circleID);
-        
-        if (activeItem.dashArray.length == 0){//if line style is empty
 
-          console.log("Circle " + activeItem.id +"'s outline is solid");
+        if(iLayer.isAncestor(activeItem)){
+          
+          var circleID = activeItem.data.id;
+          saveIntersect(circleID);
+
+        }else if(cLayer.isAncestor(activeItem)){
+
+          var circleID = activeItem.data.id;
           saveCircle(circleID);
         }
       }
-    },false);
+  },true);
 
-    //dashed button
-    var dashedBtn = document.getElementById("inlineRadioIntersect12");
+  //change stroke value (dotted/solid)
 
-    dashedBtn.addEventListener("change",function(){
-      if(activeItem){
+  //solid button 
+  var solidBtn = document.getElementById("inlineRadioIntersect1");
 
-        var circleID = activeItem.data.circleId;
-        console.log("calculated circle id");
-        console.log(circleID);
+  solidBtn.addEventListener("change",function(){
+    if(activeItem){
 
-        //true or false, not specified values
-        activeItem.dashArray = [10,4];
-        console.log("Circle " + activeItem.id +"'s outline is dashed");
+      var circleID = activeItem.data.circleId;
+      console.log("calculated circle id");
+      console.log(circleID);
+      
+      if (activeItem.dashArray.length == 0){//if line style is empty
 
+        console.log("Circle " + activeItem.id +"'s outline is solid");
         saveCircle(circleID);
-
       }
-    },false);
+    }
+  },false);
+
+  //dashed button
+  var dashedBtn = document.getElementById("inlineRadioIntersect12");
+
+  dashedBtn.addEventListener("change",function(){
+    if(activeItem){
+
+      var circleID = activeItem.data.circleId;
+      console.log("calculated circle id");
+      console.log(circleID);
+
+      //true or false, not specified values
+      activeItem.dashArray = [10,4];
+      console.log("Circle " + activeItem.id +"'s outline is dashed");
+
+      saveCircle(circleID);
+
+    }
+  },false);
 
 
   saveIntersect = function(circleID){
@@ -420,8 +420,6 @@
     var iLayer = project.getItem({data: {layerName: "intersections"}});
 
     var intersections = Array();
-
-    console.log("saveIntersect here");
 
     console.log("This is iLayer.children length " + iLayer.children.length);
 
@@ -433,20 +431,28 @@
 
       var child = {};
 
-      console.log("This is iLayer.children " + iLayer.children[i]);
+      // console.log("This is iLayer.children " + iLayer.children[i]);
       console.log("This is iLayer.children id " + iLayer.children[i].data.id);
 
       //if the child is not empty, and includes the circleID in its ID
       //add a child object to array
-      if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.id.includes(circleID)){
+      if(!iLayer.children[i].isEmpty()){
+          if(iLayer.children[i].data.id.includes(circleID)){
 
-        child.id = iLayer.children[i].data.id; 
-        child.area =  iLayer.children[i].area;
-        child.color = iLayer.children[i].fillColor.getComponents().toString();
-        
-        intersections.push(child);
+          child.id = iLayer.children[i].data.id; 
+          child.area =  iLayer.children[i].area;
+          child.color = iLayer.children[i].fillColor.getComponents().toString();
+          // console.log("This is the intersection child" + child);
+
+          intersections.push(child);
+          }else{
+             console.log("ERROR: circleID is not in the intersection");
+          }
+      }else{
+        console.log("ERROR: Child is empty");
       }
-    }
+
+    }//end for 
 
     $.post("/saveIntersectData", {
           "intersections": intersections, /* an array which holds all intersections */ 
@@ -455,7 +461,7 @@
       console.log("Save intersection complete!");
     }); 
 
-    }
+    }//end saveInt
 
   //sends the circle data to DB storage
   saveCircle = function(circleID){

@@ -21,7 +21,7 @@
   project.addLayer(labelLayer);
 
 
-  //TODO: move to document.onready event (window load) / read up on better options
+  //TODO?: move to document.onready event (window load) / read up on better options
 
   var intialize = function(){
 
