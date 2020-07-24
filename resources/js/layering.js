@@ -51,7 +51,7 @@
 
       circle[i]['circle_x'] = circle_x;
       // console.log(circle[i]['circle_x']);
-      circle[i]['circle_y']  = circle_x;
+      circle[i]['circle_y']  = circle_y;
       circle[i]['radius'] = radius;
       circle[i]['label'] = label;
       circle[i]['dbid'] = dbid;

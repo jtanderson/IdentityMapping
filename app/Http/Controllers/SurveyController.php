@@ -148,7 +148,7 @@ class SurveyController extends Controller{
       }
 
       
-      $intersection->color = $request->input('color', '');
+      $intersection->color = $obj['color'];
       $intersection->area = $obj['area'];
 
       $intersection->save();
