@@ -30,4 +30,5 @@ class Participant extends Model
 
       return $circles;
     }
+
 }

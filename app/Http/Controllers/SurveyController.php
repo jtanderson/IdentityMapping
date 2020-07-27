@@ -1,13 +1,13 @@
-<?php
+  <?php
 
-namespace App\Http\Controllers;
+  namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+  use App\Http\Controllers\Controller;
+  use Illuminate\Support\Facades\Log;
+  use Illuminate\Http\Request;
+  use Illuminate\Support\Facades\DB;
 
-class SurveyController extends Controller{
+  class SurveyController extends Controller{
 
   public function __construct(){
     $this->middleware('participant');
@@ -88,18 +88,18 @@ class SurveyController extends Controller{
     $arr = $request->input('intersections');
     Log::info($arr);
 
-//intersections passed from layering.js (saveIntersect())
+    //intersections passed from layering.js (saveIntersect())
 
-//     //local.INFO: array (
-// myapp_1    |   'intersections' => 
-// myapp_1    |   array (
-// myapp_1    |     0 => 
-// myapp_1    |     array (
-// myapp_1    |       'id' => '12',
-// myapp_1    |       'area' => '5316.506290736899',
-// myapp_1    |     ),
-// myapp_1    |   ),
-// myapp_1    | ) 
+    //     //local.INFO: array (
+    // myapp_1    |   'intersections' => 
+    // myapp_1    |   array (
+    // myapp_1    |     0 => 
+    // myapp_1    |     array (
+    // myapp_1    |       'id' => '12',
+    // myapp_1    |       'area' => '5316.506290736899',
+    // myapp_1    |     ),
+    // myapp_1    |   ),
+    // myapp_1    | ) 
 
     foreach ($arr as $obj) {
 
@@ -107,13 +107,13 @@ class SurveyController extends Controller{
 
       // Log::info($obj);
 
-// local.INFO: array (
-// myapp_1    |   0 => 
-// myapp_1    |   array (
-// myapp_1    |     'id' => '12',
-// myapp_1    |     'area' => '12530.66999727977',
-// myapp_1    |   ),
-// myapp_1    | )  
+      // local.INFO: array (
+      // myapp_1    |   0 => 
+      // myapp_1    |   array (
+      // myapp_1    |     'id' => '12',
+      // myapp_1    |     'area' => '12530.66999727977',
+      // myapp_1    |   ),
+      // myapp_1    | )  
 
       //$participant->getCircles with index (number) ("") match circle number with circle id ['id'][0] 
       //!!!!!!!! & get actual dbid
@@ -155,17 +155,69 @@ class SurveyController extends Controller{
 
       Log::info($intersection);
 
-// local.INFO: array (
-// myapp_1    |   'id' => '12',
-// myapp_1    |   'area' => '12530.66999727977',
-// myapp_1    | )  
+      // local.INFO: array (
+      // myapp_1    |   'id' => '12',
+      // myapp_1    |   'area' => '12530.66999727977',
+      // myapp_1    | )  
 
     
     }
 
   }
 
-//intersection survey
+  public function deleteParticipant(Request $request){
+
+    $participant = \App\Participant::find(session()->get('participant_id'));
+
+    $circles = $participant->getCircles();
+
+    //this is going to give me errors based on foreign key constraints
+
+    foreach ($circles as $circle){
+
+      $intersection1 = App\Intersection::where('circle1_id');
+      foreach ($intersection1 as $intersect){
+        
+        $intersect->dropForeign(['circle1_id']);
+        $intersect->delete();
+      }
+
+      $intersection2 = App\Intersection::where('circle2_id');
+      foreach ($intersection2 as $intersect){
+        
+        $intersect->dropForeign(['circle2_id']);
+        $intersect->delete();
+      }
+
+      $intersection3 = App\Intersection::where('circle2_id');
+      foreach ($intersection3 as $intersect){
+        
+        $intersect->dropForeign(['circle3_id']);
+        $intersect->delete();
+      }
+
+      $intersection4 = App\Intersection::where('circle2_id');
+      foreach ($intersection4 as $intersect){
+        
+        $intersect->dropForeign(['circle4_id']);
+        $intersect->delete();
+      }
+
+      $intersection5 = App\Intersection::where('circle2_id');
+      foreach ($intersection5 as $intersect){
+       
+       $intersect->dropForeign(['circle5_id']);
+       $intersect->delete();
+      }
+
+      $circle->dropForeign(['participant_id']);
+      $circle->delete();
+    }
+
+    $participant->delete();
+  }
+
+  //intersection survey
   public function intersections(){
     return view('intersections', array(
       'progress' => '40',
@@ -206,33 +258,4 @@ class SurveyController extends Controller{
     ));
   }
 
-}
-
-  // public function survey(){
-  //   return view('survey', array(
-  //     'progress' => '100',
-  //     'prevURL' => route('intersections'),
-  //     'nextURL' => route('demographics'),
-  //   ));
-  // }
-  // public function deomographics(){
-  //   return view('demographics', array(
-  //     'progress' => '100',
-  //     'prevURL' => route('survey'),
-  //     'nextURL' => route('grouping'),
-  //   ));
-  // }
-  // public function grouping(){
-  //   return view('grouping', array(
-  //     'progress' => '100',
-  //     'prevURL' => route('demographics'),
-  //     'nextURL' => route('finished'),
-  //   ));
-  // }
-  // public function finished(){
-  //   return view('finished', array(
-  //     'progress' => '100',
-  //     'prevURL' => route('grouping'),
-  //   ));
-  // }
-
+  }

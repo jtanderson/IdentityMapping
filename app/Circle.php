@@ -12,5 +12,4 @@ class Circle extends Model
   
     protected $table = "circle";
 
-    //G: should we add variables in here? Thought it only needed for us to create a class variable and it would pull from DB
 }
