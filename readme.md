@@ -17,10 +17,11 @@
 
 ### 7/21 Meeting:
 - [ ] FINISH saveIntersect on coloring
-- [ ] Null check on color & linestyle in controller (make sure works)
+    - (In progress) Return color on Extended? 
+- [x] Null check on color & linestyle in controller (make sure works)
 - [x] if select canvas ("Nothing hit") - will break the doc.getElementById() 
     - [x] prevent function from running/nullity check -> added if/else statement
-- [ ] Abort button should delete entire participant & their data (W/ WARNING!) - Add function to SurveyController (go into DB, find participant by id, and then delete p at that id)
+- [ ] (In progress) Abort button should delete entire participant & their data (W/ WARNING!) - Add function to SurveyController (go into DB, find participant by id, and then delete p at that id)
 - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
 - [ ] /end page has "Next" button 
     - Take the directional stuff out of @end (no need for Abort or Next)
