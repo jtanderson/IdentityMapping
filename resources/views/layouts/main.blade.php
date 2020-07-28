@@ -43,8 +43,10 @@
         </div>
       </div>
       <div class="col-sm-3">
-        <div class="text text-left">
-          <a class="btn btn-danger" href="">Abort</a>
+        <div class="text text-left"> 
+          <form action="#" onsubmit="onAbort(event);">>
+            <input type="submit" class="btn btn-danger" value="Abort">
+        </form>
         </div>
       </div>
       <div class="col-sm-3">
@@ -63,5 +65,22 @@
   <!-- Scripts -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   @yield('javascript')
+  <script type="text/javascript">
+    
+    onAbort = function(e){
+
+      console.log("Abort button pressed!");
+
+      e.preventDefault();
+
+      $.post("/deleteParticipant", {
+
+      }).done(function(data){
+
+        console.log("Abort complete!");
+      });
+
+    }
+  </script>
 </body>
 </html>

@@ -98,26 +98,6 @@ height: 750px;
     iLayer.removeChildren();
     tLayer.removeChildren();
   }
-  // // var previous = function(){
-  // //   localStorage["saved"] = paper.project.exportJSON();
-  // //   localStorage["previous"] = "true";
-  // //   window.history.back();
-  // // }
-
-  // var save=function(){
-  //   localStorage["circles"] = paper.project.layers[0].children[4].id;
-  //   localStorage["intersect"] = paper.project.layers[1].children;
-  //   localStorage["text"] = paper.project.layers[2].children;
-  //   localStorage["proj"] = paper.project.exportJSON();
-
-  //   var surveyData = [];
-
-  //   var output = [];
-  //   var names = [];
-  //   var ar;
-    
-  // }
-
 
 </script>
 @endsection

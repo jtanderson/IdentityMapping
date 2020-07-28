@@ -43,7 +43,7 @@
         @endforeach
       </div>
 
-      <script>
+      <script> //(7/28) what does this do?
         function doFunction(){
           locked = true;
           console.log(locked);

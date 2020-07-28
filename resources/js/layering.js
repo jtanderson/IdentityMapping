@@ -20,12 +20,9 @@
   labelLayer.data.layerName = "labels";
   project.addLayer(labelLayer);
 
-
-  //TODO?: move to document.onready event (window load) / read up on better options
-
   var intialize = function(){
 
-  var circle = Array(5);
+   var circle = Array(5);
 
    for(var i=1; i<=5; i++){
 
@@ -113,47 +110,50 @@
 
       tLayer.addChild(label);//adds text to the text layer
 
-  }//end for
-
+   }//end for
   }
 
-  intialize();
+
+  $( document ).ready(function() {
+
+    intialize();
+
+  }
 
   saveIntersect = function(circleID){
 
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
+    var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-  var intersections = Array();
+    var intersections = Array();
 
-  console.log("saveIntersect here");
+    console.log("saveIntersect here");
 
-  console.log("This is iLayer.children length " + iLayer.children.length);
+    console.log("This is iLayer.children length " + iLayer.children.length);
 
-  console.log("This is iLayer.children " + iLayer.children);
+    console.log("This is iLayer.children " + iLayer.children);
 
-  for(var i in iLayer.children){
+    for(var i in iLayer.children){
 
-    var child = {};
+      var child = {};
 
-    console.log("This is iLayer.children " + iLayer.children[i]);
-    console.log("This is iLayer.children id " + iLayer.children[i].data.id);
+      console.log("This is iLayer.children " + iLayer.children[i]);
+      console.log("This is iLayer.children id " + iLayer.children[i].data.id);
 
-    if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.id.includes(circleID)){
+      if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.id.includes(circleID)){
 
-      child.id = iLayer.children[i].data.id; 
-      child.area =  iLayer.children[i].area;
-      
-      intersections.push(child);
+        child.id = iLayer.children[i].data.id; 
+        child.area =  iLayer.children[i].area;
+        
+        intersections.push(child);
+      }
     }
-  }
 
-  $.post("/saveIntersectData", {
-        "intersections": intersections, /* an array which holds all intersections */ 
-  })
-  .done(function(data){
-    console.log("Save intersection complete!");
-  }); 
-
+    $.post("/saveIntersectData", {
+          "intersections": intersections, /* an array which holds all intersections */ 
+    })
+    .done(function(data){
+      console.log("Save intersection complete!");
+    }); 
   }
 
   intersections();
@@ -165,16 +165,16 @@
   // var group5 = new Group(); 
 
   function creation(){
-  var iLayer = project.getItem({data:{layerName: "intersections"}});
-  var cLayer = project.getItem({data:{layerName: "circles"}});
-  var tLayer = project.getItem({data:{layerName: "labels"}});
-  for(var i in cLayer.children){
-    cLayer.children[i].fillColor = new Color(1, 1, 1, 0.75);
-    cLayer.children[i].dashArray = false;
-  }
-  for(var j in iLayer.children){
-    iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);
-  }
+    var iLayer = project.getItem({data:{layerName: "intersections"}});
+    var cLayer = project.getItem({data:{layerName: "circles"}});
+    var tLayer = project.getItem({data:{layerName: "labels"}});
+    for(var i in cLayer.children){
+      cLayer.children[i].fillColor = new Color(1, 1, 1, 0.75);
+      cLayer.children[i].dashArray = false;
+    }
+    for(var j in iLayer.children){
+      iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);
+    }
   }
 
   //function for creating intersections
@@ -259,32 +259,32 @@
     } // i loop 
     //ends the fours loop
 
-  var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
-  var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
-  var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
-  var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});
-  var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
+    var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
+    var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
+    var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
+    var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});
+    var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
 
-  if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
-    var int_ijklm = iLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
-    int_ijklm.data.id = ""+i+j+k+l+"5";
-    iLayer.addChild(int_ijklm); 
-  }//end the five single
+    if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
+      var int_ijklm = iLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
+      int_ijklm.data.id = ""+i+j+k+l+"5";
+      iLayer.addChild(int_ijklm); 
+    }//end the five single
 
   }//end intersections function
 
   //function for fixing the layers
   var fixLayers = function(){
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
-  var cLayer = project.getItem({data: {layerName: "circles"}});
-  var tLayer = project.getItem({data: {layerName: "labels"}});
-  tLayer.sendToBack();
-  iLayer.sendToBack();
-  cLayer.sendToBack();
+    var iLayer = project.getItem({data: {layerName: "intersections"}});
+    var cLayer = project.getItem({data: {layerName: "circles"}});
+    var tLayer = project.getItem({data: {layerName: "labels"}});
+    tLayer.sendToBack();
+    iLayer.sendToBack();
+    cLayer.sendToBack();
 
-  // if(debug_mode){
-  //   console.log('Fixed layers...');
-  // }
+    // if(debug_mode){
+    //   console.log('Fixed layers...');
+    // }
 
   }//end fix layers function
 
@@ -301,134 +301,133 @@
   //mouse down function
   paper.tool.onMouseDown = function(event){
 
-  console.log("onMouseDown running!");
+    console.log("onMouseDown running!");
 
-  if(activeItem){
-    activeItem.selected = false;
-  }
-
-  handle = null;
-  var cLayer = project.getItem({data: {layerName: "circles"}});
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
-
-
-  hitResult = iLayer.hitTest(event.point);
-  if(false && hitResult != null ){//if the intersection layer is hit
-    activeItem = hitResult.item; //activeItem will be a intersection
-    
-    console.log("User clicked an intersection with id " + hitResult.item.data.id);
-
-  } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
-    activeItem = hitResult.item; // will be a circle
-    activeItem.selected = true;
-    console.log("User clicked circle: " + hitResult.item.data.circleId);
-
-    //bring circle selected to top of canvas?
-    //hitResult.item.data.circleId.bringToFront();
-
-    //creates circles handle
-    handle = activeItem.hitTest(event.point, 
-      {
-        segments: true,
-        stroke: true,
-        fill: true,
-        tolerance: 15
-      }
-    );
-  } else { //when nothing is hit
-      console.log("Nothing hit");
-    if( activeItem ){
+    if(activeItem){
       activeItem.selected = false;
     }
-    activeItem = null;
-  }
+
+    handle = null;
+    var cLayer = project.getItem({data: {layerName: "circles"}});
+    var iLayer = project.getItem({data: {layerName: "intersections"}});
+
+
+    hitResult = iLayer.hitTest(event.point);
+    if(false && hitResult != null ){//if the intersection layer is hit
+      activeItem = hitResult.item; //activeItem will be a intersection
+      
+      console.log("User clicked an intersection with id " + hitResult.item.data.id);
+
+    } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
+      activeItem = hitResult.item; // will be a circle
+      activeItem.selected = true;
+      console.log("User clicked circle: " + hitResult.item.data.circleId);
+
+      //bring circle selected to top of canvas?
+      //hitResult.item.data.circleId.bringToFront();
+
+      //creates circles handle
+      handle = activeItem.hitTest(event.point, 
+        {
+          segments: true,
+          stroke: true,
+          fill: true,
+          tolerance: 15
+        }
+      );
+    } else { //when nothing is hit
+        console.log("Nothing hit");
+      if( activeItem ){
+        activeItem.selected = false;
+      }
+      activeItem = null;
+    }
   }//end of the mouse down function
 
   var segment;
 
   //when user clicks, holds down, and drags
   paper.tool.onMouseDrag = function(event){
-  if(activeItem == null){
-    return;
-  }
-  else{
-
-    dragged=true;
-    var cLayer = project.getItem({data: {layerName: "circles"}});
-    var iLayer = project.getItem({data: {layerName: "intersections"}});
-    
-    // TODO: instead of using a variable, test which layer activeItem is in!!
-    // circleLayer.isAncestor(activeItem) (For circles inside circles)
-
-    if( cLayer.isAncestor(activeItem) ){ //if circle
-
-      iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
-
-      //if the user clicked near the circles boundary
-      if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
-        var p = event.point; // old
-        var p2 = p + event.delta; // new
-        var c = activeItem.position;
-        if ((c - p).length > (c - p2).length){
-          activeItem.scaling -= 0.005*event.delta.length;
-        } else {
-          activeItem.scaling += 0.005*event.delta.length;
-        }
-        
-        console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
-      }
-      //else move the circle
-      else {
-        var data = activeItem.data.circleId;
-        if(activeItem){
-          activeItem.translate(event.delta);
-          project.getItem({data: {labelId: data}}).translate(event.delta);
-            console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
-        }
-
-
-      }//end if circle edge or circle
-        console.log("Clicked canvas");
+    if(activeItem == null){
+      return;
     }
+    else{
 
-    intersections();
+      dragged=true;
+      var cLayer = project.getItem({data: {layerName: "circles"}});
+      var iLayer = project.getItem({data: {layerName: "intersections"}});
+      
+      // TODO: instead of using a variable, test which layer activeItem is in!!
+      // circleLayer.isAncestor(activeItem) (For circles inside circles)
 
-  }//end else
+      if( cLayer.isAncestor(activeItem) ){ //if circle
+
+        iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
+
+        //if the user clicked near the circles boundary
+        if(handle && (handle.type == 'stroke' || handle.type == 'segment')){
+          var p = event.point; // old
+          var p2 = p + event.delta; // new
+          var c = activeItem.position;
+          if ((c - p).length > (c - p2).length){
+            activeItem.scaling -= 0.005*event.delta.length;
+          } else {
+            activeItem.scaling += 0.005*event.delta.length;
+          }
+          
+          console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+        }
+        //else move the circle
+        else {
+          var data = activeItem.data.circleId;
+          if(activeItem){
+            activeItem.translate(event.delta);
+            project.getItem({data: {labelId: data}}).translate(event.delta);
+              console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+          }
+
+
+        }//end if circle edge or circle
+          console.log("Clicked canvas");
+      }
+
+      intersections();
+
+    }//end else
   }//end mouse dragging function
-
 
   //sends the circle data to DB storage
   saveCircle = function(circleID){
 
-  var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-  console.log(circleLabel);
+    var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+    console.log(circleLabel);
 
-  // var dbid = document.getElementById("circle-"+circleID+"-id").value;
+    // var dbid = document.getElementById("circle-"+circleID+"-id").value;
 
-  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+    var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
-  var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-  objLabel.content = circleLabel;
+    var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+    objLabel.content = circleLabel;
 
-  obj.visible = true;
-  objLabel.visible = true;
+    obj.visible = true;
+    objLabel.visible = true;
 
-  // console.log(obj);
+    // console.log(obj);
 
-  $.post("/saveCircleData", {
-      "number": circleID,
-      "position_x": obj.position.x,
-      "position_y": obj.position.y,
-      "label": circleLabel,
-      "radius": (obj.bounds.width/2),
-  })
-  .done(function(data){
+    $.post("/saveCircleData", {
+        "number": circleID,
+        "position_x": obj.position.x,
+        "position_y": obj.position.y,
+        "label": circleLabel,
+        "radius": (obj.bounds.width/2),
+    })
+    .done(function(data){
 
-    console.log("Save circle complete!");
+      console.log("Save circle complete!");
 
-    saveIntersect(circleID);
+      saveIntersect(circleID);
 
-  });
+    });
 
   }
 
@@ -436,51 +435,50 @@
   //on mouse up function
   paper.tool.onMouseUp = function(event){
 
-  var cLayer = project.getItem({data:{layerName: "circles"}});
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
+    var cLayer = project.getItem({data:{layerName: "circles"}});
+    var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-  //is circle check
-  if( cLayer.isAncestor(activeItem) ){
+    //is circle check
+    if( cLayer.isAncestor(activeItem) ){
 
-      var circleID = activeItem.data.circleId;
-      // console.log("calculated circle id");
-      // console.log(circleID);
+        var circleID = activeItem.data.circleId;
+        // console.log("calculated circle id");
+        // console.log(circleID);
 
-      if(dragged){//if the user dragged the circle
+        if(dragged){//if the user dragged the circle
 
-        intersections();
+          intersections();
 
-          // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
+            // console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
 
-          // console.log("HERE2");
+            // console.log("HERE2");
 
-          console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
+            console.log("Circle " + activeItem.data.circleId + " has radius " + activeItem.bounds.width/2);
 
-          fixLayers();
+            fixLayers();
 
+        }
+
+          saveCircle(circleID);
+
+    }else if(false && hitResult != null ){
+
+      console.log("Releasing selected item");
+      if( activeItem ){
+        activeItem.selected = false;
       }
 
-        saveCircle(circleID);
-
-  }else if(false && hitResult != null ){
-
-    console.log("Releasing selected item");
-    if( activeItem ){
-      activeItem.selected = false;
     }
+    else{
 
-  }
-  else{
+      console.log("onMouseUp null");
+      if( activeItem ){
+        activeItem.selected = false;
+      }
+      activeItem = null;
 
-    console.log("onMouseUp null");
-    if( activeItem ){
-      activeItem.selected = false;
     }
-    activeItem = null;
-
-  }
-  dragged = false;
-
+    dragged = false;
 
   }//end mouse up function
 
@@ -490,65 +488,65 @@
   //function tied to btn that first adds circle
   doSubmit = function(e){
 
-  console.log("doSumbit Layering here");
+    console.log("doSumbit Layering here");
 
-  e.preventDefault();
+    e.preventDefault();
 
-  //should work when circles are inputted/created 
-  var circleID = e.target.id.split("-")[1];
-  console.log(circleID);
+    //should work when circles are inputted/created 
+    var circleID = e.target.id.split("-")[1];
+    console.log(circleID);
 
-  saveCircle(circleID);
+    saveCircle(circleID);
 
-  // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-  // console.log(circleLabel);
+    // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+    // console.log(circleLabel);
 
-  // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+    // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 
-  // // console.log(obj.position.x);
-  // // console.log(obj.position.y);
-  // // console.log(obj.bounds.width/2);
+    // // console.log(obj.position.x);
+    // // console.log(obj.position.y);
+    // // console.log(obj.bounds.width/2);
 
-  // var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-  // objLabel.content = circleLabel;
+    // var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
+    // objLabel.content = circleLabel;
 
-  // obj.visible = true;
-  // objLabel.visible = true;
+    // obj.visible = true;
+    // objLabel.visible = true;
 
-  // // console.log(obj);
+    // // console.log(obj);
 
-  // insert = true;
+    // insert = true;
 
-  // $.post("/saveCircleData", {
-  //     "number": circleID,
-  //     "position_x": obj.position.x,
-  //     "position_y": obj.position.y,
-  //     "label": circleLabel,
-  //     "radius": (obj.bounds.width/2),
-  // })
-  // .done(function(data){
-  //   console.log("Save complete!");
-  // });
+    // $.post("/saveCircleData", {
+    //     "number": circleID,
+    //     "position_x": obj.position.x,
+    //     "position_y": obj.position.y,
+    //     "label": circleLabel,
+    //     "radius": (obj.bounds.width/2),
+    // })
+    // .done(function(data){
+    //   console.log("Save complete!");
+    // });
 
-  // $.post("/saveIntersectData", {
-  //       "created": "" /*time stamp here */,
-  //       "updated": "" /*time stamp here */,
-  //       "circle1": "" /*circle 1 id*/,
-  //       "circle2": "" /*circle 2 id*/,
-  //       "area": "" /*calculated in intersection function*/
-  // })
-  // .done(function(data){
-  //   console.log("Save complete!");
-  // });
+    // $.post("/saveIntersectData", {
+    //       "created": "" /*time stamp here */,
+    //       "updated": "" /*time stamp here */,
+    //       "circle1": "" /*circle 1 id*/,
+    //       "circle2": "" /*circle 2 id*/,
+    //       "area": "" /*calculated in intersection function*/
+    // })
+    // .done(function(data){
+    //   console.log("Save complete!");
+    // });
 
-  // insert = true;
+    // insert = true;
 
-  intersections();
+    intersections();
 
-  //old logic -> dbarray.push(paper.project.exportJSON());
-  //             console.log(dbarray);
+    //old logic -> dbarray.push(paper.project.exportJSON());
+    //             console.log(dbarray);
 
-  return false;
+    return false;
   } //end doSubmit function
 
   //G: Do we still need line below?

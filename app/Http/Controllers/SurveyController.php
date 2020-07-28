@@ -165,13 +165,21 @@
 
   }
 
+  //request sent is the button push?
   public function deleteParticipant(Request $request){
 
     $participant = \App\Participant::find(session()->get('participant_id'));
 
     $circles = $participant->getCircles();
+    //if this is empty, does it return empty string?
 
-    //this is going to give me errors based on foreign key constraints
+    if($circles == ''){
+
+      $participant->delete();
+
+    }else{
+
+      //this is going to give me errors based on foreign key constraints
 
     foreach ($circles as $circle){
 
@@ -214,7 +222,10 @@
       $circle->delete();
     }
 
-    $participant->delete();
+      $participant->delete();
+    }
+
+    
   }
 
   //intersection survey
