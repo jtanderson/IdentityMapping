@@ -44,7 +44,7 @@
       </div>
       <div class="col-sm-3">
         <div class="text text-left"> 
-          <form action="#" onsubmit="onAbort(event);">>
+          <form action="#" onsubmit="onAbort(event);">
             <input type="submit" class="btn btn-danger" value="Abort">
         </form>
         </div>
