@@ -16,15 +16,17 @@
   - [ ] find replacement for grace ( :( )
 
 ### 7/21 Meeting:
-- [ ] FINISH saveIntersect on coloring
-    - (In progress) Return color on Extended? 
-- [x] Null check on color & linestyle in controller (make sure works)
-- [x] if select canvas ("Nothing hit") - will break the doc.getElementById() 
-    - [x] prevent function from running/nullity check -> added if/else statement
-- [ ] (In progress) Abort button should delete entire participant & their data (W/ WARNING!) - Add function to SurveyController (go into DB, find participant by id, and then delete p at that id)
 - [ ] Remove abort button on `/start` page - (will need to remove the template from start -- where did we put the @yield stuff??)
 - [ ] /end page has "Next" button 
     - Take the directional stuff out of @end (no need for Abort or Next)
+    
+### 7/28 Meeting: (IN PROGRESS)
+- [ ] Should returning to /layering have color? (Assumed yes)
+    - ERROR on saveCircle on extended, activeItem.data.id is undefined now
+- [ ] Abort button should delete entire participant & their data (W/ WARNING!) - Add function to SurveyController (go into DB, find participant by id, and then delete p at that id)
+- [ ] Reorganize directions out of template (?)
+- [ ] (This week) Refactor /survey, /category
+
     
 ### Later?: 
 - [ ] Admin page where Admins could add in questions (Maybe 7/21-23 project?)
@@ -58,3 +60,6 @@
 - [x] /category "@ensection" 
 - [x] (IN PROGRESS) Circle ID saved in saveIntersect is not the dbid for the circle. - (2) find most recent circle with $participant (check SurveyController comments)
    - [x] (7/13) save area correctly 
+- [x] Null check on color & linestyle in controller (make sure works)
+- [x] if select canvas ("Nothing hit") - will break the doc.getElementById() 
+    - [x] prevent function from running/nullity check -> added if/else statement
