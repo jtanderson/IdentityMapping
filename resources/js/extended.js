@@ -133,95 +133,101 @@
 
   //only needs to recreate circles on page
   var intialize = function(){
-    var circle = Array(5);
 
-     for(var i=1; i<=5; i++){
+   var circle = Array(5);
 
-        var circleID = i;
+   for(var i=1; i<=5; i++){
 
-        circle[i] = Array();
+      var circleID = i;
 
-        // var form = document.getElementById("circle-" + i);
-        var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-        // console.log("circle "+i+" x retrieved is " + circle_x);
-        var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-        // console.log("circle "+i+" y retrieved is " + circle_y);
-        var radius = document.getElementById("circle-"+circleID+"-radius").value;
-        // console.log("circle "+i+" radius retrieved is " + radius);
-        var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split(",");
+      circle[i] = Array();
 
-        var dbid = document.getElementById("circle-"+circleID+"-id").value;
-        
-        var label = document.getElementById("circle-"+circleID+"-label").value;
-        //add information to circle[i].circle_x = circle_x
-       
-         //should return "" if no circle
+      // var form = document.getElementById("circle-" + i);
+      var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
+      // console.log("circle "+i+" x retrieved is " + circle_x);
+      var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
+      // console.log("circle "+i+" y retrieved is " + circle_y);
+      var radius = document.getElementById("circle-"+circleID+"-radius").value;
+      // console.log("circle "+i+" radius retrieved is " + radius);
+      var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
+      var color = document.getElementById("circle-"+circleID+"-color").value;
+      var dbid = document.getElementById("circle-"+circleID+"-id").value;
+      var label = document.getElementById("circle-"+circleID+"-label").value;
+      console.log("This is the circle label" + label);
+     
+       //should return "" if no circle
 
-        circle[i]['circle_x'] = circle_x;
-        circle[i]['circle_y']  = circle_y;
-        circle[i]['radius'] = radius;
-        circle[i]['label'] = label;
-        circle[i]['dbid'] = dbid;
-        circle[i]['line_style'] = line_style;
+      circle[i]['circle_x'] = circle_x;
+      // console.log(circle[i]['circle_x']);
+      circle[i]['circle_y']  = circle_y;
+      circle[i]['radius'] = radius;
+      circle[i]['label'] = label;
+      circle[i]['color'] = color;
+      circle[i]['dbid'] = dbid;
 
 
-        var min = 55;
-        var max = 135;
-        var minR = 125;
-        var maxR = 650;
+      var min = 55;
+      var max = 135;
+      var minR = 125;
+      var maxR = 650;
 
-        var exists = true;
+      var exists = true;
 
-        if(circle[i]['dbid'] == ""){
+      if(circle[i]['dbid'] == ""){
 
-          exists = false;
-          console.log("I think, therefore I don't exist");
-          circle[i]['label'] = "Circle " + i;
-          circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-          circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-          circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
-          circle[i]['line_style'] = [];
+        exists = false;
+        console.log("I think, therefore I don't exist");
+        circle[i]['label'] = "Circle " + i;
+        circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+        circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+        circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
+        circle[i]['color'] = new Color(1, 1, 1, 0.75);
+      }
+
+      if(circle[i]['color'] == "" || "0,0,0"){
+        circle[i]['color'] = new Color(1, 1, 1, 0.75);
+      }
+
+
+      var circ = new Path.Circle({
+        center: [circle[i]['circle_x'], circle[i]['circle_y']],
+        radius: circle[i]['radius'],
+        fillColor: circle[i]['color'],
+        strokeColor: 'black',
+        // id: i,
+        insert: exists,
+        visible: exists,
+        data: {
+          circleId: i
         }
+      });
 
+      var iLayer = project.getItem({data:{layerName: "intersections"}});
+      var cLayer = project.getItem({data:{layerName: "circles"}});
+      var tLayer = project.getItem({data:{layerName: "labels"}});
 
-        var circ = new Path.Circle({
-          center: [circle[i]['circle_x'], circle[i]['circle_y']],
-          radius: circle[i]['radius'],
-          fillColor: new Color(1, 1, 1, 0.75),
-          strokeColor: 'black',
-          dashArray: circle[i]['line_style'],
-          insert: exists,
-          visible: exists,
-          data: {
-            circleId: i
-          }
-        });
+      // console.log(circle);
+      cLayer.addChild(circ); //add each circle to the layer WITHOUT visibility
+      //avoid global handles
 
-        var iLayer = project.getItem({data:{layerName: "intersections"}});
-        var cLayer = project.getItem({data:{layerName: "circles"}});
-        var tLayer = project.getItem({data:{layerName: "labels"}});
+      // var c = project.getItem({data: {circleId: i}});
 
-        // console.log(circle);
-        cLayer.addChild(circ); //add each circle to the layer WITHOUT visibility
+      // console.log(circ.center);
 
-        var label = new PointText({
-          fillColor:  'black',
-          content: circle[i]['label'],
-          position: circ.position,
-          insert: exists,
-          visible: exists,
-          data: {
-            labelId: i
-          }
-        });
+      var label = new PointText({
+        fillColor:  'black',
+        content: circle[i]['label'],
+        position: circ.position,
+        insert: exists,
+        visible: exists,
+        data: {
+          labelId: i
+        }
+      });
 
-        tLayer.addChild(label);//adds text to the text layer
+      tLayer.addChild(label);//adds text to the text layer
 
-    }//end for
-
-    intersections();
-
-    fixLayers();
+   }//end for
   }
 
   intialize();
@@ -466,7 +472,6 @@
   saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-  console.log("recursion saveCircle?");
 
   var obj = project.getItem({data: {circleId: parseInt(circleID)}});
 

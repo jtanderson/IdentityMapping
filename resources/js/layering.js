@@ -38,10 +38,10 @@
       var radius = document.getElementById("circle-"+circleID+"-radius").value;
       // console.log("circle "+i+" radius retrieved is " + radius);
       var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
-
+      var color = document.getElementById("circle-"+circleID+"-color").value;
       var dbid = document.getElementById("circle-"+circleID+"-id").value;
-      
       var label = document.getElementById("circle-"+circleID+"-label").value;
+      console.log("This is the circle label" + label);
       //add information to circle[i].circle_x = circle_x
      
        //should return "" if no circle
@@ -51,6 +51,7 @@
       circle[i]['circle_y']  = circle_y;
       circle[i]['radius'] = radius;
       circle[i]['label'] = label;
+      circle[i]['color'] = color;
       circle[i]['dbid'] = dbid;
 
 
@@ -69,13 +70,17 @@
         circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
         circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
         circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
+        circle[i]['color'] = new Color(1, 1, 1, 0.75);
       }
 
+      if(circle[i]['color'] == "" || "0,0,0"){
+        circle[i]['color'] = new Color(1, 1, 1, 0.75);
+      }
 
       var circ = new Path.Circle({
         center: [circle[i]['circle_x'], circle[i]['circle_y']],
         radius: circle[i]['radius'],
-        fillColor: new Color(1, 1, 1, 0.75),
+        fillColor: circle[i]['color'],
         strokeColor: 'black',
         // id: i,
         insert: exists,
@@ -114,11 +119,11 @@
   }
 
 
-  $( document ).ready(function() {
+  // $( document ).ready(function() {
 
     intialize();
 
-  }
+  // });
 
   saveIntersect = function(circleID){
 
@@ -143,7 +148,7 @@
 
         child.id = iLayer.children[i].data.id; 
         child.area =  iLayer.children[i].area;
-        
+        child.color = iLayer.children[i].fillColor.getComponents().toString();        
         intersections.push(child);
       }
     }
@@ -420,6 +425,8 @@
         "position_y": obj.position.y,
         "label": circleLabel,
         "radius": (obj.bounds.width/2),
+        "line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
+        "color": obj.fillColor.getComponents().toString(), //this is a string from the color OBJ
     })
     .done(function(data){
 
