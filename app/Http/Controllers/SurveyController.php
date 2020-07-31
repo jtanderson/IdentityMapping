@@ -40,10 +40,13 @@ public function color(Request $request){
   $participant = \App\Participant::find(session()->get('participant_id'));
   
   $circles = $participant->getCircles();
+  $intersect = $participant->getIntersections();
+  Log::info($intersect);
 
   return view('color', array(
     'progress' => '20',
     'circles' => $circles,
+    'intersections' => $intersect,
     'prevURL' => route('position'),
     'nextURL' => route('intersections'),
   ));
@@ -109,39 +112,39 @@ public function saveIntersectData(Request $request){
     // local.INFO: array (
     // myapp_1    |   0 => 
     // myapp_1    |   array (
-    // myapp_1    |     'id' => '12',
+    // myapp_1    |     'intersectId' => '12',
     // myapp_1    |     'area' => '12530.66999727977',
     // myapp_1    |   ),
     // myapp_1    | )  
 
-    //$participant->getCircles with index (number) ("") match circle number with circle id ['id'][0] 
+    //$participant->getCircles with index (number) ("") match circle number with circle id ['intersectId'][0] 
     //!!!!!!!! & get actual dbid
 
-    $findid1 = $obj['id'][0];
+    $findid1 = $obj['intersectId'][0];
     Log::info($findid1); 
     $index1 = intval($findid1);
 
-    $findid2 = $obj['id'][1];
+    $findid2 = $obj['intersectId'][1];
     Log::info($findid2);
     $index2 = intval($findid2);
 
     $intersection->circle1_id = $circles[$index1]['id'];
     $intersection->circle2_id = $circles[$index2]['id'];
 
-    if(strlen($obj['id']) >= 3){
-      $findid3 = $obj['id'][2];
+    if(strlen($obj['intersectId']) >= 3){
+      $findid3 = $obj['intersectId'][2];
       $index3 = intval($findid3);
       $intersection->circle3_id = $circles[$index3]['id'];
     }
 
-    if(strlen($obj['id']) >= 4){
-      $findid4 = $obj['id'][3];
+    if(strlen($obj['intersectId']) >= 4){
+      $findid4 = $obj['intersectId'][3];
       $index4 = intval($findid4);
       $intersection->circle4_id = $circles[$index4]['id'];
     }
 
-    if(strlen($obj['id']) >= 5){
-      $findid5 = $obj['id'][4];
+    if(strlen($obj['intersectId']) >= 5){
+      $findid5 = $obj['intersectId'][4];
       $index5 = intval($findid5);
       $intersection->circle5_id = $circles[$index5]['id'];
     }
@@ -164,68 +167,63 @@ public function saveIntersectData(Request $request){
 
 }
 
-//request sent is the button push?
-public function deleteParticipant(Request $request){
+// //request sent is the button push?
+// public function deleteParticipant(Request $request){
 
-  $participant = \App\Participant::find(session()->get('participant_id'));
+//   $participant = \App\Participant::find(session()->get('participant_id'));
 
-  $circles = $participant->getCircles();
-  //if this is empty, does it return empty string?
+//   $circles = $participant->getCircles();
 
-  if($circles == ''){
+//   foreach ($circles as $circle){
 
-    $participant->delete();
-
-  }else{
-
-    //this is going to give me errors based on foreign key constraints
-
-  foreach ($circles as $circle){
-
-    $intersection1 = App\Intersection::where('circle1_id');
-    foreach ($intersection1 as $intersect){
+//     $intersection1 = App\Intersection::where('circle1_id');
+//     foreach ($intersection1 as $intersect){
       
-      $intersect->dropForeign(['circle1_id']);
-      $intersect->delete();
-    }
+//       $intersect->dropForeign(['circle1_id']);
+//       $intersect->delete();
+//     }
 
-    $intersection2 = App\Intersection::where('circle2_id');
-    foreach ($intersection2 as $intersect){
+//     $intersection2 = App\Intersection::where('circle2_id');
+//     foreach ($intersection2 as $intersect){
       
-      $intersect->dropForeign(['circle2_id']);
-      $intersect->delete();
-    }
+//       $intersect->dropForeign(['circle2_id']);
+//       $intersect->delete();
+//     }
 
-    $intersection3 = App\Intersection::where('circle2_id');
-    foreach ($intersection3 as $intersect){
+//     $intersection3 = App\Intersection::where('circle2_id');
+//     foreach ($intersection3 as $intersect){
       
-      $intersect->dropForeign(['circle3_id']);
-      $intersect->delete();
-    }
+//       $intersect->dropForeign(['circle3_id']);
+//       $intersect->delete();
+//     }
 
-    $intersection4 = App\Intersection::where('circle2_id');
-    foreach ($intersection4 as $intersect){
+//     $intersection4 = App\Intersection::where('circle2_id');
+//     foreach ($intersection4 as $intersect){
       
-      $intersect->dropForeign(['circle4_id']);
-      $intersect->delete();
-    }
+//       $intersect->dropForeign(['circle4_id']);
+//       $intersect->delete();
+//     }
 
-    $intersection5 = App\Intersection::where('circle2_id');
-    foreach ($intersection5 as $intersect){
+//     $intersection5 = App\Intersection::where('circle2_id');
+//     foreach ($intersection5 as $intersect){
      
-     $intersect->dropForeign(['circle5_id']);
-     $intersect->delete();
-    }
+//      $intersect->dropForeign(['circle5_id']);
+//      $intersect->delete();
+//     }
 
-    $circle->dropForeign(['participant_id']);
-    $circle->delete();
-  }
+//     $circle->dropForeign(['participant_id']);
+//     $circle->delete();
+//   }
 
-    $participant->delete();
-  }
+//   $participant->delete();
 
+//   return view('end', array(
+//     'progress' => '100',
+//     'nextURL' => '',
+//     'prevURL' => '',
+//   ));
   
-}
+// }
 
 //intersection survey
 public function intersections(){
@@ -263,7 +261,7 @@ public function category(){
   public function end(){
   return view('end', array(
     'progress' => '100',
-    'nextURL' => route('end'),
+    'nextURL' => '',
     'prevURL' => '',
   ));
 }

@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Participant extends Model
 {
@@ -19,7 +22,6 @@ class Participant extends Model
     // protected $id = 'session_token';
 
     public function getCircles(){
-      $circlesArr = $this->hasMany('\App\Circle');
       $circles = [
         1 => $this->hasMany('\App\Circle')->where('number', '1')->latest()->first(),
         2 => $this->hasMany('\App\Circle')->where('number', '2')->latest()->first(),
@@ -29,6 +31,41 @@ class Participant extends Model
       ];
 
       return $circles;
+    }
+
+    public function getIntersections(){
+
+      $circles = $this->getCircles();
+
+      $intersection = [];
+
+      $i = 0;
+
+      foreach($circles as $circle){
+
+        if($circle !== null){
+
+          Log::info($circle);
+          $intersection[$i] = $circle->getIntersect();
+          Log::info($intersection[$i]);
+          $i++;
+       }
+        
+      }
+
+      return $intersection;
+    }
+
+
+    public function deleteAll(){
+
+      //array of circles 
+      $circlesArr = $this->hasMany('\App\Circle');
+      foreach($circlesArr as $circle){
+
+        $circle->delete();
+      }
+
     }
 
 }

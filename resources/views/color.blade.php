@@ -64,6 +64,18 @@ height: 750px;
 
       @endforeach
 
+      @foreach ( $intersect as $key => $value )
+        <input type="hidden" name="int-{{ $key }}" id="int-{{ $key }}-dbid" value="{{ $value ? $value['id'] : "" }}" />
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-id1" value="{{ $value ? $value['circle1_id'] : "" }}"/>
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-id2" value="{{ $value ? $value['circle2_id'] : "" }}"/>
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-id3" value="{{ $value ? $value['circle3_id'] : "" }}"/>
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-id4" value="{{ $value ? $value['circle4_id'] : "" }}"/>
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-id5" value="{{ $value ? $value['circle5_id'] : "" }}"/>
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-color" value="{{ $value ? $value['color'] : "" }}"/>
+        <input type="hidden" name ="int-{{ $key }}" id="int-{{ $key }}-area" value="{{ $value ? $value['area'] : "" }}"/>
+        
+      @endforeach
+
       <div class="col-sm-8">
         <canvas id="c" resize></canvas>
       </div>

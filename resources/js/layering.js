@@ -142,11 +142,11 @@
       var child = {};
 
       console.log("This is iLayer.children " + iLayer.children[i]);
-      console.log("This is iLayer.children id " + iLayer.children[i].data.id);
+      console.log("This is iLayer.children id " + iLayer.children[i].data.intersectId);
 
-      if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.id.includes(circleID)){
+      if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.intersectId.includes(circleID)){
 
-        child.id = iLayer.children[i].data.id; 
+        child.intersectId = iLayer.children[i].data.intersectId; 
         child.area =  iLayer.children[i].area;
         child.color = iLayer.children[i].fillColor.getComponents().toString();        
         intersections.push(child);
@@ -198,7 +198,7 @@
           if( c_j.visible ){ //if two circles overlap, then create intersection
             var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
             int_ij.selected = false;
-            int_ij.data.id = ""+i+j;
+            int_ij.data.intersectId = ""+i+j;
             iLayer.addChild(int_ij); //2
           }
         }
@@ -215,13 +215,13 @@
           if( c_j.visible ){ //if two circles overlap, then create intersection
             var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
             int_ij.selected = false;
-            int_ij.data.id = ""+i+j;
+            int_ij.data.intersectId = ""+i+j;
             for(var k=j+1;k<6;k++){ //3
               var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
               if( c_k.visible ){//if three circles overlap, then create intersection
                 var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
                 int_ijk.selected = false;
-                int_ijk.data.id = ""+i+j+k;
+                int_ijk.data.intersectId= ""+i+j+k;
                 iLayer.addChild(int_ijk); 
               }
             }
@@ -240,19 +240,19 @@
           if( c_j.visible ){ //if two circles overlap, then create intersection
             var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
             int_ij.selected = false;
-            int_ij.data.id = ""+i+j;
+            int_ij.data.intersectId = ""+i+j;
             for(k=j+1;k<6;k++){ //3
               var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
               if( c_k.visible ){//if three circles overlap, then create intersection
                 var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
                 int_ijk.selected = false;
-                int_ijk.data.id = ""+i+j+k;
+                int_ijk.data.intersectId= ""+i+j+k;
                 for(var l = k+1;l<6; l++){ //4
                   var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
                   if( c_l.visible ){ //if four circles overlap, then create intersection
                     var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
                     int_ijkl.selected = false;
-                    int_ijkl.data.id = ""+i+j+k+l;
+                    int_ijkl.data.intersectId = ""+i+j+k+l;
                     iLayer.addChild(int_ijkl);//4
                   } // c_l visible
                 } // l loop
@@ -271,8 +271,8 @@
     var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
 
     if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
-      var int_ijklm = iLayer.getItem({data: {id: "1234"}}).intersect(c_m, {insert: false}); //5 way int
-      int_ijklm.data.id = ""+i+j+k+l+"5";
+      var int_ijklm = iLayer.getItem({data: {intersectId: "1234"}}).intersect(c_m, {insert: false}); //5 way int
+      int_ijklm.data.intersectId = ""+i+j+k+l+"5";
       iLayer.addChild(int_ijklm); 
     }//end the five single
 
@@ -321,7 +321,7 @@
     if(false && hitResult != null ){//if the intersection layer is hit
       activeItem = hitResult.item; //activeItem will be a intersection
       
-      console.log("User clicked an intersection with id " + hitResult.item.data.id);
+      console.log("User clicked an intersection with id " + hitResult.item.data.intersectId);
 
     } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
       activeItem = hitResult.item; // will be a circle
