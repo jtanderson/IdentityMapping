@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 
@@ -8,7 +8,7 @@
   </h1>
   <div class="col-sm-2">
     
-    <div class="form-group">
+      <div class="form-group">
       <script>
         document.write("<label for='exampleFormControlSelect1'>");
         if(localStorage[1] != undefined){

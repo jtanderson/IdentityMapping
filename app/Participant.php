@@ -33,28 +33,32 @@ class Participant extends Model
       return $circles;
     }
 
-    public function getIntersections(){
+    // public function getIntersections(){
 
-      $circles = $this->getCircles();
+    //   $circles = $this->getCircles();
 
-      $intersection = [];
+    //   $intersection = [];
 
-      $i = 0;
+    //   // $i = 0;
 
-      foreach($circles as $circle){
+    //   //this is where double array occurs, we go through every circle (outside array) and put intersections inside that location (inside array)
 
-        if($circle !== null){
+    //   foreach($circles as $circle){
 
-          Log::info($circle);
-          $intersection[$i] = $circle->getIntersect();
-          Log::info($intersection[$i]);
-          $i++;
-       }
+    //     if($circle !== null){
+
+    //       // Log::info($circle);
+    //       $int = $circle->getIntersect();
+    //       array_push($intersection, $int);
+    //       // Log::info($int);
+    //       // Log::info($intersection);
+    //       // $i++;
+    //    }
         
-      }
+    //   }
 
-      return $intersection;
-    }
+    //   return $intersection;
+    // }
 
 
     public function deleteAll(){

@@ -118,26 +118,33 @@
 
      //this needs to be in a for loop for however many intersections there are...
      var i;
+     var length = document.getElementById("length").value;
 
-     for(i = 0; i <= 5; i++){ //(7/31): for now it's 5, but it can be up to 26. How to find this number??
-      var intdbid = document.getElementById("int-"+i+"-dbid").value;
-      var circle1_id = document.getElementById("int-"+i+"-circle1_id").value;
-      var circle2_id = document.getElementById("int-"+i+"-circle2_id").value;
-      var circle3_id = document.getElementById("int-"+i+"-circle3_id").value;
-      var circle4_id = document.getElementById("int-"+i+"-circle4_id").value;
-      var circle5_id = document.getElementById("int-"+i+"-circle5_id").value;
-      var intcolor = document.getElementById("int-"+i+"-color").value;
-      var intarea = document.getElementById("int-"+i+"-area").value;
+     for(i = 0; i <= length; i++){
 
-      intersection[circleID][i]['id'] = intdbid;
-      intersection[circleID][i]['circle1_id'] = circle1_id;
-      intersection[circleID][i]['circle2_id'] = circle2_id;
-      intersection[circleID][i]['circle3_id'] = circle3_id;
-      intersection[circleID][i]['circle4_id'] = circle4_id;
-      intersection[circleID][i]['circle5_id'] = circle5_id;
-      intersection[circleID][i]['color'] = intcolor;
-      intersection[circleID][i]['area'] = intarea;
+        var intdbid = document.getElementById("int-"+i+"-dbid").value;
+        console.log(intdbid);
+        if(intdbid !== ''){
 
+          var circle1_id = document.getElementById("int-"+i+"-circle1_id").value;
+          var circle2_id = document.getElementById("int-"+i+"-circle2_id").value;
+          var circle3_id = document.getElementById("int-"+i+"-circle3_id").value;
+          var circle4_id = document.getElementById("int-"+i+"-circle4_id").value;
+          var circle5_id = document.getElementById("int-"+i+"-circle5_id").value;
+          var intcolor = document.getElementById("int-"+i+"-color").value;
+          var intarea = document.getElementById("int-"+i+"-area").value;
+
+          intersection[circleID][i]['dbid'] = intdbid;
+          intersection[circleID][i]['circle1_id'] = circle1_id;
+          intersection[circleID][i]['circle2_id'] = circle2_id;
+          intersection[circleID][i]['circle3_id'] = circle3_id;
+          intersection[circleID][i]['circle4_id'] = circle4_id;
+          intersection[circleID][i]['circle5_id'] = circle5_id;
+          intersection[circleID][i]['color'] = intcolor;
+          intersection[circleID][i]['area'] = intarea;
+
+        }
+      
      }
 
 
