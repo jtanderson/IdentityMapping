@@ -22,11 +22,11 @@ class Circle extends Model
     public function getIntersect(){
 
    		$intersections = [
-   			$intersection1 = \DB::table('intersection')->where('circle1_id', $this->id)->first(),
-    		$intersection2 = \DB::table('intersection')->where('circle2_id', $this->id)->first(),
-    		$intersection3 = \DB::table('intersection')->where('circle3_id', $this->id)->first(),
-			  $intersection4 = \DB::table('intersection')->where('circle4_id', $this->id)->first(),
-	    	$intersection5 = \DB::table('intersection')->where('circle5_id', $this->id)->first(),
+   			$intersection1 = $this->hasMany('\App\Intersection', 'circle1_id')->where('id', $this->id)->first(),
+    		$intersection2 = $this->hasMany('\App\Intersection', 'circle2_id')->where('id', $this->id)->first(),
+    		$intersection3 = $this->hasMany('\App\Intersection', 'circle3_id')->where('id', $this->id)->first(),
+  			$intersection4 = $this->hasMany('\App\Intersection', 'circle4_id')->where('id', $this->id)->first(),
+	    	$intersection5 = $this->hasMany('\App\Intersection', 'circle5_id')->where('id', $this->id)->first(),
    		];
 
    		return $intersections; 	

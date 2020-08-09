@@ -64,7 +64,7 @@
 
         @endforeach
 
-        <input type ="hidden" id="length" value="{{ $length }}"/>
+
         @foreach ( $intersection as $index => $val )
           <input type="hidden" name="int-{{ $index }}" id="int-{{ $index }}-dbid" value="{{ $val ? $val->id : "" }}" />
           <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id1" value="{{ $val ? $val->circle1_id : "" }}"/>

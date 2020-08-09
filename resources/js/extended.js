@@ -48,21 +48,21 @@
 
       // var form = document.getElementById("circle-" + i);
       var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-      // console.log("circle "+i+" x retrieved is " + circle_x);
+      console.log("circle "+i+" x retrieved is " + circle_x);
       var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-      // console.log("circle "+i+" y retrieved is " + circle_y);
+      console.log("circle "+i+" y retrieved is " + circle_y);
       var radius = document.getElementById("circle-"+circleID+"-radius").value;
-      // console.log("circle "+i+" radius retrieved is " + radius);
+      console.log("circle "+i+" radius retrieved is " + radius);
       var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
       var color = document.getElementById("circle-"+circleID+"-color").value;
       var dbid = document.getElementById("circle-"+circleID+"-id").value;
       var label = document.getElementById("circle-"+circleID+"-label").value;
-      // console.log("This is the circle label" + label);
+      console.log("This is the circle label" + label);
      
        //should return "" if no circle
 
       circle[i]['circle_x'] = circle_x;
-      // console.log(circle[i]['circle_x']);
+      console.log(circle[i]['circle_x']);
       circle[i]['circle_y']  = circle_y;
       circle[i]['radius'] = radius;
       circle[i]['label'] = label;
@@ -114,39 +114,6 @@
       cLayer.addChild(circ); //add each circle to the layer WITHOUT visibility
       //avoid global handles
 
-     //Now we have an array of intersections[circle#][intonthatcircle][intinfo];
-
-     //this needs to be in a for loop for however many intersections there are...
-     var i;
-     var length = document.getElementById("length").value;
-
-     for(i = 0; i <= length; i++){
-
-        var intdbid = document.getElementById("int-"+i+"-dbid").value;
-        console.log(intdbid);
-        if(intdbid !== ''){
-
-          var circle1_id = document.getElementById("int-"+i+"-circle1_id").value;
-          var circle2_id = document.getElementById("int-"+i+"-circle2_id").value;
-          var circle3_id = document.getElementById("int-"+i+"-circle3_id").value;
-          var circle4_id = document.getElementById("int-"+i+"-circle4_id").value;
-          var circle5_id = document.getElementById("int-"+i+"-circle5_id").value;
-          var intcolor = document.getElementById("int-"+i+"-color").value;
-          var intarea = document.getElementById("int-"+i+"-area").value;
-
-          intersection[circleID][i]['dbid'] = intdbid;
-          intersection[circleID][i]['circle1_id'] = circle1_id;
-          intersection[circleID][i]['circle2_id'] = circle2_id;
-          intersection[circleID][i]['circle3_id'] = circle3_id;
-          intersection[circleID][i]['circle4_id'] = circle4_id;
-          intersection[circleID][i]['circle5_id'] = circle5_id;
-          intersection[circleID][i]['color'] = intcolor;
-          intersection[circleID][i]['area'] = intarea;
-
-        }
-      
-     }
-
 
       var label = new PointText({
         fillColor:  'black',
@@ -162,6 +129,54 @@
       tLayer.addChild(label);//adds text to the text layer
 
    }//end for
+
+   for(var j = 1; j <= 5; j++){
+
+     //Now we have an array of intersections[circle#][intonthatcircle][intinfo];
+     //this needs to be in a for loop for however many intersections there are...
+     
+     var i;
+     for(i = 0; i <= 26; i++){
+
+        var intdbid = document.getElementById("int-"+i+"-dbid").value;
+        console.log(intdbid);
+
+        if(intdbid !== ''){
+
+          var circle1_id = document.getElementById("int-"+i+"-circle1_id").value;
+          var circle2_id = document.getElementById("int-"+i+"-circle2_id").value;
+          var circle3_id = document.getElementById("int-"+i+"-circle3_id").value;
+          var circle4_id = document.getElementById("int-"+i+"-circle4_id").value;
+          var circle5_id = document.getElementById("int-"+i+"-circle5_id").value;
+          var intcolor = document.getElementById("int-"+i+"-color").value;
+          var intarea = document.getElementById("int-"+i+"-area").value;
+
+          intersection[i]['dbid'] = intdbid;
+          intersection[i]['circle1_id'] = circle1_id;
+          intersection[i]['circle2_id'] = circle2_id;
+          intersection[i]['circle3_id'] = circle3_id;
+          intersection[i]['circle4_id'] = circle4_id;
+          intersection[i]['circle5_id'] = circle5_id;
+          intersection[i]['color'] = intcolor;
+          intersection[i]['area'] = intarea;
+
+          var int = {
+            dbid: intersection[i]['dbid'],
+            circle1_id: intersection[i]['circle1_id'],
+            circle2_id: intersection[i]['circle2_id'],
+            circle3_id: intersection[i]['circle3_id'],
+            circle4_id: intersection[i]['circle4_id'],
+            circle5_id: intersection[i]['circle5_id'],
+            color: intersection[i]['color'],
+            area: intersection[i]['area'],
+          };
+
+          iLayer.addChild(int);
+
+      }
+      
+     }
+   }
 
 
   }

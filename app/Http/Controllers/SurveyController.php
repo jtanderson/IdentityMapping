@@ -45,28 +45,29 @@ public function color(Request $request){
   foreach ($circles as $circle){
     if($circle !== null){
         $int = $circle->getIntersect();
+        Log::info($int);
         foreach($int as $sect){
           if($sect !== null){
             foreach($intersection as $index => $key){
               if($intersection[$index]->id !== $sect->id){
                 array_push($intersection, $sect);
                 Log::info($sect);
-             }
             }
           }
         }
+      }
     }
   }
 
   Log::info($intersection);
 
-  $length = sizeof($intersection);
+  // $length = sizeof($intersection);
 
   return view('color', array(
     'progress' => '20',
     'circles' => $circles,
     'intersection' => $intersection,
-    'length' => $length,
+    // 'length' => $length,
     'prevURL' => route('position'),
     'nextURL' => route('intersections'),
   ));
@@ -184,7 +185,6 @@ public function saveIntersectData(Request $request){
 
   
   }
-
 }
 
 // //request sent is the button push?
