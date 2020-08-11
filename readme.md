@@ -17,12 +17,12 @@
     
 ### 7/28 Meeting:
 - [ ] (IN PROGRESS) saveIntersect for Circles class - returning intersections for extended page
-    - Current issue: How to find # of intersections visibile? 
+    - **(Q 1) sends weird ORM information with intersection array
 - [ ] (In progress) Abort button should delete entire participant & their data (W/ WARNING!) - 
-    - Add function to SurveyController (go into DB, find participant by id, and then delete p at that id)
+    - Add function to SurveyController (go into DB, find participant by id, and then delete p at that id) **(Q 4) Check logic here
 - [ ] Remove abort button on `/start` page
-    - why is this not effin' working... put in a if/esle statement & still not working
-- [ ] (This week) Refactor /survey, /category
+    - **(Q 3) why is this not effin' working... put in a if/esle statement & still not working
+- [ ] (In progress) Refactor /survey, /category **(Q 4) Check logic here
 - [ ] Seed data with laravel - data that always seed (admin, user acct.) in our case, survey questions... (pull Q from database automatically)
 - [ ] Admin page where Admins could add in questions (so admin view to do this)
       - Add/remove survey questions... (to DB and then choose which ones to use?)
