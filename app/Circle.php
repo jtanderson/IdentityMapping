@@ -15,22 +15,45 @@ class Circle extends Model
   
     protected $table = "circle";
 
-    //(7/28) This isn't right, can have more than one intersection, not just latest/first
+    //(8/11)
 
-    //$int = App\Intersection::where('id1', $this->id); < should return all the intersections where circle id is id1. 
+    //A circle can have several intersections and an intersection has multiple circles.
+
+    //BUT intersections has its own table - no middle table circle_intersection... 
 
     public function getIntersect(){
 
-   		$intersections = [
-   			$intersection1 = $this->hasMany('\App\Intersection', 'circle1_id')->where('id', $this->id)->first(),
-    		$intersection2 = $this->hasMany('\App\Intersection', 'circle2_id')->where('id', $this->id)->first(),
-    		$intersection3 = $this->hasMany('\App\Intersection', 'circle3_id')->where('id', $this->id)->first(),
-  			$intersection4 = $this->hasMany('\App\Intersection', 'circle4_id')->where('id', $this->id)->first(),
-	    	$intersection5 = $this->hasMany('\App\Intersection', 'circle5_id')->where('id', $this->id)->first(),
-   		];
+      //array_map walks through array received by getIntersectId() and applies function at each element of array
+      $id = array_map(function($val){ return $val->maxid;}, $this->getIntersectId());
 
-   		return $intersections; 	
+      //$id is an array
+
+      //below statement returns a collection of intersection objects 
+
+      return DB::table('intersection')
+        ->whereIn('id', $id)->get();
     }
+
+    private function getIntersectId(){
+
+      // $ids = DB::select('select max(id) from intersection where `circle1_id` = :id OR `circle2_id` = :id OR `circle3_id` = :id OR `circle4_id` = :id OR `circle5_id` = :id group by circle1_id, circle2_id, circle3_id, circle4_id, circle5_id', ['id' => $this->id]);
+
+      $ids = DB::table('intersection')
+        ->select(DB::raw('max(id) as maxid'))
+        ->where('circle1_id', $this->id)
+        ->orWhere('circle2_id', $this->id)
+        ->orWhere('circle3_id', $this->id)
+        ->orWhere('circle4_id', $this->id)
+        ->orWhere('circle5_id', $this->id)
+        ->groupBy('circle1_id', 'circle2_id', 'circle3_id', 'circle4_id', 'circle5_id')
+        ->get()
+        ->toArray();
+
+      print_r($ids);
+
+      return $ids;
+
+  }
     
 
 }
