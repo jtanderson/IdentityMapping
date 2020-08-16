@@ -41,23 +41,15 @@ public function color(Request $request){
   
   $circles = $participant->getCircles();
   Log::info($circles);
-  
+
   $intersection = [];
 
   foreach ($circles as $circle){
     if($circle !== null){
         $int = $circle->getIntersect();
+        Log::info("This is the int");
         Log::info($int);
-        foreach($int as $sect){
-          if($sect !== null){
-            foreach($intersection as $index => $key){
-              if($intersection[$index]->id !== $sect->id){
-                array_push($intersection, $sect);
-                Log::info($sect);
-            }
-          }
-        }
-      }
+        array_push($intersection, $int);
     }
   }
 

@@ -17,10 +17,6 @@ class Circle extends Model
 
     //(8/11)
 
-    //A circle can have several intersections and an intersection has multiple circles.
-
-    //BUT intersections has its own table - no middle table circle_intersection... 
-
     public function getIntersect(){
 
       //array_map walks through array received by getIntersectId() and applies function at each element of array
@@ -34,7 +30,7 @@ class Circle extends Model
         ->whereIn('id', $id)->get();
     }
 
-    private function getIntersectId(){
+    public function getIntersectId(){
 
       // $ids = DB::select('select max(id) from intersection where `circle1_id` = :id OR `circle2_id` = :id OR `circle3_id` = :id OR `circle4_id` = :id OR `circle5_id` = :id group by circle1_id, circle2_id, circle3_id, circle4_id, circle5_id', ['id' => $this->id]);
 
