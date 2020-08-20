@@ -65,17 +65,15 @@
         @endforeach
 
 
-        @foreach ( $intersection as $index => $inst )
-          @foreach( $inst as $obj => $int)
-          <input type="hidden" name="int-{{ $index }}" id="int-{{ $obj }}-dbid" value="{{ $int ? $int->id : "" }}" />
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-id1" value="{{ $int ? $int->circle1_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-id2" value="{{ $int ? $int->circle2_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-id3" value="{{ $int ? $int->circle3_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-id4" value="{{ $int ? $int->circle4_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-id5" value="{{ $int ? $int->circle5_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-color" value="{{ $int ? $int->color : "" }}"/>
-          <input type="hidden" name ="int-{{ $obj }}" id="int-{{ $obj }}-area" value="{{ $int ? $int->area : "" }}"/>
-          @endforeach
+        @foreach ( $intersection as $index => $int )
+          <input type="hidden" name="int-{{ $index }}" id="int-{{ $index }}-dbid" value="{{ $int ? $int->id : "" }}" />
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id1" value="{{ $int ? $int->circle1_id : "" }}"/>
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id2" value="{{ $int ? $int->circle2_id : "" }}"/>
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id3" value="{{ $int ? $int->circle3_id : "" }}"/>
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id4" value="{{ $int ? $int->circle4_id : "" }}"/>
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id5" value="{{ $int ? $int->circle5_id : "" }}"/>
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-color" value="{{ $int ? $int->color : "" }}"/>
+          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-area" value="{{ $int ? $int->area : "" }}"/>
         @endforeach
 
         <div class="col-sm-8">

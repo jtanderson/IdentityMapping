@@ -12,32 +12,30 @@
         <label for="exampleFormControlTextarea1">What do your intersections mean?</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
-    <script type="text/javascript">
-    if($intersection2 !== null){
 
       @foreach ($intersection2 as $int2)
 
       <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int2->circle1_id + $int2->circle2_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
 
       @endforeach
-  }
-    </script>
-    <script type = "text/javascript">
-    @foreach ($intersection3 as $int3)
 
-      <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int3->circle1_id + $int3->circle2_id + $int3->circle3_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
+      @foreach ($intersection3 as $int3)
 
-    @endforeach
-  </script>
-  <script type="text/javascript">
-    @foreach ($intersection4 as $int4)
+        <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int3->circle1_id + $int3->circle2_id + $int3->circle3_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
 
-      <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int4->circle1_id + $int4->circle2_id + $int3->circle3_id + $int4->circle4_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
+      @endforeach
 
-    @endforeach
-  </script>
+      @foreach ($intersection4 as $int4)
 
-      <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int5->circle1_id + $int5->circle2_id + $int5->circle3_id + $int5->circle4_id + $int5->circle5_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
+        <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int4->circle1_id + $int4->circle2_id + $int3->circle3_id + $int4->circle4_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
+
+      @endforeach
+
+      @foreach ($intersection5 as $int5)
+
+        <div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the" + $int5->circle1_id + $int5->circle2_id + $int5->circle3_id + $int5->circle4_id + $int5->circle5_id + "intersection (emotional, behavioral, time spent)." </label><textarea class='form-control' id='exampleFormControlTextarea1' rows='3'></textarea></div>
+
+      @endforeach
 
   <!-- <script>
                var prefix = "<div class='form-group'> <label for='exampleFormControlTextarea1'>Please describe the overall nature of the ";

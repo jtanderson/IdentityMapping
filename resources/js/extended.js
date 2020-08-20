@@ -34,8 +34,105 @@
 
     console.log('Fixed layers...');
   }//end fix layers function
+  
+  //function for creating intersections
+  function intersections(){
+    
+    var iLayer = project.getItem({data:{layerName: "intersections"}});
+    iLayer.removeChildren();//destroying old intersections
 
-  //only needs to recreate circles & intersections on page
+    for(var i = 1; i < 6; i++){
+      var c_i = project
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
+      if( c_i.visible ){
+        for(var j=i+1;j<6;j++){
+          var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+          if( c_j.visible ){ //if two circles overlap, then create intersection
+            var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+            int_ij.selected = false;
+            int_ij.data.intersectId = ""+i+j;
+            iLayer.addChild(int_ij); //2
+          }
+        }
+      }
+    } //end the twos loop
+
+    for(i=1;i<6;i++){ //1
+      var c_i = project
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
+      if( c_i.visible ){
+        for(j=i+1;j<6;j++){ //2
+          var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+          if( c_j.visible ){ //if two circles overlap, then create intersection
+            var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+            int_ij.selected = false;
+            int_ij.data.intersectId = ""+i+j;
+            for(var k=j+1;k<6;k++){ //3
+              var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+              if( c_k.visible ){//if three circles overlap, then create intersection
+                var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
+                int_ijk.selected = false;
+                int_ijk.data.intersectId= ""+i+j+k;
+                iLayer.addChild(int_ijk); 
+              }
+            }
+          }
+        }
+      }
+    } //end the threes loop
+
+    for(i=1;i<6;i++){ //1
+      var c_i = project
+        .getItem({data: {layerName: "circles"}})
+        .getItem({data: {circleId: i}});
+      if( c_i.visible ){
+        for(j=i+1;j<6;j++){ //2
+          var c_j = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: j}});
+          if( c_j.visible ){ //if two circles overlap, then create intersection
+            var int_ij = c_i.intersect(c_j, {insert: false}); //2 way int
+            int_ij.selected = false;
+            int_ij.data.intersectId = ""+i+j;
+            for(k=j+1;k<6;k++){ //3
+              var c_k = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: k}});
+              if( c_k.visible ){//if three circles overlap, then create intersection
+                var int_ijk = int_ij.intersect(c_k, {insert: false}); //3 way int
+                int_ijk.selected = false;
+                int_ijk.data.intersectId= ""+i+j+k;
+                for(var l = k+1;l<6; l++){ //4
+                  var c_l = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: l}});
+                  if( c_l.visible ){ //if four circles overlap, then create intersection
+                    var int_ijkl = int_ijk.intersect(c_l, {insert: false}); //4 way int
+                    int_ijkl.selected = false;
+                    int_ijkl.data.intersectId = ""+i+j+k+l;
+                    iLayer.addChild(int_ijkl);//4
+                  } // c_l visible
+                } // l loop
+              } // c_k visible
+            } // k loop
+          } // c_j visible
+        } // j loop
+      } // c_i visible
+    } // i loop 
+    //ends the fours loop
+
+    var c_m = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 5}});
+    var two = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 2}});
+    var three = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 3}});
+    var four = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 4}});
+    var one = project.getItem({data: {layerName: "circles"}}).getItem({data: {circleId: 1}});
+
+    if( c_m.visible && two.visible && three.visible &&four.visible && one.visible ){
+      var int_ijklm = iLayer.getItem({data: {intersectId: "1234"}}).intersect(c_m, {insert: false}); //5 way int
+      int_ijklm.data.intersectId = ""+i+j+k+l+"5";
+      iLayer.addChild(int_ijklm); 
+    }//end the five single
+
+  }//end intersections function
+
+
+  //needs to recreate circles & intersections on page
   var intialize = function(){
 
    var circle = Array(5);
@@ -48,16 +145,16 @@
 
       // var form = document.getElementById("circle-" + i);
       var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-      // console.log("circle "+i+" x retrieved is " + circle_x);
+      console.log("circle "+i+" x retrieved is " + circle_x);
       var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-      // console.log("circle "+i+" y retrieved is " + circle_y);
+      console.log("circle "+i+" y retrieved is " + circle_y);
       var radius = document.getElementById("circle-"+circleID+"-radius").value;
-      // console.log("circle "+i+" radius retrieved is " + radius);
+      console.log("circle "+i+" radius retrieved is " + radius);
       var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
       var color = document.getElementById("circle-"+circleID+"-color").value;
       var dbid = document.getElementById("circle-"+circleID+"-id").value;
       var label = document.getElementById("circle-"+circleID+"-label").value;
-      // console.log("This is the circle label" + label);
+      console.log("This is the circle label" + label);
      
        //should return "" if no circle
 
@@ -130,68 +227,99 @@
 
    }//end for
 
-   for(var j = 1; j <= 5; j++){
+   //8/18
+   // layering.getItem('123') - colr & border style 
 
-     //Now we have an array of intersections[circle#][intonthatcircle][intinfo];
-     //this needs to be in a for loop for however many intersections there are...
-     
-     var intersection = Array();
+   intersections();
 
-     for(var i = 0; i <= 26; i++){
+   // //need to retrieve circleid from intersections, their colors and line styles
 
-      intersection[i] = Array();
+   //   // var intersection = Array();
 
-        var intdbid = document.getElementById("int-"+i+"-dbid").value;
-        console.log(intdbid);
+   //   // for(var i = 0; i <= 26; i++){
 
-        if(intdbid !== null){
+   //   //    intersection[i] = Array();
 
-          var circle1_id = document.getElementById("int-"+i+"-id1").value;
-          console.log(circle1_id);
-          var circle2_id = document.getElementById("int-"+i+"-id2").value;
-          console.log(circle2_id);
-          var circle3_id = document.getElementById("int-"+i+"-id3").value;
-          console.log(circle3_id);
-          var circle4_id = document.getElementById("int-"+i+"-id4").value;
-          console.log(circle4_id);
-          var circle5_id = document.getElementById("int-"+i+"-id5").value;
-          console.log(circle5_id);
+   //   //    var obj = document.getElementById("int-"+i+"-dbid");
+
+   //   //    if(obj !== null){
+
+
+   //   //      var intdbid = document.getElementById("int-"+i+"-dbid").value;
+   //   //      var circle1_id = document.getElementById("int-"+i+"-id1").value;
+   //   //      // console.log(circle1_id);
+   //   //      var circle2_id = document.getElementById("int-"+i+"-id2").value;
+   //   //      // console.log(circle2_id);
+   //   //      var circle3_id = document.getElementById("int-"+i+"-id3").value;
+   //   //      // console.log(circle3_id);
+   //   //      var circle4_id = document.getElementById("int-"+i+"-id4").value;
+   //   //      // console.log(circle4_id);
+   //   //      var circle5_id = document.getElementById("int-"+i+"-id5").value;
+   //   //      // console.log(circle5_id);
+
+   //   //      intersection[i]['dbid'] = intdbid;
+   //   //      intersection[i]['circle1_id'] = circle1_id;
+   //   //      intersection[i]['circle2_id'] = circle2_id;
+   //   //      intersection[i]['circle3_id'] = circle3_id;
+   //   //      intersection[i]['circle4_id'] = circle4_id;
+   //   //      intersection[i]['circle5_id'] = circle5_id;
+   //   //      intersection[i]['color'] = intcolor;
+   //   //      intersection[i]['area'] = intarea;
+
+   //   //      var int = new Path({
+   //   //        dbid: intersection[i]['dbid'],
+   //   //        circle1_id: intersection[i]['circle1_id'],
+   //   //        circle2_id: intersection[i]['circle2_id'],
+   //   //        circle3_id: intersection[i]['circle3_id'],
+   //   //        circle4_id: intersection[i]['circle4_id'],
+   //   //        circle5_id: intersection[i]['circle5_id'],
+   //   //        color: intersection[i]['color'],
+   //   //        area: intersection[i]['area'],
+   //   //      });
+
+   //   //      console.log(int);
+
+   //   //      iLayer.addChild(int);
+
+   //   //  }else{
+
+   //   //    console.log("ERROR: Intersection["+i+"] is NULL!");
+   //   //  }
+      
+   //   // }
+
+   //  var intersections = Array();
+
+   //  console.log("Repopulating/editing intersections here");
+
+   //  console.log("This is iLayer.children length " + iLayer.children.length);
+
+   //  console.log("This is iLayer.children " + iLayer.children);
+
+
+    for(var i in iLayer.children){
+
+      //(8/18) logic here for pulling info from circles
+      //retrieve intersection id & color then saveIntersect
+
+      for(var circleID = 1; circleID <= 5; circleID++){
+
+        if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.intersectId.includes(circleID)){
+
           var intcolor = document.getElementById("int-"+i+"-color").value;
           console.log(intcolor);
           var intarea = document.getElementById("int-"+i+"-area").value;
           console.log(intarea);
 
-          intersection[i]['dbid'] = intdbid;
-          intersection[i]['circle1_id'] = circle1_id;
-          intersection[i]['circle2_id'] = circle2_id;
-          intersection[i]['circle3_id'] = circle3_id;
-          intersection[i]['circle4_id'] = circle4_id;
-          intersection[i]['circle5_id'] = circle5_id;
-          intersection[i]['color'] = intcolor;
-          intersection[i]['area'] = intarea;
+          iLayer.children[i].fillColor = intcolor;
+          iLayer.children[i].data.area = intarea;
 
-          var int = {
-            dbid: intersection[i]['dbid'],
-            circle1_id: intersection[i]['circle1_id'],
-            circle2_id: intersection[i]['circle2_id'],
-            circle3_id: intersection[i]['circle3_id'],
-            circle4_id: intersection[i]['circle4_id'],
-            circle5_id: intersection[i]['circle5_id'],
-            color: intersection[i]['color'],
-            area: intersection[i]['area'],
-          };
+        }//end if
 
-          console.log(int);
+      }//inside for
+    }//outside for
 
-          iLayer.addChild(int);
-
-      }
-      
-     }
-   }
-
-
-  }
+  } //end of init
 
   intialize();
 
@@ -247,7 +375,7 @@
     colorSlider.value = (1-test_r/255)*100;
     //(7/20) which then calls change event 
 
-    saveIntersect()
+    saveIntersect();
 
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
 
