@@ -249,35 +249,35 @@ public function intersections(){
 
   foreach ($circles as $circle){
 
-    $intersection1 = App\Intersection::where('circle1_id');
+    $intersection1 = DB::table('intersection')->where('circle1_id', $circle->id)->get();
     // foreach ($intersection1 as $intersect){
       
     //   $intersect->dropForeign(['circle1_id']);
     //   $intersect->delete();
     // }
 
-    $intersection2 = App\Intersection::where('circle2_id');
+    $intersection2 = DB::table('intersection')->where('circle2_id', $circle->id)->get();
     // foreach ($intersection2 as $intersect){
       
     //   $intersect->dropForeign(['circle2_id']);
     //   $intersect->delete();
     // }
 
-    $intersection3 = App\Intersection::where('circle2_id');
+    $intersection3 = DB::table('intersection')->where('circle3_id', $circle->id)->get();
     // foreach ($intersection3 as $intersect){
       
     //   $intersect->dropForeign(['circle3_id']);
     //   $intersect->delete();
     // }
 
-    $intersection4 = App\Intersection::where('circle2_id');
+    $intersection4 = DB::table('intersection')->where('circle4_id', $circle->id)->get();
     // foreach ($intersection4 as $intersect){
       
     //   $intersect->dropForeign(['circle4_id']);
     //   $intersect->delete();
     // }
 
-    $intersection5 = App\Intersection::where('circle2_id');
+    $intersection5 = DB::table('intersection')->where('circle5_id', $circle->id)->get();
     // foreach ($intersection5 as $intersect){
      
     //  $intersect->dropForeign(['circle5_id']);
