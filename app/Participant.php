@@ -23,11 +23,11 @@ class Participant extends Model
 
     public function getCircles(){
       $circles = [
-        1 => $this->hasMany('\App\Circle')->where('number', '1')->first(),
-        2 => $this->hasMany('\App\Circle')->where('number', '2')->first(),
-        3 => $this->hasMany('\App\Circle')->where('number', '3')->first(),
-        4 => $this->hasMany('\App\Circle')->where('number', '4')->first(),
-        5 => $this->hasMany('\App\Circle')->where('number', '5')->first(),
+        1 => $this->hasMany('\App\Circle')->where('number', '1')->latest()->first(),
+        2 => $this->hasMany('\App\Circle')->where('number', '2')->latest()->first(),
+        3 => $this->hasMany('\App\Circle')->where('number', '3')->latest()->first(),
+        4 => $this->hasMany('\App\Circle')->where('number', '4')->latest()->first(),
+        5 => $this->hasMany('\App\Circle')->where('number', '5')->latest()->first(),
       ];
 
       return $circles;
