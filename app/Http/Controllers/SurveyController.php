@@ -40,28 +40,13 @@ public function color(Request $request){
   $participant = \App\Participant::find(session()->get('participant_id'));
   
   $circles = $participant->getCircles();
-  // Log::info($circles);
 
-  $intersection = [];
-
-  foreach($circles as $circle){ 
-    if($circle !== null){ 
-      $int = $circle->getIntersect(); 
-      foreach($int as $info){ 
-        // print_r($info); 
-        array_push($intersection, $info); 
-      }
-    }
-  }
-
-  // Log::info($intersection);
-
-  // $length = sizeof($intersection);
+  $allIntersections = $participant->getIntersections();
 
   return view('color', array(
     'progress' => '20',
     'circles' => $circles,
-    'intersection' => $intersection,
+    'intersection' => $allIntersections,
     // 'length' => $length,
     'prevURL' => route('position'),
     'nextURL' => route('intersections'),

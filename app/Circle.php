@@ -45,8 +45,6 @@ class Circle extends Model
         ->get()
         ->toArray();
 
-      print_r($ids);
-
       return $ids;
 
   }
