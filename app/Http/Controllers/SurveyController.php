@@ -119,7 +119,8 @@ public function saveIntersectData(Request $request){
   // myapp_1    |   ),
   // myapp_1    | ) 
 
-  foreach ($arr as $obj) {
+  // NB: the type-cast prevents an invalid argument exception when $arr is empty
+  foreach ((Array) $arr as $obj) {
 
     $intersection = new \App\Intersection;
 
@@ -289,11 +290,10 @@ public function intersections(){
 
   return view('intersections', array(
     'progress' => '40',
-    'intersection2' => ,
-    'intersection3' => ,
-    'intersection4' => ,
-    'intersection5' => ,
-    '' => ,
+    'intersection2' => '',
+    'intersection3' => '',
+    'intersection4' => '',
+    'intersection5' => '',
     'prevURL' => route('color'),
     'nextURL' => route('survey'),
   ));
