@@ -122,31 +122,31 @@ public function saveIntersectData(Request $request){
     //$participant->getCircles with index (number) ("") match circle number with circle id ['intersectId'][0] 
     //!!!!!!!! & get actual dbid
 
-    $findid1 = $obj['intersectId'][0];
+    $findid1 = $obj['id'][0];
     Log::info($findid1);
     $index1 = intval($findid1);
 
-    $findid2 = $obj['intersectId'][1];
+    $findid2 = $obj['id'][1];
     Log::info($findid2);
     $index2 = intval($findid2);
 
     $intersection->circle1_id = $circles[$index1]['id'];
     $intersection->circle2_id = $circles[$index2]['id'];
 
-    if(strlen($obj['intersectId']) >= 3){
-      $findid3 = $obj['intersectId'][2];
+    if(strlen($obj['id']) >= 3){
+      $findid3 = $obj['id'][2];
       $index3 = intval($findid3);
       $intersection->circle3_id = $circles[$index3]['id'];
     }
 
-    if(strlen($obj['intersectId']) >= 4){
-      $findid4 = $obj['intersectId'][3];
+    if(strlen($obj['id']) >= 4){
+      $findid4 = $obj['id'][3];
       $index4 = intval($findid4);
       $intersection->circle4_id = $circles[$index4]['id'];
     }
 
-    if(strlen($obj['intersectId']) >= 5){
-      $findid5 = $obj['intersectId'][4];
+    if(strlen($obj['id']) >= 5){
+      $findid5 = $obj['id'][4];
       $index5 = intval($findid5);
       $intersection->circle5_id = $circles[$index5]['id'];
     }

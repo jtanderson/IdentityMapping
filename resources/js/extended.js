@@ -182,11 +182,11 @@ var intialize = function(){
       circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
       circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
       circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
-      circle[i]['color'] = new Color(1, 1, 1, 0.75);
+      circle[i]['color'] = new Color(255, 255, 255, 0.75);
     }
 
-    if(circle[i]['color'] == "" || "0,0,0"){
-      circle[i]['color'] = new Color(1, 1, 1, 0.75);
+    if(circle[i]['color'] == ""){
+      circle[i]['color'] = new Color(255, 255, 255, 0.75);
     }
 
 
@@ -194,14 +194,15 @@ var intialize = function(){
       center: [circle[i]['circle_x'], circle[i]['circle_y']],
       radius: circle[i]['radius'],
       fillColor: circle[i]['color'],
-      strokeColor: 'black',
-      // id: i,
+      strokeColor: 'black', // TODO: load from DB
       insert: exists,
       visible: exists,
       data: {
         circleId: i
       }
     });
+
+    console.log(circ);
 
     var iLayer = project.getItem({data:{layerName: "intersections"}});
     var cLayer = project.getItem({data:{layerName: "circles"}});
@@ -254,7 +255,8 @@ var intialize = function(){
     }
     console.log("Going to set the color for intersection " + intId + " with paper Id " + intPaperId);
     var colorStr = document.getElementById('int-'+intId+'-color').value;
-    iLayer.getItem({data: {intersectId: intPaperId}}).fillColor = "rgb("+colorStr+")";
+    console.log("Setting color to: " + colorStr);
+    iLayer.getItem({data: {intersectId: intPaperId}}).fillColor = colorStr;
 
     // TODO: line/border style?
   }
@@ -474,7 +476,7 @@ saveIntersect = function(circleID){
 
         child.id = iLayer.children[i].data.intersectId; 
         child.area =  iLayer.children[i].area;
-        child.color = iLayer.children[i].fillColor.getComponents().toString();
+        child.color = iLayer.children[i].fillColor.toCSS();
         // console.log("This is the intersection child" + child);
 
         intersections.push(child);
@@ -516,7 +518,7 @@ saveCircle = function(circleID){
     "label": circleLabel,
     "radius": (obj.bounds.width/2),
     "line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
-    "color": obj.fillColor.getComponents().toString(), //this is a string from the color OBJ
+    "color": obj.fillColor.toCSS(), //this is a string from the color OBJ
     //ex) "rgba(38,0,217,0.9)"  
   };
 
