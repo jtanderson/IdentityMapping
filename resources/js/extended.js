@@ -305,11 +305,8 @@ paper.tool.onMouseDown = function(event){
     test_r = colorStr.split("(")[1].split(",")[0]; //colorStr[0] is r, colorStr[1] is g
     test_b = colorStr.split("(")[1].split(",")[2]; //colorStr[2] is b
 
-    console.log("I think intersection " + activeItem.id + " colors are " + test_r + " and " + test_b);
-
     //sets sliderIntersect value (slider's position) to that "color" on its range
     colorSlider.value = (1-test_r/255)*100;
-    //(7/20) which then calls change event 
 
     saveIntersect();
 
@@ -317,8 +314,6 @@ paper.tool.onMouseDown = function(event){
 
     activeItem = hitResult.item; // will be a circle
     activeItem.selected = true;
-
-    console.log(activeItem.fillColor);
 
     //retrieves color slider
     colorSlider = document.getElementById("rangeIntersect");
@@ -329,8 +324,6 @@ paper.tool.onMouseDown = function(event){
     //retrieves r and b
     test_r = colorStr.split("(")[1].split(",")[0];
     test_b = colorStr.split("(")[1].split(",")[2];
-
-    console.log("I think circle " + activeItem.id + " colors are " + test_r + " and " + test_b);
 
     //sets sliderIntersect value (slider's position) to that "color" on its range
     colorSlider.value = (1-test_r/255)*100;
@@ -498,7 +491,8 @@ saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
 
-  var obj = project.getItem({data: {circleId: parseInt(circleID)}});
+  var cLayer = project.getItem({data: {layerName: "circles"}});
+  var obj = cLayer.getItem({data: {circleId: parseInt(circleID)}});
 
   var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
   objLabel.content = circleLabel;
@@ -506,7 +500,7 @@ saveCircle = function(circleID){
   obj.visible = true;
   objLabel.visible = true;
 
-  var problem = {
+  var circleData = {
     "number": circleID,
     "position_x": obj.position.x,
     "position_y": obj.position.y,
@@ -517,13 +511,9 @@ saveCircle = function(circleID){
     //ex) "rgba(38,0,217,0.9)"  
   };
 
-  // console.log(obj);
-  // console.log(obj.fillColor);
-  // console.log(obj.fillColor.canvasStyle);
-
   // console.log(problem);
 
-  $.post("/saveCircleData", problem).done(function(data){
+  $.post("/saveCircleData", circleData).done(function(data){
     console.log("Save complete!");
   });
 
