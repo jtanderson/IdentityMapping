@@ -148,7 +148,7 @@
 
         child.intersectId = iLayer.children[i].data.intersectId; 
         child.area =  iLayer.children[i].area;
-        child.color = iLayer.children[i].fillColor.getComponents().toString();        
+        child.color = iLayer.children[i].fillColor.toCSS();        
         intersections.push(child);
       }
     }
@@ -174,11 +174,11 @@
     var cLayer = project.getItem({data:{layerName: "circles"}});
     var tLayer = project.getItem({data:{layerName: "labels"}});
     for(var i in cLayer.children){
-      cLayer.children[i].fillColor = new Color(1, 1, 1, 0.75);
+      cLayer.children[i].fillColor = new Color(255, 255, 255, 0.75);
       cLayer.children[i].dashArray = false;
     }
     for(var j in iLayer.children){
-      iLayer.children[j].fillColor = new Color(1, 1, 1, 0.75);
+      iLayer.children[j].fillColor = new Color(255, 255, 255, 0.75);
     }
   }
 
@@ -426,7 +426,7 @@
         "label": circleLabel,
         "radius": (obj.bounds.width/2),
         "line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
-        "color": obj.fillColor.getComponents().toString(), //this is a string from the color OBJ
+        "color": obj.fillColor.toCSS(), //this is a string from the color OBJ
     })
     .done(function(data){
 

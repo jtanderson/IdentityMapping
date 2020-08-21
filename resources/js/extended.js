@@ -182,12 +182,14 @@ var intialize = function(){
       circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
       circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
       circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
-      circle[i]['color'] = new Color(255, 255, 255, 0.75);
+      circle[i]['color'] = new Color(255, 255, 255, 0.9);
     }
 
     if(circle[i]['color'] == ""){
-      circle[i]['color'] = new Color(255, 255, 255, 0.75);
+      circle[i]['color'] = new Color(255, 255, 255, 0.9);
     }
+
+    console.log(circle[i]);
 
 
     var circ = new Path.Circle({
@@ -201,8 +203,6 @@ var intialize = function(){
         circleId: i
       }
     });
-
-    console.log(circ);
 
     var iLayer = project.getItem({data:{layerName: "intersections"}});
     var cLayer = project.getItem({data:{layerName: "circles"}});
