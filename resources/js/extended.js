@@ -232,6 +232,33 @@ var intialize = function(){
 
   intersections();
 
+  var intersectionIdElements = document.getElementsByName('int-id');
+
+  // "circle" mapping is label -> dbid
+  // reverse it.
+  var cIdLabel = {};
+  for(circ in circle){
+    if(circle[circ]['dbid']){
+      cIdLabel[""+circle[circ]["dbid"]] = circ;
+    }
+  }
+
+  for(var i=0; i<intersectionIdElements.length; i++){
+    var intId = intersectionIdElements[i].value;
+    var intPaperId = "";
+    for(numInd in intId){
+      // grab the db id of a circle, translate to label, append to int id
+      console.log("looking for HTML with id " + 'int-'+intId+'-c'+(parseInt(numInd)+1));
+      var label = document.getElementById('int-'+intId+'-c'+(parseInt(numInd)+1)).value;
+      intPaperId += cIdLabel[label];
+    }
+    console.log("Going to set the color for intersection " + intId + " with paper Id " + intPaperId);
+    var colorStr = document.getElementById('int-'+intId+'-color').value;
+    iLayer.getItem({data: {intersectId: intPaperId}}).fillColor = "rgb("+colorStr+")";
+
+    // TODO: line/border style?
+  }
+
 } //end of init
 
 intialize();

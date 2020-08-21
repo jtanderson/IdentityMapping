@@ -65,15 +65,17 @@
         @endforeach
 
 
-        @foreach ( $intersection as $index => $int )
-          <input type="hidden" name="int-{{ $index }}" id="int-{{ $index }}-dbid" value="{{ $int ? $int->id : "" }}" />
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id1" value="{{ $int ? $int->circle1_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id2" value="{{ $int ? $int->circle2_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id3" value="{{ $int ? $int->circle3_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id4" value="{{ $int ? $int->circle4_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-id5" value="{{ $int ? $int->circle5_id : "" }}"/>
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-color" value="{{ $int ? $int->color : "" }}"/>
-          <input type="hidden" name ="int-{{ $index }}" id="int-{{ $index }}-area" value="{{ $int ? $int->area : "" }}"/>
+        @foreach ( $intersections as $index => $int )
+        <div>
+          <input type="hidden" name="int-id" id="int-{{ $int->id }}-id" value="{{ $int->id }}" />
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c1" value="{{ $int->circle1_id }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c2" value="{{ $int->circle2_id }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c3" value="{{ $int ? $int->circle3_id : "" }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c4" value="{{ $int ? $int->circle4_id : "" }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c5" value="{{ $int ? $int->circle5_id : "" }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-color" value="{{ $int ? $int->color : "" }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-area" value="{{ $int ? $int->area : "" }}"/>
+        </div>
         @endforeach
 
         <div class="col-sm-8">
@@ -81,21 +83,6 @@
         </div>
       </div>
     </div>
-
-    <br>
-    <div>
-    </div>
-  </p>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-
-    </div>
-    <div class="col-sm-6">
-
-
-    </div>
-    
   </div>
   @endsection
 
