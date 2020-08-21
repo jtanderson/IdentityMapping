@@ -46,7 +46,7 @@ public function color(Request $request){
   return view('color', array(
     'progress' => '20',
     'circles' => $circles,
-    'intersection' => $allIntersections,
+    'intersections' => $allIntersections,
     // 'length' => $length,
     'prevURL' => route('position'),
     'nextURL' => route('intersections'),
