@@ -41,8 +41,13 @@ class Participant extends Model
      * "active" version of their respective labels.
      */
     public function getIntersections(){
-      $circles = $this->getCircles();
-      $circle_ids = array_map(function($circ){ return isset($circ) ? $circ->id : null; }, $circles);
+      $circle_ids = collect($this->getCircles())
+                      ->reject(function($circ){
+                        return empty($circ);
+                      })
+                      ->map(function($circ){
+                        return $circ->id;
+                      });
       
       // Assumption: an intersection cannot be tied to an "outdated" version of a circle
       // So, any intersection related to a 'latest' circle, is valid. There are no "versions"

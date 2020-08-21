@@ -133,8 +133,7 @@ function intersections(){
 
 
 //needs to recreate circles & intersections on page
-var intialize = function(){
-
+var initialize = function(){
   var circle = Array(5);
 
   for(var i=1; i<=5; i++){
@@ -145,16 +144,15 @@ var intialize = function(){
 
     // var form = document.getElementById("circle-" + i);
     var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-    console.log("circle "+i+" x retrieved is " + circle_x);
+    //console.log("circle "+i+" x retrieved is " + circle_x);
     var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-    console.log("circle "+i+" y retrieved is " + circle_y);
+    //console.log("circle "+i+" y retrieved is " + circle_y);
     var radius = document.getElementById("circle-"+circleID+"-radius").value;
-    console.log("circle "+i+" radius retrieved is " + radius);
+    //console.log("circle "+i+" radius retrieved is " + radius);
     var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
     var color = document.getElementById("circle-"+circleID+"-color").value;
     var dbid = document.getElementById("circle-"+circleID+"-id").value;
     var label = document.getElementById("circle-"+circleID+"-label").value;
-    console.log("This is the circle label" + label);
 
     //should return "" if no circle
 
@@ -188,9 +186,6 @@ var intialize = function(){
     if(circle[i]['color'] == ""){
       circle[i]['color'] = new Color(255, 255, 255, 0.9);
     }
-
-    console.log(circle[i]);
-
 
     var circ = new Path.Circle({
       center: [circle[i]['circle_x'], circle[i]['circle_y']],
@@ -235,7 +230,7 @@ var intialize = function(){
 
   var intersectionIdElements = document.getElementsByName('int-id');
 
-  // "circle" mapping is label -> dbid
+  // "circle" mapping is number -> dbid
   // reverse it.
   var cIdLabel = {};
   for(circ in circle){
@@ -247,23 +242,23 @@ var intialize = function(){
   for(var i=0; i<intersectionIdElements.length; i++){
     var intId = intersectionIdElements[i].value;
     var intPaperId = "";
-    for(numInd in intId){
+    for(var j=0; j<5; j++){ //numInd in intId){
       // grab the db id of a circle, translate to label, append to int id
-      console.log("looking for HTML with id " + 'int-'+intId+'-c'+(parseInt(numInd)+1));
-      var label = document.getElementById('int-'+intId+'-c'+(parseInt(numInd)+1)).value;
-      intPaperId += cIdLabel[label];
+      //console.log("looking for HTML with id " + 'int-'+intId+'-c'+(parseInt(intId[j])+1));
+      var number = document.getElementById('int-'+intId+'-c'+(j+1)).value;
+      intPaperId += number ? cIdLabel[number] : "";
     }
     console.log("Going to set the color for intersection " + intId + " with paper Id " + intPaperId);
     var colorStr = document.getElementById('int-'+intId+'-color').value;
     console.log("Setting color to: " + colorStr);
     iLayer.getItem({data: {intersectId: intPaperId}}).fillColor = colorStr;
 
-    // TODO: line/border style?
+    // TODO: line/border style
   }
 
 } //end of init
 
-intialize();
+initialize();
 
 //mouse down function
 paper.tool.onMouseDown = function(event){

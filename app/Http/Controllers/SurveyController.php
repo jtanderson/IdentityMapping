@@ -41,12 +41,13 @@ public function color(Request $request){
   
   $circles = $participant->getCircles();
 
-  $allIntersections = $participant->getIntersections();
+  $currentIntersections = $participant->getIntersections();
+  Log::info(print_r($currentIntersections, true));
 
   return view('color', array(
     'progress' => '20',
     'circles' => $circles,
-    'intersections' => $allIntersections,
+    'intersections' => $currentIntersections,
     // 'length' => $length,
     'prevURL' => route('position'),
     'nextURL' => route('intersections'),
@@ -79,17 +80,14 @@ public function saveCircleData(Request $request){
 }
 
 public function saveIntersectData(Request $request){
-  Log::info("Saving intersection data...");
-  Log::info($request);
-
   $participant = \App\Participant::find(session()->get('participant_id'));
 
   //split the id ex "12"
 
   $circles = $participant->getCircles();
 
-  $arr = $request->input('intersections');
-  Log::info($arr);
+  $intersections = $request->input('intersections');
+  //Log::info($arr);
 
   //intersections passed from layering.js (saveIntersect())
 
@@ -105,9 +103,9 @@ public function saveIntersectData(Request $request){
   // myapp_1    | ) 
 
   // NB: the type-cast prevents an invalid argument exception when $arr is empty
-  foreach ((Array) $arr as $obj) {
+  foreach ((Array) $intersections as $intData) {
 
-    $intersection = new \App\Intersection;
+    //$intersection = new \App\Intersection;
 
     // Log::info($obj);
 
@@ -120,44 +118,30 @@ public function saveIntersectData(Request $request){
     // myapp_1    | )  
 
     //$participant->getCircles with index (number) ("") match circle number with circle id ['intersectId'][0] 
-    //!!!!!!!! & get actual dbid
 
-    $findid1 = $obj['id'][0];
-    Log::info($findid1);
-    $index1 = intval($findid1);
-
-    $findid2 = $obj['id'][1];
-    Log::info($findid2);
-    $index2 = intval($findid2);
-
-    $intersection->circle1_id = $circles[$index1]['id'];
-    $intersection->circle2_id = $circles[$index2]['id'];
-
-    if(strlen($obj['id']) >= 3){
-      $findid3 = $obj['id'][2];
-      $index3 = intval($findid3);
-      $intersection->circle3_id = $circles[$index3]['id'];
+    $circle_ids = Array($circles[intval($intData['id'][0])]['id'], $circles[intval($intData['id'][1])]['id']);
+    if( strlen($intData['id']) >= 3 ){
+      array_push($circle_ids, $circles[intval($intData['id'][2])]['id']);
+    }
+    if( strlen($intData['id']) >= 4 ){
+      array_push($circle_ids, $circles[intval($intData['id'][3])]['id']);
+    }
+    if( strlen($intData['id']) >= 5 ){
+      array_push($circle_ids, $circles[intval($intData['id'][4])]['id']);
     }
 
-    if(strlen($obj['id']) >= 4){
-      $findid4 = $obj['id'][3];
-      $index4 = intval($findid4);
-      $intersection->circle4_id = $circles[$index4]['id'];
-    }
-
-    if(strlen($obj['id']) >= 5){
-      $findid5 = $obj['id'][4];
-      $index5 = intval($findid5);
-      $intersection->circle5_id = $circles[$index5]['id'];
-    }
-
+    $intersection = \App\Intersection::getByCircleIds($circle_ids);
     
-    $intersection->color = $obj['color'];
-    $intersection->area = $obj['area'];
+    if(empty($intersection)){
+      $intersection = new \App\Intersection;
+      foreach($circle_ids as $i => $id){
+        $intersection['circle'.($i+1).'_id'] = $id;
+      }
+    }
 
+    $intersection->color = $intData['color'];
+    $intersection->area = $intData['area'];
     $intersection->save();
-
-    Log::info($intersection);
 
     // local.INFO: array (
     // myapp_1    |   'id' => '12',
