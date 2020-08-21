@@ -21,6 +21,10 @@ class Participant extends Model
 
     // protected $id = 'session_token';
 
+    public function circles(){
+      return $this->hasMany('\App\Circle');
+    }
+
     public function getCircles(){
       $circles = [
         1 => $this->hasMany('\App\Circle')->where('number', '1')->latest()->first(),
@@ -33,10 +37,12 @@ class Participant extends Model
       return $circles;
     }
 
+    /* NB: this function only finds intersections where *all* involved circles are currently the
+     * "active" version of their respective labels.
+     */
     public function getIntersections(){
       $circles = $this->getCircles();
       $circle_ids = array_map(function($circ){ return isset($circ) ? $circ->id : null; }, $circles);
-      Log::info($circle_ids);
       
       // Assumption: an intersection cannot be tied to an "outdated" version of a circle
       // So, any intersection related to a 'latest' circle, is valid. There are no "versions"
@@ -61,15 +67,27 @@ class Participant extends Model
 
     }
 
-    public function deleteAll(){
+    public function allIntersections(){
+      $circle_ids = $this->circles->map(function($c){
+        return $c->id;
+      });
 
-      //array of circles 
-      $circlesArr = $this->hasMany('\App\Circle');
-      foreach($circlesArr as $circle){
-
-        $circle->delete();
-      }
-
+      return DB::table('intersection')
+              ->whereIn('circle1_id', $circle_ids)
+              ->orWhereIn('circle2_id', $circle_ids)
+              ->orWhereIn('circle3_id', $circle_ids)
+              ->orWhereIn('circle4_id', $circle_ids)
+              ->orWhereIn('circle5_id', $circle_ids)
+              ->get();
     }
 
+    public function deleteAll(){
+      $intersections = $this->allIntersections()->map(function($i){ return $i->id; });
+      \App\Intersection::destroy($intersections);
+
+      $circleIds = $this->circles->modelKeys();
+      \App\Circle::destroy($circleIds);
+
+      // TODO: survey questions
+    }
 }

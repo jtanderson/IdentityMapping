@@ -13,6 +13,7 @@
 
 Route::get('/', 'SurveyController@start');
 Route::get('/start', 'SurveyController@start')->name('start');
+Route::get('/abort', 'SurveyController@abort')->name('abort');
 Route::get('/position', 'SurveyController@position')->name('position');
 Route::get('/color', 'SurveyController@color')->name('color');
 Route::get('/survey', 'SurveyController@survey')->name('survey');

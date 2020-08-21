@@ -169,52 +169,11 @@ public function saveIntersectData(Request $request){
 }
 
 //request sent is the Abort button push?
-public function deleteParticipant(Request $request){
+public function abort(Request $request){
 
   $participant = \App\Participant::find(session()->get('participant_id'));
 
-  $circles = $participant->getCircles();
-
-  foreach ($circles as $circle){
-
-    $intersection1 = App\Intersection::where('circle1_id');
-    foreach ($intersection1 as $intersect){
-      
-      $intersect->dropForeign(['circle1_id']);
-      $intersect->delete();
-    }
-
-    $intersection2 = App\Intersection::where('circle2_id');
-    foreach ($intersection2 as $intersect){
-      
-      $intersect->dropForeign(['circle2_id']);
-      $intersect->delete();
-    }
-
-    $intersection3 = App\Intersection::where('circle2_id');
-    foreach ($intersection3 as $intersect){
-      
-      $intersect->dropForeign(['circle3_id']);
-      $intersect->delete();
-    }
-
-    $intersection4 = App\Intersection::where('circle2_id');
-    foreach ($intersection4 as $intersect){
-      
-      $intersect->dropForeign(['circle4_id']);
-      $intersect->delete();
-    }
-
-    $intersection5 = App\Intersection::where('circle2_id');
-    foreach ($intersection5 as $intersect){
-     
-     $intersect->dropForeign(['circle5_id']);
-     $intersect->delete();
-    }
-
-    $circle->dropForeign(['participant_id']);
-    $circle->delete();
-  }
+  $participant->deleteAll();
 
   $participant->delete();
 
