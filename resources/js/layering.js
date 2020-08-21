@@ -146,7 +146,7 @@
 
       if(!iLayer.children[i].isEmpty() && iLayer.children[i].data.intersectId.includes(circleID)){
 
-        child.intersectId = iLayer.children[i].data.intersectId; 
+        child.id = iLayer.children[i].data.intersectId; 
         child.area =  iLayer.children[i].area;
         child.color = iLayer.children[i].fillColor.toCSS();        
         intersections.push(child);
