@@ -24,16 +24,16 @@ var labelLayer = new Layer();
 labelLayer.data.layerName = "labels";
 project.addLayer(labelLayer);
 
-var fixLayers = function(){
-  var iLayer = project.getItem({data: {layerName: "intersections"}});
-  var cLayer = project.getItem({data: {layerName: "circles"}});
-  var tLayer = project.getItem({data: {layerName: "labels"}});
-  tLayer.sendToBack();
-  cLayer.sendToBack();
-  iLayer.sendToBack();
+// var fixLayers = function(){
+//   var iLayer = project.getItem({data: {layerName: "intersections"}});
+//   var cLayer = project.getItem({data: {layerName: "circles"}});
+//   var tLayer = project.getItem({data: {layerName: "labels"}});
+//   tLayer.sendToBack();
+//   cLayer.sendToBack();
+//   iLayer.sendToBack();
 
-  console.log('Fixed layers...');
-}//end fix layers function
+//   console.log('Fixed layers...');
+// }//end fix layers function
 
 //function for creating intersections
 function intersections(){
@@ -142,6 +142,9 @@ var initialize = function(){
 
     circle[i] = Array();
 
+    // var cLayer = project.getItem({data: {layerName: "circles"}});
+    // var obj = cLayer.getItem({data: {circleId: parseInt(circleID)}});
+
     // var form = document.getElementById("circle-" + i);
     var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
     //console.log("circle "+i+" x retrieved is " + circle_x);
@@ -149,12 +152,14 @@ var initialize = function(){
     //console.log("circle "+i+" y retrieved is " + circle_y);
     var radius = document.getElementById("circle-"+circleID+"-radius").value;
     //console.log("circle "+i+" radius retrieved is " + radius);
-    var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
+    var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split();
+    // var dashArray = line_style.split();
+    console.log("this is line style" + line_style);
     var color = document.getElementById("circle-"+circleID+"-color").value;
     var dbid = document.getElementById("circle-"+circleID+"-id").value;
     var label = document.getElementById("circle-"+circleID+"-label").value;
-
     //should return "" if no circle
+
 
     circle[i]['circle_x'] = circle_x;
     // console.log(circle[i]['circle_x']);
@@ -163,6 +168,8 @@ var initialize = function(){
     circle[i]['label'] = label;
     circle[i]['color'] = color;
     circle[i]['dbid'] = dbid;
+    circle[i]['line_style'] = line_style;
+    // console.log(circle[i]['line_style']);
 
 
     var min = 55;
@@ -181,6 +188,7 @@ var initialize = function(){
       circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
       circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
       circle[i]['color'] = new Color(255, 255, 255, 0.9);
+      circle[i]['line_style'] = [0,0];
     }
 
     if(circle[i]['color'] == ""){
@@ -191,7 +199,8 @@ var initialize = function(){
       center: [circle[i]['circle_x'], circle[i]['circle_y']],
       radius: circle[i]['radius'],
       fillColor: circle[i]['color'],
-      strokeColor: 'black', // TODO: load from DB
+      strokeColor: 'black',
+      dashArray: circle[i]['line_style'],
       insert: exists,
       visible: exists,
       data: {
@@ -223,9 +232,6 @@ var initialize = function(){
 
   }//end for
 
-  //8/18
-  // layering.getItem('123') - colr & border style 
-
   intersections();
 
   var intersectionIdElements = document.getElementsByName('int-id');
@@ -244,7 +250,7 @@ var initialize = function(){
     var intPaperId = "";
     for(var j=0; j<5; j++){ //numInd in intId){
       // grab the db id of a circle, translate to label, append to int id
-      //console.log("looking for HTML with id " + 'int-'+intId+'-c'+(parseInt(intId[j])+1));
+      console.log("looking for HTML with id " + 'int-'+intId+'-c'+(parseInt(intId[j])+1));
       var number = document.getElementById('int-'+intId+'-c'+(j+1)).value;
       intPaperId += number ? cIdLabel[number] : "";
     }
@@ -253,7 +259,7 @@ var initialize = function(){
     console.log("Setting color to: " + colorStr);
     iLayer.getItem({data: {intersectId: intPaperId}}).fillColor = colorStr;
 
-    // TODO: line/border style
+    // TODO: line/border style for intersections
   }
 
 } //end of init
@@ -284,7 +290,7 @@ paper.tool.onMouseDown = function(event){
 
   //hit testing
 
-  fixLayers();
+  // fixLayers();
 
   if(hitResult = iLayer.hitTest(event.point)){//if the intersection layer is hit
 
@@ -448,7 +454,7 @@ saveIntersect = function(circleID){
 
   // console.log("This is iLayer.children " + iLayer.children);
 
-  for(var i in iLayer.children){
+  for(var i = 0; i < iLayer.children.length; i++){
 
     //for each intersection, make an object
 
@@ -460,7 +466,6 @@ saveIntersect = function(circleID){
     //if the child is not empty, and includes the circleID in its ID
     //add a child object to array
     if(!iLayer.children[i].isEmpty()){
-      if(iLayer.children[i].data.intersectId.includes(circleID)){
 
         child.id = iLayer.children[i].data.intersectId; 
         child.area =  iLayer.children[i].area;
@@ -468,12 +473,10 @@ saveIntersect = function(circleID){
         // console.log("This is the intersection child" + child);
 
         intersections.push(child);
+
       }else{
-        console.log("ERROR: circleID is not in the intersection");
+        console.log("ERROR: intersection array is empty");
       }
-    }else{
-      console.log("ERROR: Child is empty");
-    }
 
   }//end for 
 
@@ -523,7 +526,7 @@ doSubmit = function(e){
 
   e.preventDefault();
 
-  var circleID = event.target.id.split("-")[1];
+  var circleID = e.target.id.split("-")[1];
   // console.log(circleID);
 
   saveCircle(circleID);

@@ -30,30 +30,30 @@ var intialize = function(){
 
     circle[i] = Array();
 
-    // var form = document.getElementById("circle-" + i);
-    var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-    // console.log("circle "+i+" x retrieved is " + circle_x);
-    var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-    // console.log("circle "+i+" y retrieved is " + circle_y);
-    var radius = document.getElementById("circle-"+circleID+"-radius").value;
-    // console.log("circle "+i+" radius retrieved is " + radius);
-    var line_style = document.getElementById("circle-"+circleID+"-line_style").value;
-    var color = document.getElementById("circle-"+circleID+"-color").value;
-    var dbid = document.getElementById("circle-"+circleID+"-id").value;
-    var label = document.getElementById("circle-"+circleID+"-label").value;
-    console.log("This is the circle label" + label);
-    //add information to circle[i].circle_x = circle_x
+      // var form = document.getElementById("circle-" + i);
+      var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
+      // console.log("circle "+i+" x retrieved is " + circle_x);
+      var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
+      // console.log("circle "+i+" y retrieved is " + circle_y);
+      var radius = document.getElementById("circle-"+circleID+"-radius").value;
+      // console.log("circle "+i+" radius retrieved is " + radius);
+      var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split();
+      var color = document.getElementById("circle-"+circleID+"-color").value;
+      var dbid = document.getElementById("circle-"+circleID+"-id").value;
+      var label = document.getElementById("circle-"+circleID+"-label").value;
+      console.log("This is the circle label" + label);
+      console.log(line_style);
+           
+       //should return "" if no circle
 
-    //should return "" if no circle
-
-    circle[i]['circle_x'] = circle_x;
-    // console.log(circle[i]['circle_x']);
-    circle[i]['circle_y']  = circle_y;
-    circle[i]['radius'] = radius;
-    circle[i]['label'] = label;
-    circle[i]['color'] = color;
-    circle[i]['dbid'] = dbid;
-
+      circle[i]['circle_x'] = circle_x;
+      // console.log(circle[i]['circle_x']);
+      circle[i]['circle_y']  = circle_y;
+      circle[i]['radius'] = radius;
+      circle[i]['label'] = label;
+      circle[i]['color'] = color;
+      circle[i]['dbid'] = dbid;
+      circle[i]['line_style'] = line_style;
 
     var min = 55;
     var max = 135;
@@ -63,32 +63,32 @@ var intialize = function(){
     var exists = true;
 
     if(circle[i]['dbid'] == ""){
-
-      exists = false;
-      console.log("I think, therefore I don't exist");
-      circle[i]['label'] = "Circle " + i;
-      circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-      circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
-      circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
-      circle[i]['color'] = new Color(1, 1, 1, 0.75);
+        exists = false;
+        console.log("I think, therefore I don't exist");
+        circle[i]['label'] = "Circle " + i;
+        circle[i]['circle_x'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+        circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
+        circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
+        circle[i]['color'] = new Color(1, 1, 1, 0.75);
+        circle[i]['line_style'] = 0;
     }
 
     if(circle[i]['color'] == "" || "0,0,0"){
       circle[i]['color'] = new Color(1, 1, 1, 0.75);
     }
 
-    var circ = new Path.Circle({
-      center: [circle[i]['circle_x'], circle[i]['circle_y']],
-      radius: circle[i]['radius'],
-      fillColor: circle[i]['color'],
-      strokeColor: 'black',
-      // id: i,
-      insert: exists,
-      visible: exists,
-      data: {
-        circleId: i
-      }
-    });
+      var circ = new Path.Circle({
+        center: [circle[i]['circle_x'], circle[i]['circle_y']],
+        radius: circle[i]['radius'],
+        fillColor: circle[i]['color'],
+        strokeColor: 'black',
+        dashArray: circle[i]['line_style'],
+        insert: exists,
+        visible: exists,
+        data: {
+          circleId: i
+        }
+      });
 
     var iLayer = project.getItem({data:{layerName: "intersections"}});
     var cLayer = project.getItem({data:{layerName: "circles"}});
@@ -119,11 +119,7 @@ var intialize = function(){
 }
 
 
-// $( document ).ready(function() {
-
 intialize();
-
-// });
 
 saveIntersect = function(circleID){
 
@@ -162,12 +158,6 @@ saveIntersect = function(circleID){
 }
 
 intersections();
-
-// //group creation for layering the intersections
-// var group2 = new Group();
-// var group3 = new Group();
-// var group4 = new Group();
-// var group5 = new Group(); 
 
 function creation(){
   var iLayer = project.getItem({data:{layerName: "intersections"}});
@@ -287,10 +277,6 @@ var fixLayers = function(){
   iLayer.sendToBack();
   cLayer.sendToBack();
 
-  // if(debug_mode){
-  //   console.log('Fixed layers...');
-  // }
-
 }//end fix layers function
 
 
@@ -362,9 +348,6 @@ paper.tool.onMouseDrag = function(event){
     var cLayer = project.getItem({data: {layerName: "circles"}});
     var iLayer = project.getItem({data: {layerName: "intersections"}});
 
-    // TODO: instead of using a variable, test which layer activeItem is in!!
-    // circleLayer.isAncestor(activeItem) (For circles inside circles)
-
     if( cLayer.isAncestor(activeItem) ){ //if circle
 
       iLayer.removeChildren();//destroying old intersections (even though we are not recalculating)
@@ -391,15 +374,13 @@ paper.tool.onMouseDrag = function(event){
           console.log("Circle " + activeItem.data.circleId + " has position " + activeItem.position);
         }
 
-
       }//end if circle edge or circle
       console.log("Clicked canvas");
     }
+      intersections();
 
-    intersections();
-
-  }//end else
-}//end mouse dragging function
+    }//end else
+  }//end mouse dragging function
 
 //sends the circle data to DB storage
 saveCircle = function(circleID){
@@ -498,57 +479,7 @@ doSubmit = function(e){
 
   saveCircle(circleID);
 
-  // var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
-  // console.log(circleLabel);
-
-  // var obj = project.getItem({data: {circleId: parseInt(circleID)}});
-
-  // // console.log(obj.position.x);
-  // // console.log(obj.position.y);
-  // // console.log(obj.bounds.width/2);
-
-  // var objLabel = project.getItem({data: {labelId: parseInt(circleID)}});
-  // objLabel.content = circleLabel;
-
-  // obj.visible = true;
-  // objLabel.visible = true;
-
-  // // console.log(obj);
-
-  // insert = true;
-
-  // $.post("/saveCircleData", {
-  //     "number": circleID,
-  //     "position_x": obj.position.x,
-  //     "position_y": obj.position.y,
-  //     "label": circleLabel,
-  //     "radius": (obj.bounds.width/2),
-  // })
-  // .done(function(data){
-  //   console.log("Save complete!");
-  // });
-
-  // $.post("/saveIntersectData", {
-  //       "created": "" /*time stamp here */,
-  //       "updated": "" /*time stamp here */,
-  //       "circle1": "" /*circle 1 id*/,
-  //       "circle2": "" /*circle 2 id*/,
-  //       "area": "" /*calculated in intersection function*/
-  // })
-  // .done(function(data){
-  //   console.log("Save complete!");
-  // });
-
-  // insert = true;
-
   intersections();
-
-  //old logic -> dbarray.push(paper.project.exportJSON());
-  //             console.log(dbarray);
 
   return false;
 } //end doSubmit function
-
-//G: Do we still need line below?
-//window.doSubmit = doSubmit;
-

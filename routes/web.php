@@ -17,7 +17,7 @@ Route::get('/abort', 'SurveyController@abort')->name('abort');
 Route::get('/position', 'SurveyController@position')->name('position');
 Route::get('/color', 'SurveyController@color')->name('color');
 Route::get('/survey', 'SurveyController@survey')->name('survey');
-Route::get('/intersections', 'SurveyController@intersections')->name('intersections');
+Route::get('/debrief', 'SurveyController@intersectionDebrief')->name('intersectionDebrief');
 Route::get('/demographic', 'SurveyController@demographic')->name('demographic');
 Route::get('/category', 'SurveyController@category')->name('category');
 Route::get('/end', 'SurveyController@end')->name('end');

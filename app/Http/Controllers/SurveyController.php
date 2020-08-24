@@ -50,7 +50,7 @@ public function color(Request $request){
     'intersections' => $currentIntersections,
     // 'length' => $length,
     'prevURL' => route('position'),
-    'nextURL' => route('intersections'),
+    'nextURL' => route('intersectionDebrief'),
   ));
 }
 
@@ -170,7 +170,7 @@ public function abort(Request $request){
 }
 
 //intersection survey
-public function intersections(){
+public function intersectionDebrief(){
 
   $participant = \App\Participant::find(session()->get('participant_id'));
 
@@ -178,50 +178,40 @@ public function intersections(){
 
   foreach ($circles as $circle){
 
-    $intersection1 = DB::table('intersection')->where('circle1_id', $circle->id)->get();
-    // foreach ($intersection1 as $intersect){
-      
-    //   $intersect->dropForeign(['circle1_id']);
-    //   $intersect->delete();
-    // }
+    $intersections = $participant->getIntersections();
 
-    $intersection2 = DB::table('intersection')->where('circle2_id', $circle->id)->get();
-    // foreach ($intersection2 as $intersect){
-      
-    //   $intersect->dropForeign(['circle2_id']);
-    //   $intersect->delete();
-    // }
+    $twoways = [];
+    $threeways = [];
+    $fourways = [];
+    $fiveway = null;
 
-    $intersection3 = DB::table('intersection')->where('circle3_id', $circle->id)->get();
-    // foreach ($intersection3 as $intersect){
-      
-    //   $intersect->dropForeign(['circle3_id']);
-    //   $intersect->delete();
-    // }
+    foreach ($intersections as $intersect){
 
-    $intersection4 = DB::table('intersection')->where('circle4_id', $circle->id)->get();
-    // foreach ($intersection4 as $intersect){
-      
-    //   $intersect->dropForeign(['circle4_id']);
-    //   $intersect->delete();
-    // }
+      if($intersect->circle3_id !== null){
 
-    $intersection5 = DB::table('intersection')->where('circle5_id', $circle->id)->get();
-    // foreach ($intersection5 as $intersect){
-     
-    //  $intersect->dropForeign(['circle5_id']);
-    //  $intersect->delete();
-    // }
+        array_push($threeways, $intersect);
 
-    
+      }elseif($intersect->circle4_id !== null){
+
+        array_push($fourways, $intersect);
+
+      }elseif($intersect->circle5_id !== null){
+
+        $fiveway = $intersect;
+
+      }else{
+
+        array_push($twoways, $intersect);
+      }
+    } 
   }
 
-  return view('intersections', array(
+  return view('/debrief', array(
     'progress' => '40',
-    'intersection2' => '',
-    'intersection3' => '',
-    'intersection4' => '',
-    'intersection5' => '',
+    'twoway' => $twoways,
+    'threeway' => $threeways,
+    'fourway' => $fourways,
+    'fiveway' => $fiveway,
     'prevURL' => route('color'),
     'nextURL' => route('survey'),
   ));
