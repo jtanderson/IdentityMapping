@@ -183,7 +183,7 @@ public function intersectionDebrief(){
     $twoways = [];
     $threeways = [];
     $fourways = [];
-    $fiveway = null;
+    $fiveway = [];
 
     foreach ($intersections as $intersect){
 
@@ -197,21 +197,22 @@ public function intersectionDebrief(){
 
       }elseif($intersect->circle5_id !== null){
 
-        $fiveway = $intersect;
+        array_push($fiveways, $intersect);
 
       }else{
 
         array_push($twoways, $intersect);
+
       }
     } 
   }
 
   return view('/debrief', array(
     'progress' => '40',
-    'twoway' => $twoways,
-    'threeway' => $threeways,
-    'fourway' => $fourways,
-    'fiveway' => $fiveway,
+    'twoways' => $twoways,
+    'threeways' => $threeways,
+    'fourways' => $fourways,
+    'fiveways' => $fiveway,
     'prevURL' => route('color'),
     'nextURL' => route('survey'),
   ));
