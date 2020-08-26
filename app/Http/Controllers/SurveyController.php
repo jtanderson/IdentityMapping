@@ -166,7 +166,6 @@ public function abort(Request $request){
     'nextURL' => '',
     'prevURL' => '',
   ));
-  
 }
 
 //intersection survey
@@ -218,9 +217,39 @@ public function intersectionDebrief(){
   ));
 }
 
+public function addQuestion(){
+
+      $question = new SurveyQuestions;
+
+      //query needs to be a seeded
+      $question->text = $query;
+      $question->extreme_left = $extremeLeft;
+      $question->extreme_right = $extremeRight;
+      $question->degrees = "7";
+
+      $question->save();
+        
+    }
+
 public function survey(){
+
+  $participant = \App\Participant::find(session()->get('participant_id'));
+
+  $circles = $participant->getCircles();
+
+  $question1 = \App\SurveyQuestions::create(['text' => 'Rate how strongly held each social identity is when you think about yourself.']);
+  $question2 = \App\SurveyQuestions::create(['text' => 'Rate the distance you believe each social identity is from defining who you are.']);
+  $question3 = \App\SurveyQuestions::create(['text' => 'Rate how important each social identity is to the way you think about yourself']);
+  $question4 = \App\SurveyQuestions::create(['text' => 'How often do you think about having each social identity and what you have in common with others who share that identity?']);
+  $question5 = \App\SurveyQuestions::create(['text' => 'Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.']);
+  $question6 = \App\SurveyQuestions::create(['text' => 'How proud do you feel when someone who shares your social identity accomplishes something outstanding?']);
+
+  $surveyquestions = [$question1, $question2, $question3, $question4, $question5, $question6];
+
   return view('survey', array(
     'progress' => '60',
+    'circles' => $circles,
+    'surveyquestions' => $surveyquestions,
     'prevURL' => route('color'),
     'nextURL' => route('category'),
   ));
