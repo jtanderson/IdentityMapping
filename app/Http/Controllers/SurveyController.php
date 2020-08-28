@@ -192,12 +192,12 @@ public function intersectionDebrief(){
     }
   }
 
-  return view('/debrief', array(
+  return view('/intersectionDebrief', array(
     'progress' => '40',
     'intersections' => $intersections,
     'meaning' => $participant->intersection_meaning,
     'prevURL' => route('color'),
-    'nextURL' => route('survey'),
+    'nextURL' => route('identityDebrief'),
   ));
 }
 
@@ -216,33 +216,17 @@ public function saveExplanation(Request $request){
   $intersection->save();
 }
 
-public function addQuestion(){
-
-      $question = new SurveyQuestion;
-
-      //query needs to be a seeded
-      $question->text = $query;
-      $question->extreme_left = $extremeLeft;
-      $question->extreme_right = $extremeRight;
-      $question->degrees = "7";
-
-      $question->save();
-        
-    }
-
-public function survey(){
+public function identityDebrief(){
 
   $participant = \App\Participant::find(session()->get('participant_id'));
-
   $circles = $participant->getCircles();
+  $surveyquestions = \App\SurveyQuestion::where('surveyable_type', 'circle')->get();
 
-  $surveyquestions = \App\SurveyQuestion::all();
-
-  return view('survey', array(
+  return view('identityDebrief', array(
     'progress' => '60',
-    'circles' => $circles,
+    'circles' => array_filter($circles),
     'surveyquestions' => $surveyquestions,
-    'prevURL' => route('color'),
+    'prevURL' => route('intersectionDebrief'),
     'nextURL' => route('category'),
   ));
 }

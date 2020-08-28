@@ -21,36 +21,42 @@ class SurveyQuestionSeeder extends Seeder
           'extreme_left' => "Strongly held",
           'extreme_right' => "Weakly held",
           'degrees' => '5',
+          'surveyable_type' => 'circle',
         ],
         [ 
           'text' => "Rate the distance you believe each social identity is from defining who you are.",
           'extreme_left' => "Very close",
           'extreme_right' => "Very far",
           'degrees' => '5',
+          'surveyable_type' => 'circle',
         ],
         [ 
           'text' => "Rate how important each social identity is to the way you think about yourself",
           'extreme_left' => "Very important",
           'extreme_right' => "Very unimportant",
           'degrees' => '5',
+          'surveyable_type' => 'circle',
         ],
         [ 
           'text' => "How often do you think about having each social identity and what you have in common with others who share that identity?",
           'extreme_left' => "Very often",
           'extreme_right' => "Very rarely",
           'degrees' => '5',
+          'surveyable_type' => 'circle',
         ],
         [ 
           'text' => "Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.",
           'extreme_left' => "A lot",
           'extreme_right' => "Very little",
           'degrees' => '5',
+          'surveyable_type' => 'circle',
         ],
         [ 
           'text' => "How proud do you feel when someone who shares your social identity accomplishes something outstanding?",
           'extreme_left' => "Very proud",
           'extreme_right' => "Not proud",
           'degrees' => '5',
+          'surveyable_type' => 'circle',
         ],
       ]);
   }
