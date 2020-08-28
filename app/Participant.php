@@ -52,8 +52,7 @@ class Participant extends Model
       // Assumption: an intersection cannot be tied to an "outdated" version of a circle
       // So, any intersection related to a 'latest' circle, is valid. There are no "versions"
       // of any intersections between circles. They are immutable.
-      return DB::table('intersection')
-              ->whereIn('circle1_id', $circle_ids)
+      return \App\Intersection::whereIn('circle1_id', $circle_ids)
               ->whereIn('circle2_id', $circle_ids)
               ->where(function($query) use ($circle_ids) {
                 $query->whereNull('circle3_id')
@@ -67,8 +66,8 @@ class Participant extends Model
                 $query->whereNull('circle5_id')
                       ->orWhereIn('circle5_id', $circle_ids);
               })
-              ->get()
-              ->unique(); // needed? Possibly, have to check with how JS creates the ids.
+              ->get();
+              //->unique(); // needed? Possibly, have to check with how JS creates the ids.
 
     }
 

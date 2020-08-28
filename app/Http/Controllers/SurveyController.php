@@ -179,39 +179,22 @@ public function intersectionDebrief(){
 
     $intersections = $participant->getIntersections();
 
-    $twoways = [];
-    $threeways = [];
-    $fourways = [];
-    $fiveway = [];
-
-    foreach ($intersections as $intersect){
-
-      if($intersect->circle3_id !== null){
-
-        array_push($threeways, $intersect);
-
-      }elseif($intersect->circle4_id !== null){
-
-        array_push($fourways, $intersect);
-
-      }elseif($intersect->circle5_id !== null){
-
-        array_push($fiveways, $intersect);
-
-      }else{
-
-        array_push($twoways, $intersect);
-
-      }
-    } 
+    foreach($intersections as $intersect){
+      $intersect['viewLabel'] = join(
+        array_filter([
+          $intersect->circle1->label,
+          $intersect->circle2->label,
+          $intersect->circle3 ? $intersect->circle3->label : "",
+          $intersect->circle4 ? $intersect->circle4->label : "",
+          $intersect->circle5 ? $intersect->circle5->label : "",
+        ]), // NB: with default callback, removes FALSE-y values
+        '-');
+    }
   }
 
   return view('/debrief', array(
     'progress' => '40',
-    'twoways' => $twoways,
-    'threeways' => $threeways,
-    'fourways' => $fourways,
-    'fiveways' => $fiveway,
+    'intersections' => $intersections,
     'prevURL' => route('color'),
     'nextURL' => route('survey'),
   ));
@@ -219,7 +202,7 @@ public function intersectionDebrief(){
 
 public function addQuestion(){
 
-      $question = new SurveyQuestions;
+      $question = new SurveyQuestion;
 
       //query needs to be a seeded
       $question->text = $query;
@@ -237,14 +220,7 @@ public function survey(){
 
   $circles = $participant->getCircles();
 
-  $question1 = \App\SurveyQuestions::create(['text' => 'Rate how strongly held each social identity is when you think about yourself.']);
-  $question2 = \App\SurveyQuestions::create(['text' => 'Rate the distance you believe each social identity is from defining who you are.']);
-  $question3 = \App\SurveyQuestions::create(['text' => 'Rate how important each social identity is to the way you think about yourself']);
-  $question4 = \App\SurveyQuestions::create(['text' => 'How often do you think about having each social identity and what you have in common with others who share that identity?']);
-  $question5 = \App\SurveyQuestions::create(['text' => 'Indicate the extent to which something that happens in your life is affected by what happens to other people who share that social identity.']);
-  $question6 = \App\SurveyQuestions::create(['text' => 'How proud do you feel when someone who shares your social identity accomplishes something outstanding?']);
-
-  $surveyquestions = [$question1, $question2, $question3, $question4, $question5, $question6];
+  $surveyquestions = \App\SurveyQuestion::all();
 
   return view('survey', array(
     'progress' => '60',

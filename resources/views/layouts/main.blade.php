@@ -34,17 +34,15 @@
 
     <br><br>
     <div class="row">
-      <div class = "col-sm-3">
-      </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <div class="text text-left">
           @if ($prevURL != '')
           <h4><a href="{{ $prevURL }}">&larr;&nbsp; Previous</a></h4>
           @endif
         </div>
       </div>
-      <div class="col-sm-3">
-        <div class="text text-left">
+      <div class="col-sm-4">
+        <div class="text text-center">
           @if ($nextURL !== '/position')
           <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Abort</a>
           @else
@@ -52,7 +50,7 @@
           @endif
         </div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <div class="text text-right">
           @if ($nextURL !== '')
           <h4><a href="{{ $nextURL }}">Next &rarr;</a>&emsp;&emsp;</h4>
@@ -63,6 +61,7 @@
       </div>
     </div>
   </div>
+  <br><br>
 
   <!-- Scripts -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
