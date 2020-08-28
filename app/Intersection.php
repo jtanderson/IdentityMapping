@@ -10,6 +10,10 @@ class Intersection extends Model
 {
      protected $table = 'intersection';
 
+     protected $attributes = [
+       'explanation' => ''
+     ];
+
      public function circle1(){
        return $this->belongsTo('App\Circle', 'circle1_id');
      }

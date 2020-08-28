@@ -147,8 +147,6 @@ public function saveIntersectData(Request $request){
     // myapp_1    |   'id' => '12',
     // myapp_1    |   'area' => '12530.66999727977',
     // myapp_1    | )  
-
-  
   }
 }
 
@@ -179,6 +177,8 @@ public function intersectionDebrief(){
 
     $intersections = $participant->getIntersections();
 
+    Log::info($intersections);
+
     foreach($intersections as $intersect){
       $intersect['viewLabel'] = join(
         array_filter([
@@ -195,9 +195,25 @@ public function intersectionDebrief(){
   return view('/debrief', array(
     'progress' => '40',
     'intersections' => $intersections,
+    'meaning' => $participant->intersection_meaning,
     'prevURL' => route('color'),
     'nextURL' => route('survey'),
   ));
+}
+
+public function saveMeaning(Request $request){
+  $participant = \App\Participant::find(session()->get('participant_id'));
+
+  $participant->intersection_meaning = $request->input('meaningText');
+
+  $participant->save();
+}
+
+public function saveExplanation(Request $request){
+  $participant = \App\Participant::find(session()->get('participant_id'));
+  $intersection = \App\Intersection::find($request->input('id'));
+  $intersection->explanation = $request->input('explanation');
+  $intersection->save();
 }
 
 public function addQuestion(){

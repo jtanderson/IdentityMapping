@@ -65,6 +65,13 @@
 
   <!-- Scripts -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript">
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+  </script>
   @yield('javascript')
 </body>
 </html>

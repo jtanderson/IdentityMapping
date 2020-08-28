@@ -1,10 +1,4 @@
 //paper = require('paper/dist/paper-full');
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-
 console.log("Loading Layering");
 
 var circleLayer = new Layer();//creates the circle layer
@@ -152,9 +146,9 @@ saveIntersect = function(circleID){
   $.post("/saveIntersectData", {
     "intersections": intersections, /* an array which holds all intersections */ 
   })
-    .done(function(data){
-      console.log("Save intersection complete!");
-    }); 
+  .done(function(data){
+    console.log("Save intersection complete!");
+  }); 
 }
 
 intersections();
