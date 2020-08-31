@@ -24,6 +24,7 @@
 @endsection
 
 @section('javascript')
+<script type="text/javascript" src=""/>
 <script type="text/javascript">
 window.onload = function(){
   document.getElementById('intersection-meaning').onchange = function(){

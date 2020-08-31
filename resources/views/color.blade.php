@@ -88,7 +88,7 @@
 
   @section('javascript')
     <script type="text/javascript" src="{{ asset('js/paper.js') }}"></script>
-    <script type="text/paperscript" src="{{ asset('js/extended.js') }}" canvas="c"></script>
+    <script type="text/paperscript" src="{{ asset('js/color.js') }}" canvas="c"></script>
   <script>
     var reset = function(){
       var cLayer = paper.project.getItem({data: {layerName: "circles"}});
