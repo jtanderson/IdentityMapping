@@ -12,9 +12,12 @@
       <p>Now that your map is complete, we are going to ask you some questions about your social identities. <b>Please respond to the following questions thinking about each identity one at a time.</b></p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm">
-      @foreach ($surveyquestions as $number => $question)
+  @foreach ($surveyquestions as $number => $question)
+    @if ( $number % 2 == 0 )
+    <div class="row">
+      <div class="col-sm">
+        <div class="card-deck">
+    @endif
         <div class="card" style="width: 30rem;">
           <div class="card-body">
             <h5 class="card-title">{{ $question->text }}</h5>
@@ -32,8 +35,12 @@
             @endforeach
           </div>
         </div>
-      @endforeach
+    @if ( $number % 2 == 1 )
+        </div>
+      </div>
     </div>
-  </div>
+    <br>
+    @endif
+  @endforeach
   <br><br>
   @endsection
