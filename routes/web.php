@@ -26,6 +26,7 @@ Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('s
 Route::post('/deleteParticipant', 'SurveyController@deleteParticipant')->name('deleteParticipant');
 Route::post('/saveMeaning', 'SurveyController@saveMeaning')->name('saveMeaning');
 Route::post('/saveExplanation', 'SurveyController@saveExplanation')->name('saveExplanation');
+Route::post('/saveSurveyQuestion', 'SurveyController@saveSurveyQuestion')->name('saveSurveyQuestion');
 
 Auth::routes(['register' => false]);
 

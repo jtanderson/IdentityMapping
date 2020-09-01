@@ -15,8 +15,6 @@ class Circle extends Model
   
     protected $table = "circle";
 
-    //(8/11)
-
     public function getIntersect(){
 
       //array_map walks through array received by getIntersectId() and applies function at each element of array
@@ -31,9 +29,7 @@ class Circle extends Model
     }
 
     public function getIntersectId(){
-
       // $ids = DB::select('select max(id) from intersection where `circle1_id` = :id OR `circle2_id` = :id OR `circle3_id` = :id OR `circle4_id` = :id OR `circle5_id` = :id group by circle1_id, circle2_id, circle3_id, circle4_id, circle5_id', ['id' => $this->id]);
-
       $ids = DB::table('intersection')
         ->select(DB::raw('max(id) as maxid'))
         ->where('circle1_id', $this->id)
@@ -44,10 +40,6 @@ class Circle extends Model
         ->groupBy('circle1_id', 'circle2_id', 'circle3_id', 'circle4_id', 'circle5_id')
         ->get()
         ->toArray();
-
       return $ids;
-
   }
-    
-
 }
