@@ -3,8 +3,6 @@ window.onload = function(){
 
   for(var i=0; i<radios.length; i++){
     radios[i].onchange = function(evt){
-      console.log(evt);
-      console.log(evt.target);
       var nameParts = evt.target.name.split('-');
       $.post('/saveSurveyQuestion', {
         surveyable_id: nameParts[1],

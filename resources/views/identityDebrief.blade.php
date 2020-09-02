@@ -17,16 +17,21 @@
       <div class="col-sm">
         <div class="card-deck">
     @endif
-        <div class="card" style="width: 30rem;">
+        <div class="card text-center" style="width: 30rem;">
           <div class="card-body">
             <h5 class="card-title">{{ $question->text }}</h5>
             @foreach ($circles as $index => $circle)
+              <hr/>
               <b>{{ $circle['label'] }}</b>
               <form> 
                 {{ $question->extreme_left }}
                 @for ($i = 1; $i <= intval($question->degrees); $i++)
                   <div class="form-check form-check-inline">
-                    <input type="radio" name="circle-{{ $circle->id }}-question-{{ $question->id }}" value="{{ $i }}">
+                    @if ( $i == $question->answer )
+                      <input type="radio" class="survey-radio"  name="circle-{{ $circle->id }}-question-{{ $question->id }}" value="{{ $i }}" checked>
+                    @else
+                      <input type="radio" class="survey-radio"  name="circle-{{ $circle->id }}-question-{{ $question->id }}" value="{{ $i }}">
+                    @endif
                   </div>
                 @endfor
                 {{ $question->extreme_right }}
@@ -38,8 +43,12 @@
         </div>
       </div>
     </div>
-    <br>
     @endif
   @endforeach
-  <br><br>
+</div>
+<br>
+@endsection
+
+@section('javascript')
+<script type="text/javascript" src="{{ asset('js/identityDebrief.js') }}"></script>
 @endsection

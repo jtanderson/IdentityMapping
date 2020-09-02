@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class SurveyAnswer extends Model {
   protected $table = 'surveyanswer';
 
-  protected $fillable = [];
+  protected $fillable = ['surveyquestion_id', 'surveyable_id', 'surveyable_type', 'answer'];
 
   protected $attributes = [];
 }

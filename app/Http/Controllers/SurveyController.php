@@ -214,7 +214,12 @@ class SurveyController extends Controller{
 
   public function saveSurveyQuestion(Request $request){
     $question = \App\SurveyQuestion::find($request->question_id);
-
+    \App\SurveyAnswer::updateOrCreate(
+      ['surveyquestion_id' => $question->id,
+       'surveyable_type'   => $request->surveyable_type,
+       'surveyable_id'     => $request->surveyable_id ],
+      ['answer' => $request->answer]
+    );
   }
 
   public function saveExplanation(Request $request){
@@ -227,12 +232,24 @@ class SurveyController extends Controller{
   public function identityDebrief(){
 
     $participant = \App\Participant::find(session()->get('participant_id'));
-    $circles = $participant->getCircles();
+    $circles = array_filter($participant->getCircles());
+    $circleIds = array_map(function($obj){ return $obj->id; }, $circles);
     $surveyquestions = \App\SurveyQuestion::where('surveyable_type', 'circle')->get();
+    $surveyanswers = \App\SurveyAnswer::where('surveyable_type', 'circle')
+      ->whereIn('surveyable_id', $circleIds)
+      ->get();
+
+    // store the answer values on the question for the view
+    foreach( $surveyanswers as $answer ){
+      // an answer must have a question :)
+      $question = $surveyquestions->find($answer->surveyquestion_id);
+      $question->answer = $answer->answer;
+    }
+    
 
     return view('identityDebrief', array(
       'progress' => '60',
-      'circles' => array_filter($circles),
+      'circles' => $circles,
       'surveyquestions' => $surveyquestions,
       'prevURL' => route('intersectionDebrief'),
       'nextURL' => route('category'),

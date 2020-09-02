@@ -20,4 +20,7 @@ class SurveyQuestion extends Model
     'degrees' => 5
   ];
 
+  public function surveyAnswers(){
+    return $this->hasMany('App\SurveyAnswer');
+  }
 }
