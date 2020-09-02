@@ -24,30 +24,29 @@ var intialize = function(){
 
     circle[i] = Array();
 
-      // var form = document.getElementById("circle-" + i);
-      var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
-      // console.log("circle "+i+" x retrieved is " + circle_x);
-      var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
-      // console.log("circle "+i+" y retrieved is " + circle_y);
-      var radius = document.getElementById("circle-"+circleID+"-radius").value;
-      // console.log("circle "+i+" radius retrieved is " + radius);
-      var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split();
-      var color = document.getElementById("circle-"+circleID+"-color").value;
-      var dbid = document.getElementById("circle-"+circleID+"-id").value;
-      var label = document.getElementById("circle-"+circleID+"-label").value;
-      console.log("This is the circle label" + label);
-      console.log(line_style);
-           
-       //should return "" if no circle
+    // var form = document.getElementById("circle-" + i);
+    var circle_x = document.getElementById("circle-"+circleID+"-center-x").value;
+    // console.log("circle "+i+" x retrieved is " + circle_x);
+    var circle_y = document.getElementById("circle-"+circleID+"-center-y").value;
+    // console.log("circle "+i+" y retrieved is " + circle_y);
+    var radius = document.getElementById("circle-"+circleID+"-radius").value;
+    // console.log("circle "+i+" radius retrieved is " + radius);
+    //var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split();
+    var color = document.getElementById("circle-"+circleID+"-color").value;
+    var dbid = document.getElementById("circle-"+circleID+"-id").value;
+    var label = document.getElementById("circle-"+circleID+"-label").value;
+    console.log("This is the circle label" + label);
+         
+     //should return "" if no circle
 
-      circle[i]['circle_x'] = circle_x;
-      // console.log(circle[i]['circle_x']);
-      circle[i]['circle_y']  = circle_y;
-      circle[i]['radius'] = radius;
-      circle[i]['label'] = label;
-      circle[i]['color'] = color;
-      circle[i]['dbid'] = dbid;
-      circle[i]['line_style'] = line_style;
+    circle[i]['circle_x'] = circle_x;
+    // console.log(circle[i]['circle_x']);
+    circle[i]['circle_y']  = circle_y;
+    circle[i]['radius'] = radius;
+    circle[i]['label'] = label;
+    circle[i]['color'] = color;
+    circle[i]['dbid'] = dbid;
+    //circle[i]['line_style'] = "["+line_style+"]";
 
     var min = 55;
     var max = 135;
@@ -64,25 +63,25 @@ var intialize = function(){
         circle[i]['circle_y'] = Math.floor(Math.random() * (+maxR - +minR)) + +minR;
         circle[i]['radius'] = Math.floor(Math.random() * (+max - +min)) + +min;
         circle[i]['color'] = new Color(1, 1, 1, 0.75);
-        circle[i]['line_style'] = 0;
+        //circle[i]['line_style'] = 0;
     }
 
     if(circle[i]['color'] == "" || "0,0,0"){
       circle[i]['color'] = new Color(1, 1, 1, 0.75);
     }
 
-      var circ = new Path.Circle({
-        center: [circle[i]['circle_x'], circle[i]['circle_y']],
-        radius: circle[i]['radius'],
-        fillColor: circle[i]['color'],
-        strokeColor: 'black',
-        dashArray: circle[i]['line_style'],
-        insert: exists,
-        visible: exists,
-        data: {
-          circleId: i
-        }
-      });
+    var circ = new Path.Circle({
+      center: [circle[i]['circle_x'], circle[i]['circle_y']],
+      radius: circle[i]['radius'],
+      fillColor: circle[i]['color'],
+      strokeColor: 'black',
+      //dashArray: circle[i]['line_style'],
+      insert: exists,
+      visible: exists,
+      data: {
+        circleId: i
+      }
+    });
 
     var iLayer = project.getItem({data:{layerName: "intersections"}});
     var cLayer = project.getItem({data:{layerName: "circles"}});
@@ -154,6 +153,7 @@ saveIntersect = function(circleID){
 intersections();
 
 function creation(){
+  console.log("HERE???");
   var iLayer = project.getItem({data:{layerName: "intersections"}});
   var cLayer = project.getItem({data:{layerName: "circles"}});
   var tLayer = project.getItem({data:{layerName: "labels"}});
@@ -396,7 +396,7 @@ saveCircle = function(circleID){
     "position_y": obj.position.y,
     "label": circleLabel,
     "radius": (obj.bounds.width/2),
-    "line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
+    //"line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
     "color": obj.fillColor.toCSS(), //this is a string from the color OBJ
   })
   .done(function(data){

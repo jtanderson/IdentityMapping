@@ -75,6 +75,7 @@
           <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c5" value="{{ $int ? $int->circle5_id : "" }}"/>
           <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-color" value="{{ $int ? $int->color : "" }}"/>
           <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-area" value="{{ $int ? $int->area : "" }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-line_style" value="{{ $int ? $int->line_style : "" }}"/>
         </div>
         @endforeach
 

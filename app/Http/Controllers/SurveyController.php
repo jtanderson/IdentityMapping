@@ -141,12 +141,10 @@ class SurveyController extends Controller{
 
       $intersection->color = $intData['color'];
       $intersection->area = $intData['area'];
+      if( array_key_exists('line_style', $intData) ){
+        $intersection->line_style = $intData['line_style'];
+      }
       $intersection->save();
-
-      // local.INFO: array (
-      // myapp_1    |   'id' => '12',
-      // myapp_1    |   'area' => '12530.66999727977',
-      // myapp_1    | )  
     }
   }
 

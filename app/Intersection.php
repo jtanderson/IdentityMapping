@@ -11,7 +11,8 @@ class Intersection extends Model
      protected $table = 'intersection';
 
      protected $attributes = [
-       'explanation' => ''
+       'explanation' => '',
+       'line_style' => '',
      ];
 
      public function circle1(){
