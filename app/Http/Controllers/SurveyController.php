@@ -155,7 +155,6 @@ class SurveyController extends Controller{
 
   //request sent is the Abort button push?
   public function abort(Request $request){
-
     $participant = \App\Participant::find(session()->get('participant_id'));
 
     $participant->deleteAll();
@@ -257,17 +256,29 @@ class SurveyController extends Controller{
   }
 
   public function category(){
-    return view('grouping', array(
+    $participant = \App\Participant::find(session()->get('participant_id'));
+    $circles = array_filter($participant->getCircles());
+    $categories = \App\Category::all();
+
+    return view('category', array(
+      'circles' => $circles,
+      'categories' => $categories,
       'progress' => '70',
-      'prevURL' => route('survey'),
+      'prevURL' => route('identityDebrief'),
       'nextURL' => route('demographic'),
     ));
+  }
+
+  public function saveCategeory(Request $request){
+    $circle = \App\Circle::find($request->circle_id);
+    $circle->category_id = $request->category_id;
+    $circle->save();
   }
 
   public function demographic(){
     return view('demographic', array(
       'progress' => '80',
-      'prevURL' => route('survey'),
+      'prevURL' => route('categroy'),
       'nextURL' => route('end'),
     ));
   }
