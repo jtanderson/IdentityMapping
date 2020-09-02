@@ -60,7 +60,12 @@ class SurveyController extends Controller{
     Log::info("Saving circle data...");
     Log::info($request);
 
-    $circle = new \App\Circle;
+    if( $request->input('id') ){
+      $circle = \App\Circle::find($request->input('id'));
+    } else {
+      $circle = new \App\Circle;
+    }
+
     $circle->label = $request->input('label');
     $circle->number = $request->input('number');
     // $circle->dbid = $request->input('dbid');

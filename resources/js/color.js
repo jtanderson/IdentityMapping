@@ -468,6 +468,7 @@ saveIntersect = function(circleID){
 saveCircle = function(circleID){
 
   var circleLabel = document.getElementById("circle-"+circleID+"-label").value;
+  var dbid = document.getElementById("circle-"+circleID+"-id").value;
 
   var cLayer = project.getItem({data: {layerName: "circles"}});
   var obj = cLayer.getItem({data: {circleId: parseInt(circleID)}});
@@ -479,6 +480,7 @@ saveCircle = function(circleID){
   objLabel.visible = true;
 
   var circleData = {
+    "id": dbid,
     "number": circleID,
     "position_x": obj.position.x,
     "position_y": obj.position.y,
