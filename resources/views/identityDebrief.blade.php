@@ -1,16 +1,15 @@
-  @extends('layouts.main')
+@extends('layouts.main')
 
-  @section('css')
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  @endsection
+@section('css')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+@endsection
 
-  @section('content')
+@section('content')
 
-  <h1> Description</h1>
-  <div class="row">
-    <div class="col-sm">
-      <p>Now that your map is complete, we are going to ask you some questions about your social identities. <b>Please respond to the following questions thinking about each identity one at a time.</b></p>
-    </div>
+<h1> Description</h1>
+<div class="row">
+  <div class="col-sm">
+    <p>Now that your map is complete, we are going to ask you some questions about your social identities. <b>Please respond to the following questions thinking about each identity one at a time.</b></p>
   </div>
   @foreach ($surveyquestions as $number => $question)
     @if ( $number % 2 == 0 )
@@ -43,4 +42,4 @@
     @endif
   @endforeach
   <br><br>
-  @endsection
+@endsection

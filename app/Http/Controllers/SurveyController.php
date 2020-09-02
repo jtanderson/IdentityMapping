@@ -8,251 +8,256 @@ use Illuminate\Support\Facades\DB;
 
 class SurveyController extends Controller{
 
-public function __construct(){
-  $this->middleware('participant');
-}
+  public function __construct(){
+    $this->middleware('participant');
+  }
 
-public function start(Request $request){
+  public function start(Request $request){
 
-  return view('start', array(
-    'progress' => '0',
-    'prevURL' => '',
-    'nextURL' => route('position'),
-  ));
-}
+    return view('start', array(
+      'progress' => '0',
+      'prevURL' => '',
+      'nextURL' => route('position'),
+    ));
+  }
 
-public function position(Request $request){
+  public function position(Request $request){
 
-  $participant = \App\Participant::find(session()->get('participant_id'));
-  
-  $circles = $participant->getCircles();
+    $participant = \App\Participant::find(session()->get('participant_id'));
 
-  return view('position', array(
-    'progress' => '10',
-    'circles' => $circles,
-    'prevURL' => route('start'),
-    'nextURL' => route('color'),
-  ));
-}
+    $circles = $participant->getCircles();
 
-public function color(Request $request){
-  
-  $participant = \App\Participant::find(session()->get('participant_id'));
-  
-  $circles = $participant->getCircles();
+    return view('position', array(
+      'progress' => '10',
+      'circles' => $circles,
+      'prevURL' => route('start'),
+      'nextURL' => route('color'),
+    ));
+  }
 
-  $currentIntersections = $participant->getIntersections();
-  Log::info(print_r($currentIntersections, true));
+  public function color(Request $request){
 
-  return view('color', array(
-    'progress' => '20',
-    'circles' => $circles,
-    'intersections' => $currentIntersections,
-    // 'length' => $length,
-    'prevURL' => route('position'),
-    'nextURL' => route('intersectionDebrief'),
-  ));
-}
+    $participant = \App\Participant::find(session()->get('participant_id'));
+
+    $circles = $participant->getCircles();
+
+    $currentIntersections = $participant->getIntersections();
+    Log::info(print_r($currentIntersections, true));
+
+    return view('color', array(
+      'progress' => '20',
+      'circles' => $circles,
+      'intersections' => $currentIntersections,
+      // 'length' => $length,
+      'prevURL' => route('position'),
+      'nextURL' => route('intersectionDebrief'),
+    ));
+  }
 
 
-// only for AJAX endpoint
-public function saveCircleData(Request $request){
-  Log::info("Saving circle data...");
-  Log::info($request);
+  // only for AJAX endpoint
+  public function saveCircleData(Request $request){
+    Log::info("Saving circle data...");
+    Log::info($request);
 
-  $circle = new \App\Circle;
-  $circle->label = $request->input('label');
-  $circle->number = $request->input('number');
-  // $circle->dbid = $request->input('dbid');
-  $circle->center_x = $request->input('position_x');
-  $circle->center_y = $request->input('position_y');
-  $circle->radius = $request->input('radius');
-  $circle->color = $request->input('color','');
-  //needs a sort of test (not NULL) OR
-  //can also be nullable()?
-  // & make sure everything is OK with it
-  $circle->line_style = $request->input('line_style','');
-  $circle->participant_id = $request->session()->get('participant_id','');
+    $circle = new \App\Circle;
+    $circle->label = $request->input('label');
+    $circle->number = $request->input('number');
+    // $circle->dbid = $request->input('dbid');
+    $circle->center_x = $request->input('position_x');
+    $circle->center_y = $request->input('position_y');
+    $circle->radius = $request->input('radius');
+    $circle->color = $request->input('color','');
+    //needs a sort of test (not NULL) OR
+    //can also be nullable()?
+    // & make sure everything is OK with it
+    $circle->line_style = $request->input('line_style','');
+    $circle->participant_id = $request->session()->get('participant_id','');
 
-  Log::info($circle);
+    Log::info($circle);
 
-  $circle->save();
-}
+    $circle->save();
+  }
 
-public function saveIntersectData(Request $request){
-  $participant = \App\Participant::find(session()->get('participant_id'));
+  public function saveIntersectData(Request $request){
+    $participant = \App\Participant::find(session()->get('participant_id'));
 
-  //split the id ex "12"
+    //split the id ex "12"
 
-  $circles = $participant->getCircles();
+    $circles = $participant->getCircles();
 
-  $intersections = $request->input('intersections');
-  //Log::info($arr);
+    $intersections = $request->input('intersections');
+    //Log::info($arr);
 
-  //intersections passed from layering.js (saveIntersect())
+    //intersections passed from layering.js (saveIntersect())
 
-  //     //local.INFO: array (
-  // myapp_1    |   'intersections' => 
-  // myapp_1    |   array (
-  // myapp_1    |     0 => 
-  // myapp_1    |     array (
-  // myapp_1    |       'id' => '12',
-  // myapp_1    |       'area' => '5316.506290736899',
-  // myapp_1    |     ),
-  // myapp_1    |   ),
-  // myapp_1    | ) 
-
-  // NB: the type-cast prevents an invalid argument exception when $arr is empty
-  foreach ((Array) $intersections as $intData) {
-
-    //$intersection = new \App\Intersection;
-
-    // Log::info($obj);
-
-    // local.INFO: array (
-    // myapp_1    |   0 => 
+    //     //local.INFO: array (
+    // myapp_1    |   'intersections' => 
     // myapp_1    |   array (
-    // myapp_1    |     'intersectId' => '12',
-    // myapp_1    |     'area' => '12530.66999727977',
+    // myapp_1    |     0 => 
+    // myapp_1    |     array (
+    // myapp_1    |       'id' => '12',
+    // myapp_1    |       'area' => '5316.506290736899',
+    // myapp_1    |     ),
     // myapp_1    |   ),
-    // myapp_1    | )  
+    // myapp_1    | ) 
 
-    //$participant->getCircles with index (number) ("") match circle number with circle id ['intersectId'][0] 
+    // NB: the type-cast prevents an invalid argument exception when $arr is empty
+    foreach ((Array) $intersections as $intData) {
 
-    $circle_ids = Array($circles[intval($intData['id'][0])]['id'], $circles[intval($intData['id'][1])]['id']);
-    if( strlen($intData['id']) >= 3 ){
-      array_push($circle_ids, $circles[intval($intData['id'][2])]['id']);
-    }
-    if( strlen($intData['id']) >= 4 ){
-      array_push($circle_ids, $circles[intval($intData['id'][3])]['id']);
-    }
-    if( strlen($intData['id']) >= 5 ){
-      array_push($circle_ids, $circles[intval($intData['id'][4])]['id']);
-    }
+      //$intersection = new \App\Intersection;
 
-    $intersection = \App\Intersection::getByCircleIds($circle_ids);
-    
-    if(empty($intersection)){
-      $intersection = new \App\Intersection;
-      foreach($circle_ids as $i => $id){
-        $intersection['circle'.($i+1).'_id'] = $id;
+      // Log::info($obj);
+
+      // local.INFO: array (
+      // myapp_1    |   0 => 
+      // myapp_1    |   array (
+      // myapp_1    |     'intersectId' => '12',
+      // myapp_1    |     'area' => '12530.66999727977',
+      // myapp_1    |   ),
+      // myapp_1    | )  
+
+      //$participant->getCircles with index (number) ("") match circle number with circle id ['intersectId'][0] 
+
+      $circle_ids = Array($circles[intval($intData['id'][0])]['id'], $circles[intval($intData['id'][1])]['id']);
+      if( strlen($intData['id']) >= 3 ){
+        array_push($circle_ids, $circles[intval($intData['id'][2])]['id']);
+      }
+      if( strlen($intData['id']) >= 4 ){
+        array_push($circle_ids, $circles[intval($intData['id'][3])]['id']);
+      }
+      if( strlen($intData['id']) >= 5 ){
+        array_push($circle_ids, $circles[intval($intData['id'][4])]['id']);
+      }
+
+      $intersection = \App\Intersection::getByCircleIds($circle_ids);
+
+      if(empty($intersection)){
+        $intersection = new \App\Intersection;
+        foreach($circle_ids as $i => $id){
+          $intersection['circle'.($i+1).'_id'] = $id;
+        }
+      }
+
+      $intersection->color = $intData['color'];
+      $intersection->area = $intData['area'];
+      $intersection->save();
+
+      // local.INFO: array (
+      // myapp_1    |   'id' => '12',
+      // myapp_1    |   'area' => '12530.66999727977',
+      // myapp_1    | )  
+    }
+  }
+
+  //request sent is the Abort button push?
+  public function abort(Request $request){
+
+    $participant = \App\Participant::find(session()->get('participant_id'));
+
+    $participant->deleteAll();
+
+    $participant->delete();
+
+    return view('end', array(
+      'progress' => '100',
+      'nextURL' => '',
+      'prevURL' => '',
+    ));
+  }
+
+  //intersection survey
+  public function intersectionDebrief(){
+
+    $participant = \App\Participant::find(session()->get('participant_id'));
+
+    $circles = $participant->getCircles();
+
+    foreach ($circles as $circle){
+
+      $intersections = $participant->getIntersections();
+
+      Log::info($intersections);
+
+      foreach($intersections as $intersect){
+        $intersect['viewLabel'] = join(
+          array_filter([
+            $intersect->circle1->label,
+            $intersect->circle2->label,
+            $intersect->circle3 ? $intersect->circle3->label : "",
+            $intersect->circle4 ? $intersect->circle4->label : "",
+            $intersect->circle5 ? $intersect->circle5->label : "",
+          ]), // NB: with default callback, removes FALSE-y values
+          '-');
       }
     }
 
-    $intersection->color = $intData['color'];
-    $intersection->area = $intData['area'];
+    return view('/intersectionDebrief', array(
+      'progress' => '40',
+      'intersections' => $intersections,
+      'meaning' => $participant->intersection_meaning,
+      'prevURL' => route('color'),
+      'nextURL' => route('identityDebrief'),
+    ));
+  }
+
+  public function saveMeaning(Request $request){
+    $participant = \App\Participant::find(session()->get('participant_id'));
+
+    $participant->intersection_meaning = $request->input('meaningText');
+
+    $participant->save();
+  }
+
+  public function saveSurveyQuestion(Request $request){
+    $question = \App\SurveyQuestion::find($request->question_id);
+
+  }
+
+  public function saveExplanation(Request $request){
+    $participant = \App\Participant::find(session()->get('participant_id'));
+    $intersection = \App\Intersection::find($request->input('id'));
+    $intersection->explanation = $request->input('explanation');
     $intersection->save();
-
-    // local.INFO: array (
-    // myapp_1    |   'id' => '12',
-    // myapp_1    |   'area' => '12530.66999727977',
-    // myapp_1    | )  
-  }
-}
-
-//request sent is the Abort button push?
-public function abort(Request $request){
-
-  $participant = \App\Participant::find(session()->get('participant_id'));
-
-  $participant->deleteAll();
-
-  $participant->delete();
-
-  return view('end', array(
-    'progress' => '100',
-    'nextURL' => '',
-    'prevURL' => '',
-  ));
-}
-
-//intersection survey
-public function intersectionDebrief(){
-
-  $participant = \App\Participant::find(session()->get('participant_id'));
-
-  $circles = $participant->getCircles();
-
-  foreach ($circles as $circle){
-
-    $intersections = $participant->getIntersections();
-
-    Log::info($intersections);
-
-    foreach($intersections as $intersect){
-      $intersect['viewLabel'] = join(
-        array_filter([
-          $intersect->circle1->label,
-          $intersect->circle2->label,
-          $intersect->circle3 ? $intersect->circle3->label : "",
-          $intersect->circle4 ? $intersect->circle4->label : "",
-          $intersect->circle5 ? $intersect->circle5->label : "",
-        ]), // NB: with default callback, removes FALSE-y values
-        '-');
-    }
   }
 
-  return view('/intersectionDebrief', array(
-    'progress' => '40',
-    'intersections' => $intersections,
-    'meaning' => $participant->intersection_meaning,
-    'prevURL' => route('color'),
-    'nextURL' => route('identityDebrief'),
-  ));
-}
+  public function identityDebrief(){
 
-public function saveMeaning(Request $request){
-  $participant = \App\Participant::find(session()->get('participant_id'));
+    $participant = \App\Participant::find(session()->get('participant_id'));
+    $circles = $participant->getCircles();
+    $surveyquestions = \App\SurveyQuestion::where('surveyable_type', 'circle')->get();
 
-  $participant->intersection_meaning = $request->input('meaningText');
+    return view('identityDebrief', array(
+      'progress' => '60',
+      'circles' => array_filter($circles),
+      'surveyquestions' => $surveyquestions,
+      'prevURL' => route('intersectionDebrief'),
+      'nextURL' => route('category'),
+    ));
+  }
 
-  $participant->save();
-}
-
-public function saveExplanation(Request $request){
-  $participant = \App\Participant::find(session()->get('participant_id'));
-  $intersection = \App\Intersection::find($request->input('id'));
-  $intersection->explanation = $request->input('explanation');
-  $intersection->save();
-}
-
-public function identityDebrief(){
-
-  $participant = \App\Participant::find(session()->get('participant_id'));
-  $circles = $participant->getCircles();
-  $surveyquestions = \App\SurveyQuestion::where('surveyable_type', 'circle')->get();
-
-  return view('identityDebrief', array(
-    'progress' => '60',
-    'circles' => array_filter($circles),
-    'surveyquestions' => $surveyquestions,
-    'prevURL' => route('intersectionDebrief'),
-    'nextURL' => route('category'),
-  ));
-}
-
-public function category(){
-  return view('grouping', array(
-    'progress' => '70',
-    'prevURL' => route('survey'),
-    'nextURL' => route('demographic'),
-  ));
-}
+  public function category(){
+    return view('grouping', array(
+      'progress' => '70',
+      'prevURL' => route('survey'),
+      'nextURL' => route('demographic'),
+    ));
+  }
 
   public function demographic(){
-  return view('demographic', array(
-    'progress' => '80',
-    'prevURL' => route('survey'),
-    'nextURL' => route('end'),
-  ));
-}
+    return view('demographic', array(
+      'progress' => '80',
+      'prevURL' => route('survey'),
+      'nextURL' => route('end'),
+    ));
+  }
 
   public function end(){
-  return view('end', array(
-    'progress' => '100',
-    'nextURL' => '',
-    'prevURL' => '',
-  ));
-}
+    return view('end', array(
+      'progress' => '100',
+      'nextURL' => '',
+      'prevURL' => '',
+    ));
+  }
 }
 ?>

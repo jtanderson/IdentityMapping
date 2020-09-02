@@ -54,7 +54,7 @@
 
   @section('javascript')
   <script type="text/javascript" src="{{ asset('js/paper.js') }}"></script>
-  <script type="text/paperscript" src="{{ asset('js/layering.js') }}" canvas="c"></script>
+  <script type="text/paperscript" src="{{ asset('js/position.js') }}" canvas="c"></script>
 
   <script type="text/javascript">
     var reset = function(){
