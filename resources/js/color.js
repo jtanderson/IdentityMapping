@@ -267,15 +267,11 @@ paper.tool.onMouseDown = function(event){
 
   //get the solid button
   var solidBtn = document.getElementById("inlineRadioIntersect1");
-  solidBtn.checked = false;
-
   //get the dashed button
   var dashedBtn = document.getElementById("inlineRadioIntersect12");
-  dashedBtn.checked = false;
 
-  if(debug_mode){
-    console.log("Radios Cleared");
-  }
+  dashedBtn.checked = false;
+  solidBtn.checked = false;
 
   //hit testing
 
@@ -302,6 +298,9 @@ paper.tool.onMouseDown = function(event){
 
     //sets sliderIntersect value (slider's position) to that "color" on its range
     colorSlider.value = (1-test_r/255)*100;
+
+    dashedBtn.checked = activeItem.dashArray.length > 0 ? true : false;
+    solidBtn.checked = !dashedBtn.checked;
 
     //saveIntersect();
   } else if(hitResult = cLayer.hitTest(event.point)){//if the circle layer is hit
@@ -339,11 +338,17 @@ paper.tool.onMouseDown = function(event){
         tolerance: 30
       }
     );
+
+    dashedBtn.checked = activeItem.dashArray.length > 0 ? true : false;
+    solidBtn.checked = !dashedBtn.checked;
   } else { //when nothing is hit
 
     if(debug_mode){
       console.log("Nothing hit");
     }
+
+    dashedBtn.checked = false;
+    solidBtn.checked = false;
 
     //turn activeItem from true -> false
     if( activeItem ){
@@ -414,6 +419,9 @@ dashedBtn.addEventListener("change",function(){ changeBorder([10,4]);},false);
 //solid button 
 var solidBtn = document.getElementById("inlineRadioIntersect1");
 solidBtn.addEventListener("change",function(){ changeBorder([]); }, false);
+
+dashedBtn.checked = false;
+solidBtn.checked = false;
 
 // Saves all intersections that involve circle circleID (using number as id)
 saveIntersect = function(circleID){
