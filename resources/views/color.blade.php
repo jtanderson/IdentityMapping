@@ -80,7 +80,7 @@
         @endforeach
 
         <div class="col-sm-8">
-          <canvas id="c" resize></canvas>
+          <canvas style="background-color: white;" id="c" resize></canvas>
         </div>
       </div>
     </div>
