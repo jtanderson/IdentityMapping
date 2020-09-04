@@ -27,6 +27,7 @@ Route::post('/deleteParticipant', 'SurveyController@deleteParticipant')->name('d
 Route::post('/saveMeaning', 'SurveyController@saveMeaning')->name('saveMeaning');
 Route::post('/saveExplanation', 'SurveyController@saveExplanation')->name('saveExplanation');
 Route::post('/saveSurveyQuestion', 'SurveyController@saveSurveyQuestion')->name('saveSurveyQuestion');
+Route::post('/saveSurveyAnswer', 'SurveyController@saveSurveyAnswer')->name('saveSurveyAnswer');
 Route::post('/saveCategory', 'SurveyController@saveCategory')->name('saveCategory');
 Route::post('/saveDemographics', 'SurveyController@saveDemographics')->name('saveDemographics');
 

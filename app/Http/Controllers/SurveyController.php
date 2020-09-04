@@ -211,7 +211,7 @@ class SurveyController extends Controller{
     $participant->save();
   }
 
-  public function saveSurveyQuestion(Request $request){
+  public function saveSurveyAnswer(Request $request){
     $question = \App\SurveyQuestion::find($request->question_id);
     \App\SurveyAnswer::updateOrCreate(
       ['surveyquestion_id' => $question->id,
@@ -290,10 +290,12 @@ class SurveyController extends Controller{
   }
 
   public function end(){
+    $participant = \App\Participant::find(session()->get('participant_id'));
     $questions = \App\SurveyQuestion::where('surveyable_type', 'participant')->get();
 
     return view('end', array(
       'questions' => $questions,
+      'participant' => $participant,
       'progress' => '100',
       'nextURL' => '',
       'prevURL' => '',
