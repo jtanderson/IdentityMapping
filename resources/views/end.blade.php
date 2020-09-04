@@ -15,31 +15,37 @@
 @foreach ( $questions as $question )
 <div class="row">
   <div class="col-sm">
-    <form>
-      <div class="form-group">
-        <label>{{ $question->text }}</label>
-        <div class="">
-          {{ $question->extreme_left }}
-          @for ($i = 1; $i <= intval($question->degrees); $i++)
-            <div class="form-check form-check-inline">
-              @if ( $i == $question->answer )
-                <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}" checked>
-              @else
-                <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}">
-              @endif
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label>{{ $question->text }}</label>
+            <div class="">
+              {{ $question->extreme_left }}
+              @for ($i = 1; $i <= intval($question->degrees); $i++)
+                <div class="form-check form-check-inline">
+                  @if ( $i == $question->answer )
+                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}" checked>
+                  @else
+                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}">
+                  @endif
+                </div>
+              @endfor
+              {{ $question->extreme_right }}
             </div>
-          @endfor
-          {{ $question->extreme_right }}
-        </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 @endforeach
-
+<br>
 <div class="row">
   <div class="col-sm">
-      <h1><p align="center">Thank You!</p></h1>
+    <div class="text-center">
+      <a class="btn btn-success" name= "button-1" value = "button-1" href="/thanks">Finish</a>
+    </div>
   </div>
 </div>
 

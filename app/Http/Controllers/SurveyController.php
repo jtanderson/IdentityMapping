@@ -301,5 +301,15 @@ class SurveyController extends Controller{
       'prevURL' => '',
     ));
   }
+
+  public function thanks(Request $request){
+    $request->session()->regenerate();
+
+    return view('thanks', array(
+      'progress' => '100',
+      'nextURL' => '',
+      'prevURL' => '',
+    ));
+  }
 }
 ?>
