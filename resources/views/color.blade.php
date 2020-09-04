@@ -32,10 +32,10 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          
           <h5>Active Item Color:<br></h5>
-          <div class="bg" style="width: 70%;">
-            <input type="range" id="rangeIntersect" min="0"  max="100" value = "0"/>&emsp;
+          <div class="bg" style="">
+            <img style="width: 100%;" src="{{ asset('img/colorSlider.png') }}"/>
+            <input style="width: 100%" type="range" id="rangeIntersect" min="0"  max="100" value = "0"/>&emsp;
           </div>
           <br><br>
           <h5>Circle Outline:</h5>
