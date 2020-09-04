@@ -28,6 +28,7 @@ Route::post('/saveMeaning', 'SurveyController@saveMeaning')->name('saveMeaning')
 Route::post('/saveExplanation', 'SurveyController@saveExplanation')->name('saveExplanation');
 Route::post('/saveSurveyQuestion', 'SurveyController@saveSurveyQuestion')->name('saveSurveyQuestion');
 Route::post('/saveCategory', 'SurveyController@saveCategory')->name('saveCategory');
+Route::post('/saveDemographics', 'SurveyController@saveDemographics')->name('saveDemographics');
 
 Auth::routes(['register' => false]);
 

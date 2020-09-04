@@ -16,4 +16,6 @@ mix.js('resources/js/app.js', 'public/js')
   .js('resources/js/color.js', 'public/js')
   .js('resources/js/identityDebrief.js', 'public/js')
   .js('resources/js/intersectionDebrief.js', 'public/js')
+  .js('resources/js/category.js', 'public/js')
+  .js('resources/js/demographics.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css');

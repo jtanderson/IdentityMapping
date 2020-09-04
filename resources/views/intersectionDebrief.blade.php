@@ -15,7 +15,7 @@
 
     @foreach ($intersections as $intersection)
     <div class='form-group'>
-      <label for='intersection-{{ $intersection->id }}'>Please describe the overall nature of the {{ $intersection->viewLabel }} in terms of emotions behaviors, and time invested.</label>
+      <label for='intersection-{{ $intersection->id }}'>Please describe the overall nature of the <strong>{{ $intersection->viewLabel }}</strong> intersection in terms of emotions behaviors, and time invested.</label>
       <textarea class='form-control' name="intersection-explanation" id='intersection-{{ $intersection->id }}' rows='3'>{{ $intersection->explanation }}</textarea>
     </div>
     @endforeach

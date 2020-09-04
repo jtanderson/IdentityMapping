@@ -58,6 +58,21 @@ class SurveyQuestionSeeder extends Seeder
           'degrees' => '5',
           'surveyable_type' => 'circle',
         ],
+        // participant survey questions
+        [
+          'text' => "How easy was this survey to complete?",
+          "extreme_left" => "Very easy",
+          "extreme_right" => "Very difficult",
+          "degrees" => "5",
+          "surveyable_type" => "participant"
+        ],
+        [
+          'text' => "Did you complete the survey in a timely manner?",
+          "extreme_left" => "Able to complete quickly",
+          "extreme_right" => "Took a long time to complete",
+          "degrees" => "5",
+          "surveyable_type" => "participant"
+        ]
       ]);
   }
 }

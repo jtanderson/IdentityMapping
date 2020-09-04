@@ -13,7 +13,8 @@
   @foreach ( $circles as $circle )
   <div class="col-sm-2">
     {{ $circle->label }}:
-    <select class="form-control">
+    <select name="circle-{{ $circle->id }}-category" class="category-select form-control">
+      <option value=""></option>
       @foreach ( $categories as $category )
         @if ( $circle->category_id == $category->id )
           <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
@@ -29,5 +30,5 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="categories.js"></script>
+<script type="text/javascript" src="{{ asset('js/category.js') }}"></script>
 @endsection

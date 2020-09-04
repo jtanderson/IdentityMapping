@@ -269,7 +269,7 @@ class SurveyController extends Controller{
     ));
   }
 
-  public function saveCategeory(Request $request){
+  public function saveCategory(Request $request){
     $circle = \App\Circle::find($request->circle_id);
     $circle->category_id = $request->category_id;
     $circle->save();
@@ -278,13 +278,22 @@ class SurveyController extends Controller{
   public function demographic(){
     return view('demographic', array(
       'progress' => '80',
-      'prevURL' => route('categroy'),
+      'prevURL' => route('category'),
       'nextURL' => route('end'),
     ));
   }
 
+  public function saveDemographics(Request $request){
+    $participant = \App\Participant::find(session()->get('participant_id'));
+    $participant->fill([$request->key => $request->value]);
+    $participant->save();
+  }
+
   public function end(){
+    $questions = \App\SurveyQuestion::where('surveyable_type', 'participant')->get();
+
     return view('end', array(
+      'questions' => $questions,
       'progress' => '100',
       'nextURL' => '',
       'prevURL' => '',
