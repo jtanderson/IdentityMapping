@@ -32,10 +32,10 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          
           <h5>Active Item Color:<br></h5>
-          <div class="bg" style="width: 70%;">
-            <input type="range" id="rangeIntersect" min="0"  max="100" value = "0"/>&emsp;
+          <div class="bg" style="">
+            <img style="width: 100%;" src="{{ asset('img/colorSlider.png') }}"/>
+            <input style="width: 100%" type="range" id="rangeIntersect" min="0"  max="100" value = "0"/>&emsp;
           </div>
           <br><br>
           <h5>Circle Outline:</h5>
@@ -75,11 +75,12 @@
           <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-c5" value="{{ $int ? $int->circle5_id : "" }}"/>
           <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-color" value="{{ $int ? $int->color : "" }}"/>
           <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-area" value="{{ $int ? $int->area : "" }}"/>
+          <input type="hidden" name="int-{{ $int->id }}" id="int-{{ $int->id }}-line_style" value="{{ $int ? $int->line_style : "" }}"/>
         </div>
         @endforeach
 
         <div class="col-sm-8">
-          <canvas id="c" resize></canvas>
+          <canvas style="background-color: white;" id="c" resize></canvas>
         </div>
       </div>
     </div>
@@ -88,7 +89,7 @@
 
   @section('javascript')
     <script type="text/javascript" src="{{ asset('js/paper.js') }}"></script>
-    <script type="text/paperscript" src="{{ asset('js/extended.js') }}" canvas="c"></script>
+    <script type="text/paperscript" src="{{ asset('js/color.js') }}" canvas="c"></script>
   <script>
     var reset = function(){
       var cLayer = paper.project.getItem({data: {layerName: "circles"}});

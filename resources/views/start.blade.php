@@ -23,26 +23,21 @@
 <div class="row">
   <div class="col col-sm-4">
       <figure class="figure" style=" height:90%;">
-        <img src="/app/resources/img/inline.png" style="height:80%; width:100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-        <figcaption class="figure-caption">This example demonstrates the aligning of your identities in a straight line which could describe your identities of equal importance.</figcaption>
+        <img src="{{ asset('img/bullseye.png') }}" style="height:80%; width:100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+        <figcaption class="figure-caption">This is an example identity configuration</figcaption>
       </figure>
   </div>
   <div class="col col-sm-4">
       <figure class="figure" style=" height: 90%; width: 100%;">
-        <img src="/app/resources/img/random.png" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-        <figcaption class="figure-caption">This example shows a random mapping that could depict your interpretation of your identities in a unique way from something else.</figcaption>
+        <img src="{{ asset('img/inline.png') }}" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+        <figcaption class="figure-caption">This is an example identity configuration</figcaption>
       </figure>
   </div>
   <div class="col col-sm-4">
     <figure class="figure" style="height: 90%;">
-      <img src="/app/resources/img/bullsye.png" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-      <figcaption class="figure-caption">This example is a popular mapping opf yoiur identities in a bullseye putting the most important identity at the center and smallest meaning most important.</figcaption>
+      <img src="{{ asset('img/random.png') }}" style="height: 80%; width: 100%;" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+      <figcaption class="figure-caption">This is an example identity configuration</figcaption>
     </figure>
   </div>
 </div> <!-- End row 2 -->
-<div class="row">
-  <div class="col col-sm-4">
-    <a href="terms.html">Terms and Conditions</a>
-  </div>
-</div>
 @endsection

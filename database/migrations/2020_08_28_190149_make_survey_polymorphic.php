@@ -14,7 +14,9 @@ class MakeSurveyPolymorphic extends Migration
     public function up()
     {
       Schema::table('surveyanswers', function(Blueprint $table){
-        $table->renameColumn('participant_id','surveyable_id');
+        $table->dropForeign(['participant_id']);
+        $table->dropColumn('participant_id');
+        $table->unsignedBigInteger('surveyable_id');
         $table->string('surveyable_type');
       });
     }
@@ -27,8 +29,10 @@ class MakeSurveyPolymorphic extends Migration
     public function down()
     {
       Schema::table('surveyanswers', function(Blueprint $table){
-        $table->renameColumn('surveyable_id', 'participant_id');
+        $table->dropColumn('surveyable_id');
         $table->dropColumn('surveyable_type');
+        $table->unsignedBigInteger('participant_id');
+        $table->foreign('participant_id')->references('id')->on('participant');
       });
     }
 }

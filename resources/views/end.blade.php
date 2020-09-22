@@ -6,78 +6,52 @@
 
 @section('content')
 
-<div class="text text-left">
-    <h4>Finally, we would like some feedback on the survey itself. Please answer these questions so we may be able to improve upon this survey in the future.</h4>
-    <br><br>
-</div>
-
 <div class="row">
-    <h5>Was this survey easy to use?</h5>
-    <br>
-      <form>&emsp;Easy to use &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="4">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="5">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="6">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="7">&emsp;
-            </label>
-            Difficult to use
-     </form>
-
-	<h5>Did you complete this survey in a timely matter?</h5>
-	<br>
-      <form>&emsp;Able to complete quickly &emsp;
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="1">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="2">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="3">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio"  value="4">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="5">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="6">&emsp;
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" value="7">&emsp;
-            </label>
-            Took a while to complete
-     </form>
-	
-	</div>
+  <div class="col-sm">
+    <h4>Finally, we would like some feedback on the survey itself. Please answer these questions so we may be able to improve upon this survey in the future.</h4>
+  </div>
 </div>
 
-<br><br>
-
-<div class="col-sm">
-    <h1><p align="center">Thank You!</p></h1>    
+@foreach ( $questions as $question )
+<div class="row">
+  <div class="col-sm">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label>{{ $question->text }}</label>
+            <div class="">
+              {{ $question->extreme_left }}
+              @for ($i = 1; $i <= intval($question->degrees); $i++)
+                <div class="form-check form-check-inline">
+                  @if ( $i == $question->answer )
+                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}" checked>
+                  @else
+                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}">
+                  @endif
+                </div>
+              @endfor
+              {{ $question->extreme_right }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
+<br>
+<div class="row">
+  <div class="col-sm">
+    <div class="text-center">
+      <a class="btn btn-success" name= "button-1" value = "button-1" href="/thanks">Finish</a>
+    </div>
+  </div>
 </div>
 
 @endsection
 
 
 @section('javascript')
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ asset('js/end.js') }}"></script>
 @endsection

@@ -21,12 +21,27 @@ Route::get('/intersectionDebrief', 'SurveyController@intersectionDebrief')->name
 Route::get('/demographic', 'SurveyController@demographic')->name('demographic');
 Route::get('/category', 'SurveyController@category')->name('category');
 Route::get('/end', 'SurveyController@end')->name('end');
+Route::get('/thanks', 'SurveyController@thanks')->name('thanks');
 Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCircleData');
 Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('saveIntersectData');
 Route::post('/deleteParticipant', 'SurveyController@deleteParticipant')->name('deleteParticipant');
 Route::post('/saveMeaning', 'SurveyController@saveMeaning')->name('saveMeaning');
 Route::post('/saveExplanation', 'SurveyController@saveExplanation')->name('saveExplanation');
+Route::post('/saveSurveyQuestion', 'SurveyController@saveSurveyQuestion')->name('saveSurveyQuestion');
+Route::post('/saveSurveyAnswer', 'SurveyController@saveSurveyAnswer')->name('saveSurveyAnswer');
+Route::post('/saveCategory', 'SurveyController@saveCategory')->name('saveCategory');
+Route::post('/saveDemographics', 'SurveyController@saveDemographics')->name('saveDemographics');
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
+Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
+  ->name('surveyquestions.all')
+  ->middleware('auth');
+Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
+  ->name('updateSurveyQuestion')
+  ->middleware('auth');
+Route::delete('/admin/removeSurveyQuestion/{id}', 'AdminController@removeSurveyQuestion')
+  ->name('removeSurveyQuestion')
+  ->middleware('auth');
+

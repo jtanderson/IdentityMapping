@@ -21,11 +21,14 @@ class SessionCheck
       $request->session()->put('participant_id', $participant->id);
     } else {
       //field name on left, value on right
-      $participant_id = DB::table('participant')->insertGetId([
+      $participant = new \App\Participant;
+      $participant->session_token = $sessId;
+      $participant->save();
+      /*$participant_id = DB::table('participant')->insertGetId([
         'session_token' => $sessId,
         'intersection_meaning' => '',
-      ]);
-      $request->session()->put('participant_id', $participant_id);
+      ]);*/
+      $request->session()->put('participant_id', $participant->id);
       return redirect('/start');
     }
 

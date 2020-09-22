@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
 
-    public const HOME = '/home';
+    public const HOME = '/start';
     
     /**
      * This namespace is applied to your controller routes.

@@ -43,10 +43,8 @@
       </div>
       <div class="col-sm-4">
         <div class="text text-center">
-          @if ($nextURL !== '/position')
-          <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Abort</a>
-          @else
-          <h4></h4>
+          @if ($progress > 0 && $progress < 100)
+            <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Abort</a>
           @endif
         </div>
       </div>
@@ -54,8 +52,6 @@
         <div class="text text-right">
           @if ($nextURL !== '')
           <h4><a href="{{ $nextURL }}">Next &rarr;</a>&emsp;&emsp;</h4>
-          @else
-          <h4> Finished </h4>
           @endif
         </div> 
       </div>
