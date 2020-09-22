@@ -163,7 +163,7 @@ class SurveyController extends Controller{
 
     return view('start', array(
       'progress' => '0',
-      'nextURL' => '',
+      'nextURL' => route('position'),
       'prevURL' => '',
     ));
   }
