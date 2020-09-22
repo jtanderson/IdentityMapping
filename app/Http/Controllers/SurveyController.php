@@ -183,14 +183,14 @@ class SurveyController extends Controller{
 
       foreach($intersections as $intersect){
         $intersect['viewLabel'] = join(
-          array_filter([
+          '-',
+          array_filter([ // NB: with default callback, removes FALSE-y values
             $intersect->circle1->label,
             $intersect->circle2->label,
             $intersect->circle3 ? $intersect->circle3->label : "",
             $intersect->circle4 ? $intersect->circle4->label : "",
             $intersect->circle5 ? $intersect->circle5->label : "",
-          ]), // NB: with default callback, removes FALSE-y values
-          '-');
+          ]));
       }
     }
 
