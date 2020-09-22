@@ -12,7 +12,7 @@ class SurveyQuestion extends Model
   //
   protected $table = 'surveyquestion';
 
-  protected $fillable = ['text', 'extreme_left', 'extreme_right', 'degrees'];
+  protected $fillable = ['text', 'extreme_left', 'extreme_right', 'degrees', 'surveyable_type'];
 
   protected $attributes = [ 
     'extreme_left' => 'Strongly Disagree',

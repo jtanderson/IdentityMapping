@@ -38,3 +38,10 @@ Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth')
 Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
   ->name('surveyquestions.all')
   ->middleware('auth');
+Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
+  ->name('updateSurveyQuestion')
+  ->middleware('auth');
+Route::delete('/admin/removeSurveyQuestion/{id}', 'AdminController@removeSurveyQuestion')
+  ->name('removeSurveyQuestion')
+  ->middleware('auth');
+

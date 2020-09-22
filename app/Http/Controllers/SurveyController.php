@@ -233,7 +233,7 @@ class SurveyController extends Controller{
     $participant = \App\Participant::find(session()->get('participant_id'));
     $circles = array_filter($participant->getCircles());
     $circleIds = array_map(function($obj){ return $obj->id; }, $circles);
-    $surveyquestions = \App\SurveyQuestion::where('surveyable_type', 'circle')->get();
+    $surveyquestions = \App\SurveyQuestion::where('active', true)->where('surveyable_type', 'circle')->get();
     $surveyanswers = \App\SurveyAnswer::where('surveyable_type', 'circle')
       ->whereIn('surveyable_id', $circleIds)
       ->get();
@@ -291,7 +291,7 @@ class SurveyController extends Controller{
 
   public function end(){
     $participant = \App\Participant::find(session()->get('participant_id'));
-    $questions = \App\SurveyQuestion::where('surveyable_type', 'participant')->get();
+    $questions = \App\SurveyQuestion::where('active', true)->where('surveyable_type', 'participant')->get();
 
     return view('end', array(
       'questions' => $questions,

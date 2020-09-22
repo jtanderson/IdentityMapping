@@ -26,7 +26,27 @@ class AdminController extends Controller
         return view('admin');
     }
 
+    public function updateSurveyQuestion($id, Request $request){
+      $question = \App\SurveyQuestion::create($request->all());
+
+      if( $question->id ){
+        $oldQ = \App\SurveyQuestion::find($id);
+        $oldQ->active = false;
+        $oldQ->save();
+        return $question;
+      } else {
+        return \App\SurveyQuestion::find($id);
+      }
+
+    }
+
+    public function removeSurveyQuestion($id, Request $request){
+      $question = \App\SurveyQuestion::find($id);
+      $question->active = false;
+      $question->save();
+    }
+
     public function surveyQuestions(){
-      return \App\SurveyQuestion::all();
+      return \App\SurveyQuestion::where('active', true)->get();
     }
 }
