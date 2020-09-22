@@ -17,7 +17,8 @@ class SurveyQuestion extends Model
   protected $attributes = [ 
     'extreme_left' => 'Strongly Disagree',
     'extreme_right' => 'Strongly Agree',
-    'degrees' => 5
+    'degrees' => 5,
+    'active' => true
   ];
 
   public function surveyAnswers(){

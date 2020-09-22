@@ -303,6 +303,10 @@ class SurveyController extends Controller{
   }
 
   public function thanks(Request $request){
+    $participant = \App\Participant::find(session()->get('participant_id'));
+    $participant->finished = true;
+    $participant->save();
+
     $request->session()->regenerate();
 
     return view('thanks', array(

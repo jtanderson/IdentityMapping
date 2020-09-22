@@ -15,6 +15,7 @@ class Participant extends Model
 
   protected $attributes = [
     'intersection_meaning' => "",
+    'finished' => false
   ];
 
   protected $fillable = [
