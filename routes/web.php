@@ -34,4 +34,7 @@ Route::post('/saveDemographics', 'SurveyController@saveDemographics')->name('sav
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
+Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
+  ->name('surveyquestions.all')
+  ->middleware('auth');
