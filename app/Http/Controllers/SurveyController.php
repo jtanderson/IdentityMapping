@@ -161,8 +161,8 @@ class SurveyController extends Controller{
 
     $participant->delete();
 
-    return view('end', array(
-      'progress' => '100',
+    return view('start', array(
+      'progress' => '0',
       'nextURL' => '',
       'prevURL' => '',
     ));
