@@ -11,6 +11,7 @@
     - Low priority for now
     - As a shim, add text to the user in the instructions to mention this awkward case
   - **ADMIN INTERFACE**
+    - Changing degrees of surveyquestion doesn't update
     - Allow creation of new survey questions
     - Allow add/edit/remove categories
     - Add some pre-defined reports and data export
