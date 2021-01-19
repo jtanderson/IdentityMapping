@@ -29,17 +29,27 @@ class AdminController extends Controller
     }
 
     public function updateSurveyQuestion($id, Request $request){
+
+      // The ID will be 0 if this is updating a new question
+
       $question = \App\SurveyQuestion::create($request->all());
 
       Log::info($question); // Prints out the question object as an eloquent object
 
       if( $question->id ){
         $oldQ = \App\SurveyQuestion::find($id);
-        $oldQ->active = false;
-        $oldQ->save();
+
+        if ($oldQ) {
+          $oldQ->active = false;
+          $oldQ->save();
+        }
+        
         return $question;
+      
       } else {
+        
         return \App\SurveyQuestion::find($id);
+      
       }
 
     }
@@ -52,7 +62,29 @@ class AdminController extends Controller
      * 
      */
 
-    // public function newSurveyQuestion($id, Request $request) {
+    public function newSurveyQuestion(Request $request) {
+
+      $question = \App\surveyQuestion::create($request->all()); // Create a new eloquent object survey question
+      Log::info($request);
+      Log::info($question);
+      $question->active = true; // set it to active
+      $question->save(); // save it to the db
+      return $question; // return the question to the Vue component
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+     // public function newSurveyQuestion($id, Request $request) {
 
     //   $question = \App\surveyQuestion::create($request->all());
 
@@ -65,20 +97,6 @@ class AdminController extends Controller
     //   return $question;
 
     // }
-
-    public function newSurveyQuestion(Request $request) {
-
-      $question = \App\surveyQuestion::create($request->all());
-
-      //$oldQ = \App\SurveyQuestion::find($id);
-    
-      $question->active = true;
-      // Apparently, you can't set the id of the question below, I am assuming this is because the ID does not exist yet, therefore you cannot change it and it is given a default id of the incorrect number
-      // $question->id = $id; // I'm not sure why we need to do this, but if we do not, when get a number that is not the correct id. $id is from the url path which is the correct id
-      $question->save();
-      return $question;
-
-    }
 
 
     public function removeSurveyQuestion($id, Request $request){
