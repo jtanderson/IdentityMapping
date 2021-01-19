@@ -27,6 +27,11 @@ class UserSeeder extends Seeder
           'name' => "Dan Harris",
           'email' => "dwharris@salisbury.edu",
           'password' => bcrypt('dwh'.env('ADMIN_PASSWORD'))
+        ],
+        [
+          'name' => "Jacob Duncan",
+          'email' => "jduncan5@gulls.salisbury.edu",
+          'password' => bcrypt('jwd'.env('ADMIN_PASSWORD'))
         ]
       ]);
     }

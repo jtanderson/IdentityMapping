@@ -41,6 +41,9 @@ Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
 Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
   ->name('updateSurveyQuestion')
   ->middleware('auth');
+Route::post('/admin/newSurveyQuestion', 'AdminController@newSurveyQuestion')
+  ->name('newSurveyQuestion')
+  ->middleware('auth');
 Route::delete('/admin/removeSurveyQuestion/{id}', 'AdminController@removeSurveyQuestion')
   ->name('removeSurveyQuestion')
   ->middleware('auth');
