@@ -40,6 +40,26 @@
   </div>
 </div>
 @endforeach
+
+
+<!-- Added the Comments / Feedback textarea here that was suggested in the readme list -->
+<div class="row">
+  <div class="col-sm">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label>Comments / Feedback</label>
+            <div class="">
+            <textarea style="resize:none;" id="comments" name="comments" rows="4" cols="50" ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <br>
 <div class="row">
   <div class="col-sm">

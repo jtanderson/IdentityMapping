@@ -1,6 +1,8 @@
 # Identity Mapping 
 
 ## Current TODO
+
+  - Odd # of survey questions, card layout issues on /identityDebrief need to be fixed
     
   - From Dr. Harris:
     - Graphics on intro page - people misspelled,  text labels too small in circles

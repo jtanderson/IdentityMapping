@@ -69,27 +69,9 @@
 
 
           newSurveyQuestion() {
-            // idk if this a sufficient way to get the next id, it seems to give some problems when editing the newly added questions and trying to save it 
-            // let nextID = (this.questions[this.questions.length - 1].id) + 1;
-            // console.log("QUESTIONS", this.questions);
-            // console.log("NEXTID", nextID);
-            // axios
-            //   .post('/admin/newSurveyQuestion', {
-            //     text: 'edit me',
-            //     degrees: '0',
-            //     extreme_left: 'edit me',
-            //     extreme_right: 'edit me',
-            //     surveyable_type: 'edit me',
-            //   })
-            //   .then(response => {
-            //     console.log(response.data);
-            //     this.questions.push(response.data); // pushing the response.data "question" to the questions array here in vue
-            //     console.log(this.questions);
-            //     this.questions[this.questions.length - 1].mode = "surveyquestionedit"; // Setting the newly pushed question to have be in question edit mode
-            //   });
 
             // soft add to the frontend
-            var dataToPost = {
+            let dataToPost = {
                 text: 'edit me',
                 degrees: '0',
                 extreme_left: 'edit me',

@@ -19,13 +19,25 @@ class AdminController extends Controller
     }
 
     /**
+    * Queries the database to get the number of questions that are currently active
+    * @return int
+    */
+
+    // public function getNumberOfActiveQuestions() {
+    //   return \App\SurveyQuestion::where('active', 1)->count();
+    // }
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('admin');
+        $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+        return view('admin', array(
+          'activeQuestions' => $activeQuestions,
+        ));
     }
 
     public function updateSurveyQuestion($id, Request $request){
@@ -72,8 +84,6 @@ class AdminController extends Controller
       return $question; // return the question to the Vue component
 
     }
-
-
 
 
 

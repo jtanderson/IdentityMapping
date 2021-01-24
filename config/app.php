@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'CIRCLES | Salisbury University'),
+    // 'name' => env('APP_NAME', 'CIRCLES | Salisbury University'),
+    'name' => env('CIRCLES | Salisbury University'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -229,3 +231,5 @@ return [
     ],
 
 ];
+
+?>
