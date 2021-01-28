@@ -21,7 +21,7 @@ Route::get('/intersectionDebrief', 'SurveyController@intersectionDebrief')->name
 Route::get('/demographic', 'SurveyController@demographic')->name('demographic');
 Route::get('/category', 'SurveyController@category')->name('category');
 Route::get('/end', 'SurveyController@end')->name('end');
-Route::get('/thanks', 'SurveyController@thanks')->name('thanks');
+Route::post('/thanks', 'SurveyController@thanks')->name('thanks');
 Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCircleData');
 Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('saveIntersectData');
 Route::post('/deleteParticipant', 'SurveyController@deleteParticipant')->name('deleteParticipant');

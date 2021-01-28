@@ -305,9 +305,13 @@ class SurveyController extends Controller{
   public function thanks(Request $request){
     $participant = \App\Participant::find(session()->get('participant_id'));
     $participant->finished = true;
+    $participant->feedback = $request->comments;
+    Log::info($participant);
     $participant->save();
 
     $request->session()->regenerate();
+
+    // NOTE: the Likert questions are saved via JS before they click "Finish"
 
     return view('thanks', array(
       'progress' => '100',

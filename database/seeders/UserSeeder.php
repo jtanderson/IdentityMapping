@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -18,20 +19,20 @@ class UserSeeder extends Seeder
         [ 
           'name' => "Joe Anderson",
           'email' => "jtanderson@salisbury.edu",
-          'password' => bcrypt('jta'.env('ADMIN_PASSWORD'))
+          'password' => Hash::make('jta'.env('ADMIN_PASSWORD'))
         ],[ 
           'name' => "Tom Tomcho",
           'email' => "tjtomcho@salisbury.edu",
-          'password' => bcrypt('tjt'.env('ADMIN_PASSWORD'))
+          'password' => Hash::make('tjt'.env('ADMIN_PASSWORD'))
         ],[ 
           'name' => "Dan Harris",
           'email' => "dwharris@salisbury.edu",
-          'password' => bcrypt('dwh'.env('ADMIN_PASSWORD'))
+          'password' => Hash::make('dwh'.env('ADMIN_PASSWORD'))
         ],
         [
           'name' => "Jacob Duncan",
           'email' => "jduncan5@gulls.salisbury.edu",
-          'password' => bcrypt('jwd'.env('ADMIN_PASSWORD'))
+          'password' => Hash::make('jwd'.env('ADMIN_PASSWORD'))
         ]
       ]);
     }
