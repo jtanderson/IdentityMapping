@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <div class="card mb-4"> 
+                <div class="card-header">{{ __('/start page context') }}</div>
+                <div class="card-body">
+                  <div id="editor">hi</div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
@@ -18,4 +24,10 @@
     <br/>
     <surveyquestion-component></surveyquestion-component>
 </div>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor');
+</script>
 @endsection
