@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+  .js('resources/js/admin.js', 'public/js')
   .js('resources/js/position.js', 'public/js')
   .js('resources/js/color.js', 'public/js')
   .js('resources/js/identityDebrief.js', 'public/js')

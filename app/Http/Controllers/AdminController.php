@@ -23,9 +23,6 @@ class AdminController extends Controller
     * @return int
     */
 
-    // public function getNumberOfActiveQuestions() {
-    //   return \App\SurveyQuestion::where('active', 1)->count();
-    // }
 
     /**
      * Show the application dashboard.
@@ -85,34 +82,11 @@ class AdminController extends Controller
 
     }
 
-
-
-
-
-
-
-
-
-
-     // public function newSurveyQuestion($id, Request $request) {
-
-    //   $question = \App\surveyQuestion::create($request->all());
-
-    //   //$oldQ = \App\SurveyQuestion::find($id);
-    
-    //   $question->active = true;
-    //   // Apparently, you can't set the id of the question below, I am assuming this is because the ID does not exist yet, therefore you cannot change it and it is given a default id of the incorrect number
-    //   // $question->id = $id; // I'm not sure why we need to do this, but if we do not, when get a number that is not the correct id. $id is from the url path which is the correct id
-    //   $question->save();
-    //   return $question;
-
-    // }
-
-
-    public function removeSurveyQuestion($id, Request $request){
+    public function removeSurveyQuestion($id){
       $question = \App\SurveyQuestion::find($id);
       $question->active = false;
       $question->save();
+      
     }
 
     public function surveyQuestions(){
