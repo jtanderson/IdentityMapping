@@ -11,6 +11,9 @@
 <div class="row">
   <div class="col col-sm-12">
     <div class="lead">
+          @php
+            echo getTextContent('start-top-1');
+          @endphp
           Psychologists distinguish between our personal identities and our social identities.  Personal identities involve descriptions of our self, <span style="color: red">separate from others.</span>  
           Social identities involve descriptions of our bonds or <span style="color: red">connections</span> with other people or groups. 
            Human beings are social creatures. We all have <span style="color: #ff0000">connections or affiliations</span> with others.<br><br>
