@@ -31,8 +31,10 @@ class AdminController extends Controller
     public function index()
     {
         $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+        $textContent = getTextContent('start-top-1');
         return view('admin', array(
           'activeQuestions' => $activeQuestions,
+          'textContent' => $textContent,
         ));
     }
 

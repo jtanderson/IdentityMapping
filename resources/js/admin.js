@@ -1,24 +1,20 @@
-import * as Quill from 'quill';
-window.Quill = require('quill');
-//import Toolbar from 'quill/modules/toolbar';
-//import Snow from 'quill/themes/snow';
-//import Bold from 'quill/formats/bold';
-//import Italic from 'quill/formats/italic';
-//import Header from 'quill/formats/header';
+window.Quill = require("quill");
 
+let div = document.getElementsByClassName("editor");
 
-//Quill.register({
-  //'modules/toolbar': Toolbar,
-  //'themes/snow': Snow,
-  //'formats/bold': Bold,
-  //'formats/italic': Italic,
-  //'formats/header': Header
-//});
+let options = {
+    modules: {
+        toolbar: "#toolbar"
+    },
+    placeholder: "Enter words here",
+    theme: "snow"
+};
 
-let div = document.getElementById('editor');
-let quill = new Quill(div);
-
+for (let i = 0; i < div.length; i++) {
+    let divItem = div[i];
+    let quill = new Quill(divItem, options);
+}
 
 window.onload = function() {
-  console.log("HERE");
-}
+    console.log("HERE");
+};

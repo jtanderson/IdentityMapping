@@ -15,73 +15,10 @@
                 </div>
             </div>
 
+            
+            <TextContent title="Start Page Content" content="{{ $textContent }}"></TextContent>
 
 
-            <!-- These can easily be put into a Vue component, I just want to get Quill working first -->
-            <div class="card mb-4"> 
-                <div class="card-header">{{ __('Start Page Context') }}</div>
-                <div class="card-body">
-                  <div id="toolbar">
-                    <button class="ql-bold">Bold</button>
-                    <button class="ql-italic">Italic</button>
-                  </div>
-                  <div id="editor">
-                    <p>Start page context here ...</p>
-                  </div>
-                </div>
-            </div>
-
-            <div class="card mb-4"> 
-                <div class="card-header">{{ __('Position Page Context') }}</div>
-                <div class="card-body">
-                  <div id="toolbar">
-                    <button class="ql-bold">Bold</button>
-                    <button class="ql-italic">Italic</button>
-                  </div>
-                  <div id="editor">
-                    <p>Position page context here ... </p>
-                  </div>
-                </div>
-            </div>
-
-            <div class="card mb-4"> 
-                <div class="card-header">{{ __('Color Page Context') }}</div>
-                <div class="card-body">
-                  <div id="toolbar">
-                    <button class="ql-bold">Bold</button>
-                    <button class="ql-italic">Italic</button>
-                  </div>
-                  <div id="editor">
-                    <p>Color page context here ... </p>
-                  </div>
-                </div>
-            </div>
-
-            <div class="card mb-4"> 
-                <div class="card-header">{{ __('Identity Debrief Page Context') }}</div>
-                <div class="card-body">
-                  <div id="toolbar">
-                    <button class="ql-bold">Bold</button>
-                    <button class="ql-italic">Italic</button>
-                  </div>
-                  <div id="editor">
-                    <p>Identity debrief context here ... </p>
-                  </div>
-                </div>
-            </div>
-
-            <div class="card"> 
-                <div class="card-header">{{ __('Demographics Page Context') }}</div>
-                <div class="card-body">
-                  <div id="toolbar">
-                    <button class="ql-bold">Bold</button>
-                    <button class="ql-italic">Italic</button>
-                  </div>
-                  <div id="editor">
-                    <p>Demographics context here ... </p>
-                  </div>
-                </div>
-            </div>
         </div>
     </div>
     <br/>
@@ -89,8 +26,16 @@
 </div>
 @endsection
 
-@section('javascript')
+<!-- @section('javascript')
 <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
+<script type="text/javascript" src="{{ asset('../../../../node_modules/quill/quill.js') }}"></script>
+@endsection -->
+
+@section('styles')
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+@endsection
+@section('javascript')
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 @endsection
 
 

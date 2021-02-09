@@ -25,6 +25,4 @@
 
 @section('javascript')
 <script type="text/javascript" src="{{ asset('js/intersectionDebrief.js') }}"/>
-<script type="text/javascript">
-</script>
 @endsection
