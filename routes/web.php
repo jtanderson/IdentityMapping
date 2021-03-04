@@ -35,6 +35,7 @@ Route::post('/saveDemographics', 'SurveyController@saveDemographics')->name('sav
 Auth::routes(['register' => false]);
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
+Route::get('/admin/content', 'AdminController@contentEditPage')->name('content')->middleware('auth');
 Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
   ->name('surveyquestions.all')
   ->middleware('auth');
@@ -47,4 +48,5 @@ Route::post('/admin/newSurveyQuestion', 'AdminController@newSurveyQuestion')
 Route::delete('/admin/removeSurveyQuestion/{id}', 'AdminController@removeSurveyQuestion')
   ->name('removeSurveyQuestion')
   ->middleware('auth');
+Route::post('/admin/updateTextContent/{key}', 'AdminController@updateTextContent')->name('updateTextContent')->middleware('auth');
 

@@ -17,6 +17,7 @@ class CreateTextContentTable extends Migration
             $table->id();
             $table->timestamps();
             $table->text('content'); // the actual html of the content
+            $table->string('name'); // the name of the piece of content, similar to the desc., but just 1 - 2 words
             $table->string('key');   // the logical name, e.g. 'start-paragraph-one'
             $table->text('description'); // describe the content for the admin
         });

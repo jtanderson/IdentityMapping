@@ -28,7 +28,7 @@
             <div class="form-group mb-2">
               <input type="text" class="form-control" name="circle-{{ $key }}" id="circle-{{ $key }}-label" value="{{ $value ? $value['label'] : "" }}" style="">
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Add Circle</button>
+            <button type="submit" class="btn btn-primary ml-2 mb-2">Add Circle</button>
             <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-x" value="{{ $value ? $value['center_x'] : "" }}"/>
             <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-center-y" value="{{ $value ? $value['center_y'] : "" }}"/>
             <input type="hidden" name ="circle-{{ $key }}" id="circle-{{ $key }}-radius" value="{{ $value ? $value['radius'] : "" }}"/>

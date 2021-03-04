@@ -31,11 +31,16 @@ class AdminController extends Controller
     public function index()
     {
         $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
-        $textContent = getTextContent('start-top-1');
         return view('admin', array(
           'activeQuestions' => $activeQuestions,
-          'textContent' => $textContent,
         ));
+    }
+
+    public function contentEditPage() {
+      
+      return view('content', array(
+        'contents' => \App\TextContent::all()
+      ));
     }
 
     public function updateSurveyQuestion($id, Request $request){
@@ -92,5 +97,14 @@ class AdminController extends Controller
 
     public function surveyQuestions(){
       return \App\SurveyQuestion::where('active', true)->get();
+    }
+
+    function updateTextContent($key, Request $request) {
+      $content = \App\TextContent::where('key', $key)->first();
+      Log::info($request->all());
+      $newContent = $request->content;
+      $content->content = $newContent;
+      $content->save();
+      return $content;
     }
 }

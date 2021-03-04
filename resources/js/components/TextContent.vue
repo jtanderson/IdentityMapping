@@ -1,14 +1,19 @@
 <template>
     <div class="card mb-4">
-        <div class="card-header">{{ title }}</div>
+        <div class="card-header font-weight-bold">
+            {{ name }}
+            <span class="ml-2 font-weight-light float-right">{{
+                description
+            }}</span>
+        </div>
         <div id="toolbar"></div>
         <div class="card-body">
-            <div id="editor"></div>
+            <div :class="idword"></div>
         </div>
         <div class="mb-4 mx-auto">
             <button
                 class="btn btn-primary rounded m-auto"
-                v-on:click="getQuillContents"
+                v-on:click="updateText"
             >
                 Save
             </button>
@@ -34,7 +39,6 @@ export default {
         ];
 
         let options = {
-            // Need to change this to the value of the text that is currently on the page
             placeholder: "Add text content here...",
             theme: "snow",
             toolbar: "#toolbar",
@@ -43,13 +47,19 @@ export default {
             }
         };
 
-        this.quill = new Quill("#editor", options);
-        console.log(this.content);
-        this.quill.setText(this.content);
+        this.quill = new Quill(`.${this.idword}`, options); // hack way of doing this so quill doesnt break
+
+        const delta = this.quill.clipboard.convert(this.content);
+        this.quill.setContents(delta);
+
+        console.log("INNTER HTML", this.quill.root.innerHTML);
+        console.log("content-key: ", this.idword);
+        console.log("CONTENT: ", this.content);
     },
 
     // What is passed into the component
-    props: ["title", "content"],
+    // need to pass in description too
+    props: ["idword", "name", "content", "description"],
 
     data() {
         return {
@@ -57,11 +67,26 @@ export default {
         };
     },
 
+    name: "TextContent",
+
     methods: {
-        getQuillContents: function(event) {
-            let delta = this.quill.getContents();
-            // This is the full navigation to the text within the quill box
-            console.log(delta.ops[0].insert);
+        async updateText() {
+            let newContent = this.quill.root.innerHTML;
+            await axios
+                .post("/admin/updateTextContent/" + `${this.idword}`, {
+                    key: this.idword,
+                    name: this.name,
+                    content: newContent,
+                    description: this.description
+                })
+                .then(response => {
+                    // TODO: Alert user that content was saved
+                    console.log(response);
+                    const delta = this.quill.clipboard.convert(
+                        response.data.content
+                    );
+                    this.quill.setContents(delta);
+                });
         }
     }
 };

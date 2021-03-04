@@ -44,7 +44,7 @@
       <div class="col-sm-4">
         <div class="text text-center">
           @if ($progress > 0 && $progress < 100)
-            <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Abort</a>
+            <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Restart</a>
           @endif
         </div>
       </div>
