@@ -37,8 +37,19 @@
 
 -   Added button on admin interface to route the user to the text content page [still to be finished]
 -   Added newer pictures to the /start page
--   Changed the Abort button on each of the pages to 'Reset'
+-   Changed the Abort button on each of the pages to 'Restart'
 -   Went from 2 nicer pictures instead of 3 semi-ok pictures [need approval / feedback]
 -   Added rainbow background to the header of the start page [need approval / feedback]
 -   Added space between input and 'Add Circle' button on the /position page
 -   Added space between the radio button cards on /identityDebrief
+
+1. Proper containment -> Meaning one within another
+2. At least one where you can color the intersection
+
+## TODO
+
+-   The /color bar under the active item color, make that start in the middle and not have a circle, but just a bar
+-   Button to go back from /admin/content to /admin
+-   Button to go from /admin to /start
+
+-   Confirmation of save on /admin/content

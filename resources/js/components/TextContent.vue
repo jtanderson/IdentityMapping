@@ -1,22 +1,50 @@
 <template>
-    <div class="card mb-4">
-        <div class="card-header font-weight-bold">
-            {{ name }}
-            <span class="ml-2 font-weight-light float-right">{{
-                description
-            }}</span>
-        </div>
+    <div>
         <div id="toolbar"></div>
         <div class="card-body">
             <div :class="idword"></div>
         </div>
-        <div class="mb-4 mx-auto">
+        <div class="mb-4 mx-auto row justify-content-center">
             <button
-                class="btn btn-primary rounded m-auto"
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                v-bind:data-target="idclass"
                 v-on:click="updateText"
             >
                 Save
             </button>
+        </div>
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            v-bind:id="idclass"
+            tabindex="-1"
+            role="dialog"
+            v-bind:aria-labelledby="idclasslabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" v-bind:id="idclasslabel">
+                            {{ name }}
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        Save successful!
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -63,7 +91,9 @@ export default {
 
     data() {
         return {
-            quill: ""
+            quill: "",
+            idclass: `#${this.idword}`,
+            idclasslabel: `${this.idword}Label`
         };
     },
 

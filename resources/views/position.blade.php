@@ -3,8 +3,8 @@
 @section('css')
   #c {
     border-style: solid;
-    width: 750px;
-    height: 750px;
+    width: 730px;
+    height: 730px;
   }
 @endsection
 

@@ -51,7 +51,7 @@
       <div class="col-sm-4">
         <div class="text text-right">
           @if ($nextURL !== '')
-          <h4><a href="{{ $nextURL }}">Next &rarr;</a>&emsp;&emsp;</h4>
+          <h4><a href="{{ $nextURL }}">Next &rarr;</a></h4>
           @endif
         </div> 
       </div>
