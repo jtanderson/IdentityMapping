@@ -19,14 +19,15 @@
     <div class="col-sm">
       <div class="card-deck">
   @endif
-      <div class="card text-center" style="width: 30rem;">
+      <div class="card text-center" style="width: 30rem; margin-bottom: 2%;">
         <div class="card-body">
           <h5 class="card-title">{{ $question->text }}</h5>
           @foreach ($circles as $index => $circle)
             <hr/>
-            <b>{{ $circle['label'] }}</b>
+            <!-- Not sure if this mb-2 worked -->
+            <b class="mb-2">{{ $circle['label'] }}</b> 
             <form> 
-              {{ $question->extreme_left }}
+              <span style="margin-right: 2%;">{{ $question->extreme_left }}</span>
               @for ($i = 1; $i <= intval($question->degrees); $i++)
                 <div class="form-check form-check-inline">
                   @if ( $i == $question->answer )
@@ -36,7 +37,7 @@
                   @endif
                 </div>
               @endfor
-              {{ $question->extreme_right }}
+              <span style="margin-left: 2%;">{{ $question->extreme_right }}</span>
             </form>
           @endforeach
         </div>
@@ -54,3 +55,4 @@
 @section('javascript')
 <script type="text/javascript" src="{{ asset('js/identityDebrief.js') }}"></script>
 @endsection
+  

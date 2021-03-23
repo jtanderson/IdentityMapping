@@ -10,7 +10,7 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Identity Mapping') }}</title>
+  <title>CIRCLES | Salisbury University</title>
 
   <!-- Styles -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">  
@@ -44,14 +44,14 @@
       <div class="col-sm-4">
         <div class="text text-center">
           @if ($progress > 0 && $progress < 100)
-            <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Abort</a>
+            <a class="btn btn-danger" name= "button-1" value = "button-1" href="/abort">Restart</a>
           @endif
         </div>
       </div>
       <div class="col-sm-4">
         <div class="text text-right">
           @if ($nextURL !== '')
-          <h4><a href="{{ $nextURL }}">Next &rarr;</a>&emsp;&emsp;</h4>
+          <h4><a href="{{ $nextURL }}">Next &rarr;</a></h4>
           @endif
         </div> 
       </div>

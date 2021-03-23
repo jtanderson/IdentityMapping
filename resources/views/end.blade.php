@@ -17,7 +17,7 @@
   <div class="col-sm">
     <div class="card">
       <div class="card-body">
-        <form>
+        <form name="surveyquestion-form">
           <div class="form-group">
             <label>{{ $question->text }}</label>
             <div class="">
@@ -25,9 +25,9 @@
               @for ($i = 1; $i <= intval($question->degrees); $i++)
                 <div class="form-check form-check-inline">
                   @if ( $i == $question->answer )
-                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}" checked>
+                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}" checked/>
                   @else
-                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}">
+                    <input type="radio" class="survey-radio"  name="participant-{{ $participant->id }}-question-{{ $question->id }}" value="{{ $i }}"/>
                   @endif
                 </div>
               @endfor
@@ -40,14 +40,29 @@
   </div>
 </div>
 @endforeach
-<br>
+
+<form action="{{ route('thanks') }}" method="post">
+@csrf
+<!-- Added the Comments / Feedback textarea here that was suggested in the readme list -->
 <div class="row">
   <div class="col-sm">
-    <div class="text-center">
-      <a class="btn btn-success" name= "button-1" value = "button-1" href="/thanks">Finish</a>
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <label>Comments / Feedback</label>
+          <div class="">
+            <textarea style="resize:none;" id="comments" name="comments" rows="4" cols="50" ></textarea>
+          </div>
+        </div>
+        <div class="text-center">
+          <input class="btn btn-success" type="submit" value="Finish"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+</form>
 
 @endsection
 

@@ -29,7 +29,7 @@
                       </tbody>
                     </table>
                     <div class="btn-group">
-                      <button class="btn btn-primary" @click="newSurveyQuestion()">New</button>
+                      <button class="btn btn-primary" v-on:click="newSurveyQuestion">New</button>
                     </div>
                   </div>
               </div>
@@ -44,6 +44,9 @@
             questions: [],
           }
         },
+
+        // Does this happen on page load or re-render?
+        // When does this happen
         created() {
           axios
             .get("/admin/surveyquestions")
@@ -55,23 +58,72 @@
             });
         },
         methods: {
+
+
           editSurveyQuestion(question) {
+            console.log("in edit", question);
+            console.log("editing")
             question.mode = "surveyquestionedit";
+            
           },
-          saveSurveyQuestion(question) {
-            axios
+
+
+          newSurveyQuestion() {
+
+            // soft add to the frontend
+            let dataToPost = {
+                text: 'edit me',
+                degrees: '0',
+                extreme_left: 'edit me',
+                extreme_right: 'edit me',
+                surveyable_type: 'edit me',
+                id: 0,
+            }
+
+            dataToPost.mode = "surveyquestionedit"; // not part of db object
+
+            this.questions.push(dataToPost);
+
+            console.log(this.questions);
+
+          },
+
+          
+          async saveSurveyQuestion(question) {
+            console.log("BEFORE THEN", question.id);
+            await axios
               .post('/admin/updateSurveyQuestion/'+question.id, {
                 text: question.text,
-                degress: question.degrees,
+                degrees: question.degrees, // typo on this line makes degrees default to 5. This was degress, should be degrees??
                 extreme_left: question.extreme_left,
                 extreme_right: question.extreme_right,
                 surveyable_type: question.surveyable_type
               })
               .then(response => {
-                question = response.data;
+
+                console.log("IN THEN", question);   
+                
+                // Better way to do this...
+                question.id = response.data.id;
+                question.text = response.data.text;
+                question.degrees = response.data.degrees;
+                question.extreme_left = response.data.extreme_left;
+                question.extreme_right = response.data.extreme_right;
+                question.surveyable_type = response.data.surveyable_type;
+                question.mode = "surveyquestioninfo";
+               
+                console.log("IN THEN 2", question.mode);   
+                        
               });
-            question.mode = "surveyquestioninfo";
+
+            console.log("AFTER THEN", question.id);
+
+            console.log("in save", question);
+            
+            // question.mode = "surveyquestioninfo";
           },
+
+
           removeSurveyQuestion(id) {
             axios
               .delete('/admin/removeSurveyQuestion/'+id)
@@ -80,6 +132,8 @@
                 this.questions.splice(i, 1);
               });
           }
+
+
         }
     }
 </script>

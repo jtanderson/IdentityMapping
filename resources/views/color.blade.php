@@ -3,8 +3,8 @@
   @section('css')
   #c {
   border-style: solid;
-  width: 750px;
-  height: 750px;
+  width: 730px;
+  height: 730px;
   }
   @endsection
 
@@ -33,7 +33,7 @@
       <div class="row">
         <div class="col-sm-4">
           <h5>Active Item Color:<br></h5>
-          <div class="bg" style="">
+          <div class="bg">
             <img style="width: 100%;" src="{{ asset('img/colorSlider.png') }}"/>
             <input style="width: 100%" type="range" id="rangeIntersect" min="0"  max="100" value = "0"/>&emsp;
           </div>

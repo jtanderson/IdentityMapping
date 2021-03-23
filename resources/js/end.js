@@ -1,5 +1,5 @@
 window.onload = function(){
-  var forms = document.getElementsByTagName('form');
+  var forms = document.getElementsByName('surveyquestion-form');
 
   for(var i=0; i<forms.length; i++){
     forms[i].addEventListener('change', function(evt){
