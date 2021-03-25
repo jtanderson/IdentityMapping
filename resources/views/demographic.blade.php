@@ -9,8 +9,10 @@
 <div class="row">
   <div class="col-sm">
     <h1>Demographics</h1>
-    <div class="text text-left">
-      <p>Please tell us aboiut yourself now so that we can compare you to people that are related to you in demographics. This will help in determining who you associate with and who you are likely to associate with in the future. After filling this out you will be prompted to the end of the survey where you can submit all of your work for final comparison and the assignment will be completed.</p>
+    <div class="text text-left mb-4">
+        @php
+          echo getTextContent('demographics-top-1');
+        @endphp
     </div>
   </div>
 </div>

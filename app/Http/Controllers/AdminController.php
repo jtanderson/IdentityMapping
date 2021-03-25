@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -30,9 +31,26 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // TODO: Put all of these queries in their respectable functions and just call the function
         $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+        $totalSessions = \App\Sessions::all()->count();
+        // Gets number of unique circle label
+        $circleLabels = DB::table('circle')
+                      ->select(DB::raw('label'), DB::raw('count(*) as count'))
+                      ->groupBy('label')
+                      ->orderBy('count', 'desc')
+                      ->take(3)
+                      ->get();
+        $mostFrequentCircleLabels = [];
+        foreach ($circleLabels as $circleLabel) {
+          array_push($mostFrequentCircleLabels, $circleLabel->label); 
+        } 
+        $circleLabelCount = \App\Circle::all()->groupBy('label')->count();
         return view('admin', array(
           'activeQuestions' => $activeQuestions,
+          'totalSessions' => $totalSessions,
+          'circleLabelCount' => $circleLabelCount, 
+          'circleLabels' => $mostFrequentCircleLabels,
         ));
     }
 
@@ -42,6 +60,7 @@ class AdminController extends Controller
         'contents' => \App\TextContent::all()
       ));
     }
+
 
     public function updateSurveyQuestion($id, Request $request){
 

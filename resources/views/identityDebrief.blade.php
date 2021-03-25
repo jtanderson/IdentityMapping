@@ -7,11 +7,19 @@
 @section('content')
 
 <h1> Description</h1>
-<div class="row">
-  <div class="col-sm">
-    <p>Now that your map is complete, we are going to ask you some questions about your social identities. <b>Please respond to the following questions thinking about each identity one at a time.</b></p>
+<div class="row mb-4">
+  <div class="col-sm mb-4">
+        @php
+          echo getTextContent('description-top-1');
+        @endphp
   </div>
 </div>
+
+@if (count($circles) == 0)
+
+  <h3>You have no circles plotted. Go back and add some!</h3>
+
+@else 
 
 @foreach ($surveyquestions as $number => $question)
   @if ( $number % 2 == 0 )
@@ -48,6 +56,8 @@
   </div>
   @endif
 @endforeach
+
+@endif
 
 <br>
 @endsection

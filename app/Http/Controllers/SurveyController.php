@@ -175,11 +175,11 @@ class SurveyController extends Controller{
 
     $circles = $participant->getCircles();
 
+    /* $intersections = array(); */
+
     foreach ($circles as $circle){
 
       $intersections = $participant->getIntersections();
-
-      Log::info($intersections);
 
       foreach($intersections as $intersect){
         $intersect['viewLabel'] = join(
@@ -192,6 +192,7 @@ class SurveyController extends Controller{
             $intersect->circle5 ? $intersect->circle5->label : "",
           ]));
       }
+  
     }
 
     return view('/intersectionDebrief', array(

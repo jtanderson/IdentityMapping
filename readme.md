@@ -46,10 +46,22 @@
 1. Proper containment -> Meaning one within another
 2. At least one where you can color the intersection
 
-## TODO
+## NOTE
 
--   The /color bar under the active item color, make that start in the middle and not have a circle, but just a bar
--   Button to go back from /admin/content to /admin
--   Button to go from /admin to /start
+When hitting reset on any page and being redirected to /start page, you must hit next twice as you are on the /abort route and not the /start route
 
--   Confirmation of save on /admin/content
+## 03/25/2021 Check-In 
+
+- [x] Confirmation of save on /admin/content
+    - [x] Button change when change made to text, disabled/enabled and on save
+- [x] Look for bugs
+- [x] QA week
+- [x] When no intersections made, on desciption page reflect that
+- [x] More queries / dashboard stats for admin [Sessions w/ circles]
+
+- The /color bar under the active item color, make that start in the middle and not have a circle, but just a bar
+- Organize admin views / routes
+- Put admin buttons in the navbar of admin page [stats tab]
+- Word cloud for identities user input, look for common size, color, radius, identity, intersection counting
+- Go through and find CDNs and convert to NPM packages
+- Admin to change the category drop down
