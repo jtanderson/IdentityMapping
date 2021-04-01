@@ -60,8 +60,20 @@ When hitting reset on any page and being redirected to /start page, you must hit
 - [x] More queries / dashboard stats for admin [Sessions w/ circles]
 
 - The /color bar under the active item color, make that start in the middle and not have a circle, but just a bar
-- Organize admin views / routes
+- [x] Organize admin views / routes
 - Put admin buttons in the navbar of admin page [stats tab]
 - Word cloud for identities user input, look for common size, color, radius, identity, intersection counting
 - Go through and find CDNs and convert to NPM packages
-- Admin to change the category drop down
+- [x] Admin to change the category drop down
+
+
+### Found a bug
+
+- When wiping db and remigrating and nothing in the circles table
+when we get most used label, admin route crashes because we can't
+get mostUsedLabel[0] because it doesn't exist.
+
+- Found solution of checking to see whether the table was empty and 
+displaying that statistic conditionally
+
+

@@ -259,7 +259,7 @@ class SurveyController extends Controller{
   public function category(){
     $participant = \App\Participant::find(session()->get('participant_id'));
     $circles = array_filter($participant->getCircles());
-    $categories = \App\Category::all();
+    $categories = \App\Category::where('active', true)->get();
 
     return view('category', array(
       'circles' => $circles,
