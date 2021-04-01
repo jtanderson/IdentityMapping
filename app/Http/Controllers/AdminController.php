@@ -31,27 +31,21 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // TODO: Put all of these queries in their respectable functions and just call the function
         $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
         $totalSessions = \App\Sessions::all()->count();
         $categoryCount = \App\Category::where('active', true)->count();
-        // Gets number of unique circle label
         $circleLabels = DB::table('circle')
                       ->select(DB::raw('label'), DB::raw('count(*) as count'))
                       ->groupBy('label')
                       ->orderBy('count', 'desc')
-                      ->take(3)
+                      ->take(5)
                       ->get();
+
         $mostFrequentCircleLabels = [];
-        if ($circleLabels->isEmpty()) {
-              array_push($mostFrequentCircleLabels, "N/A"); 
-              array_push($mostFrequentCircleLabels, "N/A"); 
-              array_push($mostFrequentCircleLabels, "N/A"); 
-        } else {
-          foreach ($circleLabels as $circleLabel) {
-              array_push($mostFrequentCircleLabels, $circleLabel->label); 
-          } 
-        }
+        foreach ($circleLabels as $circleLabel) {
+            array_push($mostFrequentCircleLabels, $circleLabel->label); 
+        } 
+
         $circleLabelCount = \App\Circle::all()->groupBy('label')->count();
         return view('admin', array(
           'activeQuestions' => $activeQuestions,

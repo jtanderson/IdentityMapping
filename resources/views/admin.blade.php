@@ -18,21 +18,18 @@
                 <div class="card-header">{{ __('Statistics') }}</div>
                 <div class="card-body">
                 <ul>
-                <!-- Accessing the variable $activeQuestions set in the AdminController so that we can return the number of active questions as a stat at the top of the admin dashboard -->
                   <li><h4>Active Questions: <small class="bold-stat">{{ $activeQuestions }}</small></h4></li>
                   <li><h4>Total Sessions: <small class="bold-stat">{{ $totalSessions }}</small></h4></li>
                   <li><h4>Category Count: <small class="bold-stat">{{ $categoryCount }}</small></h4></li>
                   <li><h4>Label Count: <small class="bold-stat">{{ $circleLabelCount }}</small></h4></li>
-                    @if ( $circleLabelCount == 0 )
-                    @else
                       <li>
-                          <h4>Top 3 Labels: 
-                              <small class="bold-stat">{{ $circleLabels[0] }}, </small>
-                              <small class="bold-stat">{{ $circleLabels[1] }}, </small>
-                              <small class="bold-stat">{{ $circleLabels[2] }} </small>
-                          </h4>
+                          <h4>Top {{ count($circleLabels) }} Labels</h4>
+                            <ul>
+                              @foreach($circleLabels as $circleLabel)
+                                  <li class="bold-stat">{{ $circleLabel }}</li>
+                              @endforeach
+                            </ul>
                       </li>
-                    @endif
                 </ul>
                 </div>
             </div>
