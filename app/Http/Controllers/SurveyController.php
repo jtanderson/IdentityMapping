@@ -175,11 +175,11 @@ class SurveyController extends Controller{
 
     $circles = $participant->getCircles();
 
+    /* $intersections = array(); */
+
     foreach ($circles as $circle){
 
       $intersections = $participant->getIntersections();
-
-      Log::info($intersections);
 
       foreach($intersections as $intersect){
         $intersect['viewLabel'] = join(
@@ -192,6 +192,7 @@ class SurveyController extends Controller{
             $intersect->circle5 ? $intersect->circle5->label : "",
           ]));
       }
+  
     }
 
     return view('/intersectionDebrief', array(
@@ -258,7 +259,7 @@ class SurveyController extends Controller{
   public function category(){
     $participant = \App\Participant::find(session()->get('participant_id'));
     $circles = array_filter($participant->getCircles());
-    $categories = \App\Category::all();
+    $categories = \App\Category::where('active', true)->get();
 
     return view('category', array(
       'circles' => $circles,

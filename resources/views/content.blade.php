@@ -21,12 +21,7 @@
         <section class="jumbotron text-center bg-primary" style="color: white;">
             <h1>Text Content Editor</h1>
         </section> 
-
-            <!-- Want this to be an 'accordian' drop down style for these text editors so that the page does not look repetetive and overwhelming to the user -->
-
-
             <div id="accordion">
-
             @foreach ( $contents as $content )
                 <div class="card">
                     <div class="card-header">
@@ -45,15 +40,6 @@
                 </div>
             @endforeach
             </div>
-
-
-<!-- 
-            <div>
-            @foreach ( $contents as $content )
-                <TextContent idword="{{ $content->key }}" content="{{ $content->content }}" name="{{ $content->name }}" description="{{ $content->description }}"></TextContent>
-            @endforeach
-            </div> -->
-
         </div>
     </div>
 </div>

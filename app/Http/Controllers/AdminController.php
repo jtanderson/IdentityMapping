@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -31,8 +32,27 @@ class AdminController extends Controller
     public function index()
     {
         $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+        $totalSessions = \App\Sessions::all()->count();
+        $categoryCount = \App\Category::where('active', true)->count();
+        $circleLabels = DB::table('circle')
+                      ->select(DB::raw('label'), DB::raw('count(*) as count'))
+                      ->groupBy('label')
+                      ->orderBy('count', 'desc')
+                      ->take(5)
+                      ->get();
+
+        $mostFrequentCircleLabels = [];
+        foreach ($circleLabels as $circleLabel) {
+            array_push($mostFrequentCircleLabels, $circleLabel->label); 
+        } 
+
+        $circleLabelCount = \App\Circle::all()->groupBy('label')->count();
         return view('admin', array(
           'activeQuestions' => $activeQuestions,
+          'totalSessions' => $totalSessions,
+          'circleLabelCount' => $circleLabelCount, 
+          'circleLabels' => $mostFrequentCircleLabels,
+          'categoryCount' => $categoryCount,
         ));
     }
 
@@ -42,6 +62,21 @@ class AdminController extends Controller
         'contents' => \App\TextContent::all()
       ));
     }
+
+    public function categoryEditPage() {
+      
+      return view('admineditcategory', array(
+        'category' => \App\Category::all()
+      ));
+    }
+
+    public function surveyquestionEditPage() {
+      $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+      return view('surveyquestion', array(
+        'activeQuestions' => $activeQuestions, 
+      ));
+    }
+
 
     public function updateSurveyQuestion($id, Request $request){
 
@@ -69,6 +104,36 @@ class AdminController extends Controller
 
     }
 
+
+    public function updateCategory($id, Request $request){
+
+      // The ID will be 0 if this is updating a new question
+
+      $category = \App\Category::create($request->all());
+
+      if( $category->id ){
+        $oldC = \App\Category::find($id);
+
+        if ($oldC) {
+          $oldC->active = false;
+          $oldC->save();
+        }
+        
+        return $category;
+      
+      } else {
+        
+        return \App\Category::find($id);
+      
+      }
+
+    }
+
+
+
+
+
+
     /**
      * 
      * Add a new question to the pool of questions in the database, this question is rendered in the admin dashboard for editing
@@ -88,15 +153,33 @@ class AdminController extends Controller
 
     }
 
+    public function newCategory(Request $request) {
+
+      $category = \App\Category::create($request->all()); // Create a new eloquent object survey question
+      $category->active = true; // set it to active
+      $category->save(); // save it to the db
+      return $category; // return the question to the Vue component
+
+    }
+
     public function removeSurveyQuestion($id){
       $question = \App\SurveyQuestion::find($id);
       $question->active = false;
       $question->save();
-      
+    }
+
+    public function removeCategory($id){
+      $category = \App\Category::find($id);
+      $category->active = false;
+      $category->save();
     }
 
     public function surveyQuestions(){
       return \App\SurveyQuestion::where('active', true)->get();
+    }
+
+    public function getCategories(){
+      return \App\Category::where('active', true)->get();
     }
 
     function updateTextContent($key, Request $request) {
