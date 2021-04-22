@@ -1,5 +1,21 @@
 # Identity Mapping
 
+## Meeting 4/22
+
+- [ ] Put survey feedback before the /identityDebrief page
+- [ ] Separate page for participant questions vs survey questions
+  - [ ] change the polymorphic type of "participant" to "survey"
+  - [ ] make "participant" the new set of 'divergence' questions from Dr. T
+    - [ ] Put these questions right after the feedback page (so just before /identityDebrief)
+- [ ] Manage demographics available in survey
+- [ ] Bigger text in start page circles
+- [ ] Maybe break steps to first ask for identities (on start page), then plot on map
+- [ ] Gifs for examples of using the circles
+- [ ] A/B test system for the examples of identities
+  - [ ] can determine which one the user gets when the participant is inserted into the DB
+- [ ] Turn off the "explain every intersection" survey
+- [ ] Customize colors
+
 ## Current TODO
 
 -   Odd # of survey questions, card layout issues on /identityDebrief need to be fixed
