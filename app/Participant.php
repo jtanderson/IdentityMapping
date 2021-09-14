@@ -72,7 +72,7 @@ class Participant extends Model
               ->orWhereIn('circle5_id', $circle_ids);
       })
       ->get();
-    //->unique(); // needed? Possibly, have to check with how JS creates the ids.
+      //->unique(); // needed? Possibly, have to check with how JS creates the ids.
 
   }
 

@@ -37,6 +37,9 @@ Auth::routes(['register' => false]);
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
 Route::get('/admin/content', 'AdminController@contentEditPage')->name('content')->middleware('auth');
 Route::get('/admin/data', 'AdminController@dataProcessingPage')->name('data')->middleware('auth');
+Route::get('/admin/editcategory', 'AdminController@categoryEditPage')->name('editcategory')->middleware('auth');
+Route::get('/admin/editsurveyquestions', 'AdminController@surveyquestionEditPage')->name('editsurveyquestionpage')->middleware('auth');
+Route::get('/admin/getcategories', 'AdminController@getCategories')->name('getcategory')->middleware('auth');
 Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
   ->name('surveyquestions.all')
   ->middleware('auth');
@@ -44,11 +47,20 @@ Route::get('/admin/getData', 'AdminController@getData')->name('getData')->middle
 Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
   ->name('updateSurveyQuestion')
   ->middleware('auth');
+Route::post('/admin/updateCategory/{id}', 'AdminController@updateCategory')
+  ->name('updateCategory')
+  ->middleware('auth');
 Route::post('/admin/newSurveyQuestion', 'AdminController@newSurveyQuestion')
   ->name('newSurveyQuestion')
   ->middleware('auth');
+Route::post('/admin/newCategory', 'AdminController@newCategory')
+  ->name('newCategory')
+  ->middleware('auth');
 Route::delete('/admin/removeSurveyQuestion/{id}', 'AdminController@removeSurveyQuestion')
   ->name('removeSurveyQuestion')
+  ->middleware('auth');
+Route::delete('/admin/removeCategory/{id}', 'AdminController@removeCategory')
+  ->name('removeCategory')
   ->middleware('auth');
 Route::post('/admin/updateTextContent/{key}', 'AdminController@updateTextContent')->name('updateTextContent')->middleware('auth');
 

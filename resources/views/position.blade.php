@@ -16,9 +16,9 @@
      
     </div>
     <div id="StartMapping" class="tabcontent">     
-      This is the section where you choose the five social identities that are closest to you and map them onto the canvas where you see fit.
-      To add social identities, simply type each one into the corresponding text box then click add circle. Once a circle has been added you can move them on the screen
-      to be placed where you think they fit best.
+        @php
+          echo getTextContent('position-top-1');
+        @endphp
       <br><br>
     </div> 
     <div class="row">

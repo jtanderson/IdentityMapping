@@ -12,7 +12,9 @@ class Category extends Model {
 
   protected $fillable = ['name'];
 
-  protected $attributes = [];
+  protected $attributes = [
+    'active' => true
+  ];
 
   public function circles(){
     return $this->hasMany('App\Circle');
