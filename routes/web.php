@@ -36,9 +36,11 @@ Auth::routes(['register' => false]);
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
 Route::get('/admin/content', 'AdminController@contentEditPage')->name('content')->middleware('auth');
+Route::get('/admin/data', 'AdminController@dataProcessingPage')->name('data')->middleware('auth');
 Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
   ->name('surveyquestions.all')
   ->middleware('auth');
+Route::get('/admin/getData', 'AdminController@getData')->name('getData')->middleware('auth');
 Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
   ->name('updateSurveyQuestion')
   ->middleware('auth');

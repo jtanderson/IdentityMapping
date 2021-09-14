@@ -43,6 +43,16 @@ class AdminController extends Controller
       ));
     }
 
+    // Pass in specifications for what data we want
+    // Return the data we want
+    public function dataProcessingPage() {
+      return view('data');
+    }
+
+    public function getData() {
+      return 1;
+    }
+
     public function updateSurveyQuestion($id, Request $request){
 
       // The ID will be 0 if this is updating a new question

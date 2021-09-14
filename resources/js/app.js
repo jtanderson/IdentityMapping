@@ -36,6 +36,10 @@ Vue.component(
     require("./components/SurveyQuestionEdit.vue").default
 );
 Vue.component("textcontent", require("./components/TextContent.vue").default);
+Vue.component(
+    "datadump",
+    require("./components/DataDumpComponent.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

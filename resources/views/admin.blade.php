@@ -6,7 +6,8 @@
         <div class="col-md-12">
 
             <button type="button" class="btn btn-primary mb-4" onclick="window.location.href='/admin/content'">Edit Text Content</button>
-            <button type="button" class="btn btn-success mb-4" onclick="window.location.href='/start'">Start Survey</button>
+            <button type="button" class="btn btn-success mb-4 float-right" onclick="window.location.href='/start'">Start Survey</button>
+            <button type="button" class="btn btn-primary mb-4" onclick="window.location.href='/admin/data'">Get Survey Data</button>
 
             <div class="card mb-4">
                 <div class="card-header">{{ __('Dashboard') }}</div>
