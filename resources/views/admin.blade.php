@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -25,6 +26,3 @@
     <surveyquestion-component />
 </div>
 @endsection
-
-
-

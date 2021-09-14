@@ -23,9 +23,6 @@
                 >
                     <h1>Text Content Editor</h1>
                 </section>
-
-                <!-- Want this to be an 'accordian' drop down style for these text editors so that the page does not look repetetive and overwhelming to the user -->
-
                 <div id="accordion">
                     @foreach ( $contents as $content )
                     <div class="card">
