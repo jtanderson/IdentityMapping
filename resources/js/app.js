@@ -42,10 +42,16 @@ Vue.component(
     require("./components/DataDumpComponent.vue").default
 );
 
-Vue.component("category-component", require("./components/CategoryComponent.vue").default);
+Vue.component(
+    "category-component",
+    require("./components/CategoryComponent.vue").default
+);
 Vue.component("categoryinfo", require("./components/CategoryInfo.vue").default);
 Vue.component("categoryedit", require("./components/CategoryEdit.vue").default);
-
+Vue.component(
+    "pagecontroller",
+    require("./components/PageController.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

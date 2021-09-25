@@ -2,19 +2,19 @@
 
 ## Meeting 4/22
 
-- [ ] Put survey feedback before the /identityDebrief page
-- [ ] Separate page for participant questions vs survey questions
-  - [ ] change the polymorphic type of "participant" to "survey"
-  - [ ] make "participant" the new set of 'divergence' questions from Dr. T
-    - [ ] Put these questions right after the feedback page (so just before /identityDebrief)
-- [ ] Manage demographics available in survey
-- [ ] Bigger text in start page circles
-- [ ] Maybe break steps to first ask for identities (on start page), then plot on map
-- [ ] Gifs for examples of using the circles
-- [ ] A/B test system for the examples of identities
-  - [ ] can determine which one the user gets when the participant is inserted into the DB
-- [ ] Turn off the "explain every intersection" survey
-- [ ] Customize colors
+-   [ ] Put survey feedback before the /identityDebrief page
+-   [ ] Separate page for participant questions vs survey questions
+    -   [ ] change the polymorphic type of "participant" to "survey"
+    -   [ ] make "participant" the new set of 'divergence' questions from Dr. T
+        -   [ ] Put these questions right after the feedback page (so just before /identityDebrief)
+-   [ ] Manage demographics available in survey
+-   [ ] Bigger text in start page circles
+-   [ ] Maybe break steps to first ask for identities (on start page), then plot on map
+-   [ ] Gifs for examples of using the circles
+-   [ ] A/B test system for the examples of identities
+    -   [ ] can determine which one the user gets when the participant is inserted into the DB
+-   [ ] Turn off the "explain every intersection" survey
+-   [ ] Customize colors
 
 ## Current TODO
 
@@ -66,27 +66,26 @@
 
 When hitting reset on any page and being redirected to /start page, you must hit next twice as you are on the /abort route and not the /start route
 
-## 03/25/2021 Check-In 
+## 03/25/2021 Check-In
 
-- [x] Confirmation of save on /admin/content
-    - [x] Button change when change made to text, disabled/enabled and on save
-- [x] Look for bugs
-- [x] QA week
-- [x] When no intersections made, on desciption page reflect that
-- [x] More queries / dashboard stats for admin [Sessions w/ circles]
-- [x] Organize admin views / routes
-- [x] Admin to change the category drop down
+-   [x] Confirmation of save on /admin/content
+    -   [x] Button change when change made to text, disabled/enabled and on save
+-   [x] Look for bugs
+-   [x] QA week
+-   [x] When no intersections made, on desciption page reflect that
+-   [x] More queries / dashboard stats for admin [Sessions w/ circles]
+-   [x] Organize admin views / routes
+-   [x] Admin to change the category drop down
 
-- The /color bar under the active item color, make that start in the middle and not have a circle, but just a bar
-- Put admin buttons in the navbar of admin page [stats tab]
-- Word cloud for identities user input, look for common size, color, radius, identity, intersection counting
-- Go through and find CDNs and convert to NPM packages
+-   The /color bar under the active item color, make that start in the middle and not have a circle, but just a bar
+-   Put admin buttons in the navbar of admin page [stats tab]
+-   Word cloud for identities user input, look for common size, color, radius, identity, intersection counting
+-   Go through and find CDNs and convert to NPM packages
 
 ### Found a bug
-- When wiping db and remigrating and nothing in the circles table
-when we get most used label, admin route crashes because we can't
-get mostUsedLabel[0] because it doesn't exist.
-- Found solution of checking to see whether the table was empty and 
-displaying that statistic conditionally
 
-
+-   When wiping db and remigrating and nothing in the circles table
+    when we get most used label, admin route crashes because we can't
+    get mostUsedLabel[0] because it doesn't exist.
+-   Found solution of checking to see whether the table was empty and
+    displaying that statistic conditionally

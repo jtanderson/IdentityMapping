@@ -40,7 +40,6 @@
                 <button
                     type="button"
                     class="btn btn-success"
-                    style="width: 85px;"
                     v-on:click="getData"
                 >
                     Get Data

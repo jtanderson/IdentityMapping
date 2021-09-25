@@ -63,10 +63,12 @@ class AdminController extends Controller
       ));
     }
 
-    // Pass in specifications for what data we want
-    // Return the data we want
     public function dataProcessingPage() {
       return view('data');
+    }
+
+    public function pageManagerPage() {
+      return view('pagemanager');
     }
 
     public function getData() {

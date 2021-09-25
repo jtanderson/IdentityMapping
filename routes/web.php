@@ -37,6 +37,7 @@ Auth::routes(['register' => false]);
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('auth');
 Route::get('/admin/content', 'AdminController@contentEditPage')->name('content')->middleware('auth');
 Route::get('/admin/data', 'AdminController@dataProcessingPage')->name('data')->middleware('auth');
+Route::get('/admin/page-manager', 'AdminController@pageManagerPage')->name('pagemanager')->middleware('auth');
 Route::get('/admin/editcategory', 'AdminController@categoryEditPage')->name('editcategory')->middleware('auth');
 Route::get('/admin/editsurveyquestions', 'AdminController@surveyquestionEditPage')->name('editsurveyquestionpage')->middleware('auth');
 Route::get('/admin/getcategories', 'AdminController@getCategories')->name('getcategory')->middleware('auth');
