@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -9,9 +10,10 @@
                 <h1>Admin Dashboard</h1>
             </section> 
 
-            <button type="button" class="btn btn-success mb-4" onclick="window.location.href='/start'">Start Survey</button>
+            <button type="button" class="btn btn-primary mb-4" onclick="window.location.href='/admin/content'">Edit Text Content</button>
+            <button type="button" class="btn btn-success mb-4 float-right" onclick="window.location.href='/start'">Start Survey</button>
+            <button type="button" class="btn btn-primary mb-4" onclick="window.location.href='/admin/data'">Get Survey Data</button>
             <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/editsurveyquestions'">Edit Survey Questions</button>
-            <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/content'">Edit Text Content</button>
             <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/editcategory'">Edit Categories</button>
 
             <div class="card mb-4">

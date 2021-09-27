@@ -63,7 +63,17 @@ class AdminController extends Controller
       ));
     }
 
-    public function categoryEditPage() {
+    // Pass in specifications for what data we want
+    // Return the data we want
+    public function dataProcessingPage() {
+      return view('data');
+    }
+
+    public function getData() {
+      return 1;
+    }
+
+  public function categoryEditPage() {
       
       return view('admineditcategory', array(
         'category' => \App\Category::all()
@@ -76,7 +86,6 @@ class AdminController extends Controller
         'activeQuestions' => $activeQuestions, 
       ));
     }
-
 
     public function updateSurveyQuestion($id, Request $request){
 

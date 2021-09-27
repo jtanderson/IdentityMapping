@@ -1,18 +1,18 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.app') @section('content')
 <div>
-
-<div class="container mb-4">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-        
-        <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/admin'">&laquo; Back</button>
-
+    <div class="container mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    onclick="window.location.href='/admin'"
+                >
+                    &laquo; Back
+                </button>
+            </div>
         </div>
     </div>
-</div>
-
 
 <div class="container">
     <div class="row justify-content-center">
@@ -37,21 +37,14 @@
                         <TextContent idword="{{ $content->key }}" content="{{ $content->content }}" name="{{ $content->name }}" description="{{ $content->description }}"></TextContent>
                     </div>
                     </div>
+                    @endforeach
                 </div>
-            @endforeach
             </div>
         </div>
     </div>
 </div>
-
-</div>
-@endsection
-
-@section('javascript')
+@endsection @section('javascript')
 <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
-@endsection 
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/admin.css')}}">
+@endsection @section('css')
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
 @endsection
-
