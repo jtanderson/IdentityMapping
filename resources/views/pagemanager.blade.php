@@ -24,6 +24,18 @@
                     <h1>Page Manager</h1>
                 </section>
             </div>
+            <h2 class="text-center">Pages</h2>
+            @foreach ($pages as $page)
+              <h3>{{ $page->number }}</h3>
+              <div class="card">
+                <div class="card-body">
+                  <h4>Header</h4>
+                  {{ $page->header }}
+                  <h4 class="mt-2">Description</h4>
+                  {{ $page->description }}
+                </div>
+              </div>
+              @endforeach
             <PageController />
         </div>
     </div>

@@ -87,21 +87,6 @@
             </div>
           </div>
         </div>
-        <h2 class="text-center">Pages</h2>
-        <div
-          v-for="page in pages"
-          :key="(page.number, page.header, page.description)"
-        >
-          <h3>{{ page.number }}</h3>
-          <div class="card">
-            <div class="card-body">
-              <h4>Header</h4>
-              {{ page.header }}
-              <h4 class="mt-2">Description</h4>
-              {{ page.desc }}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

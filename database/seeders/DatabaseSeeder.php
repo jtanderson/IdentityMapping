@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         SurveyQuestionSeeder::class,
         CategorySeeder::class,
         UserSeeder::class,
+        SurveyPageSeeder::class,
         TextContentSeeder::class,
       ]);
     }

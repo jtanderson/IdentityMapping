@@ -31,7 +31,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+        $activeQuestions = \App\surveyquestion::where('active', 1)->count();
         $totalSessions = \App\Sessions::all()->count();
         $categoryCount = \App\Category::where('active', true)->count();
         $circleLabels = DB::table('circle')
@@ -68,7 +68,10 @@ class AdminController extends Controller
     }
 
     public function pageManagerPage() {
-      return view('pagemanager');
+      Log::info(\App\surveypage::all());
+      return view('pagemanager', array(
+        'pages' => \App\surveypage::all()
+      ));
     }
 
     public function getData() {
@@ -83,7 +86,7 @@ class AdminController extends Controller
     }
 
     public function surveyquestionEditPage() {
-      $activeQuestions = \App\SurveyQuestion::where('active', 1)->count();
+      $activeQuestions = \App\surveyquestion::where('active', 1)->count();
       return view('surveyquestion', array(
         'activeQuestions' => $activeQuestions, 
       ));
@@ -93,12 +96,12 @@ class AdminController extends Controller
 
       // The ID will be 0 if this is updating a new question
 
-      $question = \App\SurveyQuestion::create($request->all());
+      $question = \App\surveyquestion::create($request->all());
 
       Log::info($question); // Prints out the question object as an eloquent object
 
       if( $question->id ){
-        $oldQ = \App\SurveyQuestion::find($id);
+        $oldQ = \App\surveyquestion::find($id);
 
         if ($oldQ) {
           $oldQ->active = false;
@@ -109,7 +112,7 @@ class AdminController extends Controller
       
       } else {
         
-        return \App\SurveyQuestion::find($id);
+        return \App\surveyquestion::find($id);
       
       }
 
@@ -149,13 +152,13 @@ class AdminController extends Controller
      * 
      * Add a new question to the pool of questions in the database, this question is rendered in the admin dashboard for editing
      * 
-     * @return \App\surveyQuestion
+     * @return \App\surveyquestion
      * 
      */
 
     public function newSurveyQuestion(Request $request) {
 
-      $question = \App\surveyQuestion::create($request->all()); // Create a new eloquent object survey question
+      $question = \App\surveyquestion::create($request->all()); // Create a new eloquent object survey question
       Log::info($request);
       Log::info($question);
       $question->active = true; // set it to active
@@ -174,7 +177,7 @@ class AdminController extends Controller
     }
 
     public function removeSurveyQuestion($id){
-      $question = \App\SurveyQuestion::find($id);
+      $question = \App\surveyquestion::find($id);
       $question->active = false;
       $question->save();
     }
@@ -186,7 +189,7 @@ class AdminController extends Controller
     }
 
     public function surveyQuestions(){
-      return \App\SurveyQuestion::where('active', true)->get();
+      return \App\surveyquestion::where('active', true)->get();
     }
 
     public function getCategories(){
@@ -200,5 +203,31 @@ class AdminController extends Controller
       $content->content = $newContent;
       $content->save();
       return $content;
+    }
+
+    function addPage(Request $request) {
+      $page = \App\SurveyPage::create($request->all()); 
+      Log::info($request);
+      Log::info($page);
+      $page->active = true;
+      $page->save();
+      return $page; 
+    }
+
+    function updatePage($id, Request $request) {
+      $page = \App\SurveyPage::where('id', $id)->first();
+      Log::info($request->all());
+      $newContent = $request->content;
+      $content->content = $newContent;
+      $content->save();
+      return $content;
+    }
+
+    function deletePage() {
+
+    }
+
+    function editPage() {
+
     }
 }
