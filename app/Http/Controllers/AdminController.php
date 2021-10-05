@@ -223,11 +223,23 @@ class AdminController extends Controller
       return $content;
     }
 
-    function deletePage() {
-
+    function deletePage($id) {
+      $page = \App\SurveyPage::find($id);
+      $page->active = false;
+      $page->save();
     }
 
     function editPage() {
 
+    }
+
+    function getNumberOfPages() {
+      $numPages = \App\SurveyPage::all()->count();
+      return $numPages;
+    }
+
+    function getAllPages() {
+      $allPages = \App\SurveyPage::all();
+      return $allPages;
     }
 }

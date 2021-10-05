@@ -45,6 +45,8 @@ Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
   ->name('surveyquestions.all')
   ->middleware('auth');
 Route::get('/admin/getData', 'AdminController@getData')->name('getData')->middleware('auth');
+Route::get('/admin/getNumberOfPages', 'AdminController@getNumberOfPages')->name('getNumberOfPages')->middleware('auth');
+Route::get('/admin/getAllPages', 'AdminController@getAllPages')->name('getAllPages')->middleware('auth');
 Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
   ->name('updateSurveyQuestion')
   ->middleware('auth');
@@ -57,11 +59,13 @@ Route::post('/admin/newSurveyQuestion', 'AdminController@newSurveyQuestion')
 Route::post('/admin/newCategory', 'AdminController@newCategory')
   ->name('newCategory')
   ->middleware('auth');
+Route::post('/admin/updateTextContent/{key}', 'AdminController@updateTextContent')->name('updateTextContent')->middleware('auth');
+Route::post('/admin/addPage', 'AdminController@addPage')->name('addPage')->middleware('auth');
 Route::delete('/admin/removeSurveyQuestion/{id}', 'AdminController@removeSurveyQuestion')
   ->name('removeSurveyQuestion')
   ->middleware('auth');
 Route::delete('/admin/removeCategory/{id}', 'AdminController@removeCategory')
   ->name('removeCategory')
   ->middleware('auth');
-Route::post('/admin/updateTextContent/{key}', 'AdminController@updateTextContent')->name('updateTextContent')->middleware('auth');
+Route::delete('/admin/deletePage/{id}', 'AdminController@deletePage')->name('deletePage')->middleware('auth');
 

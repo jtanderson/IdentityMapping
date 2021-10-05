@@ -52,6 +52,7 @@ Vue.component(
     "pagecontroller",
     require("./components/PageController.vue").default
 );
+Vue.component("pagemapper", require("./components/PageMapper.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
