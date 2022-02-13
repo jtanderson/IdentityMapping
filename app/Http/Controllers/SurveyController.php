@@ -261,12 +261,18 @@ class SurveyController extends Controller{
     $circles = array_filter($participant->getCircles());
     $categories = \App\Category::where('active', true)->get();
 
+    $numPages = \App\SurveyPage::where('active', 1)->count();
+    $nextURL = route("surveypage", ['order' => 1]);
+    if ($numPages == 0) {
+      $nextURL = route('demographics');
+    }
+
     return view('category', array(
       'circles' => $circles,
       'categories' => $categories,
       'progress' => '70',
       'prevURL' => route('identityDebrief'),
-      'nextURL' => route('demographic'),
+      'nextURL' => $nextURL,
     ));
   }
 
@@ -277,10 +283,36 @@ class SurveyController extends Controller{
   }
 
   public function demographic(){
+    $numPages = \App\SurveyPage::where('active', 1)->count();
+    $prevURL = route("surveypage", ['order' => $numPages]);
+    if ($numPages == 0) {
+      $prevURL = route('category');
+    }
     return view('demographic', array(
-      'progress' => '80',
-      'prevURL' => route('category'),
+      'progress' => '90',
+      'prevURL' => $prevURL,
       'nextURL' => route('end'),
+    ));
+  }
+
+  public function surveyPage($order) {
+    $page = \App\SurveyPage::where('active', 1)->where('order', $order)->first();
+    $numPages = \App\SurveyPage::where('active', 1)->count();
+    $prevPageID = $page->order - 1;
+    $nextPageID = $page->order + 1;
+    $prevURL = route("surveypage",  ['order' => $prevPageID]);
+    $nextURL = route("surveypage",  ['order' => $nextPageID]);
+    if ($prevPageID == 0) {
+      $prevURL = route('category');
+    }
+    else if ($nextPageID == $numPages + 1) {
+      $nextURL = route('demographic');
+    }
+    return view('surveypage', array(
+      'progress' => '80',
+      'prevURL' => $prevURL,
+      'nextURL' => $nextURL,
+      'page' => $page,
     ));
   }
 

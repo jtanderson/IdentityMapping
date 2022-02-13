@@ -16,7 +16,6 @@
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "extend": "^3.0.2",
-        "fsevents": "*",
         "jquery": "^3.5.1",
         "laravel-mix": "^5.0.5",
         "lodash": "^4.17.19",
@@ -27,6 +26,7 @@
         "sass-loader": "^7.1.0",
         "self": "^1.0.0",
         "vue": "^2.5.17",
+        "vue-slicksort": "^1.2.0",
         "vue-template-compiler": "^2.6.11"
     },
     "optionalDependencies": {

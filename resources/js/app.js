@@ -53,6 +53,16 @@ Vue.component(
     require("./components/PageController.vue").default
 );
 Vue.component("pagemapper", require("./components/PageMapper.vue").default);
+Vue.component(
+    "pagemanager",
+    require("./components/SurveyPageManager.vue").default
+);
+
+Vue.component("modal", require("./components/Modal.vue").default);
+Vue.component(
+    "editsurveypage",
+    require("./components/EditSurveyPage.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

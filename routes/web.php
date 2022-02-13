@@ -21,6 +21,7 @@ Route::get('/intersectionDebrief', 'SurveyController@intersectionDebrief')->name
 Route::get('/demographic', 'SurveyController@demographic')->name('demographic');
 Route::get('/category', 'SurveyController@category')->name('category');
 Route::get('/end', 'SurveyController@end')->name('end');
+Route::get('/surveypage/{order}', 'SurveyController@surveyPage')->name('surveypage');
 Route::post('/thanks', 'SurveyController@thanks')->name('thanks');
 Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCircleData');
 Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('saveIntersectData');
@@ -40,6 +41,7 @@ Route::get('/admin/data', 'AdminController@dataProcessingPage')->name('data')->m
 Route::get('/admin/page-manager', 'AdminController@pageManagerPage')->name('pagemanager')->middleware('auth');
 Route::get('/admin/editcategory', 'AdminController@categoryEditPage')->name('editcategory')->middleware('auth');
 Route::get('/admin/editsurveyquestions', 'AdminController@surveyquestionEditPage')->name('editsurveyquestionpage')->middleware('auth');
+Route::get('/admin/editsurveypage/{id}', 'AdminController@surveypageEditPage')->name('editsurveypage')->middleware('auth');
 Route::get('/admin/getcategories', 'AdminController@getCategories')->name('getcategory')->middleware('auth');
 Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
   ->name('surveyquestions.all')
@@ -47,9 +49,11 @@ Route::get('/admin/surveyquestions', 'AdminController@surveyQuestions')
 Route::get('/admin/getData', 'AdminController@getData')->name('getData')->middleware('auth');
 Route::get('/admin/getNumberOfPages', 'AdminController@getNumberOfPages')->name('getNumberOfPages')->middleware('auth');
 Route::get('/admin/getAllPages', 'AdminController@getAllPages')->name('getAllPages')->middleware('auth');
+Route::get('/admin/changeOrder/{oldOrder}/{newOrder}', 'AdminController@changeOrder')->name('changeOrder')->middleware('auth');
 Route::post('/admin/updateSurveyQuestion/{id}', 'AdminController@updateSurveyQuestion')
   ->name('updateSurveyQuestion')
   ->middleware('auth');
+Route::post('/admin/updateSurveyPage/{id}', 'AdminController@updateSurveyPage')->name('updateSurveyPage')->middleware('auth');
 Route::post('/admin/updateCategory/{id}', 'AdminController@updateCategory')
   ->name('updateCategory')
   ->middleware('auth');

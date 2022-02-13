@@ -1,5 +1,12 @@
 # Identity Mapping
 
+## Meeting 2/11
+
+-   [ ] Landing page consent form (Important)
+-   [ ] Quick tutorial on how to map your identities
+-   [ ] Finishing page manager (Important)
+-   [ ] Need IRB for this(Important)
+
 ## Meeting 4/22
 
 -   [ ] Put survey feedback before the /identityDebrief page

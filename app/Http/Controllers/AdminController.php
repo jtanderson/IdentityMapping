@@ -92,6 +92,29 @@ class AdminController extends Controller
       ));
     }
 
+    public function surveypageEditPage($id) {
+      $page = \App\SurveyPage::where('active', 1)->where('order', $id)->first();
+      return view('editsurveypage', array(
+        'page' => $page,
+      ));
+    }
+
+    public function updateSurveyPage($id, Request $request) {
+      $newPage = \App\SurveyPage::create($request->all());
+      if ($newPage->order) {
+        $oldPage = \App\SurveyPage::where('active', 1)->where('order', $id);
+
+        if ($oldPage) {
+          $oldPage->active = false;
+          $oldPage->save();
+        }
+        return $newPage;
+      } else {
+        return \App\SurveyPage::where('active', 1)->where('order', $id)->first();
+      }
+
+    }
+
     public function updateSurveyQuestion($id, Request $request){
 
       // The ID will be 0 if this is updating a new question
@@ -142,11 +165,6 @@ class AdminController extends Controller
       }
 
     }
-
-
-
-
-
 
     /**
      * 
@@ -205,6 +223,13 @@ class AdminController extends Controller
       return $content;
     }
 
+    /**
+     * 
+     * Add Survey Page that will appear in Survey after category
+     * 
+     * @return \App\SurveyPage
+     * 
+     */
     function addPage(Request $request) {
       $page = \App\SurveyPage::create($request->all()); 
       Log::info($request);
@@ -214,32 +239,107 @@ class AdminController extends Controller
       return $page; 
     }
 
-    function updatePage($id, Request $request) {
-      $page = \App\SurveyPage::where('id', $id)->first();
-      Log::info($request->all());
-      $newContent = $request->content;
-      $content->content = $newContent;
-      $content->save();
-      return $content;
-    }
-
-    function deletePage($id) {
-      $page = \App\SurveyPage::find($id);
+    /**
+     * 
+     * Soft delete a page that is currently active
+     * 
+     * @return void
+     * 
+     */
+    function deletePage($order) {
+      // Have to do ->first() as ->get() is a collection and you cannot do ->save() on a collection, 
+      // only a single eloquent object, not a collection.
+      $page = \App\SurveyPage::where('active', 1)->where('order', $order)->first();
       $page->active = false;
+      $page->order = 0;
       $page->save();
+      $this->updateOrderAfterDelete();
     }
 
+    /**
+     * 
+     * Edit the content of the Survey Page
+     * 
+     * @return void
+     * 
+     */
     function editPage() {
 
     }
 
-    function getNumberOfPages() {
-      $numPages = \App\SurveyPage::all()->count();
-      return $numPages;
+    /**
+     * 
+     * Update the order of the pages
+     * 
+     * @return void
+     * 
+     */
+    function changeOrder($oldOrder, $newOrder) {
+      $pages = $this->updateOrderAfterChange((int)$oldOrder, (int)$newOrder);
+      return $pages;
     }
 
+    function updateOrderAfterChange($oldOrder, $newOrder) {
+      // Moving from right to left
+      if ($oldOrder > $newOrder) {
+        $movedPage = \App\SurveyPage::where('active', 1)->where('order', $oldOrder)->first();
+        $pages = \App\SurveyPage::where('active', 1)->where('order', '>=', $newOrder)->where('order', '!=', $oldOrder)->orderBy('order','ASC')->get();
+
+        // shift
+        for ($x = 0; $x < count($pages); $x++) {
+          $pages[$x]->order = $x + $newOrder + 1;
+          $pages[$x]->save();
+        }
+        $movedPage->order = $newOrder;
+        $movedPage->save();
+      } else if ($oldOrder < $newOrder) {
+        $movedPage = \App\SurveyPage::where('active', 1)->where('order', $oldOrder)->first();
+        $pages = \App\SurveyPage::where('active', 1)->where('order', '<=', $newOrder)->where('order', '!=', $oldOrder)->orderBy('order', 'ASC')->get();
+        // shift
+        for ($x = 0; $x < count($pages); $x++) {
+          $pages[$x]->order = $x+1;
+          $pages[$x]->save();
+        }
+        $movedPage->order = $newOrder;
+        $movedPage->save();
+      }
+      return \App\SurveyPage::where('active', 1)->orderBy('order', 'ASC')->get();
+    }
+
+    /**
+     * 
+     * Update the order of the pages after deletion
+     * 
+     * @return void
+     * 
+     */
+    function updateOrderAfterDelete() {
+      $pages = \App\SurveyPage::where('active', 1)->orderBy('order','ASC')->get();
+      for ($x = 0; $x < count($pages); $x++) {
+        $pages[$x]->order = $x+1;
+        $pages[$x]->save();
+      }
+    }
+
+    /**
+     * 
+     * Get number of active pages 
+     * 
+     * @return int
+     * 
+     */
+    function getNumberOfPages() {
+      return \App\SurveyPage::where('active', 1)->count();
+    }
+
+    /**
+     * 
+     * Get all active pages
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     * 
+     */
     function getAllPages() {
-      $allPages = \App\SurveyPage::all();
-      return $allPages;
+      return \App\SurveyPage::where('active', 1)->orderBy('order')->get();
     }
 }
