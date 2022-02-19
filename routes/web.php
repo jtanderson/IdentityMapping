@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'SurveyController@start');
+Route::get('/', 'SurveyController@consent');
+Route::get('/consent', 'SurveyController@consent')->name('consent');
 Route::get('/start', 'SurveyController@start')->name('start');
 Route::get('/abort', 'SurveyController@abort')->name('abort');
 Route::get('/position', 'SurveyController@position')->name('position');

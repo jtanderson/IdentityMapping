@@ -61,6 +61,18 @@ class TextContentSeeder extends Seeder
           'content' => 'Please tell us aboiut yourself now so that we can compare you to people that are related to you in demographics. This will help in determining who you associate with and who you are likely to associate with in the future. After filling this out you will be prompted to the end of the survey where you can submit all of your work for final comparison and the assignment will be completed.',
           'description' => "Informs the reader of the importance of demographics in this survey.",
         ],
+        [
+          'key' => 'consent-top-1',
+          'name' => 'Consent Form Page 1',
+          'content' => 'Top part of consent form goes here',
+          'description' => "Informs the participant of the consent form synopsis."
+        ],
+        [
+          'key' => 'consent-top-2',
+          'name' => 'Consent Form Page 2',
+          'content' => 'Bottom part of consent form goes here',
+          'description' => "Details of the consent form."
+        ]
 
         // Need to add the rest of the text here
       ]);

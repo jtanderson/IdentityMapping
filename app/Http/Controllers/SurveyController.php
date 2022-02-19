@@ -12,12 +12,21 @@ class SurveyController extends Controller{
     $this->middleware('participant');
   }
 
-  public function start(Request $request){
+  public function consent(Request $request){
+
+    return view('consent', array(
+      'progress' => '0',
+      'prevURL' => '',
+      'nextURL' => route('start'),
+    ));
+  }
+
+  public function start(Request $request) {
 
     return view('start', array(
       'progress' => '0',
-      'prevURL' => '',
-      'nextURL' => route('position'),
+      'prevURL' => route('consent'),
+      'nextURL' => route('position'),      
     ));
   }
 
