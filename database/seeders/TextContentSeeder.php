@@ -63,13 +63,13 @@ class TextContentSeeder extends Seeder
         ],
         [
           'key' => 'consent-top-1',
-          'name' => 'Consent Form Page 1',
+          'name' => 'Consent Form Top',
           'content' => 'Top part of consent form goes here',
           'description' => "Informs the participant of the consent form synopsis."
         ],
         [
           'key' => 'consent-top-2',
-          'name' => 'Consent Form Page 2',
+          'name' => 'Consent Form Bottom',
           'content' => 'Bottom part of consent form goes here',
           'description' => "Details of the consent form."
         ]

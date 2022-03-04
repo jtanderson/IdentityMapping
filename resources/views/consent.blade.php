@@ -4,13 +4,14 @@
 <div class="row">
   <div class="col col-sm-12">
     <section class="jumbotron text-center bg-primary" style="color: white;">
-        <h1>Survey Consent Form</h1>
+        <h1>Activity Description</h1>
     </section> 
   </div>
 </div>
 <div class="row">
   <div class="col col-sm-12">
-    <div class="lead">
+    <div>
+      <b>
           @php
             echo getTextContent('consent-top-1');
           @endphp
@@ -18,6 +19,7 @@
           @php
             echo getTextContent('consent-top-2');
           @endphp
+      </b>
     </div>
   </div>
 </div>

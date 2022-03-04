@@ -29,7 +29,7 @@ class SessionCheck
         'intersection_meaning' => '',
       ]);*/
       $request->session()->put('participant_id', $participant->id);
-      return redirect('/start');
+      return redirect('/');
     }
 
     return $next($request);

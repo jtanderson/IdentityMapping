@@ -47,7 +47,7 @@
             <button
                 type="button"
                 class="btn btn-success mb-4 float-right"
-                onclick="window.location.href='/start'"
+                onclick="window.location.href='/'"
             >
                 Start Survey
             </button>
