@@ -58,15 +58,9 @@ Vue.component(
     require("./components/SurveyPageManager.vue").default
 );
 
-Vue.component("modal", require("./components/Modal.vue").default);
 Vue.component(
     "editsurveypage",
     require("./components/EditSurveyPage.vue").default
-);
-
-Vue.component(
-    "tutorialmodal",
-    require("./components/TutorialModal.vue").default
 );
 
 /**
