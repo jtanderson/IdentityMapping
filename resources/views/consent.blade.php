@@ -10,16 +10,10 @@
 </div>
 <div class="row">
   <div class="col col-sm-12">
-    <div>
-      <b>
-          @php
-            echo getTextContent('consent-top-1');
-          @endphp
-
-          @php
-            echo getTextContent('consent-top-2');
-          @endphp
-      </b>
+    <div class="ql-editor">
+        @php
+          echo getTextContent('activity-description');
+        @endphp
     </div>
   </div>
 </div>

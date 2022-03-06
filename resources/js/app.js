@@ -64,6 +64,11 @@ Vue.component(
     require("./components/EditSurveyPage.vue").default
 );
 
+Vue.component(
+    "tutorialmodal",
+    require("./components/TutorialModal.vue").default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
