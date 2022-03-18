@@ -197,6 +197,12 @@ class TextContentSeeder extends Seeder
                 'description' =>
                     "Informs the participant of the activity description.",
             ],
+            [
+                'key' => "user-experience-top-1",
+                'name' => 'User Experience',
+                'content' => 'A few questions on how you enjoyed using the mapping tool on the previous pages.',
+                'description' => "Informs the participant on the user experience survey",
+            ]
         ]);
     }
 }

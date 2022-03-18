@@ -6,18 +6,18 @@
 
 @section('content')
 
-<h1> Description</h1>
+<h1>User Experience Survey</h1>
 <div class="row mb-4">
     <div class="col-sm mb-4">
         @php
-        echo getTextContent('description-top-1');
+        echo getTextContent('user-experience-top-1');
         @endphp
     </div>
 </div>
 
 @if (count($circles) == 0)
 
-<h3>You have no circles plotted. Go back and add some!</h3>
+<h3>You have no circles plotted. Try the mapping tool and come back!</h3>
 
 @else
 
@@ -27,27 +27,18 @@
     <div class="col-sm">
         <div class="card-deck">
             @endif
-            <div class="card text-center" style="width: 30rem; margin-bottom: 2%;">
+            <div class="card text-center" style="max-width: 50rem; margin-bottom: 2%;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $question->text }}</h5>
-                    @foreach ($circles as $index => $circle)
-                    <hr />
-                    <!-- Not sure if this mb-2 worked -->
-                    <b class="mb-2">{{ $circle['label'] }}</b>
                     <form>
                         <span style="margin-right: 2%;">{{ $question->extreme_left }}</span>
                         @for ($i = 1; $i <= intval($question->degrees); $i++)
                             <div class="form-check form-check-inline">
-                                @if ( $i == $question->answer )
-                                <input type="radio" class="survey-radio" name="circle-{{ $circle->id }}-question-{{ $question->id }}" value="{{ $i }}" checked>
-                                @else
-                                <input type="radio" class="survey-radio" name="circle-{{ $circle->id }}-question-{{ $question->id }}" value="{{ $i }}">
-                                @endif
+                                <input type="radio" class="survey-radio" name="question-{{ $question->id }}" value="{{ $i }}">
                             </div>
                             @endfor
                             <span style="margin-left: 2%;">{{ $question->extreme_right }}</span>
                     </form>
-                    @endforeach
                 </div>
             </div>
             @if ( $number % 2 == 1 )

@@ -32,10 +32,6 @@
     "optionalDependencies": {
         "fsevents": "*"
     },
-    "devDependencies": {
-        "@prettier/plugin-php": "0.14.3",
-        "prettier": "2.0.5"
-      },
     "engines": {
         "node": "8.16.2",
         "npm": "6.14.8"

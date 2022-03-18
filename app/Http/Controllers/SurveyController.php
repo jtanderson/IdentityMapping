@@ -209,7 +209,7 @@ class SurveyController extends Controller{
       'intersections' => $intersections,
       'meaning' => $participant->intersection_meaning,
       'prevURL' => route('color'),
-      'nextURL' => route('identityDebrief'),
+      'nextURL' => route('experiencesurvey'),
     ));
   }
 
@@ -260,8 +260,25 @@ class SurveyController extends Controller{
       'progress' => '60',
       'circles' => $circles,
       'surveyquestions' => $surveyquestions,
-      'prevURL' => route('intersectionDebrief'),
+      'prevURL' => route('experiencesurvey'),
       'nextURL' => route('category'),
+    ));
+  }
+
+  public function experienceSurvey() {
+
+    $participant = \App\Participant::find(session()->get('participant_id'));
+    $circles = array_filter($participant->getCircles());
+    $numCircles = count($circles);
+    $surveyquestions = \App\ExperienceSurveyQuestion::where('active', true)->get();
+
+    return view('experiencesurvey', array(
+      'progress' => '55',
+      'circles' => $circles,
+      'numCircles' => $numCircles,
+      'surveyquestions' => $surveyquestions,
+      'prevURL' => route('intersectionDebrief'),
+      'nextURL' => route('identityDebrief')
     ));
   }
 

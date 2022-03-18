@@ -14,7 +14,7 @@ var labelLayer = new Layer();
 labelLayer.data.layerName = "labels";
 project.addLayer(labelLayer);
 
-var intialize = function() {
+var intialize = function () {
     var circle = Array(5);
 
     for (var i = 1; i <= 5; i++) {
@@ -31,15 +31,18 @@ var intialize = function() {
             "circle-" + circleID + "-center-y"
         ).value;
         // console.log("circle "+i+" y retrieved is " + circle_y);
-        var radius = document.getElementById("circle-" + circleID + "-radius")
-            .value;
+        var radius = document.getElementById(
+            "circle-" + circleID + "-radius"
+        ).value;
         // console.log("circle "+i+" radius retrieved is " + radius);
         //var line_style = document.getElementById("circle-"+circleID+"-line_style").value.split();
-        var color = document.getElementById("circle-" + circleID + "-color")
-            .value;
+        var color = document.getElementById(
+            "circle-" + circleID + "-color"
+        ).value;
         var dbid = document.getElementById("circle-" + circleID + "-id").value;
-        var label = document.getElementById("circle-" + circleID + "-label")
-            .value;
+        var label = document.getElementById(
+            "circle-" + circleID + "-label"
+        ).value;
         console.log("This is the circle label" + label);
 
         //should return "" if no circle
@@ -87,8 +90,8 @@ var intialize = function() {
             insert: exists,
             visible: exists,
             data: {
-                circleId: i
-            }
+                circleId: i,
+            },
         });
 
         var iLayer = project.getItem({ data: { layerName: "intersections" } });
@@ -110,8 +113,8 @@ var intialize = function() {
             insert: exists,
             visible: exists,
             data: {
-                labelId: i
-            }
+                labelId: i,
+            },
         });
 
         tLayer.addChild(label); //adds text to the text layer
@@ -120,7 +123,7 @@ var intialize = function() {
 
 intialize();
 
-saveIntersect = function(circleID) {
+saveIntersect = function (circleID) {
     var iLayer = project.getItem({ data: { layerName: "intersections" } });
 
     var intersections = Array();
@@ -151,8 +154,9 @@ saveIntersect = function(circleID) {
     }
 
     $.post("/saveIntersectData", {
-        intersections: intersections /* an array which holds all intersections */
-    }).done(function(data) {
+        intersections:
+            intersections /* an array which holds all intersections */,
+    }).done(function (data) {
         console.log("Save intersection complete!");
     });
 };
@@ -222,7 +226,7 @@ function intersections() {
                         if (c_k.visible) {
                             //if three circles overlap, then create intersection
                             var int_ijk = int_ij.intersect(c_k, {
-                                insert: false
+                                insert: false,
                             }); //3 way int
                             int_ijk.selected = false;
                             int_ijk.data.intersectId = "" + i + j + k;
@@ -258,7 +262,7 @@ function intersections() {
                         if (c_k.visible) {
                             //if three circles overlap, then create intersection
                             var int_ijk = int_ij.intersect(c_k, {
-                                insert: false
+                                insert: false,
                             }); //3 way int
                             int_ijk.selected = false;
                             int_ijk.data.intersectId = "" + i + j + k;
@@ -270,7 +274,7 @@ function intersections() {
                                 if (c_l.visible) {
                                     //if four circles overlap, then create intersection
                                     var int_ijkl = int_ijk.intersect(c_l, {
-                                        insert: false
+                                        insert: false,
                                     }); //4 way int
                                     int_ijkl.selected = false;
                                     int_ijkl.data.intersectId =
@@ -318,7 +322,7 @@ function intersections() {
 } //end intersections function
 
 //function for fixing the layers
-var fixLayers = function() {
+var fixLayers = function () {
     var iLayer = project.getItem({ data: { layerName: "intersections" } });
     var cLayer = project.getItem({ data: { layerName: "circles" } });
     var tLayer = project.getItem({ data: { layerName: "labels" } });
@@ -337,7 +341,7 @@ var dragged = false;
 var intersect = false;
 
 //mouse down function
-paper.tool.onMouseDown = function(event) {
+paper.tool.onMouseDown = function (event) {
     console.log("onMouseDown running!");
 
     if (activeItem) {
@@ -371,7 +375,7 @@ paper.tool.onMouseDown = function(event) {
             segments: true,
             stroke: true,
             fill: true,
-            tolerance: 15
+            tolerance: 15,
         });
     } else {
         //when nothing is hit
@@ -386,7 +390,7 @@ paper.tool.onMouseDown = function(event) {
 var segment;
 
 //when user clicks, holds down, and drags
-paper.tool.onMouseDrag = function(event) {
+paper.tool.onMouseDrag = function (event) {
     if (activeItem == null) {
         return;
     } else {
@@ -443,9 +447,10 @@ paper.tool.onMouseDrag = function(event) {
 }; //end mouse dragging function
 
 //sends the circle data to DB storage
-saveCircle = function(circleID) {
-    var circleLabel = document.getElementById("circle-" + circleID + "-label")
-        .value;
+saveCircle = function (circleID) {
+    var circleLabel = document.getElementById(
+        "circle-" + circleID + "-label"
+    ).value;
 
     var cLayer = project.getItem({ data: { layerName: "circles" } });
     var obj = cLayer.getItem({ data: { circleId: parseInt(circleID) } });
@@ -463,15 +468,15 @@ saveCircle = function(circleID) {
         label: circleLabel,
         radius: obj.bounds.width / 2,
         //"line_style": obj.dashArray.toString(), //returns either empty string or "10,4"
-        color: obj.fillColor.toCSS() //this is a string from the color OBJ
-    }).done(function(data) {
+        color: obj.fillColor.toCSS(), //this is a string from the color OBJ
+    }).done(function (data) {
         console.log("Save circle complete!");
         saveIntersect(circleID);
     });
 };
 
 //on mouse up function
-paper.tool.onMouseUp = function(event) {
+paper.tool.onMouseUp = function (event) {
     var cLayer = project.getItem({ data: { layerName: "circles" } });
     var iLayer = project.getItem({ data: { layerName: "intersections" } });
 
@@ -519,7 +524,7 @@ paper.tool.onMouseUp = function(event) {
 var scope = this;
 
 //function tied to btn that first adds circle
-doSubmit = function(e) {
+doSubmit = function (e) {
     console.log("doSumbit Layering here");
 
     e.preventDefault();

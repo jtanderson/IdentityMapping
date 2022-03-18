@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         SurveyPageSeeder::class,
         TextContentSeeder::class,
+        ExperienceSurveyQuestionSeeder::class,
       ]);
     }
 }
