@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SurveyAnswer extends Model {
+class HarmonyAnswer extends Model {
 
-  protected $table = 'surveyanswer';
+  protected $table = 'harmonyquestionintersectionanswer';
 
-  protected $fillable = ['surveyquestion_id', 'surveyable_id', 'surveyable_type', 'answer'];
+  protected $fillable = ['question_id', 'answer'];
 
   protected $attributes = [];
   

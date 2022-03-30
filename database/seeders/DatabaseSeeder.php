@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         SurveyPageSeeder::class,
         TextContentSeeder::class,
         ExperienceSurveyQuestionSeeder::class,
+        HarmonyQuestionIntersectionSeeder::class,
       ]);
     }
 }

@@ -184,6 +184,8 @@ class SurveyController extends Controller{
 
     $circles = $participant->getCircles();
 
+    $harmonyQuestions = \App\HarmonyQuestion::where('active', true)->get();
+
     /* $intersections = array(); */
 
     foreach ($circles as $circle){
@@ -208,6 +210,7 @@ class SurveyController extends Controller{
       'progress' => '40',
       'intersections' => $intersections,
       'meaning' => $participant->intersection_meaning,
+      'harmonyQuestions' => $harmonyQuestions,
       'prevURL' => route('color'),
       'nextURL' => route('experiencesurvey'),
     ));
@@ -228,6 +231,14 @@ class SurveyController extends Controller{
        'surveyable_type'   => $request->surveyable_type,
        'surveyable_id'     => $request->surveyable_id ],
       ['answer' => $request->answer]
+    );
+  }
+
+  public function saveIntersectionHarmony(Request $request) {
+    $question = \App\HarmonyQuestion::find($request->key);
+    \App\HarmonyAnswer::updateOrCreate(
+      ['question_id' => $question->id],
+      ['answer' => $request->value]
     );
   }
 
@@ -288,9 +299,11 @@ class SurveyController extends Controller{
     $categories = \App\Category::where('active', true)->get();
 
     $numPages = \App\SurveyPage::where('active', 1)->count();
-    $nextURL = route("surveypage", ['order' => 1]);
-    if ($numPages == 0) {
-      $nextURL = route('demographics');
+
+    if ($numPages < 1) {
+      $nextURL = route('demographic');
+    } else {
+      $nextURL = route("surveypage", ['order' => 1]);
     }
 
     return view('category', array(
