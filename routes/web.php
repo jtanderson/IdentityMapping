@@ -27,6 +27,7 @@ Route::get('/surveypage/{order}', 'SurveyController@surveyPage')->name('surveypa
 Route::post('/thanks', 'SurveyController@thanks')->name('thanks');
 Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCircleData');
 Route::post('/saveIntersectionHarmony', 'SurveyController@saveIntersectionHarmony')->name('saveIntersectionHarmony');
+Route::post('/saveExperienceSurveyAnswer', 'SurveyController@saveExperienceSurveyAnswer')->name('saveExperienceSurveyAnswer');
 Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('saveIntersectData');
 Route::post('/deleteParticipant', 'SurveyController@deleteParticipant')->name('deleteParticipant');
 Route::post('/saveMeaning', 'SurveyController@saveMeaning')->name('saveMeaning');

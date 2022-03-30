@@ -21,32 +21,34 @@
 
 @else
 
-@foreach ($surveyquestions as $number => $question)
-@if ( $number % 2 == 0 )
-<div class="row">
-    <div class="col-sm">
-        <div class="card-deck">
-            @endif
-            <div class="card text-center" style="max-width: 50rem; margin-bottom: 2%;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $question->text }}</h5>
-                    <form>
-                        <span style="margin-right: 2%;">{{ $question->extreme_left }}</span>
-                        @for ($i = 1; $i <= intval($question->degrees); $i++)
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="survey-radio" name="question-{{ $question->id }}" value="{{ $i }}">
-                            </div>
-                            @endfor
-                            <span style="margin-left: 2%;">{{ $question->extreme_right }}</span>
-                    </form>
+<form id="experienceSurvey">
+    @foreach ($surveyquestions as $number => $question)
+    @if ( $number % 2 == 0 )
+    <div class="row">
+        <div class="col-sm">
+            <div class="card-deck">
+                @endif
+                <div class="card text-center" style="max-width: 50rem; margin-bottom: 2%;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $question->text }}</h5>
+                        <div>
+                            <span style="margin-right: 2%;">{{ $question->extreme_left }}</span>
+                            @for ($i = 1; $i <= intval($question->degrees); $i++)
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="survey-radio" name="question-{{ $question->id }}" id="{{ $question->id }}" value="{{ $i }}">
+                                </div>
+                                @endfor
+                                <span style="margin-left: 2%;">{{ $question->extreme_right }}</span>
+                        </div>
+                    </div>
                 </div>
+                @if ( $number % 2 == 1 )
             </div>
-            @if ( $number % 2 == 1 )
         </div>
     </div>
-</div>
-@endif
-@endforeach
+    @endif
+    @endforeach
+</form>
 
 @endif
 
@@ -54,5 +56,24 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('js/identityDebrief.js') }}"></script>
+<script>
+    window.onload = function() {
+        var form = document.getElementById("experienceSurvey");
+
+        form.addEventListener("change", function(evt) {
+            var data = {
+                key: evt.target.id
+                , value: evt.target.value
+            , };
+
+            console.log(data);
+
+            $.post("/saveExperienceSurveyAnswer", data).done(function(
+                response
+            ) {});
+        });
+    };
+
+</script>
+
 @endsection

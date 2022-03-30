@@ -235,11 +235,19 @@ class SurveyController extends Controller{
   }
 
   public function saveIntersectionHarmony(Request $request) {
+    $harmonyAnswer = new \App\HarmonyAnswer;
     $question = \App\HarmonyQuestion::find($request->key);
-    \App\HarmonyAnswer::updateOrCreate(
-      ['question_id' => $question->id],
-      ['answer' => $request->value]
-    );
+    $harmonyAnswer->question_id = $question->id;
+    $harmonyAnswer->answer = $request->value;
+    $harmonyAnswer->save();
+  }
+
+  public function saveExperienceSurveyAnswer(Request $request) {
+    $experienceAnswer = new \App\ExperienceSurveyAnswer;
+    $question = \App\ExperienceSurveyQuestion::find($request->key);
+    $experienceAnswer->question_id = $question->id;
+    $experienceAnswer->answer = $request->value;
+    $experienceAnswer->save();
   }
 
   public function saveExplanation(Request $request){

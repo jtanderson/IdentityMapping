@@ -18,18 +18,18 @@ class SurveyPageSeeder extends Seeder
   {
     DB::table('surveypage')->insert(
       [
-        [ 
-          'header' => "Survey Page #1",
-          'description' => "Description for survey page 1 goes here...",
-          'active' => true,
-          'order' => '1',
-        ],
-        [ 
-            'header' => "Survey Page #2",
-            'description' => "Description for survey page 2 goes here...",
-            'active' => true,
-            'order' => '2',
-          ],
+        // [ 
+        //   'header' => "Survey Page #1",
+        //   'description' => "Description for survey page 1 goes here...",
+        //   'active' => true,
+        //   'order' => '1',
+        // ],
+        // [ 
+        //     'header' => "Survey Page #2",
+        //     'description' => "Description for survey page 2 goes here...",
+        //     'active' => true,
+        //     'order' => '2',
+        //   ],
       ]);
   }
 }
