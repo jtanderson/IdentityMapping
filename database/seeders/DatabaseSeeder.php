@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         TextContentSeeder::class,
         ExperienceSurveyQuestionSeeder::class,
         HarmonyQuestionIntersectionSeeder::class,
+        SelfBeliefConstructSeeder::class,
+        SpatialHabitQuestionSeeder::class,
       ]);
     }
 }

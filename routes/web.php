@@ -17,6 +17,8 @@ Route::get('/start', 'SurveyController@start')->name('start');
 Route::get('/abort', 'SurveyController@abort')->name('abort');
 Route::get('/position', 'SurveyController@position')->name('position');
 Route::get('/color', 'SurveyController@color')->name('color');
+Route::get('/selfBelief', 'SurveyController@selfBelief')->name('selfBelief');
+Route::get('/spatialHabit', 'SurveyController@spatialHabit')->name('spatialHabit');
 Route::get('/identityDebrief', 'SurveyController@identityDebrief')->name('identityDebrief');
 Route::get('/experiencesurvey', 'SurveyController@experienceSurvey')->name('experiencesurvey');
 Route::get('/intersectionDebrief', 'SurveyController@intersectionDebrief')->name('intersectionDebrief');
@@ -29,6 +31,8 @@ Route::post('/saveCircleData', 'SurveyController@saveCircleData')->name('saveCir
 Route::post('/saveIntersectionHarmony', 'SurveyController@saveIntersectionHarmony')->name('saveIntersectionHarmony');
 Route::post('/saveExperienceSurveyAnswer', 'SurveyController@saveExperienceSurveyAnswer')->name('saveExperienceSurveyAnswer');
 Route::post('/saveIntersectData', 'SurveyController@saveIntersectData')->name('saveIntersectData');
+Route::post('/saveSelfBeliefAnswer', 'SurveyController@saveSelfBeliefAnswer')->name('saveSelfBeliefAnswer');
+Route::post('/saveSpatialHabitAnswer', 'SurveyController@saveSpatialHabitAnswer')->name('saveSpatialHabitAnswer');
 Route::post('/deleteParticipant', 'SurveyController@deleteParticipant')->name('deleteParticipant');
 Route::post('/saveMeaning', 'SurveyController@saveMeaning')->name('saveMeaning');
 Route::post('/saveExplanation', 'SurveyController@saveExplanation')->name('saveExplanation');

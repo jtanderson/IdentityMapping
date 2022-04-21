@@ -59,8 +59,32 @@ class SurveyController extends Controller{
       'intersections' => $currentIntersections,
       // 'length' => $length,
       'prevURL' => route('position'),
-      'nextURL' => route('intersectionDebrief'),
+      'nextURL' => route('experiencesurvey'),
     ));
+  }
+
+  public function selfBelief(Request $request){
+
+    $selfBeliefQuestions = \App\SelfBeliefConstructQuestion::where('active', true)->get();
+
+    return view('selfBelief', array(
+      'progress' => '35',
+      'selfbeliefquestions' => $selfBeliefQuestions,
+      'prevURL' => route('experiencesurvey'),
+      'nextURL' => route('spatialHabit'),
+    ));
+  }
+
+  public function spatialHabit(Request $request) {
+      
+      $spatialHabitQuestions = \App\SpatialHabitQuestion::where('active', true)->get();
+  
+      return view('spatialHabit', array(
+        'progress' => '40',
+        'spatialhabitquestions' => $spatialHabitQuestions,
+        'prevURL' => route('selfBelief'),
+        'nextURL' => route('intersectionDebrief'),
+      ));
   }
 
 
@@ -207,12 +231,12 @@ class SurveyController extends Controller{
     }
 
     return view('/intersectionDebrief', array(
-      'progress' => '40',
+      'progress' => '50',
       'intersections' => $intersections,
       'meaning' => $participant->intersection_meaning,
       'harmonyQuestions' => $harmonyQuestions,
-      'prevURL' => route('color'),
-      'nextURL' => route('experiencesurvey'),
+      'prevURL' => route('experiencesurvey'),
+      'nextURL' => route('identityDebrief'),
     ));
   }
 
@@ -240,6 +264,22 @@ class SurveyController extends Controller{
     $harmonyAnswer->question_id = $question->id;
     $harmonyAnswer->answer = $request->value;
     $harmonyAnswer->save();
+  }
+
+  public function saveSelfBeliefAnswer(Request $request) {
+    $selfBeliefAnswer = new \App\SelfBeliefConstructAnswer;
+    $question = \App\SelfBeliefConstructQuestion::find($request->key);
+    $selfBeliefAnswer->question_id = $question->id;
+    $selfBeliefAnswer->answer = $request->value;
+    $selfBeliefAnswer->save();
+  }
+
+  public function saveSpatialHabitAnswer(Request $request) {
+    $spatialHabitAnswer = new \App\SpatialHabitAnswer;
+    $question = \App\SpatialHabitQuestion::find($request->key);
+    $spatialHabitAnswer->question_id = $question->id;
+    $spatialHabitAnswer->answer = $request->value;
+    $spatialHabitAnswer->save();
   }
 
   public function saveExperienceSurveyAnswer(Request $request) {
@@ -279,7 +319,7 @@ class SurveyController extends Controller{
       'progress' => '60',
       'circles' => $circles,
       'surveyquestions' => $surveyquestions,
-      'prevURL' => route('experiencesurvey'),
+      'prevURL' => route('intersectionDebrief'),
       'nextURL' => route('category'),
     ));
   }
@@ -292,12 +332,12 @@ class SurveyController extends Controller{
     $surveyquestions = \App\ExperienceSurveyQuestion::where('active', true)->get();
 
     return view('experiencesurvey', array(
-      'progress' => '55',
+      'progress' => '30',
       'circles' => $circles,
       'numCircles' => $numCircles,
       'surveyquestions' => $surveyquestions,
-      'prevURL' => route('intersectionDebrief'),
-      'nextURL' => route('identityDebrief')
+      'prevURL' => route('color'),
+      'nextURL' => route('selfBelief')
     ));
   }
 

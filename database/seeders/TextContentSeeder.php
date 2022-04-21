@@ -202,7 +202,20 @@ class TextContentSeeder extends Seeder
                 'name' => 'User Experience',
                 'content' => 'A few questions on how you enjoyed using the mapping tool on the previous pages.',
                 'description' => "Informs the participant on the user experience survey",
-            ]
+            ],
+            [
+                'key' => "self-belief-top-1",
+                'name' => 'Self Belief Construct',
+                'content' => 'Please indicate your level of agreement with each of the following questions.',
+                'description' => "Informs user of self belief questions and instructions",
+            ],
+            [
+                'key' => "spatial-habit-top-1",
+                'name' => 'Spatial Habits of Mind Visualization',
+                'content' => 'Please indicate your level of agreement with each of the following questions.',
+                'description' => "Informs user of spatial habit questions and instructions",
+            ],
+
         ]);
     }
 }

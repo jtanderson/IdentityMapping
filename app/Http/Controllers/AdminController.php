@@ -40,6 +40,7 @@ class AdminController extends Controller
                       ->orderBy('count', 'desc')
                       ->take(5)
                       ->get();
+        $participantsFeedback = \App\Participant::select('feedback')->get();
 
         $mostFrequentCircleLabels = [];
         foreach ($circleLabels as $circleLabel) {
@@ -53,6 +54,7 @@ class AdminController extends Controller
           'circleLabelCount' => $circleLabelCount, 
           'circleLabels' => $mostFrequentCircleLabels,
           'categoryCount' => $categoryCount,
+          'feedback' => $participantsFeedback,
         ));
     }
 

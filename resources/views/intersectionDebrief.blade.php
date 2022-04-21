@@ -21,7 +21,7 @@
                 <div class="card-deck">
                     <div class="card text-center" style="width: 100%; margin-bottom: 2%;">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $intersection->viewLabel }} Intersection</h5>
+                            <h5 class="card-title">Please describe the overall nature of the {{ $intersection->viewLabel }} intersection in terms of emotions, behaviors, and time invested</h5>
                             @foreach($harmonyQuestions as $harmonyQuestion)
                             <div style="padding: 50px; margin-top: 12px; margin-bottom: 12px;">
                                 <p style="margin-right: 2%; width: 40ch; float: left; text-align: left;">{{ $harmonyQuestion->extreme_left }}</p>

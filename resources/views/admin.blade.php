@@ -2,18 +2,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <section
-                class="jumbotron text-center bg-primary"
-                style="color: white;"
-            >
+            <section class="jumbotron text-center bg-primary" style="color: white;">
                 <h1>Admin Dashboard</h1>
             </section>
 
-            <button
-                type="button"
-                class="btn btn-secondary mb-4"
-                onclick="window.location.href='/admin/content'"
-            >
+            <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/content'">
                 Edit Text Content
             </button>
             <!-- <button
@@ -23,32 +16,16 @@
             >
                 Get Survey Data
             </button> -->
-            <button
-                type="button"
-                class="btn btn-secondary mb-4"
-                onclick="window.location.href='/admin/editsurveyquestions'"
-            >
+            <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/editsurveyquestions'">
                 Edit Survey Questions
             </button>
-            <button
-                type="button"
-                class="btn btn-secondary mb-4"
-                onclick="window.location.href='/admin/editcategory'"
-            >
+            <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/editcategory'">
                 Edit Categories
             </button>
-            <button
-                type="button"
-                class="btn btn-secondary mb-4"
-                onclick="window.location.href='/admin/page-manager'"
-            >
+            <button type="button" class="btn btn-secondary mb-4" onclick="window.location.href='/admin/page-manager'">
                 Page Manager
             </button>
-            <button
-                type="button"
-                class="btn btn-success mb-4 float-right"
-                onclick="window.location.href='/'"
-            >
+            <button type="button" class="btn btn-success mb-4 float-right" onclick="window.location.href='/'">
                 Start Survey
             </button>
 
@@ -97,6 +74,22 @@
                                 @endforeach
                             </ul>
                         </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">{{ __("Feedback") }}</div>
+                <div class="card-body">
+                    <ul>
+                        @foreach($feedback as $message)
+                        <li>
+                            <h4>
+                                <small class="bold-stat">{{
+                                    $message
+                                }}</small>
+                            </h4>
+                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
