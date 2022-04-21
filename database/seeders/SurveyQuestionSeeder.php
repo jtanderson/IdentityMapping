@@ -23,7 +23,7 @@ class SurveyQuestionSeeder extends Seeder
           'extreme_left' => "Very important",
           'extreme_right' => "Very unimportant",
           'degrees' => '5',
-          'surveyable_type' => 'circle',
+          'surveyable_type' => 'participant',
           'active' => true,
         ],
         [ 
@@ -155,11 +155,11 @@ class SurveyQuestionSeeder extends Seeder
           'active' => true,
         ],
         [ 
-          'text' => "Filler Question",
+          'text' => "Was this survey helpful to you?",
           'extreme_left' => "Disagree Strongly",
           'extreme_right' => "Agree Strongly",
           'degrees' => '5',
-          'surveyable_type' => 'circle',
+          'surveyable_type' => 'participant',
           'active' => true,
         ],
       ]);

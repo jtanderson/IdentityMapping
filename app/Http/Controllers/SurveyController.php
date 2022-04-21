@@ -67,7 +67,7 @@ class SurveyController extends Controller{
 
     $selfBeliefQuestions = \App\SelfBeliefConstructQuestion::where('active', true)->get();
 
-    return view('selfBelief', array(
+    return view('selfbelief', array(
       'progress' => '35',
       'selfbeliefquestions' => $selfBeliefQuestions,
       'prevURL' => route('experiencesurvey'),
@@ -79,7 +79,7 @@ class SurveyController extends Controller{
       
       $spatialHabitQuestions = \App\SpatialHabitQuestion::where('active', true)->get();
   
-      return view('spatialHabit', array(
+      return view('spatialhabit', array(
         'progress' => '40',
         'spatialhabitquestions' => $spatialHabitQuestions,
         'prevURL' => route('selfBelief'),
@@ -235,7 +235,7 @@ class SurveyController extends Controller{
       'intersections' => $intersections,
       'meaning' => $participant->intersection_meaning,
       'harmonyQuestions' => $harmonyQuestions,
-      'prevURL' => route('experiencesurvey'),
+      'prevURL' => route('spatialHabit'),
       'nextURL' => route('identityDebrief'),
     ));
   }
