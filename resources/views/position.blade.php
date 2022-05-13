@@ -51,15 +51,23 @@ cursor: pointer;
             <p text-center>Map your Identities</p>
         </h1>
         <div class="text text-right mb-4">
-            <button type="button" class="btn btn-primary" id="myBtn">Video Tutorial</button>
+            <button type="button" class="btn btn-primary" id="myBtn">Additional Instructions</button>
 
             <div id="myModal" class="modal">
 
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <div class="text text-center">
-                        <iframe width="720" height="400" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                        </iframe>
+                    <div class="text text-left">
+                        <h1 class="mb-4 text text-center">Additional Instructions</h1>
+                        <p>
+                            Having listed your five social identities on the left side of the screen in their order of importance to you, you’ll notice that circles of varying sizes have appeared in random locations on the right side of the screen. Your goal is to layout the circles and name them in a way that fits you the best. The center of the mapping square reflects the center of yourself.
+                            <br /><br />
+                            The circles will appear on the screen one at a time in the order that you listed them. Once a circle has been added you can move them on the screen to be placed where you think they fit best. You should move every circle into such a position on the map as to reflect who you are. When deciding on the placement of your circles, consider how each relates to others in reflecting who you are.
+                            <br /><br />
+                            Once the circle has been placed you can drop the circle and change the size of the circle. The circles size are originally completely random therefore you will need to resize each circle to fit what describes you the best. Your choice of size of circle is up to you.
+                            <br /><br />
+                            In order to resize the circle you will have to click the circle that you want to change the size of and use the handles on the outer edge of the circle to click and drag to change the size of the selected circle.
+                        </p>
                     </div>
                 </div>
 

@@ -6,7 +6,7 @@
 
 @section('content')
 
-<h1>Meaningfullness Questions</h1>
+<h1>Meaningfulness Questions</h1>
 <div class="row mb-4">
     <div class="col-sm mb-4">
         @php

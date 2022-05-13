@@ -59,7 +59,7 @@ class SurveyController extends Controller{
       'intersections' => $currentIntersections,
       // 'length' => $length,
       'prevURL' => route('position'),
-      'nextURL' => route('experiencesurvey'),
+      'nextURL' => route('intersectionDebrief'),
     ));
   }
 
@@ -83,7 +83,7 @@ class SurveyController extends Controller{
         'progress' => '40',
         'spatialhabitquestions' => $spatialHabitQuestions,
         'prevURL' => route('selfBelief'),
-        'nextURL' => route('intersectionDebrief'),
+        'nextURL' => route('demographic'),
       ));
   }
 
@@ -232,10 +232,11 @@ class SurveyController extends Controller{
 
     return view('/intersectionDebrief', array(
       'progress' => '50',
+      'circles' => $circles,
       'intersections' => $intersections,
       'meaning' => $participant->intersection_meaning,
       'harmonyQuestions' => $harmonyQuestions,
-      'prevURL' => route('spatialHabit'),
+      'prevURL' => route('color'),
       'nextURL' => route('identityDebrief'),
     ));
   }
@@ -249,13 +250,13 @@ class SurveyController extends Controller{
   }
 
   public function saveSurveyAnswer(Request $request){
+    $answer = new \App\SurveyAnswer;
     $question = \App\SurveyQuestion::find($request->question_id);
-    \App\SurveyAnswer::updateOrCreate(
-      ['surveyquestion_id' => $question->id,
-       'surveyable_type'   => $request->surveyable_type,
-       'surveyable_id'     => $request->surveyable_id ],
-      ['answer' => $request->answer]
-    );
+    $answer->surveyquestion_id = $question->id;
+    $answer->surveyable_type = $request->surveyable_type;
+    $answer->surveyable_id = $request->surveyable_id;
+    $answer->answer = $request->answer;
+    $answer -> save();
   }
 
   public function saveIntersectionHarmony(Request $request) {
@@ -336,7 +337,7 @@ class SurveyController extends Controller{
       'circles' => $circles,
       'numCircles' => $numCircles,
       'surveyquestions' => $surveyquestions,
-      'prevURL' => route('color'),
+      'prevURL' => route('category'),
       'nextURL' => route('selfBelief')
     ));
   }
@@ -348,18 +349,18 @@ class SurveyController extends Controller{
 
     $numPages = \App\SurveyPage::where('active', 1)->count();
 
-    if ($numPages < 1) {
-      $nextURL = route('demographic');
-    } else {
-      $nextURL = route("surveypage", ['order' => 1]);
-    }
+    // if ($numPages < 1) {
+    //   $nextURL = route('demographic');
+    // } else {
+    //   $nextURL = route("surveypage", ['order' => 1]);
+    // }
 
     return view('category', array(
       'circles' => $circles,
       'categories' => $categories,
       'progress' => '70',
       'prevURL' => route('identityDebrief'),
-      'nextURL' => $nextURL,
+      'nextURL' => route('experiencesurvey'),
     ));
   }
 
@@ -371,13 +372,13 @@ class SurveyController extends Controller{
 
   public function demographic(){
     $numPages = \App\SurveyPage::where('active', 1)->count();
-    $prevURL = route("surveypage", ['order' => $numPages]);
-    if ($numPages == 0) {
-      $prevURL = route('category');
-    }
+    // $prevURL = route("surveypage", ['order' => $numPages]);
+    // if ($numPages == 0) {
+    //   $prevURL = route('category');
+    // }
     return view('demographic', array(
       'progress' => '90',
-      'prevURL' => $prevURL,
+      'prevURL' => route('spatialHabit'),
       'nextURL' => route('end'),
     ));
   }

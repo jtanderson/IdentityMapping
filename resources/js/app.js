@@ -62,6 +62,10 @@ Vue.component(
     "editsurveypage",
     require("./components/EditSurveyPage.vue").default
 );
+Vue.component(
+    "intersectiondebriefselector",
+    require("./components/IntersectionDebriefSelector.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -70,5 +74,5 @@ Vue.component(
  */
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
 });

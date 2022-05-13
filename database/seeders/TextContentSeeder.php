@@ -37,7 +37,7 @@ class TextContentSeeder extends Seeder
                 'key' => 'position-top-1',
                 'name' => 'Position Page Mapping Description',
                 'content' =>
-                    'This is the section where you choose the five social identities that are closest to you and map them onto the canvas where you see fit. To add social identities, simply type each one into the corresponding text box then click add circle. Once a circle has been added you can move them on the screen to be placed where you think they fit best.',
+                    'List your top 5 social identities in order of importance. The center of the mapping square reflects the center of yourself. Move and size the circles in the mapping space to reflect who you are, and where you think each circle fits best in relation to your other cirlces. To resize a circle, click the circle and click the handles on the outer edge of the circle and drag to change the size of the selected circle',
                 'description' =>
                     "Appears under the header 'Map your Identities' on the position page",
             ],
@@ -45,17 +45,9 @@ class TextContentSeeder extends Seeder
                 'key' => 'color-top-1',
                 'name' => 'Color Page Description',
                 'content' =>
-                    'This section is where you add some detail to your map. In this section you may add either a red color for a negative impact on your life. Or you may add the color blue to your circle meaning that this identity makes you content.',
+                    'The slider allows you to color your circles. The color continuum reflects the range between strong negative emotions (red) to mixed negative and positive emotions (purple) to strong positive emotions (blue). The ends of the continuum reflect the greatest emotional intensity. You may use different colors (or shades of color) for different parts of your circles if they intersect. For intersecting circles you can change the outline from solid to dashed.  You should choose dashed lines if you believe that two (or more) conjointly overlapping circles represent your self-identities that intersect in a way that create unique dynamics and effects for you. That is, it is hard for you to disentangle your relative experience of one overlapping identity from the other.',
                 'description' =>
                     "Gives user a description of what the color of their circles could represent",
-            ],
-            [
-                'key' => 'color-top-2',
-                'name' => 'Color Page Functionality',
-                'content' =>
-                    'To add color to your circle, use the slider below the form where entering the circles identity. This slider starts at white then goes from red to purple to blue. To the right of the color slider are two radio buttons where you can select the outline of the circle to be either solid or a dotted outline to represent a "conflicted" relationship. After you input your five identities, you can choose the color of the intersecting cirles on the map using the "Intersection Slider".',
-                'description' =>
-                    "Gives user instructions on how to use the slider, buttons, and canvas on the page.",
             ],
             [
                 'key' => 'description-top-1',
@@ -64,6 +56,13 @@ class TextContentSeeder extends Seeder
                     'Now that your map is complete, we are going to ask you some questions about your social identities. Please respond to the following questions thinking about each identity one at a time.',
                 'description' =>
                     "Message that reminds user to answer questions for each identity.",
+            ],
+            [
+                'key' => 'intersection-debrief-top-1',
+                'name' => 'Intersection Debrief Instructions',
+                'content' => 'Please select 3 intersections that you think are most important to you.',
+                'description' =>
+                    "Instructions for the intersection debrief page",
             ],
             [
                 'key' => 'demographics-top-1',

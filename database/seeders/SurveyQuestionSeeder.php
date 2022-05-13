@@ -36,8 +36,8 @@ class SurveyQuestionSeeder extends Seeder
         ],
         [ 
           'text' => "When determining whether your circles overlapped among your identities how did you interpret what your circle placement meant?",
-          'extreme_left' => "Nonoverlap more important",
-          'extreme_right' => "Overlap more important",
+          'extreme_left' => "Nonoverlap important",
+          'extreme_right' => "Overlap important",
           'degrees' => '5',
           'surveyable_type' => 'circle',
           'active' => true,
