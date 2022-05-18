@@ -30,10 +30,20 @@ class UserSeeder extends Seeder
           'password' => Hash::make('dwh'.env('ADMIN_PASSWORD'))
         ],
         [
+          'name' => "Sophie Wang",
+          'email' => "xswang@salisbury.edu",
+          'password' => Hash::make('xsw'.env('ADMIN_PASSWORD'))
+        ],
+        [
           'name' => "Jacob Duncan",
           'email' => "jduncan5@gulls.salisbury.edu",
           'password' => Hash::make('jwd'.env('ADMIN_PASSWORD'))
-        ]
+        ],
+        [
+          'name' => "Justin Ventura",
+          'email' => "jventura3@gulls.salisbury.edu",
+          'password' => Hash::make('jmv'.env('ADMIN_PASSWORD'))
+        ],
       ]);
     }
 }
